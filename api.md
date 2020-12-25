@@ -10,7 +10,7 @@ The reason not to use standard http codes, because they suck 凸( ` ﾛ ´ )凸.
 With err messages in json, you can describe verbosely what happened, and it's less code to deal with in the frontend.
 
 ## Users
-- POST /api/user
+### POST /api/user
 ```
 {
     'username': 'foo',
@@ -26,11 +26,12 @@ With err messages in json, you can describe verbosely what happened, and it's le
 }
 ```
 returns:
-    + If signed-up as `fan`, and it was a successfull, then return the token {'authToken': 'aoh2hnovsuhvh02ehf'}, it used in any endpoint that requires authentication.
-    + If signed-up as `manager`, and it was a valid info, then return {'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}
-    + If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid {'err', 'ಠ_ಠ what the hell?'}
++ If signed-up as `fan`, and it was a successfull, then return the token `{'authToken': 'aoh2hnovsuhvh02ehf'}`, it used in any endpoint that requires authentication.
++ If signed-up as `manager`, and it was a valid info, then return `{'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}`
++ If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid `{'err', 'ಠ_ಠ what the hell?'}`
 
-- PUT /api/user/<username>
+### PUT /api/user/<username>
+
 authToken in cookies, must be either an admin or the account owner
 ```
 {
@@ -47,11 +48,12 @@ authToken in cookies, must be either an admin or the account owner
 ```
 
 returns:
-    + If signed-up as `fan`, and it was a successfull, then return {}
-    + If signed-up as `manager`, and it was a valid info, then return {'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}
-    + If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid {'err', 'ಠ_ಠ what the hell?'}
++ If signed-up as `fan`, and it was a successfull, then return `{}`
++ If signed-up as `manager`, and it was a valid info, then return `{'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}`
++ If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid `{'err', 'ಠ_ಠ what the hell?'}`
     
-- GET /api/users?[page=[int >= 1]]
+### GET /api/users?[page=[int >= 1]]
+
 authToken in cookies, must be admin
 
 returns:
@@ -64,21 +66,23 @@ returns:
 ]
 ```
 
-- DELETE /api/user/<username>
+### DELETE /api/user/<username>
+
 authToken in cookies, must be admin
 
-- POST /api/login
+### POST /api/login
 ```
 {
     'username': 'foo', 'password': 'fjowihef'
 }
 ```
 returns:
-    + if valid: {'authToken': 'oefowefuowhe'}
-    + otherwise: {'err': 'wrong user/password'}
++ if valid: `{'authToken': 'oefowefuowhe'}`
++ otherwise: `{'err': 'wrong user/password'}`
 
 ## Admin/Managers
-- GET /api/managers/requests[?page=[int >= 1]]
+### GET /api/managers/requests[?page=[int >= 1]]
+
 authToken in cookies, must be admin
 
 returns: 
@@ -89,15 +93,16 @@ returns:
 ]
 ```
 
-- POST /api/managers/requests/<username>/accept 
+### POST /api/managers/requests/<username>/accept 
+
 authToken in cookies, must be admin
 
 returns:
-    + if accepted, {}
-    + not found: {'err': 'username not found'}
++ if accepted, `{}`
++ not found: `{'err': 'username not found'}`
 
 ## Matches
-- GET /api/matches?[page={int >= 1}]
+### GET /api/matches?[page={int >= 1}]
 
 returns:
 ```
@@ -114,24 +119,24 @@ returns:
 ]
 ```
 
-- GET /api/match/<UUID>
+### GET /api/match/<UUID>
 
 returns:
-    + if doesn't exist, return {'err': 'invalid id'}
-    + otherwise: 
-    ```
-    {
-        'homeTeam': 'adsfasdf',
-        'awayTeam': 'woejfe',
-        'venue': '<stadium UUID>',
-        'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
-        'mainReferee': 'Mahmoud Othman',
-        'firstLinesman': 'fasdfaf',
-        'secondLinesman': 'asdfawoj'
-    }
-    ```
++ if doesn't exist, return `{'err': 'invalid id'}`
++ otherwise: 
+```
+{
+    'homeTeam': 'adsfasdf',
+    'awayTeam': 'woejfe',
+    'venue': '<stadium UUID>',
+    'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
+    'mainReferee': 'Mahmoud Othman',
+    'firstLinesman': 'fasdfaf',
+    'secondLinesman': 'asdfawoj'
+}
+```
     
-- POST /api/match
+### POST /api/match
 ```
 {
     'homeTeam': 'adsfasdf',
@@ -145,10 +150,11 @@ returns:
 ```
 
 returns:
-    + if invalid, return {'err': 'err message'}
-    + otherwise, return {}
++ if invalid, return `{'err': 'err message'}`
++ otherwise, return `{}`
 
-- PUT /api/match/<UUID>
+### PUT /api/match/<UUID>
+
 authToken in cookies, only admin/manager
 ```
 {
@@ -164,7 +170,8 @@ authToken in cookies, only admin/manager
 ```
 
 ## Seats
-- GET /api/match/<UUID>/seats
+### GET /api/match/<UUID>/seats
+
 returns:
 ```
 {
@@ -172,7 +179,8 @@ returns:
 }
 ```
 
-- POST /api/match/<UUID>/seat/<UUID>/reserve
+### POST /api/match/<UUID>/seat/<UUID>/reserve
+
 authToken in cookies
 ```
 {
@@ -182,18 +190,20 @@ authToken in cookies
 ```
 
 returns:
-    + if valid: {'ticketNumber': 'ajsdfehjf28ehfjosdfh'}
-    + otherwise, err with describtion
++ if valid: `{'ticketNumber': 'ajsdfehjf28ehfjosdfh'}`
++ otherwise, err with describtion
 
-- DELETE /api/match/<UUID>/seat/<UUID> or DELETE /api/ticket/<UUID>
+### DELETE /api/match/<UUID>/seat/<UUID> or DELETE /api/ticket/<UUID>
+
 authToken in cookies, user must be owner of ticket, match hasn't taken place yet
 
 returns:
-    + if no error: {}
-    + otherwise: err with describtion
++ if no error: `{}`
++ otherwise: err with describtion
 
 ## Stadiums
-- GET /api/stadiums?[page={int >= 1}]
+### GET /api/stadiums?[page={int >= 1}]
+
 returns: 
 ```
 [
@@ -202,7 +212,8 @@ returns:
 ]
 ```
 
-- POST /api/stadium
+### POST /api/stadium
+
 authToken in cookies, and server must check that it's a manager/admin account
 
 ```
