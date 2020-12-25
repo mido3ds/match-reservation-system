@@ -30,7 +30,7 @@ returns:
 + If signed-up as `manager`, and it was a valid info, then return `{'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}`
 + If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid `{'err', 'ಠ_ಠ what the hell?'}`
 
-### PUT /api/user/<username>
+### PUT /api/user/$username
 
 authToken in cookies, must be either an admin or the account owner
 ```
@@ -66,7 +66,7 @@ returns:
 ]
 ```
 
-### DELETE /api/user/<username>
+### DELETE /api/user/$username
 
 authToken in cookies, must be admin
 
@@ -93,7 +93,7 @@ returns:
 ]
 ```
 
-### POST /api/managers/requests/<username>/accept 
+### POST /api/managers/requests/$username/accept 
 
 authToken in cookies, must be admin
 
@@ -119,7 +119,7 @@ returns:
 ]
 ```
 
-### GET /api/match/<UUID>
+### GET /api/match/$UUID
 
 returns:
 + if doesn't exist, return `{'err': 'invalid id'}`
@@ -153,7 +153,7 @@ returns:
 + if invalid, return `{'err': 'err message'}`
 + otherwise, return `{}`
 
-### PUT /api/match/<UUID>
+### PUT /api/match/$UUID
 
 authToken in cookies, only admin/manager
 ```
@@ -170,7 +170,7 @@ authToken in cookies, only admin/manager
 ```
 
 ## Seats
-### GET /api/match/<UUID>/seats
+### GET /api/match/$UUID/seats
 
 returns:
 ```
@@ -179,7 +179,7 @@ returns:
 }
 ```
 
-### POST /api/match/<UUID>/seat/<UUID>/reserve
+### POST /api/match/$UUID/seat/$UUID/reserve
 
 authToken in cookies
 ```
@@ -193,7 +193,7 @@ returns:
 + if valid: `{'ticketNumber': 'ajsdfehjf28ehfjosdfh'}`
 + otherwise, err with describtion
 
-### DELETE /api/match/<UUID>/seat/<UUID> or DELETE /api/ticket/<UUID>
+### DELETE /api/match/$UUID/seat/$UUID or DELETE /api/ticket/$UUID
 
 authToken in cookies, user must be owner of ticket, match hasn't taken place yet
 
