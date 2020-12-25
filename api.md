@@ -1,13 +1,6 @@
 # API endpoints
-All API endpoints should return code=200 whether an error happened or not. 
-Except when a requested page/endpoint doesn't exist, then return 404.
-Or if an internal server exception happened, then return 500.
-
-If any other error happened, then return code=200 and body={'error': '< describe cause of error >'}.
-If not error happened, either no body is returned, or 'error' is not in the body.
-
-The reason not to use standard http codes, because they suck 凸( ` ﾛ ´ )凸.
-With err messages in json, you can describe verbosely what happened, and it's less code to deal with in the frontend.
+If any error happened, then return its code and body={'error': '< describe cause of error >'}.
+If no error happened, either no body is returned, or 'error' is not in the body.
 
 ## Users
 ### POST /api/user
@@ -110,7 +103,7 @@ returns:
     {
         'homeTeam': 'adsfasdf',
         'awayTeam': 'woejfe',
-        'venue': '<stadium UUID>',
+        'venue': '< stadium UUID >',
         'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
         'mainReferee': 'Mahmoud Othman',
         'firstLinesman': 'fasdfaf',
@@ -128,7 +121,7 @@ returns:
 {
     'homeTeam': 'adsfasdf',
     'awayTeam': 'woejfe',
-    'venue': '<stadium UUID>',
+    'venue': '< stadium UUID >',
     'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
     'mainReferee': 'Mahmoud Othman',
     'firstLinesman': 'fasdfaf',
@@ -142,7 +135,7 @@ returns:
 {
     'homeTeam': 'adsfasdf',
     'awayTeam': 'woejfe',
-    'venue': '<stadium UUID>',
+    'venue': '< stadium UUID >',
     'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
     'mainReferee': 'Mahmoud Othman',
     'firstLinesman': 'fasdfaf',
@@ -162,7 +155,7 @@ authToken in cookies, only admin/manager
     // any or all of the following
     'homeTeam': 'adsfasdf',
     'awayTeam': 'woejfe',
-    'venue': '<stadium UUID>',
+    'venue': '< stadium UUID >',
     'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
     'mainReferee': 'Mahmoud Othman',
     'firstLinesman': 'fasdfaf',
@@ -180,7 +173,18 @@ returns:
 }
 ```
 
-### POST /api/match/$UUID/seat/$UUID/reserve
+### GET /api/match/$UUID/seats
+if provided with authToken, then return the reserved seats by the user
+
+returns:
+```
+{
+    'reserved': ['A1', 'B3', 'F15', 'A4' ... ],
+    'reservedByUser': {'A2': '< ticket UUID >', 'A3': 'jasodf-238hadufu-13ihr-833'}
+}
+```
+
+### POST /api/match/$UUID/seat/$ID/reserve
 
 authToken in cookies
 ```
