@@ -5,15 +5,11 @@ router.get('/', (req, res) => {
 	// TODO
 });
 
-router.post('/', (req, res) => {
+router.post('/reserve/:seat_id', (req, res) => {
 	// TODO
 });
 
-router.put('/:username', (req, res) => {
-	// TODO
-});
-
-router.delete('/:username', (req, res) => {
+router.delete('/:seat_id', (req, res) => {
 	// TODO
 });
 

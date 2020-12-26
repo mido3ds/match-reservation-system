@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.delete('/:ticket_id', (req, res) => {
 	// TODO
 });
 
