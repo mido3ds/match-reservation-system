@@ -11,9 +11,10 @@ const app = express()
 // routes modules
 const login = require('./routes/login');
 const users = require('./routes/users');
-const managers = require('./routes/managers');
+const managers = require('./routes/managers/requests');
 const matches = require('./routes/matches');
 const stadiums = require('./routes/stadiums');
+const tickets = require('./routes/tickets');
 
 // midlewares
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use('/api/users', users);
 app.use('/api/managers/requests', managers);
 app.use('/api/matches', matches);
 app.use('/api/stadiums', stadiums);
+app.use('/api/tickets', tickets);
 
 // process.env.NODE_ENV
 if (app.get('env') === 'development') {
