@@ -41,7 +41,7 @@ authToken in cookies, must be either an admin or the account owner
 ```
 
 returns:
-+ If signed-up as `fan`, and it was a successfull, then return `{}`
++ If signed-up as `fan`, and it was a successfull, then return 200
 + If signed-up as `manager`, and it was a valid info, then return `{'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}`
 + If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid `{'err', 'ಠ_ಠ what the hell?'}`
     
@@ -91,7 +91,7 @@ returns:
 authToken in cookies, must be admin
 
 returns:
-+ if accepted, `{}`
++ if accepted, 200
 + not found: `{'err': 'username not found'}`
 
 ### POST /api/managers/requests/reject/:username 
@@ -99,7 +99,7 @@ returns:
 authToken in cookies, must be admin
 
 returns:
-+ if rejected, `{}`
++ if rejected, 200
 + not found: `{'err': 'username not found'}`
 
 ## Matches
@@ -112,7 +112,7 @@ returns:
         'homeTeam': 'adsfasdf',
         'awayTeam': 'woejfe',
         'venue': '< stadium UUID >',
-        'dateTime': '2020-12-25_14:30', // yyyy-mm-dd_HH:MM cairo time
+        'dateTime': '2020-11-13T20:20:39+00:00', // yyyy-mm-ddTHH:MM:SS+HH:MM
         'mainReferee': 'Mahmoud Othman',
         'firstLinesman': 'fasdfaf',
         'secondLinesman': 'asdfawoj'
@@ -153,7 +153,7 @@ returns:
 
 returns:
 + if invalid, return `{'err': 'err message'}`
-+ otherwise, return `{}`
++ otherwise, return 200
 
 ### PUT /api/matches/:match_id
 
@@ -211,7 +211,7 @@ returns:
 authToken in cookies, user must be owner of ticket, match hasn't taken place yet
 
 returns:
-+ if no error: `{}`
++ if no error: 200
 + otherwise: err with describtion
 
 ## Stadiums

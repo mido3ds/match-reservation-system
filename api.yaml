@@ -1,0 +1,763 @@
+openapi: 3.0.1
+info:
+  title: Match Reservation API
+  version: 0.1.0
+paths:
+  /api/users:
+    post:
+      summary: signup
+      operationId: signup
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/SubmittedUser'
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: object
+                description: successful signup
+                properties:
+                  authToken:
+                    type: string
+                  msg:
+                    type: string
+                required:
+                - authToken
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: invalid data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      summary: get all users
+      operationId: getUsers
+      parameters:
+        - name: authtoken
+          in: cookie
+          schema:
+            type: string
+          required: true
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListedUser'
+        '406':
+          description: not acceptable, if page < 1
+  /api/users/{username}:
+    put:
+      summary: edit user
+      operationId: editUser
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: authtoken
+          in: cookie
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/EditedUser'
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: object
+                description: successful edit
+                properties:
+                  msg:
+                    type: string
+                    description: in case the user asked to be a manger, send a message to display to assure they will be reviewed
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: delete a user
+      operationId: deleteUser
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: authtoken
+          in: cookie
+          schema:
+            type: string
+          description: must be an admin, or the account owner
+          required: true
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: username not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/login:
+    post:
+      summary: get auth token
+      operationId: login
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - password
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  authToken:
+                    type: string
+                required:
+                - authToken
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/managers/requests:
+    get:
+      summary: list requests for management
+      operationId: getManagersRequests
+      parameters:
+        - name: authtoken
+          in: cookie
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          required: false
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListedUser'
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '406':
+          description: not acceptable, if page < 1
+  /api/managers/requests/accept/{username}:
+    post:
+      summary: accept a request
+      operationId: acceptManagersRequest
+      parameters:
+        - name: authtoken
+          in: cookie
+          required: true
+          schema:
+            type: string
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: username not found in the list of requests
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/managers/requests/reject/{username}:
+    post:
+      summary: reject a request
+      operationId: rejectManagersRequest
+      parameters:
+        - name: authtoken
+          in: cookie
+          required: true
+          schema:
+            type: string
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: username not found in the list of requests
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/matches:
+    get:
+      summary: get matches
+      operationId: getMatches
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            default: 1
+            type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListedMatch'
+        '406':
+          description: not acceptable, if page < 1
+    post:
+      summary: submit a match
+      operationId: submitMatch
+      parameters:
+        - name: authtoken
+          in: cookie
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/SubmittedMatch'
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: invalid data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/matches/{match_id}:
+    get:
+      summary: get one match
+      operationId: getMatch
+      parameters:
+        - name: match_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ListedMatch'
+        '404':
+          description: match not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: edit a match
+      operationId: editMatch
+      parameters:
+        - name: authtoken
+          in: cookie
+          required: true
+          schema:
+            type: string
+        - name: match_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/SubmittedMatch'
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: invalid data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/matches/{match_id}/seats:
+    get:
+      summary: get seats of given match
+      operationId: getSeats
+      parameters:
+        - name: match_id
+          schema:
+            type: string
+          required: true
+          in: path
+        - name: authtoken
+          schema:
+            type: string
+          required: false
+          in: cookie
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Seats'
+        '404':
+          description: match not found
+  /api/matches/{match_id}/seats/reserve/{seat_id}:
+    post:
+      summary: reserve seat
+      operationId: reserveSeat
+      parameters:
+        - name: match_id
+          schema:
+            type: string
+          required: true
+          in: path
+        - name: seat_id
+          schema:
+            type: string
+          required: true
+          in: path
+        - name: authtoken
+          schema:
+            type: string
+          required: true
+          in: cookie
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CreditCard'
+        '404':
+          description: match/seat not found
+        '401':
+          description: not authorized, or reserved
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: cancel seat
+      operationId: cancelSeat
+      parameters:
+        - name: match_id
+          schema:
+            type: string
+          required: true
+          in: path
+        - name: seat_id
+          schema:
+            type: string
+          required: true
+          in: path
+        - name: authtoken
+          schema:
+            type: string
+          required: true
+          in: cookie
+      responses:
+        '200':
+          description: ok
+        '404':
+          description: match/seat not found
+        '401':
+          description: not authorized, or not reserved
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/tickets/{ticket_id}:
+    delete:
+      summary: cancel ticket
+      operationId: cancelTicket
+      parameters:
+        - name: ticket_id
+          schema:
+            type: string
+          required: true
+          in: path
+        - name: authtoken
+          schema:
+            type: string
+          required: true
+          in: cookie
+      responses:
+        '200':
+          description: ok
+        '404':
+          description: ticket not found
+        '401':
+          description: not authorized, or not your ticket
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/stadiums:
+    get:
+      summary: get all stadiums
+      operationId: getStadiums
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListedStadium'
+        '406':
+          description: not acceptable, if page < 1
+    post:
+      summary: submit a stadium
+      operationId: submitStadium
+      parameters:
+        - name: authtoken
+          schema:
+            type: string
+          required: true
+          in: cookie
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/SubmittedStadium'
+      responses:
+        '200':
+          description: ok
+        '401':
+          description: not authorized, or not your ticket
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: invalid data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SubmittedUser:
+      type: object
+      additionalProperties: false
+      description: User sends this object when they first signup
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          example: '2020-12-09'
+          type: string
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+        city:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - fan
+          - manager
+      required:
+      - username
+      - password
+      - firstName
+      - lastName
+      - birthDate
+      - gender
+      - city
+      - address
+      - email
+      - role
+    EditedUser:
+      type: object
+      additionalProperties: false
+      description: User sends this object when they edit their profile
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          example: '2020-12-09'
+          type: string
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+        city:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - fan
+          - manager
+    ListedUser:
+      type: object
+      additionalProperties: false
+      description: This is the object sent to frontend when it asks to list user
+      properties:
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+        city:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+      required:
+      - username
+      - firstName
+      - lastName
+      - birthDate
+      - gender
+      - city
+      - address
+      - email
+    ErrorResponse:
+      type: object
+      additionalProperties: true
+      description: when an error happens, this holds the error description
+      properties:
+        err:
+          type: string
+      required:
+      - err
+    SubmittedMatch:
+      type: object
+      additionalProperties: false
+      properties:
+        homeTeam:
+          type: string
+        awayTeam:
+          type: string
+        venue:
+          type: string
+        dateTime:
+          example: '2020-12-09T23:12:00+00:00'
+          type: string
+        mainReferee:
+          type: string
+        firstLinesman:
+          type: string
+        secondLinesman:
+          type: string
+      required:
+      - homeTeam
+      - awayTeam
+      - venue
+      - dateTime
+      - mainReferee
+      - firstLinesman
+      - secondLinesman
+    ListedMatch:
+      type: object
+      additionalProperties: false
+      properties:
+        homeTeam:
+          type: string
+        awayTeam:
+          type: string
+        venue:
+          type: string
+        dateTime:
+          type: string
+        mainReferee:
+          type: string
+        firstLinesman:
+          type: string
+        secondLinesman:
+          type: string
+        uuid:
+          type: string
+      required:
+      - homeTeam
+      - awayTeam
+      - venue
+      - dateTime
+      - mainReferee
+      - firstLinesman
+      - secondLinesman
+      - uuid
+    Seats:
+      type: object
+      additionalProperties: false
+      properties:
+        reserved:
+          type: array
+          description: reserved seats in this stadium
+          items:
+            type: string
+            description: name of seat
+            example: 'A1'
+        reservedByUser:
+          type: object
+          description: tickets and seats reserved by user, if they provided their auth token
+          additionalProperties: true
+          example: '{"A2": "asdfohw82-82uero-8whfo-aoshdf", "B3": "jasodf-238hadufu-13ihr-833"}'
+      required:
+      - reserved
+    CreditCard:
+      type: object
+      additionalProperties: false
+      properties:
+        creditCardNumber:
+          type: string
+        pin:
+          type: integer
+      required:
+      - creditCardNumber
+      - pin
+    SubmittedStadium:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+      required:
+      - name
+      - city
+    ListedStadium:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+        uuid:
+          type: string
+      required:
+      - name
+      - city
+      - uuid
