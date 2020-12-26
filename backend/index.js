@@ -3,6 +3,7 @@ const Joi = require('joi');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const mysql = require('mysql');
 const config = require('config'); // e.g: config.get('database.password')
 const startupDebugger = require('debug')('app:startup');
 const dbDebugger = require('debug')('app:db');
