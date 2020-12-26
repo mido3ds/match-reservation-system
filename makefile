@@ -1,7 +1,7 @@
 docs: openapi-generator-cli.jar
 	mkdir -p out/docs
-	./openapi-generator-cli.jar generate -i api.yaml -g dynamic-html -o out/docs
-	(cd out/docs && yarn install && echo http://localhost:8002 && nodejs main.js)
+	./openapi-generator-cli.jar generate -i api.yaml -g html2 -o out/docs
+	xdg-open out/docs/index.html
 
 client: openapi-generator-cli.jar
 	mkdir -p frontend/src/api
