@@ -86,12 +86,20 @@ returns:
 ]
 ```
 
-### POST /api/managers/requests/:username/accept 
+### POST /api/managers/requests/accept/:username 
 
 authToken in cookies, must be admin
 
 returns:
 + if accepted, `{}`
++ not found: `{'err': 'username not found'}`
+
+### POST /api/managers/requests/reject/:username 
+
+authToken in cookies, must be admin
+
+returns:
++ if rejected, `{}`
 + not found: `{'err': 'username not found'}`
 
 ## Matches
@@ -184,7 +192,7 @@ returns:
 }
 ```
 
-### POST /api/matches/:match_id/seat/:seat_id/reserve
+### POST /api/matches/:match_id/seat/reserve/:seat_id
 
 authToken in cookies
 ```
