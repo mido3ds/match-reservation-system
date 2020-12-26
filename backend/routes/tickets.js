@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express'),
+	router = express.Router();
 
 router.delete('/:ticket_id', (req, res) => {
 	// TODO
