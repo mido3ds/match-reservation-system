@@ -192,7 +192,7 @@ returns:
 }
 ```
 
-### POST /api/matches/:match_id/seat/reserve/:seat_id
+### POST /api/matches/:match_id/seats/reserve/:seat_id
 
 authToken in cookies
 ```
