@@ -206,7 +206,7 @@ returns:
 + if valid: `{'ticketNumber': 'ajsdfehjf28ehfjosdfh'}`
 + otherwise, err with describtion
 
-### DELETE /api/matches/:match_id/seat/:seat_id
+### DELETE /api/matches/:match_id/seat/:seat_id or DELETE /api/ticket/:ticket_id
 
 authToken in cookies, user must be owner of ticket, match hasn't taken place yet
 
