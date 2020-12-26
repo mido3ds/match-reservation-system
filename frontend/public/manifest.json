@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "The Stadium",
+  "name": "Egyptian Premier League Match Reservation System",
   "icons": [
     {
       "src": "favicon.ico",
