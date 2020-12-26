@@ -3,7 +3,7 @@ If any error happened, then return its code and body={'error': '< describe cause
 If no error happened, either no body is returned, or 'error' is not in the body.
 
 ## Users
-### POST /api/user
+### POST /api/users
 ```
 {
     'username': 'foo',
@@ -23,7 +23,7 @@ returns:
 + If signed-up as `manager`, and it was a valid info, then return `{'authToken': null, 'msg': 'Your sign-up request is sent to the admin for review. We will email you later about it.'}`
 + If signed-up as `fan`, and it wasn't valid, then return an error that describes why it wasn't valid `{'err', 'ಠ_ಠ what the hell?'}`
 
-### PUT /api/user/$username
+### PUT /api/users/:username
 
 authToken in cookies, must be either an admin or the account owner
 ```
@@ -59,7 +59,7 @@ returns:
 ]
 ```
 
-### DELETE /api/user/$username
+### DELETE /api/users/:username
 
 authToken in cookies, must be admin
 
@@ -86,7 +86,7 @@ returns:
 ]
 ```
 
-### POST /api/managers/requests/$username/accept 
+### POST /api/managers/requests/:username/accept 
 
 authToken in cookies, must be admin
 
@@ -112,7 +112,7 @@ returns:
 ]
 ```
 
-### GET /api/match/$UUID
+### GET /api/matches/:match_id
 
 returns:
 + if doesn't exist, return `{'err': 'invalid id'}`
@@ -130,7 +130,7 @@ returns:
 }
 ```
     
-### POST /api/match
+### POST /api/matches
 ```
 {
     'homeTeam': 'adsfasdf',
@@ -147,7 +147,7 @@ returns:
 + if invalid, return `{'err': 'err message'}`
 + otherwise, return `{}`
 
-### PUT /api/match/$UUID
+### PUT /api/matches/:match_id
 
 authToken in cookies, only admin/manager
 ```
@@ -164,7 +164,7 @@ authToken in cookies, only admin/manager
 ```
 
 ## Seats
-### GET /api/match/$UUID/seats
+### GET /api/matches/:match_id/seats
 
 returns:
 ```
@@ -173,7 +173,7 @@ returns:
 }
 ```
 
-### GET /api/match/$UUID/seats
+### GET /api/matches/:match_id/seats
 if provided with authToken, then return the reserved seats by the user
 
 returns:
@@ -184,7 +184,7 @@ returns:
 }
 ```
 
-### POST /api/match/$UUID/seat/$ID/reserve
+### POST /api/matches/:match_id/seat/:seat_id/reserve
 
 authToken in cookies
 ```
@@ -198,7 +198,7 @@ returns:
 + if valid: `{'ticketNumber': 'ajsdfehjf28ehfjosdfh'}`
 + otherwise, err with describtion
 
-### DELETE /api/match/$UUID/seat/$ID or DELETE /api/ticket/$UUID
+### DELETE /api/matches/:match_id/seat/:seat_id
 
 authToken in cookies, user must be owner of ticket, match hasn't taken place yet
 
@@ -217,7 +217,7 @@ returns:
 ]
 ```
 
-### POST /api/stadium
+### POST /api/stadiums
 
 authToken in cookies, and server must check that it's a manager/admin account
 
