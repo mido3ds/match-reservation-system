@@ -86,12 +86,20 @@ returns:
 ]
 ```
 
-### POST /api/managers/requests/:username/accept 
+### POST /api/managers/requests/accept/:username 
 
 authToken in cookies, must be admin
 
 returns:
 + if accepted, `{}`
++ not found: `{'err': 'username not found'}`
+
+### POST /api/managers/requests/reject/:username 
+
+authToken in cookies, must be admin
+
+returns:
++ if rejected, `{}`
 + not found: `{'err': 'username not found'}`
 
 ## Matches
@@ -184,7 +192,7 @@ returns:
 }
 ```
 
-### POST /api/matches/:match_id/seat/:seat_id/reserve
+### POST /api/matches/:match_id/seats/reserve/:seat_id
 
 authToken in cookies
 ```
@@ -198,7 +206,7 @@ returns:
 + if valid: `{'ticketNumber': 'ajsdfehjf28ehfjosdfh'}`
 + otherwise, err with describtion
 
-### DELETE /api/matches/:match_id/seat/:seat_id
+### DELETE /api/matches/:match_id/seats/:seat_id or DELETE /api/tickets/:ticket_id
 
 authToken in cookies, user must be owner of ticket, match hasn't taken place yet
 
