@@ -1,16 +1,18 @@
-const express = require('express'),
-	router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const { userSchema } = require('../schema');
 
 router.get('/', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.post('/accept/:username', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.post('/reject/:username', (req, res) => {
-	// TODO
+  // TODO
 });
 
 module.exports = router;

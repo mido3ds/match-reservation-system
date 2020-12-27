@@ -17,9 +17,6 @@ const login = require('./routes/login'),
   stadiums = require('./routes/stadiums'),
   tickets = require('./routes/tickets');
 
-// other requires
-const schema = require('./schema');
-
 // midlewares
 function setupMiddlewares() {
   app.use(express.json());

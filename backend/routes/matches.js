@@ -1,7 +1,8 @@
-const express = require('express'),
-	router = express.Router();
-
+const express = require('express');
 const seats = require('./seats');
+const { matchSchema } = require('../schema');
+
+const router = express.Router();
 
 router.use('/:match_id/seats', seats);
 

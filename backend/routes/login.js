@@ -1,8 +1,10 @@
-const express = require('express'),
-	router = express.Router();
+const express = require('express');
+const { userSchema } = require('../schema');
+
+const router = express.Router();
 
 router.post('/', (req, res) => {
-	// TODO
+  // TODO
 });
 
 module.exports = router;
