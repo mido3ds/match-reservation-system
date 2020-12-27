@@ -1,5 +1,6 @@
 {
 	"database": {
+		"connection": "connection_string",
 		"password": "app_password"
 	}
 }
