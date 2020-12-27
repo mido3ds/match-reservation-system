@@ -1,25 +1,27 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const seats = require('./seats');
 const { matchSchema } = require('../schema');
 
 const router = express.Router();
+const Match = new mongoose.model('Match', matchSchema);
 
 router.use('/:match_id/seats', seats);
 
 router.get('/', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.get('/:match_id', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.post('/', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.put('/:match_id', (req, res) => {
-	// TODO
+  // TODO
 });
 
 module.exports = router;
