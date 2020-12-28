@@ -11,9 +11,9 @@ router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (req.params.page < 1) return res.status(406).send('not acceptable page < 1');
 
-  const users = await User.find().sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
+  const users = await User.find().select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
 
-  res.send(_.omit(users, ['password']));
+  res.send(users);
 });
 
 router.get('/me', auth, async (req, res) => {
