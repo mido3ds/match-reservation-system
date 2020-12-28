@@ -7,16 +7,16 @@ const admin = require('../middleware/admin');
 
 const router = express.Router();
 
-router.get('/', [auth, admin], (req, res) => {
+router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (req.params.page < 1) return res.status(406).send('not acceptable page < 1');
 
-  const users = User.find().sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
+  const users = await User.find().sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
 
   res.send(_.omit(users, ['password']));
 });
 
-router.get('/me', auth, (req, res) => {
+router.get('/me', auth, async (req, res) => {
   const user = await User.findById(req.user._id).select('-password');
   res.send(user);
 });
@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   res.header('x-auth-token', token).send(`Welcome, ${user.firstname} ${user.lastname}`);
 });
 
-router.put('/edit', auth, (req, res) => {
+router.put('/edit', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -58,7 +58,7 @@ router.put('/edit', auth, (req, res) => {
   res.send(user);
 });
 
-router.delete('/:username', [auth, admin], (req, res) => {
+router.delete('/:username', [auth, admin], async (req, res) => {
   const user = await User.deleteOne({ username: req.params.username });
   res.send(user);
 });
