@@ -46,6 +46,9 @@ router.post('/', async (req, res) => {
   if (req.body.role === 'fan') {
     user = { ...user, isPendding: false };
   }
+  else {
+    user = { ...user, isPendding: true };
+  }
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
