@@ -1,10 +1,7 @@
-const mongoose = require('mongoose');
 const express = require('express');
 const seats = require('./seats');
-const { matchSchema } = require('../schema');
 
 const router = express.Router();
-const Match = mongoose.model('Match', matchSchema);
 
 router.use('/:match_id/seats', seats);
 

@@ -2,5 +2,6 @@
 	"database": {
 		"connection": "connection_string",
 		"password": "app_password"
-	}
+	},
+	"jwt_private_key": "app_jwt_private_key"
 }

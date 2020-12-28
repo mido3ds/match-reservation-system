@@ -1,27 +1,66 @@
+const bcrypt = require('bcrypt');
+const _ = require('lodash');
 const express = require('express');
+const {User, validate} = require('../models/user');
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  // TODO
-  // req.params.authtoken // req.params.page
+router.get('/', [auth, admin], (req, res) => {
   const pageSize = 10;
-  const { error } = validateAuthentications()
-  const users = User.find().sort('-createdIn').skip((req.params.page - 1) * pageSize).limit(pageSize);
+  if (req.params.page < 1) return res.status(406).send('not acceptable page < 1');
+
+  const users = User.find().sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
+
+  res.send(_.omit(users, ['password']));
+});
+
+router.get('/me', auth, (req, res) => {
+  const user = await User.findById(req.user._id).select('-password');
+  res.send(user);
+});
+
+router.post('/', async (req, res) => {
+  const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  let user = await User.findOne({ $or: [
+    {username: req.body.username},
+    {email: req.body.email}
+  ]});
+
+  if (user) return res.status(400).send('This username or/and email is already registered.');
+
+  const to_pick = ['username', 'password', 'firstname', 'lastName',
+    'birthDate', 'gender', 'city', 'address', 'email', 'role'];
+
+  user = new User(_.pick(req.body, to_pick));
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+
+  await user.save();
+
+  const token = user.generateAuthToken();
+
+  res.header('x-auth-token', token).send(`Welcome, ${user.firstname} ${user.lastname}`);
 });
 
-router.post('/', (req, res) => {
-  // TODO
-  
+router.put('/edit', auth, (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const to_pick = ['password', 'firstname', 'lastName', 'birthDate', 'gender', 'city', 'address'];
+
+  user = new User(_.pick(req.body, to_pick));
+
+  const user = await User.findByIdAndUpdate(req.user._id, user).select('-password');
+
+  res.send(user);
 });
 
-router.put('/:username', (req, res) => {
-	// TODO
-});
-
-router.delete('/:username', (req, res) => {
-	// TODO
+router.delete('/:username', [auth, admin], (req, res) => {
+  const user = await User.deleteOne({ username: req.params.username });
+  res.send(user);
 });
 
 module.exports = router;

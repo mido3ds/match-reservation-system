@@ -1,49 +1,22 @@
-const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const express = require('express');
+const {User, validateLogin} = require('../models/user');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  // TODO
+router.post('/', async (req, res) => {
+  const { error } = validateLogin(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
-  User.findOne({ username: req.body.username }).then(
-    (user) => {
-      if (!user) {
-        return res.status(401).json({
-          error: new Error('User not found!')
-        });
-      }
-      bcrypt.compare(req.body.password, user.password).then(
-        (valid) => {
-          if (!valid) {
-            return res.status(401).json({
-              error: new Error('Incorrect password!')
-            });
-          }
-          const token = jwt.sign(
-            { userId: user._id },
-            'RANDOM_TOKEN_SECRET',
-            { expiresIn: '24h' });
-          res.status(200).json({
-            userId: user._id,
-            token: token
-          });
-        }
-      ).catch(
-        (error) => {
-          res.status(500).json({
-            error: error
-          });
-        }
-      );
-    }
-  ).catch(
-    (error) => {
-      res.status(500).json({
-        error: error
-      });
-    }
-  );
+  let user = await User.findOne({ username: req.body.username });
+  if (!user) return res.status(400).send('Invalid username or password!');
+  
+  const isValidPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!isValidPassword) return res.status(400).send('Invalid username or password!');
+
+  const token = user.generateAuthToken();
+
+  res.send(token);
 });
 
 module.exports = router;
