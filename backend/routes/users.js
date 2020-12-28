@@ -8,7 +8,7 @@ const admin = require('../middleware/admin');
 const router = express.Router();
 
 /***
- * get /users (get all users) (only by admin)
+ * get /users (get all users (not pendding)) (only by admin)
  * get /users/me (get my info) (any type of user)
  * post /users (register user) (anyone)
  * put /users/me (edit my info) (anyone)
@@ -19,7 +19,7 @@ router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (req.params.page < 1) return res.status(406).send('not acceptable page < 1');
 
-  const users = await User.find().select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
+  const users = await User.find({ isPendding: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
 
   res.send(users);
 });
@@ -43,6 +43,10 @@ router.post('/', async (req, res) => {
     'birthDate', 'gender', 'city', 'address', 'email', 'role'];
 
   user = new User(_.pick(req.body, to_pick));
+  if (req.body.role === 'fan') {
+    user = { ...user, isPendding: false };
+  }
+
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 
