@@ -1,21 +1,20 @@
 // dependencies
-const Joi = require('joi'),
-  express = require('express'),
-  helmet = require('helmet'),
-  morgan = require('morgan'),
-  mongoose = require('mongoose'),
-  config = require('config'), // e.g: config.get('database.password')
-  startupDebugger = require('debug')('app:startup'),
-  dbDebugger = require('debug')('app:db'),
-  app = express();
+const express = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const config = require('config'); // e.g: config.get('database.password')
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
+const app = express();
 
 // routes modules
-const login = require('./routes/login'),
-  users = require('./routes/users'),
-  managers = require('./routes/managers'),
-  matches = require('./routes/matches'),
-  stadiums = require('./routes/stadiums'),
-  tickets = require('./routes/tickets');
+const login = require('./routes/login');
+const users = require('./routes/users');
+const managers = require('./routes/managers');
+const matches = require('./routes/matches');
+const stadiums = require('./routes/stadiums');
+const tickets = require('./routes/tickets');
 
 // midlewares
 function setupMiddlewares() {

@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
 const express = require('express');
-const { userSchema } = require('../schema');
 
 const router = express.Router();
-const User = new mongoose.model('User', userSchema);
 
 router.get('/', (req, res) => {
-	// TODO
+  // TODO
+  // req.params.authtoken // req.params.page
+  const pageSize = 10;
+  const { error } = validateAuthentications()
+  const users = User.find().sort('-createdIn').skip((req.params.page - 1) * pageSize).limit(pageSize);
+  if (error) return res.status(400).send(error.details[0].message);
 });
 
 router.post('/', (req, res) => {
-	// TODO
+  // TODO
+  
 });
 
 router.put('/:username', (req, res) => {

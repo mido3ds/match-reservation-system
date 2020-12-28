@@ -1,9 +1,6 @@
-const mongoose = require('mongoose');
 const express = require('express');
-const router = express.Router();
 
-const { userSchema } = require('../schema');
-const User = new mongoose.model('User', userSchema);
+const router = express.Router();
 
 router.get('/', (req, res) => {
   // TODO
