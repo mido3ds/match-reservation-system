@@ -7,6 +7,14 @@ const admin = require('../middleware/admin');
 
 const router = express.Router();
 
+/***
+ * get /users (get all users) (only by admin)
+ * get /users/me (get my info) (any type of user)
+ * post /users (register user) (anyone)
+ * put /users/me (edit my info) (anyone)
+ * delete /users/:username  (delete user) (only by admin)
+ */
+
 router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (req.params.page < 1) return res.status(406).send('not acceptable page < 1');
@@ -45,7 +53,7 @@ router.post('/', async (req, res) => {
   res.header('x-auth-token', token).send(`Welcome, ${user.firstname} ${user.lastname}`);
 });
 
-router.put('/edit', auth, async (req, res) => {
+router.put('/me', auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

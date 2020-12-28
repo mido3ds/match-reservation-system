@@ -35,7 +35,7 @@ function validateUser(user) {
     city: Joi.string().min(3).max(15).required(),
     address: Joi.string().min(5).max(100).required(),
     email: Joi.string().min(5).max(255).required().email(),
-    role: Joi.string().valid(['fan', 'manager']).required()
+    role: Joi.string().valid(['fan', 'manager', 'admin']).required()
   };
   
   return Joi.validate(user, schema);
