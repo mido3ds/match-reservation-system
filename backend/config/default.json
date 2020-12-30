@@ -1,3 +1,7 @@
 {
-	"name": "Egyptian Premier League Match Reservation System - Development"
+	"name": "Egyptian Premier League Match Reservation System - Development",
+	"database": {
+		"connection": "mongodb://localhost/MatchReservationSystem"
+	},
+	"jwt_private_key": ""
 }

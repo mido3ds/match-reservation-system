@@ -1,8 +1,9 @@
-const express = require('express'),
-	router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 
 router.delete('/:ticket_id', (req, res) => {
-	// TODO
+  // TODO
 });
 
 module.exports = router;

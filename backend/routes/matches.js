@@ -1,24 +1,24 @@
-const express = require('express'),
-	router = express.Router();
-
+const express = require('express');
 const seats = require('./seats');
+
+const router = express.Router();
 
 router.use('/:match_id/seats', seats);
 
 router.get('/', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.get('/:match_id', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.post('/', (req, res) => {
-	// TODO
+  // TODO
 });
 
 router.put('/:match_id', (req, res) => {
-	// TODO
+  // TODO
 });
 
 module.exports = router;
