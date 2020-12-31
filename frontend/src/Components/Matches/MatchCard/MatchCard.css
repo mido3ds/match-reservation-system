@@ -1,0 +1,139 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: center;
+}
+
+.flex-container-col {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.match-card {
+    width: 235px;
+    height: 240px;
+    background-color: #2C2738;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.edit {
+    position:absolute;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+    margin-left:77px
+}
+
+.delete {
+    position:absolute;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+    margin-left:103px
+}
+
+.upper-area {
+    margin-top: 50px;
+}
+
+.home-team {
+    width: 70px;
+    height: 50px;
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.home-team img {
+    display:block;
+    margin:auto;
+}
+
+.home-team p {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.away-team {
+    width: 70px;
+    height: 50px;
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.away-team img {
+    display:block;
+    margin:auto;
+}
+
+.away-team p {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.date-time {
+    width: 60px;
+    height: 50px;
+    margin: 0px 7px;
+    text-align: center;
+}
+
+.time {
+    padding: 20px 0px 0px 0px;
+    font-size: 25px;
+    font-weight: bold;
+    color:white;
+    margin-bottom: 0px;
+}
+
+.date {
+    color:white;
+}
+
+.middle-area {
+    margin-top: 0px;
+}
+
+.stadium {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.stadium img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.stadium span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.referee {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.referee span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.referee img {
+    width: 20px;
+    height: 20px;
+    margin-right: 1px;
+}
+
+

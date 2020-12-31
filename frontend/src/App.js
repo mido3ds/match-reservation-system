@@ -1,9 +1,10 @@
 import './App.css';
+import Matches from './Components/Matches/Matches'
 
 function App() {
   return (
     <div className="App">
-      <h1> Match Reservation System </h1>
+      <Matches />
     </div>
   );
 }
