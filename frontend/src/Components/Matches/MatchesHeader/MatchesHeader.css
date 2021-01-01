@@ -1,10 +1,10 @@
-.header {
+.matches-header {
     position: relative;
 }
 
-.header-image {
-    width: 25%;
-    height: 90%;
+.matches-header-image {
+    width: 96%;
+    height: 350px;
     object-fit: cover;
     object-position: 50% 60%; /* try 20px 10px */ 
     opacity: 90%;
@@ -30,6 +30,7 @@
     border-color: black;
 }
 
+<<<<<<< HEAD:frontend/src/Components/Header/Header.css
 .text-block p {
     color: black;
     font-size: 20px;
@@ -40,6 +41,9 @@
 }
 
 .button-area {
+=======
+.matches-button-area {
+>>>>>>> 818449438a35e053b4417dbe03ec0a341a3f9132:frontend/src/Components/Matches/MatchesHeader/MatchesHeader.css
     position: absolute;
     bottom: 80px;
     left: 100px;

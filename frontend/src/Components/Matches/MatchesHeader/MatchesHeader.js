@@ -1,15 +1,15 @@
-import './Header.css';
+import './MatchesHeader.css';
 import Ball from "../../../images/ball.jpg";
 
-function Header() {
+function MatchesHeader() {
 
   return (
-      <div class="header">
-          <img className="header-image" alt="header" src={Ball}/>
+      <div class="matches-header">
+          <img className="matches-header-image" alt="matches-header" src={Ball}/>
           <div className="text-block">
             <h1> Matches </h1>
           </div>
-          <div  className="button-area">
+          <div  className="matches-button-area">
             <button type="button" className="add-button btn btn-primary"> Add </button>
           </div>
       </div>
@@ -17,4 +17,4 @@ function Header() {
 
 }
 
-export default Header;
+export default MatchesHeader;
