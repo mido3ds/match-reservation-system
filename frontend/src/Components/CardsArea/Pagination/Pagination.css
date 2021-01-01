@@ -141,7 +141,7 @@
     animation: big-dot-container--animation-next 0.3s forwards;
 }
 
-.btn {
+.custom-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -150,7 +150,7 @@
     transition: opacity 0.2s;
 }
 
-.btn:hover {
+.custom-btn:hover {
     opacity: 0.6;
 }
 

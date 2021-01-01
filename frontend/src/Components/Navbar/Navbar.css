@@ -1,0 +1,90 @@
+.flex-container-center {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-navbar {
+    overflow: hidden;
+    height: 100px;
+    transition: height 1000ms;
+    background-color:white;
+    z-index: 100;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.4);
+}
+
+.page-navbar.is-active {
+    height: 65px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+.flex-container-start {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.brand-text {
+    margin-top: 20px;
+    transition: margin-top 1000ms;
+    font-size: 30px;
+    transition: font-size 1000ms;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    border-width: 10px;
+}
+
+.brand-text.is-active {
+    margin-top:15px;
+    font-size: 15px;
+}
+
+.brand-logo {
+    width: 150px;
+    transition: width 1000ms;
+}
+
+.brand-logo.is-active {
+    width: 83px;
+}
+
+.navbar-button-area {
+    margin-left: auto;
+    width: 300px;
+    height: 100px;
+    transition: height 1000ms;
+}
+
+.edit-profile-button {
+    width: 110px;
+    transition: width 1000ms;
+    background-color: #0880AE;
+    border-color: #0880AE;
+    margin: 0px 20px;
+}
+
+.log-out-profile-button {
+    width: 110px;
+    transition: width 1000ms;
+    border-color: #0880AE;
+    margin: 0px 20px;
+}
+
+.navbar-button-area.is-active {
+    height: 65px;
+}
+
+.edit-profile-button.is-active {
+    width: 100px;
+}
+
+.log-out-profile-button.is-active {
+    width: 100px;
+}
