@@ -1,10 +1,10 @@
-.matches-header {
+.header {
     position: relative;
 }
 
-.matches-header-image {
-    width: 96%;
-    height: 350px;
+.header-image {
+    width: 25%;
+    height: 90%;
     object-fit: cover;
     object-position: 50% 60%; /* try 20px 10px */ 
     opacity: 90%;
@@ -30,7 +30,16 @@
     border-color: black;
 }
 
-.matches-button-area {
+.text-block p {
+    color: black;
+    font-size: 20px;
+    line-height: 28px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    border-width: 10px;
+    border-color: black;
+}
+
+.button-area {
     position: absolute;
     bottom: 80px;
     left: 100px;
