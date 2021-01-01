@@ -1,8 +1,8 @@
-.header {
+.matches-header {
     position: relative;
 }
 
-.header-image {
+.matches-header-image {
     width: 96%;
     height: 350px;
     object-fit: cover;
@@ -29,7 +29,7 @@
     border-color: black;
 }
 
-.button-area {
+.matches-button-area {
     position: absolute;
     bottom: 80px;
     left: 100px;

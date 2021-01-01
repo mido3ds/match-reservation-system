@@ -1,0 +1,123 @@
+.user-card {
+    width: 235px;
+    height: 240px;
+    background-color: #4675a8dc;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.flex-container-col-centered {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: initial;
+    flex-direction: column;
+}
+
+.flex-container-row-centered {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: initial;
+    flex-direction: row;
+}
+
+.flex-container-centered {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.accept {
+    position:absolute;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+    margin-left:77px
+}
+
+.reject {
+    position:absolute;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+    margin-left:103px
+}
+
+.role-badge {
+    margin-top:20px;
+}
+
+.user-name {
+    margin-top:10px;
+    margin-bottom: 0px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Neucha','cursive';
+}
+
+.user-username {
+    font-size: 13px;
+    margin-top: -5px;
+    font-family: 'Padauk', sans-serif;
+}
+
+.address-area {
+    margin-top: -5px;
+}
+
+.address-area img {
+    width: 17px;
+    height: 17px;
+    margin-right: 3px;
+}
+
+.address-area span {
+    font-weight: bold;
+}
+
+.email-area {
+    margin-top: 8px;
+}
+
+.email-area img {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+    filter: brightness(90%);
+}
+
+.email-area span {
+    font-weight: bold;
+}
+
+.gender-area {
+    margin-top: 8px;
+    margin-right: 50px;
+}
+
+.gender-area img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.gender-area span {
+    font-weight: bold;
+}
+
+.birthdate-area {
+    margin-top: 8px;
+}
+
+.birthdate-area img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.birthdate-area span {
+    font-weight: bold;
+}

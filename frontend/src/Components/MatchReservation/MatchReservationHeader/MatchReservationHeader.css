@@ -1,0 +1,193 @@
+.match-reservation-header {
+    position: relative;
+}
+
+.match-reservation-header-image {
+    width: 96%;
+    height: 350px;
+    object-fit: cover;
+    object-position: 50% 90%; /* try 20px 10px */ 
+    opacity: 90%;
+    filter: brightness(30%);
+    border-radius: 50px;
+    display:block;
+    margin: 20px auto;
+}
+
+.match-details {
+    width: 96%;
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: center;
+}
+
+.flex-container-s {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: initial;
+    flex-direction: column;
+}
+
+.flex-container-col-not-centered {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: initial;
+    flex-direction: column;
+}
+
+.teams-area {
+    margin-top: 80px;
+}
+
+.match-home-team {
+    width: 300px;
+    height: 50px;
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.match-home-team img {
+    display:block;
+    margin:auto;
+}
+
+.match-home-team p {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.match-away-team {
+    width: 280px;
+    height: 50px;
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.match-away-team img {
+    display:block;
+    margin:auto;
+}
+
+.match-away-team p {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.stad-refere-area {
+    margin-top: 20px;
+}
+
+.match-date-time {
+    width: 280px;
+    height: 220px;
+    margin: 0px 7px;
+    text-align: center;
+}
+
+.match-time {
+    padding: 20px 0px 0px 0px;
+    font-size: 50px;
+    font-weight: bold;
+    color:white;
+    margin-bottom: 0px;
+}
+
+.match-date {
+    margin-top: -10px;
+    font-size: 15px;
+    font-family: 'Padauk','cursive';
+    color:white;
+}
+
+.details-area {
+    margin-top: 50px;
+}
+
+.match-stadium {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.first-linesman {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px
+}
+
+
+.first-linesman img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.first-linesman span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.second-linesman {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px
+}
+
+.second-linesman img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.second-linesman span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.match-stadium img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.match-stadium span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.match-referee {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.match-referee span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.match-referee img {
+    width: 20px;
+    height: 20px;
+    margin-right: 1px;
+}
+

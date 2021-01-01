@@ -1,6 +1,6 @@
 import './Matches.css';
 import CardsArea from '../CardsArea/CardsArea'
-import Header from './Header/Header'
+import MatchesHeader from './MatchesHeader/MatchesHeader'
 
 function Matches() {
     const cards = []
@@ -10,7 +10,7 @@ function Matches() {
 
   return (
     <div className="flex-container-col">
-        <Header />
+        <MatchesHeader />
         <CardsArea custom_cards={cards} cardIdentifier="match"/> 
     </div>
     

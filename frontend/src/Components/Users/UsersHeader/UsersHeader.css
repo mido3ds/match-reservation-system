@@ -1,8 +1,8 @@
-.header {
+.users-header {
     position: relative;
 }
 
-.header-image {
+.users-header-image {
     width: 96%;
     height: 350px;
     object-fit: cover;
@@ -29,13 +29,13 @@
     border-color: black;
 }
 
-.button-area {
+.users-button-area {
     position: absolute;
-    bottom: 80px;
-    left: 100px;
+    bottom: 75px;
+    left: 110px;
 }
 
-.add-button {
+.requests-button {
     width: 100px;
     background-color: #0880AE;
     border-color: #0880AE;
