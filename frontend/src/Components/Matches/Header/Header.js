@@ -5,7 +5,7 @@ function Header() {
 
   return (
       <div className="header">
-          <img className="header-image" alt="header" src={Ball}/>
+          <img className="header-image" className="photo" alt="header" src={Ball}/>
           <div className="text-block">
             <h1> Matches </h1>
           </div>
