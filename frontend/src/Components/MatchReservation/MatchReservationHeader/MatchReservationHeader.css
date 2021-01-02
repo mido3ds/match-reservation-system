@@ -23,29 +23,6 @@
     transform: translate(-50%, -50%);
 }
 
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: initial;
-    justify-content: center;
-}
-
-.flex-container-s {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: initial;
-    justify-content: initial;
-    flex-direction: column;
-}
-
-.flex-container-col-not-centered {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: initial;
-    flex-direction: column;
-}
-
 .teams-area {
     margin-top: 80px;
 }

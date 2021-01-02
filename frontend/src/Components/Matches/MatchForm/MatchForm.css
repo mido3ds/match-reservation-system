@@ -1,0 +1,140 @@
+
+.form-area {
+    margin-bottom: 40px;
+    width: 62%;
+    margin: auto;
+}
+
+.form-title {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.info-text {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 3px;
+    color: rgba(112, 110, 110, 0.849);
+}
+
+.dropdown-button {
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: #0880AE;
+    border-width: 2px;
+    width: 300px;
+    height: 52px;
+    line-height: 35px; 
+}
+
+.dropdown-item {
+    width: 300px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-arrow {
+    margin-left: 180px;
+}
+
+.team-dd-item-text {
+    margin-left: 10px;
+}
+
+.away-team-dd-area {
+    margin-left: 100px;
+}
+
+.stadium-dd-area {
+    margin-top: 20px;
+}
+
+.date-time-area {
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.main-referee-area {
+    margin-top: 20px;
+}
+
+.firstlinesman-area {
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.secondlinesman-area {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.input-text-area {
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: #0880AE;
+    border-width: 2px;
+    width: 300px;
+    height: 42px;
+    line-height: 35px; 
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.date-time-picker {
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: #0880AE;
+    border-width: 2px;
+    width: 300px;
+    height: 50px;
+    line-height: 35px;
+    font-size: 15px;
+    padding-left: 10px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.time-input-field {
+    border-radius: 7px;
+    border-color: #0880AE;
+    border-width: 2px;
+    padding-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.match-form-modal-body {
+    width: 800px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+ 
+.match-form-buttons-area {
+    margin-top: 130px;
+    margin-left: 133px;
+    margin-bottom: 20px;
+}
+
+.match-form-close-btn {
+    width: 110px;
+    transition: width 1000ms;
+    border-color: #0880AE;
+    margin: 0px 20px;
+}
+
+.match-form-save-btn {
+    width: 130px;
+    background-color: #0880AE;
+    border-color: #0880AE;
+    color: white;
+}

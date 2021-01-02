@@ -52,10 +52,10 @@ class Navbar extends React.Component {
 
     render() {
         return (
-            <nav className="page-navbar flex-container-start">
+            <nav className="page-navbar flex-container-row-vcenter">
                 <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
                 <p className="brand-text">  Egyptian Premier League </p>
-                <div className="navbar-button-area flex-container-center">
+                <div className="navbar-button-area flex-container-row-vcenter-hcenter">
                     <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
                     <button type="button" className="log-out-profile-button btn btn-light"> Logout </button>
                  </div>

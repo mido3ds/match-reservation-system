@@ -8,7 +8,7 @@ function MatchReservation() {
     }
 
   return (
-    <div className="flex-container-col">
+    <div className="flex-container-column-vcenter-hcenter">
         <MatchReservationHeader />
     </div>
   );

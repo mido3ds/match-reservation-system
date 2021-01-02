@@ -9,7 +9,7 @@ function Matches() {
     }
 
   return (
-    <div className="flex-container-col">
+    <div className="flex-container-column-vcenter-hcenter">
         <MatchesHeader />
         <CardsArea custom_cards={cards} cardIdentifier="match"/> 
     </div>

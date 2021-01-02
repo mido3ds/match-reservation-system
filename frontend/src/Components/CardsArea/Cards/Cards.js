@@ -9,7 +9,7 @@ function Cards({cards, loading, cardIdentifier}) {
   }
 
   return (
-    <div className = "flex-container">
+    <div className = "flex-container-row-vcenter-hcenter">
       {cards.map(card => (
         <CardComponent  card={card} id={cardIdentifier} key={card.id} />
       ))}

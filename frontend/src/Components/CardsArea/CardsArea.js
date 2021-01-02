@@ -28,7 +28,7 @@ function CardsArea({custom_cards, cardIdentifier}) {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <div className = "flex-container">
+    <div className = "flex-container-row-vcenter-hcenter">
       <Cards cards={currentCards} loading={loading} card
             cardIdentifier = {cardIdentifier} />
       <Pagination 

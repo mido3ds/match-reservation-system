@@ -1,10 +1,3 @@
-.flex-container-center {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
 .page-navbar {
     overflow: hidden;
     height: 100px;
@@ -23,13 +16,6 @@
     top: 0;
     width: 100%;
   }
-
-.flex-container-start {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-}
 
 .brand-text {
     margin-top: 20px;
@@ -82,9 +68,9 @@
 }
 
 .edit-profile-button.is-active {
-    width: 100px;
+    width: 105px;
 }
 
 .log-out-profile-button.is-active {
-    width: 100px;
+    width: 105px;
 }
