@@ -4,6 +4,7 @@ import Users from './Components/Users/Users'
 import MatchReservation from './Components/MatchReservation/MatchReservation'
 import Navbar from './Components/Navbar/Navbar'
 import MatchForm from './Components/Matches/MatchForm/MatchForm'
+import Header from './Components/Home/Header/Header'
 
 function App() {
   return (
