@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Switch } from "react-router-dom";
+import AuthorizedRoute from './Components/AuthorizedRoute/AuthorizedRoute'
 import Matches from './Components/Matches/Matches'
 import Stadiums from './Components/Stadiums/Stadiums'
 import EditProfile from './Components/EditProfile/EditProfile'
@@ -18,24 +19,24 @@ function App() {
         <Route exact path='/'>
           <Home/>
         </Route>
-        <Route path='/edit-profile'>
+        <Route path='/edit-profile' allowedUsers={["fan", "manager", "admin"]}>
           <EditProfile/>
         </Route>
         <Route path='/matches'>
           <Matches/>
         </Route>
-        <Route path='/match-reservation/:match_id'>
+        <AuthorizedRoute path='/match-reservation/:match_id' allowedUsers={["fan", "manager", "admin"]}>
           <MatchReservation/>
-        </Route>
+        </AuthorizedRoute>
         <Route path='/stadiums'>
           <Stadiums/>
         </Route>
-        <Route path='/users'>
+        <AuthorizedRoute path='/users' allowedUsers={["admin"]}>
           <Users/>
-        </Route>
-        <Route path='/management-requests'>
+        </AuthorizedRoute>
+        <AuthorizedRoute path='/management-requests' allowedUsers={["admin"]}>
           <ManagementRequests/>
-        </Route>
+        </AuthorizedRoute>
         <Route path='*'>
           <ErrorPage/>
         </Route>
