@@ -1,5 +1,5 @@
 import './Navbar.css';
-import React from 'react';
+import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import PremieurLeagueLogo from '../../images/premier-league-logo.png'
 import { isShorthandPropertyAssignment } from 'typescript';
@@ -7,16 +7,14 @@ import { isShorthandPropertyAssignment } from 'typescript';
 let lastScrollY = 0;
 let ticking = false;
 
-class Navbar extends React.Component {
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll, true);
-    }
-    
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
+function Navbar() {
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, true);
+        return () => {
+        window.removeEventListener('scroll', handleScroll);
+    }}, []);
         
-    handleScroll = event => {
+    let handleScroll = (event) => {
         // Get the navbar
         var navbar = document.getElementsByClassName("page-navbar")[0];
         var text = document.getElementsByClassName("brand-text")[0];
@@ -51,30 +49,28 @@ class Navbar extends React.Component {
         event.preventDefault();
     };
 
-    logOut = () => {
+    let logOut = () => {
         // TODO
     }
 
-    render() {
-        return (
-            <nav className="page-navbar flex-container-row-vcenter">
+    return (
+        <nav className="page-navbar flex-container-row-vcenter">
+            <Link to="/">
+                <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
+            </Link>
+            <Link to="/" className="text-link">
+                <p className="brand-text">  Egyptian Premier League </p>
+            </Link>
+            <div className="navbar-button-area flex-container-row-vcenter-hcenter">
+                <Link to="/edit-profile">
+                    <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
+                </Link>
                 <Link to="/">
-                    <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
+                    <button type="button" className="log-out-profile-button btn btn-light" onClick={logOut}> Logout </button>
                 </Link>
-                <Link to="/" className="text-link">
-                    <p className="brand-text">  Egyptian Premier League </p>
-                </Link>
-                <div className="navbar-button-area flex-container-row-vcenter-hcenter">
-                    <Link to="/edit-profile">
-                        <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
-                    </Link>
-                    <Link to="/">
-                        <button type="button" className="log-out-profile-button btn btn-light" onClick={this.logOut}> Logout </button>
-                    </Link>
-                 </div>
-            </nav>
-        );
-    }
+                </div>
+        </nav>
+    );
 }
 
 export default Navbar;

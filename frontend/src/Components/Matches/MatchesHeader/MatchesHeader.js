@@ -1,8 +1,8 @@
 import './MatchesHeader.css';
 import Ball from "../../../images/ball.jpg";
 import MatchForm from '../MatchForm/MatchForm'
-function MatchesHeader() {
 
+function MatchesHeader() {
   return (
       <div class="matches-header">
           <img className="matches-header-image" alt="matches-header" src={Ball}/>

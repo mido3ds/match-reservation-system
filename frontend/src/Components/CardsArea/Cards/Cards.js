@@ -5,7 +5,7 @@ import CardComponent from '../CardComponent/CardComponent'
 function Cards({cards, loading, cardIdentifier}) {
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return (<h2>Loading...</h2>);
   }
 
   return (
