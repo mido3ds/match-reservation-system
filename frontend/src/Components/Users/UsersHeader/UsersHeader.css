@@ -14,13 +14,13 @@
     margin: 20px auto;
 }
 
-.text-block {
+.users-text-block {
     position: absolute;
     bottom: 120px;
     left: 100px;
 }
 
-.text-block h1 {
+.users-text-block h1 {
     color: white;
     font-size: 70px;
     font-weight: bold;
@@ -35,7 +35,7 @@
     left: 110px;
 }
 
-.requests-button {
+.users-requests-button {
     width: 100px;
     background-color: #0880AE;
     border-color: #0880AE;

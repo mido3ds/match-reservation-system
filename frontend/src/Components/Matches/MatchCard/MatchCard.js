@@ -6,6 +6,7 @@ import Delete from "../../../images/delete.png";
 
 function MatchCard({card}) {
   return (
+    <div className = "test">
       <div className ="match-card flex-container-row-hcenter">
         <img alt="edit-icon" className ="edit" src={Edit}/>
         <img alt="delete-icon" className ="delete" src={Delete}/>
@@ -33,6 +34,7 @@ function MatchCard({card}) {
             <span> Gehad Grisha </span>
           </span>
         </div> 
+      </div>
       </div>
   );
 }

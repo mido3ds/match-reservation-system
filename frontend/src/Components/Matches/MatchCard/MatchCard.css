@@ -6,6 +6,10 @@
     margin: 5px;
 }
 
+.test :hover {
+    cursor: pointer;
+}
+
 .edit {
     position:absolute;
     width: 17px;

@@ -30,15 +30,7 @@
     flex-direction: column;
 }
 
-.accept {
-    position:absolute;
-    width: 17px;
-    height: 17px;
-    margin: 10px;
-    margin-left:77px
-}
-
-.reject {
+.remove-icon {
     position:absolute;
     width: 17px;
     height: 17px;

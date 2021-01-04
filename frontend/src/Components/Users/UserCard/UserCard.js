@@ -1,15 +1,13 @@
 
 import './UserCard.css';
-import AdminImage from "../../../images/admin.png";
 import ManagerImage from "../../../images/manager.png";
 import FanImage from "../../../images/fan.png";
-
+import Delete from "../../../images/delete2.png";
 
 function UserCard({card}) {
   return (
       <div className="user-card flex-container-col-centered">
-        <img alt="accept-icon" className ="accept" src="https://www.flaticon.com/svg/static/icons/svg/58/58679.svg"/>
-        <img alt="reject-icon" className ="reject" src="https://www.flaticon.com/svg/static/icons/svg/58/58253.svg"/>
+        <img alt="remove-user-icon" className ="remove-icon" src={Delete}/>
           <div className="role-badge">
               <img alt="role-bage" src={FanImage}/>
           </div>

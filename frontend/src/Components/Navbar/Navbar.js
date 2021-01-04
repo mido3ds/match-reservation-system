@@ -1,9 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import PremieurLeagueLogo from '../../images/premier-league-logo.png'
-
-let lastScrollY = 0;
-let ticking = false;
+import Navigation from '../../images/menu.png'
 
 class Navbar extends React.Component {
 
@@ -55,10 +53,18 @@ class Navbar extends React.Component {
             <nav className="page-navbar flex-container-row-vcenter">
                 <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
                 <p className="brand-text">  Egyptian Premier League </p>
+                <img alt="navigation-icon" className ="navigation-icon dropdown-toggle" 
+                    src={Navigation} href="#" role="button" 
+                    id="navbarDropDownMenu" data-toggle="dropdown" 
+                    aria-haspopup="true" aria-expanded="flase"/>
+                <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
+                      <a className="navbar-dd-item dropdown-item" href="#"> Edit Proifle </a> 
+                      <a className="navbar-dd-item dropdown-item" href="#"> Logout </a> 
+                </div>
                 <div className="navbar-button-area flex-container-row-vcenter-hcenter">
                     <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
                     <button type="button" className="log-out-profile-button btn btn-light"> Logout </button>
-                 </div>
+                </div>
             </nav>
         );
     }

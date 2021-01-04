@@ -42,9 +42,6 @@ function MatchReservationHeader({match}) {
                 <p> El-Zamalek  </p> 
               </div>
             </div>
-            <div className="details-area" >
-              
-            </div> 
           </div>
       </div>
   );

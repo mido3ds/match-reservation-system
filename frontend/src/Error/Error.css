@@ -1,0 +1,33 @@
+
+.container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow:column wrap;
+    justify-content:space-around;
+}
+
+.lost-message h1 {
+    font-size: 70px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    border-width: 10px;
+    border-color: black;
+}
+
+.lost-message h2 {
+    font-size: 30px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.lost-message p {
+    font-size: 15px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.home-button {
+    margin-top: 20px;
+    width: 110px;
+    background-color: #0880AE;
+    border-color: #0880AE;
+}

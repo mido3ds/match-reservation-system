@@ -1,8 +1,8 @@
 
 .form-area {
     margin-bottom: 40px;
-    width: 62%;
-    margin: auto;
+    width: 800px;
+    margin: 0 auto;
 }
 
 .form-title {
@@ -150,4 +150,26 @@
     display: table-cell;
     vertical-align: middle;
     pointer-events:none;
+}
+
+@media (max-width: 800px) { 
+    .form-area {
+        width: 400px;
+    }
+
+    .match-form-modal-body {
+        width: 400px;
+        flex-direction: column;
+    }
+
+    .away-team-dd-area, .date-time-area, .firstlinesman-area {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+    
+    .match-form-buttons-area {
+        margin-top: 0px;
+        margin-left: 20px;
+        margin-bottom: 0px;
+    }
 }

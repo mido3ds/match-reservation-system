@@ -19,7 +19,6 @@ function MatchForm({title}) {
     />)
 
   return (
-    <div className="match-form">
       <div class="modal fade" id="MatchFormModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document"></div>
           <div className="form-area modal-content">
@@ -55,8 +54,8 @@ function MatchForm({title}) {
                 </div>
                 <div className = "away-team-dd-area">
                   <span className = "info-text"> Away Team: </span>
-                  <div class="dropdown show">
-                    <a class="dropdown-button btn text-left dropdown-toggle" href="#" role="button" 
+                  <div className="dropdown show">
+                    <a className="dropdown-button btn text-left dropdown-toggle" href="#" role="button" 
                         id="homeTeamDropdownMenuLink" data-toggle="dropdown" 
                         aria-haspopup="true" aria-expanded="flase">
                         Choose...
@@ -133,7 +132,6 @@ function MatchForm({title}) {
               </div>
             </div>
           </div>
-        </div>
   );
 
 }
