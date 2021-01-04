@@ -1,4 +1,3 @@
-import './Users.css';
 import CardsArea from '../CardsArea/CardsArea'
 import UsersHeader from './UsersHeader/UsersHeader'
 

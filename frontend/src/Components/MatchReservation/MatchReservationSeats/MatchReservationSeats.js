@@ -1,4 +1,3 @@
-import './MatchReservationSeats.css';
 import Pitch from "../../../images/pitch.png"
 
 function MatchReservationSeats() {

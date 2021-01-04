@@ -1,4 +1,3 @@
-import './MatchReservation.css';
 import { useParams, useLocation } from "react-router-dom";
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader'
 import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats'

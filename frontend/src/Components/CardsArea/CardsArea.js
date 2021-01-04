@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './CardsArea.css';
 import Cards from './Cards/Cards'
 import Pagination from './Pagination/Pagination'
 

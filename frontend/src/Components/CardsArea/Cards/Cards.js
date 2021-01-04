@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cards.css';
 import CardComponent from '../CardComponent/CardComponent'
 
 function Cards({cards, loading, cardIdentifier}) {
