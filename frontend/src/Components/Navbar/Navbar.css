@@ -74,3 +74,8 @@
 .log-out-profile-button.is-active {
     width: 105px;
 }
+
+.text-link {
+    color: inherit !important;
+    text-decoration: inherit !important;
+}

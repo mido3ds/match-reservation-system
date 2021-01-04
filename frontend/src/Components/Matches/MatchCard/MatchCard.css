@@ -6,6 +6,10 @@
     margin: 5px;
 }
 
+.match-card-container :hover {
+    cursor: pointer;
+}
+
 .edit {
     position:absolute;
     width: 17px;

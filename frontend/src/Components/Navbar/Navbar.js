@@ -1,12 +1,13 @@
-import React from 'react';
 import './Navbar.css';
+import React from 'react';
+import { Link } from "react-router-dom";
 import PremieurLeagueLogo from '../../images/premier-league-logo.png'
+import { isShorthandPropertyAssignment } from 'typescript';
 
 let lastScrollY = 0;
 let ticking = false;
 
 class Navbar extends React.Component {
-
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll, true);
     }
@@ -50,14 +51,26 @@ class Navbar extends React.Component {
         event.preventDefault();
     };
 
+    logOut = () => {
+        // TODO
+    }
+
     render() {
         return (
             <nav className="page-navbar flex-container-row-vcenter">
-                <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
-                <p className="brand-text">  Egyptian Premier League </p>
+                <Link to="/">
+                    <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
+                </Link>
+                <Link to="/" className="text-link">
+                    <p className="brand-text">  Egyptian Premier League </p>
+                </Link>
                 <div className="navbar-button-area flex-container-row-vcenter-hcenter">
-                    <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
-                    <button type="button" className="log-out-profile-button btn btn-light"> Logout </button>
+                    <Link to="/edit-profile">
+                        <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
+                    </Link>
+                    <Link to="/">
+                        <button type="button" className="log-out-profile-button btn btn-light" onClick={this.logOut}> Logout </button>
+                    </Link>
                  </div>
             </nav>
         );

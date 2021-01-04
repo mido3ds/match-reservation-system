@@ -5,7 +5,7 @@ import Logo2 from "../../../images/teams_logos_120x120/10.png";
 
 function MatchReservationHeader({match}) {
   return (
-      <div class="match-reservation-header">
+      <div className="match-reservation-header">
           <img className="match-reservation-header-image" alt="match-header" src={UsersImage}/>
           <div className="match-details flex-container-column-vcenter">
             <div className="teams-area flex-container-row-hcenter" > 
