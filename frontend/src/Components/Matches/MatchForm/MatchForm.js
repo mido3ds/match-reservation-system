@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function MatchForm({}) {
+function MatchForm({title}) {
   const [startDate, setStartDate] = useState(new Date());
   const ExampleCustomTimeInput = ({ date, value, onChange }) => (
     <input
@@ -20,14 +20,11 @@ function MatchForm({}) {
 
   return (
     <div className="match-form">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button>
-      <div class="test modal fade" id="exampleModal" tabindex="-1" role="dialog">
+      <div class="modal fade" id="MatchFormModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document"></div>
           <div className="form-area modal-content">
             <div className="modal-header">
-              <h1 className=" form-title"> Edit Match </h1>
+              <h1 className=" form-title"> {title} </h1>
             </div>
               <div class="modal-body match-form-modal-body flex-container-row">
                 <div className = "home-team-dd-area">

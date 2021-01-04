@@ -1,17 +1,19 @@
 import './MatchesHeader.css';
 import Ball from "../../../images/ball.jpg";
-
+import MatchForm from '../MatchForm/MatchForm'
 function MatchesHeader() {
 
   return (
       <div class="matches-header">
           <img className="matches-header-image" alt="matches-header" src={Ball}/>
-          <div className="text-block">
+          <div className="matches-text-block">
             <h1> Matches </h1>
           </div>
           <div  className="matches-button-area">
-            <button type="button" className="add-button btn btn-primary"> Add </button>
+            <button type="button" className="matches-add-button btn btn-primary" 
+                  data-toggle="modal" data-target="#MatchFormModal"> Add </button>
           </div>
+          <MatchForm title="Add Match"/>
       </div>
   );
 

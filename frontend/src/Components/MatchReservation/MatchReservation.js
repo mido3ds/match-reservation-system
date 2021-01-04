@@ -1,15 +1,13 @@
 import './MatchReservation.css';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader'
+import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats'
 
 function MatchReservation() {
-    const cards = []
-    for(var i = 0; i < 37; i++) {
-        cards.push({id : i}) 
-    }
-
+  
   return (
     <div className="flex-container-column-vcenter-hcenter">
         <MatchReservationHeader />
+        <MatchReservationSeats />
     </div>
   );
 

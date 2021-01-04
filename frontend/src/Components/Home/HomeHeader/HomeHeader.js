@@ -1,7 +1,7 @@
-import './Header.css';
+import './HomeHeader.css';
 import logo from "../../../images/epl-logo.png";
 
-function Header() {
+function HomeHeader() {
 
   return (
     <div className="header">
@@ -14,4 +14,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HomeHeader;

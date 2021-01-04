@@ -2,6 +2,7 @@ import './Matches.css';
 import CardsArea from '../CardsArea/CardsArea'
 import MatchesHeader from './MatchesHeader/MatchesHeader'
 
+
 function Matches() {
     const cards = []
     for(var i = 0; i < 50; i++) {

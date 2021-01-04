@@ -1,0 +1,41 @@
+
+.confirmation-area {
+    width: 32%;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.confirmation-title {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.confirmation-body p {
+    font-size: 13px;
+    margin-left: 15px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.confirmation-modal-buttons-area {
+    margin-top: 15px;
+    margin-left: 155px;
+    margin-bottom: 5px;
+}
+
+.confirmation-modal-cancel-btn {
+    width: 90px;
+    transition: width 1000ms;
+    border-color: #0880AE;
+    margin: 0px 20px;
+}
+
+.confirmation-modal-ok-btn {
+    width: 90px;
+    background-color: #0880AE;
+    border-color: #0880AE;
+    color: white;
+}

@@ -14,14 +14,14 @@
     margin: 20px auto;
 }
 
-.text-block {
+.matches-text-block {
     position: absolute;
     bottom: 120px;
     left: 100px;
 }
 
-.text-block h1 {
-    color: black;
+.matches-text-block h1 {
+    color: white;
     font-size: 56px;
     line-height: 56px;
     font-weight: bold;
@@ -32,11 +32,11 @@
 
 .matches-button-area {
     position: absolute;
-    bottom: 80px;
+    bottom: 60px;
     left: 100px;
 }
 
-.add-button {
+.matches-add-button {
     width: 100px;
     background-color: #0880AE;
     border-color: #0880AE;
