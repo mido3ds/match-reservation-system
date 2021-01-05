@@ -6,9 +6,6 @@
     margin: 5px;
 }
 
-.test :hover {
-    cursor: pointer;
-}
 
 .edit {
     position:absolute;
@@ -126,3 +123,7 @@
 }
 
 
+.noHover{
+    text-decoration: none !important;
+    cursor: pointer;
+}

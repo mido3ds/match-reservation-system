@@ -3,7 +3,7 @@ import './Pagination.css';
 
 let pageNumber = 1;
 
-const Pagination = ({ cardsPerPage, totalCards, paginate }) => {
+function Pagination ({ cardsPerPage, totalCards, paginate }) {
  
   const maxPageNumber = Math.ceil(totalCards / cardsPerPage);
   var paginationWrapper = document.querySelector('.pagination-wrapper');

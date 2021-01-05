@@ -1,19 +1,21 @@
-import React from 'react';
 import './Navbar.css';
+import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import PremieurLeagueLogo from '../../images/premier-league-logo.png'
 import Navigation from '../../images/menu.png'
+import { isShorthandPropertyAssignment } from 'typescript';
 
-class Navbar extends React.Component {
+let lastScrollY = 0;
+let ticking = false;
 
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll, true);
-    }
-    
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
+function Navbar() {
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, true);
+        return () => {
+        window.removeEventListener('scroll', handleScroll);
+    }}, []);
         
-    handleScroll = event => {
+    let handleScroll = (event) => {
         // Get the navbar
         var navbar = document.getElementsByClassName("page-navbar")[0];
         var text = document.getElementsByClassName("brand-text")[0];
@@ -48,26 +50,36 @@ class Navbar extends React.Component {
         event.preventDefault();
     };
 
-    render() {
-        return (
-            <nav className="page-navbar flex-container-row-vcenter">
-                <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
-                <p className="brand-text">  Egyptian Premier League </p>
-                <img alt="navigation-icon" className ="navigation-icon dropdown-toggle" 
-                    src={Navigation} href="#" role="button" 
-                    id="navbarDropDownMenu" data-toggle="dropdown" 
-                    aria-haspopup="true" aria-expanded="flase"/>
-                <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
-                      <a className="navbar-dd-item dropdown-item" href="#"> Edit Proifle </a> 
-                      <a className="navbar-dd-item dropdown-item" href="#"> Logout </a> 
-                </div>
-                <div className="navbar-button-area flex-container-row-vcenter-hcenter">
-                    <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
-                    <button type="button" className="log-out-profile-button btn btn-light"> Logout </button>
-                </div>
-            </nav>
-        );
+    let logOut = () => {
+        // TODO
     }
+
+    return (
+        <nav className="page-navbar flex-container-row-vcenter">
+            <Link to="/">
+                <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
+            </Link>
+            <Link to="/" className="text-link">
+                <p className="brand-text">  Egyptian Premier League </p>
+            </Link>
+            <img alt="navigation-icon" className ="navigation-icon dropdown-toggle" 
+                src={Navigation} href="#" role="button" 
+                id="navbarDropDownMenu" data-toggle="dropdown" 
+                aria-haspopup="true" aria-expanded="flase"/>
+            <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
+                    <a className="navbar-dd-item dropdown-item" href="#"> Edit Proifle </a> 
+                    <a className="navbar-dd-item dropdown-item" href="#"> Logout </a> 
+            </div>
+            <div className="navbar-button-area flex-container-row-vcenter-hcenter">
+                <Link to="/edit-profile">
+                    <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
+                </Link>
+                <Link to="/">
+                    <button type="button" className="log-out-profile-button btn btn-light" onClick={logOut}> Logout </button>
+                </Link>
+            </div>
+        </nav>
+    );
 }
 
 export default Navbar;

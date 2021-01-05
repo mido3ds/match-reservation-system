@@ -1,5 +1,5 @@
 import './Error.css';
-import PlayerImage from '../images/player-kick.png'
+import PlayerImage from '../../images/player-kick.png'
 
 function Error() {
   return (

@@ -1,4 +1,3 @@
-import './Requests.css';
 import CardsArea from '../CardsArea/CardsArea'
 import RequestsHeader from './RequestsHeader/RequestsHeader'
 

@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import { useState } from 'react';
 import MatchCard from '../../Matches/MatchCard/MatchCard';
 import UserCard from '../../Users/UserCard/UserCard';
 import RequestCard from '../../Requests/RequestCard/RequestCard';
 
-class CardComponent extends Component {
-    components = {
+function CardComponent({id, card}) {
+    const [components, _] = useState({
         match: MatchCard,
         user: UserCard,
         request: RequestCard
-    };
+    })
 
-    render() {
-        const TagName = this.components[this.props.id];
-        return <TagName card={this.props.card}/>
-     }
+    const TagName = components[id];
+    return (<TagName card={card}/>);
 }
 export default CardComponent;

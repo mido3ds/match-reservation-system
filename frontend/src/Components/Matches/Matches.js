@@ -1,4 +1,3 @@
-import './Matches.css';
 import CardsArea from '../CardsArea/CardsArea'
 import MatchesHeader from './MatchesHeader/MatchesHeader'
 
