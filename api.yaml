@@ -43,7 +43,7 @@ paths:
       summary: get all users
       operationId: getUsers
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           in: header
           schema:
             type: string
@@ -75,7 +75,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: authtoken
+        - name: x-auth-token
           in: header
           required: true
           schema:
@@ -112,7 +112,7 @@ paths:
           in: path
           schema:
             type: string
-        - name: authtoken
+        - name: x-auth-token
           in: header
           schema:
             type: string
@@ -181,7 +181,7 @@ paths:
       summary: list requests for management
       operationId: getManagersRequests
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           in: header
           required: true
           schema:
@@ -214,7 +214,7 @@ paths:
       summary: accept a request
       operationId: acceptManagersRequest
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           in: header
           required: true
           schema:
@@ -244,7 +244,7 @@ paths:
       summary: reject a request
       operationId: rejectManagersRequest
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           in: header
           required: true
           schema:
@@ -295,7 +295,7 @@ paths:
       summary: submit a match
       operationId: submitMatch
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           in: header
           required: true
           schema:
@@ -347,7 +347,7 @@ paths:
       summary: edit a match
       operationId: editMatch
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           in: header
           required: true
           schema:
@@ -387,7 +387,7 @@ paths:
             type: string
           required: true
           in: path
-        - name: authtoken
+        - name: x-auth-token
           schema:
             type: string
           required: false
@@ -416,7 +416,7 @@ paths:
             type: string
           required: true
           in: path
-        - name: authtoken
+        - name: x-auth-token
           schema:
             type: string
           required: true
@@ -450,7 +450,7 @@ paths:
             type: string
           required: true
           in: path
-        - name: authtoken
+        - name: x-auth-token
           schema:
             type: string
           required: true
@@ -476,7 +476,7 @@ paths:
             type: string
           required: true
           in: path
-        - name: authtoken
+        - name: x-auth-token
           schema:
             type: string
           required: true
@@ -518,7 +518,7 @@ paths:
       summary: submit a stadium
       operationId: submitStadium
       parameters:
-        - name: authtoken
+        - name: x-auth-token
           schema:
             type: string
           required: true

@@ -534,15 +534,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary accept a request
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} username 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        acceptManagersRequest: async (authtoken: string, username: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling acceptManagersRequest.');
+        acceptManagersRequest: async (xAuthToken: string, username: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling acceptManagersRequest.');
             }
             // verify required parameter 'username' is not null or undefined
             if (username === null || username === undefined) {
@@ -561,8 +561,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -588,11 +588,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @summary cancel seat
          * @param {string} matchId 
          * @param {string} seatId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelSeat: async (matchId: string, seatId: string, authtoken: string, options: any = {}): Promise<RequestArgs> => {
+        cancelSeat: async (matchId: string, seatId: string, xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'matchId' is not null or undefined
             if (matchId === null || matchId === undefined) {
                 throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling cancelSeat.');
@@ -601,9 +601,9 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             if (seatId === null || seatId === undefined) {
                 throw new RequiredError('seatId','Required parameter seatId was null or undefined when calling cancelSeat.');
             }
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling cancelSeat.');
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling cancelSeat.');
             }
             const localVarPath = `/api/matches/{match_id}/seats/reserve/{seat_id}`
                 .replace(`{${"match_id"}}`, encodeURIComponent(String(matchId)))
@@ -619,8 +619,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -645,18 +645,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary cancel ticket
          * @param {string} ticketId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelTicket: async (ticketId: string, authtoken: string, options: any = {}): Promise<RequestArgs> => {
+        cancelTicket: async (ticketId: string, xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'ticketId' is not null or undefined
             if (ticketId === null || ticketId === undefined) {
                 throw new RequiredError('ticketId','Required parameter ticketId was null or undefined when calling cancelTicket.');
             }
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling cancelTicket.');
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling cancelTicket.');
             }
             const localVarPath = `/api/tickets/{ticket_id}`
                 .replace(`{${"ticket_id"}}`, encodeURIComponent(String(ticketId)));
@@ -671,8 +671,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -697,18 +697,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary delete a user
          * @param {string} username 
-         * @param {string} authtoken must be an admin, or the account owner
+         * @param {string} xAuthToken must be an admin, or the account owner
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser: async (username: string, authtoken: string, options: any = {}): Promise<RequestArgs> => {
+        deleteUser: async (username: string, xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'username' is not null or undefined
             if (username === null || username === undefined) {
                 throw new RequiredError('username','Required parameter username was null or undefined when calling deleteUser.');
             }
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling deleteUser.');
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling deleteUser.');
             }
             const localVarPath = `/api/users/{username}`
                 .replace(`{${"username"}}`, encodeURIComponent(String(username)));
@@ -723,8 +723,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -748,16 +748,16 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary edit a match
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} matchId 
          * @param {SubmittedMatch} [submittedMatch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editMatch: async (authtoken: string, matchId: string, submittedMatch?: SubmittedMatch, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling editMatch.');
+        editMatch: async (xAuthToken: string, matchId: string, submittedMatch?: SubmittedMatch, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling editMatch.');
             }
             // verify required parameter 'matchId' is not null or undefined
             if (matchId === null || matchId === undefined) {
@@ -776,8 +776,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -811,19 +811,19 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary edit user
          * @param {string} username 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {EditedUser} [editedUser] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editUser: async (username: string, authtoken: string, editedUser?: EditedUser, options: any = {}): Promise<RequestArgs> => {
+        editUser: async (username: string, xAuthToken: string, editedUser?: EditedUser, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'username' is not null or undefined
             if (username === null || username === undefined) {
                 throw new RequiredError('username','Required parameter username was null or undefined when calling editUser.');
             }
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling editUser.');
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling editUser.');
             }
             const localVarPath = `/api/users/{username}`
                 .replace(`{${"username"}}`, encodeURIComponent(String(username)));
@@ -838,8 +838,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -872,15 +872,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary list requests for management
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagersRequests: async (authtoken: string, page?: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling getManagersRequests.');
+        getManagersRequests: async (xAuthToken: string, page?: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling getManagersRequests.');
             }
             const localVarPath = `/api/managers/requests`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -898,8 +898,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['page'] = page;
             }
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1009,11 +1009,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary get seats of given match
          * @param {string} matchId 
-         * @param {string} [authtoken] 
+         * @param {string} [xAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSeats: async (matchId: string, authtoken?: string, options: any = {}): Promise<RequestArgs> => {
+        getSeats: async (matchId: string, xAuthToken?: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'matchId' is not null or undefined
             if (matchId === null || matchId === undefined) {
                 throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling getSeats.');
@@ -1031,8 +1031,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1098,15 +1098,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary get all users
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsers: async (authtoken: string, page?: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling getUsers.');
+        getUsers: async (xAuthToken: string, page?: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling getUsers.');
             }
             const localVarPath = `/api/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1124,8 +1124,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['page'] = page;
             }
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1196,15 +1196,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary reject a request
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} username 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectManagersRequest: async (authtoken: string, username: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling rejectManagersRequest.');
+        rejectManagersRequest: async (xAuthToken: string, username: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling rejectManagersRequest.');
             }
             // verify required parameter 'username' is not null or undefined
             if (username === null || username === undefined) {
@@ -1223,8 +1223,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1250,11 +1250,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @summary reserve seat
          * @param {string} matchId 
          * @param {string} seatId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reserveSeat: async (matchId: string, seatId: string, authtoken: string, options: any = {}): Promise<RequestArgs> => {
+        reserveSeat: async (matchId: string, seatId: string, xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'matchId' is not null or undefined
             if (matchId === null || matchId === undefined) {
                 throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling reserveSeat.');
@@ -1263,9 +1263,9 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             if (seatId === null || seatId === undefined) {
                 throw new RequiredError('seatId','Required parameter seatId was null or undefined when calling reserveSeat.');
             }
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling reserveSeat.');
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling reserveSeat.');
             }
             const localVarPath = `/api/matches/{match_id}/seats/reserve/{seat_id}`
                 .replace(`{${"match_id"}}`, encodeURIComponent(String(matchId)))
@@ -1281,8 +1281,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1353,15 +1353,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary submit a match
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {SubmittedMatch} [submittedMatch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitMatch: async (authtoken: string, submittedMatch?: SubmittedMatch, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling submitMatch.');
+        submitMatch: async (xAuthToken: string, submittedMatch?: SubmittedMatch, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling submitMatch.');
             }
             const localVarPath = `/api/matches`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1375,8 +1375,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1409,15 +1409,15 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary submit a stadium
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {SubmittedStadium} [submittedStadium] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitStadium: async (authtoken: string, submittedStadium?: SubmittedStadium, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authtoken' is not null or undefined
-            if (authtoken === null || authtoken === undefined) {
-                throw new RequiredError('authtoken','Required parameter authtoken was null or undefined when calling submitStadium.');
+        submitStadium: async (xAuthToken: string, submittedStadium?: SubmittedStadium, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling submitStadium.');
             }
             const localVarPath = `/api/stadiums`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1431,8 +1431,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (authtoken !== undefined && authtoken !== null) {
-                localVarHeaderParameter['authtoken'] = String(authtoken);
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1474,13 +1474,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary accept a request
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} username 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async acceptManagersRequest(authtoken: string, username: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).acceptManagersRequest(authtoken, username, options);
+        async acceptManagersRequest(xAuthToken: string, username: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).acceptManagersRequest(xAuthToken, username, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1491,12 +1491,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @summary cancel seat
          * @param {string} matchId 
          * @param {string} seatId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelSeat(matchId: string, seatId: string, authtoken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).cancelSeat(matchId, seatId, authtoken, options);
+        async cancelSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).cancelSeat(matchId, seatId, xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1506,12 +1506,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 
          * @summary cancel ticket
          * @param {string} ticketId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelTicket(ticketId: string, authtoken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).cancelTicket(ticketId, authtoken, options);
+        async cancelTicket(ticketId: string, xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).cancelTicket(ticketId, xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1521,12 +1521,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 
          * @summary delete a user
          * @param {string} username 
-         * @param {string} authtoken must be an admin, or the account owner
+         * @param {string} xAuthToken must be an admin, or the account owner
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(username: string, authtoken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteUser(username, authtoken, options);
+        async deleteUser(username: string, xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).deleteUser(username, xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1535,14 +1535,14 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary edit a match
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} matchId 
          * @param {SubmittedMatch} [submittedMatch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async editMatch(authtoken: string, matchId: string, submittedMatch?: SubmittedMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editMatch(authtoken, matchId, submittedMatch, options);
+        async editMatch(xAuthToken: string, matchId: string, submittedMatch?: SubmittedMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editMatch(xAuthToken, matchId, submittedMatch, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1552,13 +1552,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 
          * @summary edit user
          * @param {string} username 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {EditedUser} [editedUser] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async editUser(username: string, authtoken: string, editedUser?: EditedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editUser(username, authtoken, editedUser, options);
+        async editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editUser(username, xAuthToken, editedUser, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1567,13 +1567,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary list requests for management
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagersRequests(authtoken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedUser>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getManagersRequests(authtoken, page, options);
+        async getManagersRequests(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedUser>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getManagersRequests(xAuthToken, page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1611,12 +1611,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 
          * @summary get seats of given match
          * @param {string} matchId 
-         * @param {string} [authtoken] 
+         * @param {string} [xAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSeats(matchId: string, authtoken?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Seats>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getSeats(matchId, authtoken, options);
+        async getSeats(matchId: string, xAuthToken?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Seats>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getSeats(matchId, xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1639,13 +1639,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary get all users
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsers(authtoken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedUser>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUsers(authtoken, page, options);
+        async getUsers(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedUser>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUsers(xAuthToken, page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1668,13 +1668,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary reject a request
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} username 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rejectManagersRequest(authtoken: string, username: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).rejectManagersRequest(authtoken, username, options);
+        async rejectManagersRequest(xAuthToken: string, username: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).rejectManagersRequest(xAuthToken, username, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1685,12 +1685,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @summary reserve seat
          * @param {string} matchId 
          * @param {string} seatId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reserveSeat(matchId: string, seatId: string, authtoken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditCard>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).reserveSeat(matchId, seatId, authtoken, options);
+        async reserveSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditCard>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).reserveSeat(matchId, seatId, xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1713,13 +1713,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary submit a match
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {SubmittedMatch} [submittedMatch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async submitMatch(authtoken: string, submittedMatch?: SubmittedMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).submitMatch(authtoken, submittedMatch, options);
+        async submitMatch(xAuthToken: string, submittedMatch?: SubmittedMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).submitMatch(xAuthToken, submittedMatch, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1728,13 +1728,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary submit a stadium
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {SubmittedStadium} [submittedStadium] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async submitStadium(authtoken: string, submittedStadium?: SubmittedStadium, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).submitStadium(authtoken, submittedStadium, options);
+        async submitStadium(xAuthToken: string, submittedStadium?: SubmittedStadium, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).submitStadium(xAuthToken, submittedStadium, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1752,82 +1752,82 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary accept a request
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} username 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        acceptManagersRequest(authtoken: string, username: string, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).acceptManagersRequest(authtoken, username, options).then((request) => request(axios, basePath));
+        acceptManagersRequest(xAuthToken: string, username: string, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).acceptManagersRequest(xAuthToken, username, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary cancel seat
          * @param {string} matchId 
          * @param {string} seatId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelSeat(matchId: string, seatId: string, authtoken: string, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).cancelSeat(matchId, seatId, authtoken, options).then((request) => request(axios, basePath));
+        cancelSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).cancelSeat(matchId, seatId, xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary cancel ticket
          * @param {string} ticketId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelTicket(ticketId: string, authtoken: string, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).cancelTicket(ticketId, authtoken, options).then((request) => request(axios, basePath));
+        cancelTicket(ticketId: string, xAuthToken: string, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).cancelTicket(ticketId, xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary delete a user
          * @param {string} username 
-         * @param {string} authtoken must be an admin, or the account owner
+         * @param {string} xAuthToken must be an admin, or the account owner
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser(username: string, authtoken: string, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).deleteUser(username, authtoken, options).then((request) => request(axios, basePath));
+        deleteUser(username: string, xAuthToken: string, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).deleteUser(username, xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary edit a match
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} matchId 
          * @param {SubmittedMatch} [submittedMatch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editMatch(authtoken: string, matchId: string, submittedMatch?: SubmittedMatch, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).editMatch(authtoken, matchId, submittedMatch, options).then((request) => request(axios, basePath));
+        editMatch(xAuthToken: string, matchId: string, submittedMatch?: SubmittedMatch, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).editMatch(xAuthToken, matchId, submittedMatch, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary edit user
          * @param {string} username 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {EditedUser} [editedUser] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editUser(username: string, authtoken: string, editedUser?: EditedUser, options?: any): AxiosPromise<InlineResponse2001> {
-            return DefaultApiFp(configuration).editUser(username, authtoken, editedUser, options).then((request) => request(axios, basePath));
+        editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): AxiosPromise<InlineResponse2001> {
+            return DefaultApiFp(configuration).editUser(username, xAuthToken, editedUser, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary list requests for management
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagersRequests(authtoken: string, page?: number, options?: any): AxiosPromise<Array<ListedUser>> {
-            return DefaultApiFp(configuration).getManagersRequests(authtoken, page, options).then((request) => request(axios, basePath));
+        getManagersRequests(xAuthToken: string, page?: number, options?: any): AxiosPromise<Array<ListedUser>> {
+            return DefaultApiFp(configuration).getManagersRequests(xAuthToken, page, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1853,12 +1853,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * 
          * @summary get seats of given match
          * @param {string} matchId 
-         * @param {string} [authtoken] 
+         * @param {string} [xAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSeats(matchId: string, authtoken?: string, options?: any): AxiosPromise<Seats> {
-            return DefaultApiFp(configuration).getSeats(matchId, authtoken, options).then((request) => request(axios, basePath));
+        getSeats(matchId: string, xAuthToken?: string, options?: any): AxiosPromise<Seats> {
+            return DefaultApiFp(configuration).getSeats(matchId, xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1873,13 +1873,13 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary get all users
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsers(authtoken: string, page?: number, options?: any): AxiosPromise<Array<ListedUser>> {
-            return DefaultApiFp(configuration).getUsers(authtoken, page, options).then((request) => request(axios, basePath));
+        getUsers(xAuthToken: string, page?: number, options?: any): AxiosPromise<Array<ListedUser>> {
+            return DefaultApiFp(configuration).getUsers(xAuthToken, page, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1894,25 +1894,25 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary reject a request
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {string} username 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectManagersRequest(authtoken: string, username: string, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).rejectManagersRequest(authtoken, username, options).then((request) => request(axios, basePath));
+        rejectManagersRequest(xAuthToken: string, username: string, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).rejectManagersRequest(xAuthToken, username, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary reserve seat
          * @param {string} matchId 
          * @param {string} seatId 
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reserveSeat(matchId: string, seatId: string, authtoken: string, options?: any): AxiosPromise<CreditCard> {
-            return DefaultApiFp(configuration).reserveSeat(matchId, seatId, authtoken, options).then((request) => request(axios, basePath));
+        reserveSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): AxiosPromise<CreditCard> {
+            return DefaultApiFp(configuration).reserveSeat(matchId, seatId, xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1927,24 +1927,24 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary submit a match
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {SubmittedMatch} [submittedMatch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitMatch(authtoken: string, submittedMatch?: SubmittedMatch, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).submitMatch(authtoken, submittedMatch, options).then((request) => request(axios, basePath));
+        submitMatch(xAuthToken: string, submittedMatch?: SubmittedMatch, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).submitMatch(xAuthToken, submittedMatch, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary submit a stadium
-         * @param {string} authtoken 
+         * @param {string} xAuthToken 
          * @param {SubmittedStadium} [submittedStadium] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitStadium(authtoken: string, submittedStadium?: SubmittedStadium, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).submitStadium(authtoken, submittedStadium, options).then((request) => request(axios, basePath));
+        submitStadium(xAuthToken: string, submittedStadium?: SubmittedStadium, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).submitStadium(xAuthToken, submittedStadium, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1959,14 +1959,14 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary accept a request
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {string} username 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public acceptManagersRequest(authtoken: string, username: string, options?: any) {
-        return DefaultApiFp(this.configuration).acceptManagersRequest(authtoken, username, options).then((request) => request(this.axios, this.basePath));
+    public acceptManagersRequest(xAuthToken: string, username: string, options?: any) {
+        return DefaultApiFp(this.configuration).acceptManagersRequest(xAuthToken, username, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1974,80 +1974,80 @@ export class DefaultApi extends BaseAPI {
      * @summary cancel seat
      * @param {string} matchId 
      * @param {string} seatId 
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public cancelSeat(matchId: string, seatId: string, authtoken: string, options?: any) {
-        return DefaultApiFp(this.configuration).cancelSeat(matchId, seatId, authtoken, options).then((request) => request(this.axios, this.basePath));
+    public cancelSeat(matchId: string, seatId: string, xAuthToken: string, options?: any) {
+        return DefaultApiFp(this.configuration).cancelSeat(matchId, seatId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary cancel ticket
      * @param {string} ticketId 
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public cancelTicket(ticketId: string, authtoken: string, options?: any) {
-        return DefaultApiFp(this.configuration).cancelTicket(ticketId, authtoken, options).then((request) => request(this.axios, this.basePath));
+    public cancelTicket(ticketId: string, xAuthToken: string, options?: any) {
+        return DefaultApiFp(this.configuration).cancelTicket(ticketId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary delete a user
      * @param {string} username 
-     * @param {string} authtoken must be an admin, or the account owner
+     * @param {string} xAuthToken must be an admin, or the account owner
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public deleteUser(username: string, authtoken: string, options?: any) {
-        return DefaultApiFp(this.configuration).deleteUser(username, authtoken, options).then((request) => request(this.axios, this.basePath));
+    public deleteUser(username: string, xAuthToken: string, options?: any) {
+        return DefaultApiFp(this.configuration).deleteUser(username, xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary edit a match
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {string} matchId 
      * @param {SubmittedMatch} [submittedMatch] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public editMatch(authtoken: string, matchId: string, submittedMatch?: SubmittedMatch, options?: any) {
-        return DefaultApiFp(this.configuration).editMatch(authtoken, matchId, submittedMatch, options).then((request) => request(this.axios, this.basePath));
+    public editMatch(xAuthToken: string, matchId: string, submittedMatch?: SubmittedMatch, options?: any) {
+        return DefaultApiFp(this.configuration).editMatch(xAuthToken, matchId, submittedMatch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary edit user
      * @param {string} username 
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {EditedUser} [editedUser] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public editUser(username: string, authtoken: string, editedUser?: EditedUser, options?: any) {
-        return DefaultApiFp(this.configuration).editUser(username, authtoken, editedUser, options).then((request) => request(this.axios, this.basePath));
+    public editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any) {
+        return DefaultApiFp(this.configuration).editUser(username, xAuthToken, editedUser, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary list requests for management
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {number} [page] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getManagersRequests(authtoken: string, page?: number, options?: any) {
-        return DefaultApiFp(this.configuration).getManagersRequests(authtoken, page, options).then((request) => request(this.axios, this.basePath));
+    public getManagersRequests(xAuthToken: string, page?: number, options?: any) {
+        return DefaultApiFp(this.configuration).getManagersRequests(xAuthToken, page, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2078,13 +2078,13 @@ export class DefaultApi extends BaseAPI {
      * 
      * @summary get seats of given match
      * @param {string} matchId 
-     * @param {string} [authtoken] 
+     * @param {string} [xAuthToken] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getSeats(matchId: string, authtoken?: string, options?: any) {
-        return DefaultApiFp(this.configuration).getSeats(matchId, authtoken, options).then((request) => request(this.axios, this.basePath));
+    public getSeats(matchId: string, xAuthToken?: string, options?: any) {
+        return DefaultApiFp(this.configuration).getSeats(matchId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2102,14 +2102,14 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary get all users
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {number} [page] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getUsers(authtoken: string, page?: number, options?: any) {
-        return DefaultApiFp(this.configuration).getUsers(authtoken, page, options).then((request) => request(this.axios, this.basePath));
+    public getUsers(xAuthToken: string, page?: number, options?: any) {
+        return DefaultApiFp(this.configuration).getUsers(xAuthToken, page, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2127,14 +2127,14 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary reject a request
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {string} username 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public rejectManagersRequest(authtoken: string, username: string, options?: any) {
-        return DefaultApiFp(this.configuration).rejectManagersRequest(authtoken, username, options).then((request) => request(this.axios, this.basePath));
+    public rejectManagersRequest(xAuthToken: string, username: string, options?: any) {
+        return DefaultApiFp(this.configuration).rejectManagersRequest(xAuthToken, username, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2142,13 +2142,13 @@ export class DefaultApi extends BaseAPI {
      * @summary reserve seat
      * @param {string} matchId 
      * @param {string} seatId 
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public reserveSeat(matchId: string, seatId: string, authtoken: string, options?: any) {
-        return DefaultApiFp(this.configuration).reserveSeat(matchId, seatId, authtoken, options).then((request) => request(this.axios, this.basePath));
+    public reserveSeat(matchId: string, seatId: string, xAuthToken: string, options?: any) {
+        return DefaultApiFp(this.configuration).reserveSeat(matchId, seatId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2166,27 +2166,27 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary submit a match
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {SubmittedMatch} [submittedMatch] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public submitMatch(authtoken: string, submittedMatch?: SubmittedMatch, options?: any) {
-        return DefaultApiFp(this.configuration).submitMatch(authtoken, submittedMatch, options).then((request) => request(this.axios, this.basePath));
+    public submitMatch(xAuthToken: string, submittedMatch?: SubmittedMatch, options?: any) {
+        return DefaultApiFp(this.configuration).submitMatch(xAuthToken, submittedMatch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary submit a stadium
-     * @param {string} authtoken 
+     * @param {string} xAuthToken 
      * @param {SubmittedStadium} [submittedStadium] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public submitStadium(authtoken: string, submittedStadium?: SubmittedStadium, options?: any) {
-        return DefaultApiFp(this.configuration).submitStadium(authtoken, submittedStadium, options).then((request) => request(this.axios, this.basePath));
+    public submitStadium(xAuthToken: string, submittedStadium?: SubmittedStadium, options?: any) {
+        return DefaultApiFp(this.configuration).submitStadium(xAuthToken, submittedStadium, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
