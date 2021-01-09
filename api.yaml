@@ -161,6 +161,13 @@ paths:
                 properties:
                   authToken:
                     type: string
+                  userType:
+                    type: string
+                    enum:
+                    - fan
+                    - manager
+                    - admin
+                    description: used by the forntend to know the type of the user, the backend still needs to check the payload of the authToken payload
                 required:
                 - authToken
         '401':

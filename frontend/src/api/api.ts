@@ -189,7 +189,24 @@ export interface InlineResponse2002 {
      * @memberof InlineResponse2002
      */
     authToken: string;
+    /**
+     * used by the forntend to know the type of the user, the backend still needs to check the payload of the authToken payload
+     * @type {string}
+     * @memberof InlineResponse2002
+     */
+    userType?: InlineResponse2002UserTypeEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineResponse2002UserTypeEnum {
+    Fan = 'fan',
+    Manager = 'manager',
+    Admin = 'admin'
+}
+
 /**
  * 
  * @export
@@ -694,6 +711,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+
+    
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 queryParameters.set(key, localVarQueryParameter[key]);
