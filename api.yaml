@@ -44,7 +44,7 @@ paths:
       operationId: getUsers
       parameters:
         - name: authtoken
-          in: cookie
+          in: header
           schema:
             type: string
           required: true
@@ -76,7 +76,7 @@ paths:
           schema:
             type: string
         - name: authtoken
-          in: cookie
+          in: header
           required: true
           schema:
             type: string
@@ -113,7 +113,7 @@ paths:
           schema:
             type: string
         - name: authtoken
-          in: cookie
+          in: header
           schema:
             type: string
           description: must be an admin, or the account owner
@@ -182,7 +182,7 @@ paths:
       operationId: getManagersRequests
       parameters:
         - name: authtoken
-          in: cookie
+          in: header
           required: true
           schema:
             type: string
@@ -215,7 +215,7 @@ paths:
       operationId: acceptManagersRequest
       parameters:
         - name: authtoken
-          in: cookie
+          in: header
           required: true
           schema:
             type: string
@@ -245,7 +245,7 @@ paths:
       operationId: rejectManagersRequest
       parameters:
         - name: authtoken
-          in: cookie
+          in: header
           required: true
           schema:
             type: string
@@ -296,7 +296,7 @@ paths:
       operationId: submitMatch
       parameters:
         - name: authtoken
-          in: cookie
+          in: header
           required: true
           schema:
             type: string
@@ -348,7 +348,7 @@ paths:
       operationId: editMatch
       parameters:
         - name: authtoken
-          in: cookie
+          in: header
           required: true
           schema:
             type: string
@@ -391,7 +391,7 @@ paths:
           schema:
             type: string
           required: false
-          in: cookie
+          in: header
       responses:
         '200':
           description: ok
@@ -420,7 +420,7 @@ paths:
           schema:
             type: string
           required: true
-          in: cookie
+          in: header
       responses:
         '200':
           description: ok
@@ -454,7 +454,7 @@ paths:
           schema:
             type: string
           required: true
-          in: cookie
+          in: header
       responses:
         '200':
           description: ok
@@ -480,7 +480,7 @@ paths:
           schema:
             type: string
           required: true
-          in: cookie
+          in: header
       responses:
         '200':
           description: ok
@@ -522,7 +522,7 @@ paths:
           schema:
             type: string
           required: true
-          in: cookie
+          in: header
       requestBody:
         content:
           'application/json':

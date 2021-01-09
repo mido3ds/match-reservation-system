@@ -561,6 +561,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -615,6 +619,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -662,6 +670,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
 
 
     
@@ -711,6 +723,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -759,6 +775,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
 
 
     
@@ -818,6 +838,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -872,6 +896,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
+            }
+
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
             }
 
 
@@ -1003,6 +1031,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -1090,6 +1122,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
+            }
+
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
             }
 
 
@@ -1187,6 +1223,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
@@ -1240,6 +1280,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
 
 
     
@@ -1331,6 +1375,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1382,6 +1430,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authtoken !== undefined && authtoken !== null) {
+                localVarHeaderParameter['authtoken'] = String(authtoken);
+            }
 
 
     
