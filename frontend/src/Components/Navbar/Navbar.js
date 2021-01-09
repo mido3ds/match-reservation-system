@@ -1,9 +1,8 @@
-import './Navbar.css';
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import PremieurLeagueLogo from '../../images/premier-league-logo.png'
-import Navigation from '../../images/menu.png'
-import { isShorthandPropertyAssignment } from 'typescript';
+import Navigation from '../../images/menu.png';
+import PremieurLeagueLogo from '../../images/premier-league-logo.png';
+import './Navbar.css';
 
 let lastScrollY = 0;
 let ticking = false;
@@ -12,9 +11,10 @@ function Navbar() {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, true);
         return () => {
-        window.removeEventListener('scroll', handleScroll);
-    }}, []);
-        
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, []);
+
     let handleScroll = (event) => {
         // Get the navbar
         var navbar = document.getElementsByClassName("page-navbar")[0];
@@ -26,7 +26,7 @@ function Navbar() {
 
         if (window.pageYOffset > 0) {
             navbar.classList.add("sticky")
-            if(!navbar.classList.contains("is-active")) {
+            if (!navbar.classList.contains("is-active")) {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
                 logo.classList.toggle("is-active");
@@ -34,10 +34,10 @@ function Navbar() {
                 editButton.classList.toggle("is-active");
                 logOutButton.classList.toggle("is-active");
             }
-            
+
         } else {
             navbar.classList.remove("sticky");
-            if(navbar.classList.contains("is-active")) {
+            if (navbar.classList.contains("is-active")) {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
                 logo.classList.toggle("is-active");
@@ -57,18 +57,18 @@ function Navbar() {
     return (
         <nav className="page-navbar flex-container-row-vcenter">
             <Link to="/">
-                <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo}/>
+                <img className="brand-logo" alt="brand-logo" src={PremieurLeagueLogo} />
             </Link>
             <Link to="/" className="text-link">
                 <p className="brand-text">  Egyptian Premier League </p>
             </Link>
-            <img alt="navigation-icon" className ="navigation-icon dropdown-toggle" 
-                src={Navigation} href="#" role="button" 
-                id="navbarDropDownMenu" data-toggle="dropdown" 
-                aria-haspopup="true" aria-expanded="flase"/>
+            <img alt="navigation-icon" className="navigation-icon dropdown-toggle"
+                src={Navigation} href="#" role="button"
+                id="navbarDropDownMenu" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="flase" />
             <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
-                    <a className="navbar-dd-item dropdown-item" href="#"> Edit Proifle </a> 
-                    <a className="navbar-dd-item dropdown-item" href="#"> Logout </a> 
+                <a className="navbar-dd-item dropdown-item" href="#"> Edit Proifle </a>
+                <a className="navbar-dd-item dropdown-item" href="#"> Logout </a>
             </div>
             <div className="navbar-button-area flex-container-row-vcenter-hcenter">
                 <Link to="/edit-profile">

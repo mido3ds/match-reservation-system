@@ -31,31 +31,31 @@
 }
 
 .accept {
-    position:absolute;
+    position: absolute;
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left:77px
+    margin-left: 77px
 }
 
 .reject {
-    position:absolute;
+    position: absolute;
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left:103px
+    margin-left: 103px
 }
 
 .role-badge {
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 .user-name {
-    margin-top:10px;
+    margin-top: 10px;
     margin-bottom: 0px;
     font-size: 25px;
     font-weight: bold;
-    font-family: 'Neucha','cursive';
+    font-family: 'Neucha', 'cursive';
 }
 
 .user-username {

@@ -35,7 +35,7 @@ function setupRoutes() {
 // setup database
 async function connectDB() {
   try {
-    await mongoose.connect(config.get('database.connection'),  {useNewUrlParser: true, useUnifiedTopology: true});
+    await mongoose.connect(config.get('database.connection'), { useNewUrlParser: true, useUnifiedTopology: true });
     dbDebugger('connected to MongoDB...');
     // const User = mongoose.model('User', schema.userSchema);
     // const Stadium = mongoose.model('Stadium', schema.stadiumSchema);

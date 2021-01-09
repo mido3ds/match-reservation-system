@@ -1,86 +1,86 @@
 @charset "utf-8";
-
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	background-color: #EBF4F8;
-	font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 1.4;
-  margin:0; padding:0; border:0;
+    background-color: #EBF4F8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 a {
-	color: #333;
-	outline: none;
-	text-decoration: none;
+    color: #333;
+    outline: none;
+    text-decoration: none;
 }
 
 .flex-container-row-vcenter-hcenter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .flex-container-row-vcenter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: initial;
-  flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: initial;
+    flex-direction: row;
 }
 
 .flex-container-row-hcenter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: initial;
-  justify-content: center;
-  flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .flex-container-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: initial;
-  justify-content: initial;
-  flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: initial;
+    flex-direction: row;
 }
 
 .flex-container-column-vcenter-hcenter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .flex-container-column-vcenter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: initial;
-  flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: initial;
+    flex-direction: column;
 }
 
 .flex-container-column-hcenter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: initial;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .flex-container-column {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: initial;
-  justify-content: initial;
-  flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: initial;
+    justify-content: initial;
+    flex-direction: column;
 }
-

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const express = require('express');
-const {User, validate} = require('../models/user');
+const { User, validate } = require('../models/user');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 
@@ -32,10 +32,12 @@ router.get('/me', auth, async (req, res) => {
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  let user = await User.findOne({ $or: [
-    {username: req.body.username},
-    {email: req.body.email}
-  ]});
+  let user = await User.findOne({
+    $or: [
+      { username: req.body.username },
+      { email: req.body.email }
+    ]
+  });
 
   if (user) return res.status(400).send('This username or/and email is already registered.');
 

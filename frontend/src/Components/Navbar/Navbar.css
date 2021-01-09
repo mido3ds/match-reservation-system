@@ -2,16 +2,16 @@
     overflow: hidden;
     height: 100px;
     transition: height 1000ms;
-    background-color:white;
+    background-color: white;
     z-index: 100;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.4);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .4);
 }
 
 .sticky {
     position: fixed;
     top: 0;
     width: 100%;
-  }
+}
 
 .page-navbar.is-active {
     height: 65px;
@@ -64,7 +64,7 @@
 }
 
 .brand-text.is-active {
-    margin-top:15px;
+    margin-top: 15px;
     font-size: 20px;
 }
 
@@ -99,30 +99,25 @@
     .navbar-button-area {
         display: none;
     }
-
     .navigation-icon {
         margin-left: auto;
         margin-right: 30px;
         display: flex;
     }
-
-    .brand-logo{
+    .brand-logo {
         width: 100px;
     }
-    
     .brand-text {
-        margin-top:15px;
+        margin-top: 15px;
         font-size: 22px;
     }
 }
 
-
-@media (max-width: 450px) { 
-    .brand-logo{
+@media (max-width: 450px) {
+    .brand-logo {
         margin-left: -15px;
         width: 140px;
     }
-    
     .page-navbar {
         justify-content: center;
     }
@@ -131,14 +126,11 @@
     }
     .navigation-icon {
         margin: 0px;
-
     }
-
     .navigation-menu {
         margin-right: 0px;
     }
 }
-
 
 .text-link {
     color: inherit !important;

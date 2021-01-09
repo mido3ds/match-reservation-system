@@ -1,20 +1,26 @@
-
 .pagination-wrapper {
     font-size: 0;
     transform: translate(-1%, -50%);
     text-align: center;
     margin: 35px 0px 0px 0px;
-    
 }
 
 @keyframes pagination-container--animation-prev {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(18px); }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(18px);
+    }
 }
 
 @keyframes pagination-container--animation-next {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-18px); }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-18px);
+    }
 }
 
 .transition-prev .pagination-container {
@@ -37,19 +43,17 @@
     z-index: 10;
 }
 
-.little-dot--first,
-.little-dot--last {
+.little-dot--first, .little-dot--last {
     z-index: 5;
 }
 
 @keyframes slideLeft {
-0% {
-    transform: translateX(0px);
-}
-
-100% {
-    transform: translateX(-18px);
-}
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-18px);
+    }
 }
 
 .transition-prev .little-dot--first {
@@ -57,18 +61,25 @@
 }
 
 @keyframes little-dot--first--animation {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .transition-next .little-dot--first {
     animation: little-dot--last--animation 0.3s forwards;
 }
 
-
 @keyframes little-dot--last--animation {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .transition-prev .little-dot--last {
@@ -80,7 +91,6 @@
         transform: translateX(0px);
         opacity: 1;
     }
-
     100% {
         transform: translateX(18px);
         opacity: 1;
@@ -124,13 +134,21 @@
 }
 
 @keyframes big-dot-container--animation-prev {
-    0% { transform: translateY(-50%); }
-    100% { transform: translateY(-50%) rotate(-179deg); }
+    0% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(-50%) rotate(-179deg);
+    }
 }
 
 @keyframes big-dot-container--animation-next {
-    0% { transform: translateY(-50%); }
-    100% { transform: translateY(-50%) rotate(-181deg); }
+    0% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(-50%) rotate(-181deg);
+    }
 }
 
 .transition-prev .big-dot-container {
@@ -155,7 +173,7 @@
 }
 
 .btn--next {
-    left: calc(100% + 20px);  
+    left: calc(100% + 20px);
 }
 
 .btn--prev {

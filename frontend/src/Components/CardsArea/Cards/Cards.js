@@ -1,16 +1,15 @@
 import React from 'react';
-import CardComponent from '../CardComponent/CardComponent'
+import CardComponent from '../CardComponent/CardComponent';
 
-function Cards({cards, loading, cardIdentifier}) {
-
+function Cards({ cards, loading, cardIdentifier }) {
   if (loading) {
     return (<h2>Loading...</h2>);
   }
 
   return (
-    <div className = "flex-container-row-vcenter-hcenter">
+    <div className="flex-container-row-vcenter-hcenter">
       {cards.map(card => (
-        <CardComponent  card={card} id={cardIdentifier} key={card.id} />
+        <CardComponent card={card} id={cardIdentifier} key={card.id} />
       ))}
     </div>
   );
