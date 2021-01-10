@@ -2,6 +2,10 @@ openapi: 3.0.1
 info:
   title: Match Reservation API
   version: 0.1.0
+  description: API for Match Reservation Website
+servers:
+- url: http://localhost:3000/
+  description: local development server
 paths:
   /api/users:
     post:
