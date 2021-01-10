@@ -1,7 +1,7 @@
 {
 	"name": "Egyptian Premier League Match Reservation System - Development",
 	"database": {
-		"connection": "mongodb://localhost/MatchReservationSystem"
+		"connection": "mongodb://root:password@localhost:27017"
 	},
-	"jwt_private_key": ""
+	"jwt_private_key": "very secret key"
 }
