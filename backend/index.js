@@ -57,9 +57,9 @@ function setupPort() {
   app.listen(port, () => startupDebugger(`listening on port ${port}...`));
 }
 
-function runServer() {
+async function runServer() {
   try {
-    connectDB();
+    await connectDB();
     setupMiddlewares();
     setupRoutes();
     setupPort();
