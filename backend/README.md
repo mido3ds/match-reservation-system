@@ -1,13 +1,11 @@
-$ export DEBUG=app:*
-$ export app_password=
-$ export app_token=
-$ DEBUG=app:* nodemon index.js
-
 # Install Requirements
 `yarn install`
 
 # Start Server
 `yarn run start`
+
+# Env Variables
+- To enable all loggers (see [morgan](https://github.com/expressjs/morgan)): `export DEBUG=app:*`
 
 # Start Mongo (docker)
 `./mongo_start`
