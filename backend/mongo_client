@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# you can overwrite the values by exporting env variables
+USERNAME=${USERNAME-root}
+PASSWORD=${PASSWORD-password}
+
+docker exec -it web-mongo mongo --username ${USERNAME} --password ${PASSWORD} "$@"

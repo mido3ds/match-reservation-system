@@ -1,0 +1,24 @@
+#!/bin/bash
+# you must have docker and be able to run it without sudo, 
+# see https://docs.docker.com/engine/install/linux-postinstall/
+
+# you can overwrite the values by exporting env variables
+DIR=${DIR-$(realpath mongo_data)}
+USERNAME=${USERNAME-root}
+PASSWORD=${PASSWORD-password}
+
+echo db files are in ${DIR}
+echo username is ${USERNAME}
+echo password is ${PASSWORD}
+
+mkdir -p ${DIR}
+
+docker run \
+    --rm -it \
+    --name web-mongo \
+    -v ${DIR}:/data/db \
+    -e MONGO_INITDB_ROOT_USERNAME=${USERNAME} \
+    -e MONGO_INITDB_ROOT_PASSWORD=${PASSWORD} \
+    --user $UID:$UID \
+    -p 27017:27017 \
+    mongo:4.0-xenial
