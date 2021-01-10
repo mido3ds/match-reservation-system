@@ -825,7 +825,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             if (xAuthToken === null || xAuthToken === undefined) {
                 throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling editUser.');
             }
-            const localVarPath = `/api/users/{username}`
+            const localVarPath = `/api/users/me`
                 .replace(`{${"username"}}`, encodeURIComponent(String(username)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
