@@ -9,7 +9,10 @@ const stadiumSchema = mongoose.Schema({
 const Stadium = mongoose.model('Stadium', stadiumSchema);
 
 function validateStadium(stadium) {
-  // TODO
+  return Joi.object({
+    name: Joi.string().min(5).max(50).required(),
+    city: Joi.string().min(3).max(50).required(),
+  }).validate(stadium);
 }
 
 exports.Stadium = Stadium;

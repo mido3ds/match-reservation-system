@@ -69,7 +69,7 @@ paths:
                   $ref: '#/components/schemas/ListedUser'
         '406':
           description: not acceptable, if page < 1
-  /api/users/{username}:
+  /api/users/me:
     put:
       summary: edit user
       operationId: editUser
@@ -107,6 +107,7 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /api/users/{username}:
     delete:
       summary: delete a user
       operationId: deleteUser
@@ -536,7 +537,7 @@ paths:
         '200':
           description: ok
         '401':
-          description: not authorized, or not your ticket
+          description: not authorized
           content:
             'application/json':
               schema:
