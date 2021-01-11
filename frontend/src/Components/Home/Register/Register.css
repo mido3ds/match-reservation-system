@@ -1,0 +1,13 @@
+.register-field {
+    position: relative;
+    margin: 20px;
+    padding: 30px 0px;
+    border-radius: 20px;
+    border-width: 1px;
+    display:block;
+    background-color: white;
+}
+
+.register-field Button {
+    margin-top: 20px;
+}

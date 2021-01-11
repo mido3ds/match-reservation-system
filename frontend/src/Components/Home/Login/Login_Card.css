@@ -1,0 +1,15 @@
+.login-card {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 15px;
+    padding: 32px 20px 0px 20px;
+    border-radius: 20px;
+    border-width: 1px;
+    display:block;
+    background-color: white;
+}
+
+.login-card Button {
+    margin-top: 30px;
+}
