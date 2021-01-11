@@ -1,0 +1,22 @@
+.home-card-image {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 5px;
+    border-radius: 20px;
+    border: #2C2738;
+    border-width: 1px;
+    display:block;
+}
+
+.home-card-text {
+    position: relative;
+    left: 100px;
+    /* text-align: center; */
+    bottom: 50px;
+    font-size: 20px;
+    font-size: 25px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #2C2738;
+}

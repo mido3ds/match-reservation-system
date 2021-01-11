@@ -1,4 +1,3 @@
-import logo from "../../../images/epl-logo.png";
 import Ball from "../../../images/ball.jpg";
 import './HomeHeader.css';
 
