@@ -1,8 +1,8 @@
 
 .form-area {
-    margin-bottom: 40px;
-    width: 800px;
-    margin: 0 auto;
+    margin-bottom: 40px !important;
+    width: 800px !important;
+    margin: 0 auto !important;;
 }
 
 .form-title {
@@ -23,14 +23,14 @@
 }
 
 .dropdown-button {
-    margin-top: 5px;
-    background-color: white;
-    border-radius: 10px;
-    border-color: #0880AE;
-    border-width: 2px;
-    width: 300px;
-    height: 52px;
-    line-height: 35px; 
+    margin-top: 5px !important;;
+    background-color: white !important;
+    border-radius: 10px !important;
+    border-color: #0880AE !important;
+    border-width: 2px !important;
+    width: 300px !important;;
+    height: 52px !important;;
+    line-height: 35px !important;; 
 }
 
 .dropdown-item {
@@ -38,7 +38,7 @@
 }
 
 .dropdown-toggle::after {
-    display: none;
+    display: none !important;
 }
 
 .dropdown-arrow {
@@ -78,14 +78,14 @@
 
 .input-text-area {
     margin-top: 5px;
-    background-color: white;
-    border-radius: 10px;
-    border-color: #0880AE;
-    border-width: 2px;
-    width: 300px;
-    height: 50px;
-    line-height: 35px; 
-    font-weight: bold;
+    background-color: white !important;
+    border-radius: 10px !important;
+    border-color: #0880AE !important;
+    border-width: 2px !important;
+    width: 300px !important;;
+    height: 50px !important;;
+    line-height: 35px !important;; 
+    font-weight: bold !important;;
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
@@ -127,38 +127,38 @@
 
 .match-form-close-btn {
     width: 110px;
-    transition: width 1000ms;
-    border-color: #0880AE;
+    transition: width 1000ms !important;
+    border-color: #0880AE !important;
     margin: 0px 20px;
 }
 
 .match-form-save-btn {
     width: 130px;
-    background-color: #0880AE;
-    border-color: #0880AE;
-    color: white;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+    color: white !important;
 }
 
 .vertical-alignment-helper {
-    display:table;
-    height: 100%;
-    width: 100%;
+    display:table !important;
+    height: 100% !important;
+    width: 100% !important;
     pointer-events:none;
 }
 .vertical-align-center {
     /* To center vertically */
-    display: table-cell;
-    vertical-align: middle;
-    pointer-events:none;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    pointer-events:none !important;
 }
 
 @media (max-width: 800px) { 
     .form-area {
-        width: 400px;
+        width: 400px !important;;
     }
 
     .match-form-modal-body {
-        width: 400px;
+        width: 400px !important;;
         flex-direction: column;
     }
 

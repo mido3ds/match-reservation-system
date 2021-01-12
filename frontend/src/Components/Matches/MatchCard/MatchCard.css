@@ -6,6 +6,13 @@
     margin: 5px;
 }
 
+.middle-area {
+    margin-top: 0px;
+}
+
+.upper-area {
+    margin-top: 50px;
+}
 
 .edit {
     position:absolute;
@@ -23,26 +30,11 @@
     margin-left:103px
 }
 
-.upper-area {
-    margin-top: 50px;
-}
-
 .home-team {
     width: 70px;
     height: 50px;
     margin: 0px 5px;
     text-align: center;
-}
-
-.home-team img {
-    display:block;
-    margin:auto;
-}
-
-.home-team p {
-    color: white;
-    margin-top: 7px;
-    font-weight: bold;
 }
 
 .away-team {
@@ -52,22 +44,66 @@
     text-align: center;
 }
 
-.away-team img {
-    display:block;
-    margin:auto;
-}
-
-.away-team p {
-    color: white;
-    margin-top: 7px;
-    font-weight: bold;
-}
-
 .date-time {
     width: 60px;
     height: 50px;
     margin: 0px 7px;
     text-align: center;
+}
+
+.stadium {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.referee {
+    width: 120px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.home-team img {
+    display:block;
+    margin:auto;
+}
+
+.away-team img {
+    display:block;
+    margin:auto;
+}
+
+.stadium img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.referee img {
+    width: 20px;
+    height: 20px;
+    margin-right: 1px;
+}
+
+.home-team p {
+    font-size: 12px;
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.away-team p {
+    font-size: 12px;
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.stadium span {
+    font-size: 13px;
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
 }
 
 .time {
@@ -79,49 +115,16 @@
 }
 
 .date {
+    font-size: 11px;
     color:white;
 }
 
-.middle-area {
-    margin-top: 0px;
-}
-
-.stadium {
-    width: 120px;
-    height: 30px;
-    margin: 0px 5px;
-}
-
-.stadium img {
-    width: 20px;
-    height: 20px;
-    margin-right: 3px;
-}
-
-.stadium span {
-    color: white;
-    margin-top: 7px;
-    font-weight: bold;
-}
-
-.referee {
-    width: 120px;
-    height: 30px;
-    margin: 0px 5px;
-}
-
 .referee span {
-    color: white;
+    font-size: 13px;
+    color: white !important;
     margin-top: 7px;
-    font-weight: bold;
+    font-weight: bold !important;
 }
-
-.referee img {
-    width: 20px;
-    height: 20px;
-    margin-right: 1px;
-}
-
 
 .noHover{
     text-decoration: none !important;
