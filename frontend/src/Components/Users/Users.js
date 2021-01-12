@@ -3,7 +3,7 @@ import UsersHeader from './UsersHeader/UsersHeader';
 
 function Users() {
     const cards = []
-    for (var i = 0; i < 37; i++) {
+    for (var i = 0; i < 4; i++) {
         cards.push({ id: i })
     }
 

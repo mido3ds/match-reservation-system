@@ -6,30 +6,6 @@
     margin: 5px;
 }
 
-.flex-container-col-centered {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: initial;
-    flex-direction: column;
-}
-
-.flex-container-row-centered {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: initial;
-    flex-direction: row;
-}
-
-.flex-container-centered {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
 .remove-icon {
     position:absolute;
     width: 17px;
@@ -43,7 +19,7 @@
 }
 
 .user-name {
-    margin-top:10px;
+    margin-top:13px;
     margin-bottom: 0px;
     font-size: 25px;
     font-weight: bold;
@@ -52,26 +28,31 @@
 
 .user-username {
     font-size: 13px;
-    margin-top: -5px;
+    margin-top: -10px;
     font-family: 'Padauk', sans-serif;
 }
 
 .address-area {
-    margin-top: -5px;
+    margin-top: -10px;
+}
+
+.email-area {
+    margin-top: 8px;
+}
+
+.gender-area {
+    margin-top: 8px;
+    margin-right: 50px;
+}
+
+.birthdate-area {
+    margin-top: 8px;
 }
 
 .address-area img {
     width: 17px;
     height: 17px;
     margin-right: 3px;
-}
-
-.address-area span {
-    font-weight: bold;
-}
-
-.email-area {
-    margin-top: 8px;
 }
 
 .email-area img {
@@ -81,27 +62,10 @@
     filter: brightness(90%);
 }
 
-.email-area span {
-    font-weight: bold;
-}
-
-.gender-area {
-    margin-top: 8px;
-    margin-right: 50px;
-}
-
 .gender-area img {
     width: 20px;
     height: 20px;
     margin-right: 3px;
-}
-
-.gender-area span {
-    font-weight: bold;
-}
-
-.birthdate-area {
-    margin-top: 8px;
 }
 
 .birthdate-area img {
@@ -110,6 +74,22 @@
     margin-right: 3px;
 }
 
+.address-area span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.email-area span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.gender-area span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
 .birthdate-area span {
+    font-size: 13px;
     font-weight: bold;
 }

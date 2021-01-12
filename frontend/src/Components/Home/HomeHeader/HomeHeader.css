@@ -16,23 +16,25 @@
 
 .text-block {
     position: absolute;
-    bottom: 100px;
-    left: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .text-block h1 {
     color: white;
-    font-size: 56px;
+    font-size: 46px;
     line-height: 56px;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
     border-width: 10px;
     border-color: black;
+    margin-left: 30px;
 }
 
 .text-block p {
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 56px;
     font-family: 'IBM Plex Sans', sans-serif;
     border-width: 10px;

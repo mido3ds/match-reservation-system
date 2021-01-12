@@ -4,7 +4,7 @@ import './UserCard.css';
 
 function UserCard({ card }) {
   return (
-    <div className="user-card flex-container-col-centered">
+    <div className="user-card flex-container-column-vcenter">
       <img alt="remove-user-icon" className="remove-icon" src={Delete} />
       <div className="role-badge">
         <img alt="role-bage" src={FanImage} />
@@ -12,7 +12,7 @@ function UserCard({ card }) {
       <p className="user-name"> Ahmed Afifi </p>
       <p className="user-username"> @ahmed_afifi98 </p>
 
-      <div className="flex-container-centered">
+      <div className="flex-container-column-vcenter-hcenter">
         <div className="address-area">
           <img alt="address-icon" src="https://www.flaticon.com/svg/static/icons/svg/1076/1076323.svg" />
           <span> Egypt, Cairo, El-Mokattam </span>
@@ -21,7 +21,7 @@ function UserCard({ card }) {
           <img alt="email-icon" src="https://www.flaticon.com/svg/static/icons/svg/732/732200.svg" />
           <span> Ahmed.Afifi98@eng-st.cu.ed.eg </span>
         </div>
-        <div className="flex-container-row-centered">
+        <div className="flex-container-row-vcenter">
           <div className="gender-area">
             <img alt="gender-icon" src="https://www.flaticon.com/svg/static/icons/svg/3939/3939800.svg" />
             <span> Male </span>
