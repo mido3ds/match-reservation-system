@@ -2,6 +2,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const cors = require('cors')
 const mongoose = require('mongoose');
 const config = require('config'); // e.g: config.get('database.password')
 const startupDebugger = require('debug')('app:startup');
@@ -20,6 +21,7 @@ const tickets = require('./routes/tickets');
 function setupMiddlewares() {
   app.use(express.json());
   app.use(helmet());
+  app.use(cors());
 }
 
 // routes

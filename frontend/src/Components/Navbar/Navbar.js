@@ -6,7 +6,7 @@ import './Navbar.css';
 
 let lastScrollY = 0;
 let ticking = false;
-
+// TODO: hide logout/edit-profile buttons if not logged-in
 function Navbar() {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, true);

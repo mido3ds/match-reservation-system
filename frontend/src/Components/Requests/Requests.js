@@ -1,5 +1,9 @@
+import { useEffect, useState } from 'react';
+import { DefaultApi } from '../../api';
 import CardsArea from '../CardsArea/CardsArea';
 import RequestsHeader from './RequestsHeader/RequestsHeader';
+
+const api = new DefaultApi();
 
 function Requests() {
   const cards = []
@@ -7,10 +11,23 @@ function Requests() {
     cards.push({ id: i })
   }
 
+  const [requests, setRequests] = useState(cards);
+  const [page, setPage] = useState(1);
+
+  useEffect(async () => {
+    const authToken = "TODO";
+    const resp = await api.getManagersRequests(authToken, page);
+    if (resp.status == 200) {
+      setRequests(resp.data.map((x, i) => { x.id = i; return x; }));
+    } else {
+      console.error(`api.getManagersRequests returned ${resp.status}`);
+    }
+  }, [page]);
+
   return (
     <div className="flex-container-col">
       <RequestsHeader />
-      <CardsArea custom_cards={cards} cardIdentifier="request" />
+      <CardsArea cards={requests} cardIdentifier="request" onSetPage={setPage} />
     </div>
   );
 }
