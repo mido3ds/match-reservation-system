@@ -4,7 +4,7 @@ import './Pagination.css';
 let pageNumber = 1;
 
 function Pagination({ cardsPerPage, totalCards, paginate }) {
-
+  // TODO: frontend doesn't know max page number
   const maxPageNumber = Math.ceil(totalCards / cardsPerPage);
   var paginationWrapper = document.querySelector('.pagination-wrapper');
 
@@ -16,6 +16,7 @@ function Pagination({ cardsPerPage, totalCards, paginate }) {
       console.log("DEC", pageNumber, maxPageNumber);
     }
     else if (!event.target.classList.contains('btn--prev') && pageNumber < maxPageNumber) {
+      // TODO: don't advance page if totalCards now is already 0, because this is the latest page
       paginationWrapper.classList.add('transition-next');
       pageNumber = pageNumber + 1;
       paginate(pageNumber);

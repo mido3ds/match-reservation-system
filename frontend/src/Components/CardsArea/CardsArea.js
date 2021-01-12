@@ -2,29 +2,19 @@ import React, { useEffect, useState } from 'react';
 import Cards from './Cards/Cards';
 import Pagination from './Pagination/Pagination';
 
-function CardsArea({ custom_cards, cardIdentifier }) {
+const CARDS_PER_PAGE = 10;
 
-  const [cards, setCards] = useState([]);
+function CardsArea({ cards, cardIdentifier, onSetPage }) {
+  const [currentCards, setCurrentCards] = useState(cards);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(10);
 
   useEffect(() => {
-    const fetchCards = async () => {
-      setLoading(true);
-      setCards(custom_cards);
-      setLoading(false);
-    };
-    fetchCards();
-  }, []);
-
-  // Get current cards
-  const indexOfLastPost = currentPage * cardsPerPage;
-  const indexOfFirstPost = indexOfLastPost - cardsPerPage;
-  const currentCards = cards.slice(indexOfFirstPost, indexOfLastPost);
-
-  // Change page
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+    // Get current cards
+    const indexOfLastPost = currentPage * CARDS_PER_PAGE;
+    const indexOfFirstPost = indexOfLastPost - CARDS_PER_PAGE;
+    setCurrentCards(cards.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage, cards]);
 
   return (
     <div className = "flex-container-column-vcenter-hcenter">
@@ -32,13 +22,12 @@ function CardsArea({ custom_cards, cardIdentifier }) {
         <Cards cards={currentCards} loading={loading} card
           cardIdentifier={cardIdentifier} />
       </div>
-        <Pagination
-          cardsPerPage={cardsPerPage}
-          totalCards={cards.length}
-          paginate={paginate}
-        />
+      <Pagination
+        cardsPerPage={CARDS_PER_PAGE}
+        totalCards={cards.length}
+        paginate={onSetPage}
+      />
     </div>
-
   );
 }
 
