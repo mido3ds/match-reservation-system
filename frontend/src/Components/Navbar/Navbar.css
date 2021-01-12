@@ -69,17 +69,17 @@
 }
 
 .edit-profile-button {
-    width: 110px;
-    transition: width 1000ms;
-    background-color: #0880AE;
-    border-color: #0880AE;
+    width: 110px !important;
+    transition: width 1000ms !important;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
     margin: 0px 20px;
 }
 
 .log-out-profile-button {
-    width: 110px;
-    transition: width 1000ms;
-    border-color: #0880AE;
+    width: 110px !important;
+    transition: width 1000ms !important;
+    border-color: #0880AE !important;
     margin: 0px 20px;
 }
 
