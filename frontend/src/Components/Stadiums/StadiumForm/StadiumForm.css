@@ -134,8 +134,8 @@
 
 .stadium-form-save-btn {
     width: 130px;
-    background-color: #0880AE;
-    border-color: #0880AE;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
     color: white;
 }
 

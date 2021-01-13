@@ -19,6 +19,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .text-block h1 {
@@ -29,7 +30,6 @@
     font-family: 'IBM Plex Sans', sans-serif;
     border-width: 10px;
     border-color: black;
-    margin-left: 30px;
 }
 
 .text-block p {
@@ -40,3 +40,13 @@
     border-width: 10px;
     border-color: black;
 }
+
+@media (max-width: 625px) {   
+    .text-block h1 {
+        font-size: 30px;
+    }
+    .text-block p {
+        font-size: 15px;
+    }
+  }
+  

@@ -38,6 +38,12 @@
 
 .stadiums-add-button {
     width: 100px;
-    background-color: #0880AE;
-    border-color: #0880AE;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+}
+
+.stadiums-add-button:focus,
+.stadiums-add-button:active,
+.stadiums-add-button:hover {
+    box-shadow: 0 0 0 0.2rem #0880AE !important;
 }

@@ -18,10 +18,12 @@ function Login_Card() {
 
   return (
     <div className="login-card border border-dark">
+      <div className="login-label">Login</div>
+      <hr></hr>
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
+          <Form.Label className="input-label">Email</Form.Label>
+          <Form.Control className = "login-input-text-area"
             autoFocus
             type="email"
             value={email}
@@ -29,14 +31,14 @@ function Login_Card() {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+          <Form.Label className="input-label">Password</Form.Label>
+          <Form.Control className = "login-input-text-area"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button className = "login-button" block size="lg" type="submit" disabled={!validateForm()}>
           Login
         </Button>
       </Form>

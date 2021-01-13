@@ -76,6 +76,12 @@
     margin: 0px 20px;
 }
 
+.edit-profile-button:focus,
+.edit-profile-button:active,
+.edit-profile-button:hover {
+    box-shadow: 0 0 0 0.2rem #b6dcebe7 !important;
+}
+
 .log-out-profile-button {
     width: 110px !important;
     transition: width 1000ms !important;

@@ -85,7 +85,7 @@ function MatchForm({ title }) {
                 id="homeTeamDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="flase">
                 Choose...
-                      <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
+                <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
               </a>
 
               <div className="dropdown-menu" aria-labelledby="homeTeamDropdownMenuLink">

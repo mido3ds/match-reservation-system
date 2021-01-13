@@ -1,0 +1,17 @@
+.home-cards-area {
+  margin: 0px 15px;
+}
+
+.home-card-item {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+@media (max-width: 1200px) {
+  .home-card-item {
+    flex-grow: 0;
+    flex-basis: initial;
+    width: 100%;
+  }
+}
+

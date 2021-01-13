@@ -8,6 +8,77 @@
     background-color: white;
 }
 
+.signup-card {
+    position: relative;
+    border-radius: 20px;
+    background-color: white;
+    padding: 15px 40px 30px 40px;
+    
+}
+
 .register-field Button {
     margin-top: 20px;
 }
+
+.user-submit-button {
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+}
+
+.user-submit-button:focus,
+.user-submit-button:active,
+.user-submit-button:hover {
+    box-shadow: 0 0 0 0.2rem #b6dcebe7 !important;
+}
+
+.signup-label {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-bottom: 15px;
+}
+
+.register-input-text-area {
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px !important;
+    height: 45px !important;
+    line-height: 20px !important;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+
+.input-label {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 3px;
+    color: rgba(112, 110, 110, 0.849);
+}
+
+.register-date-time-picker {
+    background-color: white !important;
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px;
+    height: 43px !important;;
+    line-height: 35px !important;
+    font-size: 15px !important;
+    padding-left: 10px;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
+.register-drop-down-button {
+    background-color: white !important;
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px !important;
+    height: 45px !important;
+    line-height: 35px !important;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+

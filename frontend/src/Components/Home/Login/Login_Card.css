@@ -1,15 +1,53 @@
 .login-card {
     position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 15px;
-    padding: 32px 20px 0px 20px;
+    height: 350px;
+    margin: 5px 14px;
+    margin-bottom: 20px;
+    padding: 10px 32px 0px 25px;
     border-radius: 20px;
-    border-width: 1px;
-    display:block;
     background-color: white;
 }
 
-.login-card Button {
-    margin-top: 30px;
+.login-button {
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+    margin-top: 20px;
 }
+
+.login-button:focus,
+.login-button:active,
+.login-button:hover {
+    box-shadow: 0 0 0 0.2rem #b6dcebe7 !important;
+}
+
+.input-label {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 3px;
+    color: rgba(112, 110, 110, 0.849);
+}
+
+.login-input-text-area {
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px !important;
+    height: 45px !important;
+    line-height: 20px !important;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.login-label {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1200px) {
+    .login-button {
+        margin-top: 25px;
+    }
+  }
+  
