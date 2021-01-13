@@ -162,7 +162,7 @@ export interface InlineResponse200 {
      * @type {string}
      * @memberof InlineResponse200
      */
-    msg?: string;
+    msg: string;
 }
 /**
  * successful edit
@@ -194,7 +194,7 @@ export interface InlineResponse2002 {
      * @type {string}
      * @memberof InlineResponse2002
      */
-    userType?: InlineResponse2002UserTypeEnum;
+    userType: InlineResponse2002UserTypeEnum;
 }
 
 /**
@@ -1166,6 +1166,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+
+    
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             const queryParameters = new URLSearchParams(localVarUrlObj.search);

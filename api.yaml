@@ -31,6 +31,7 @@ paths:
                     type: string
                 required:
                 - authToken
+                - msg
         '401':
           description: not authorized
           content:
@@ -175,6 +176,7 @@ paths:
                     description: used by the forntend to know the type of the user, the backend still needs to check the payload of the authToken payload
                 required:
                 - authToken
+                - userType
         '401':
           description: not authorized
           content:

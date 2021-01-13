@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
-  if (req.params.page < 1) return res.status(406).send('not acceptable page < 1');
+  if (req.params.page < 1) return res.status(406).send({ err: 'not acceptable page < 1' });
 
   const users = await User.find({ isPendding: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
 
@@ -31,7 +31,7 @@ router.get('/me', auth, async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({ err: error.details[0].message });
   let user = await User.findOne({
     $or: [
       { username: req.body.username },
@@ -39,17 +39,20 @@ router.post('/', async (req, res) => {
     ]
   });
 
-  if (user) return res.status(400).send('This username or/and email is already registered.');
+  if (user) return res.status(400).send({ err: 'This username or/and email is already registered.' });
 
   const to_pick = ['username', 'password', 'firstname', 'lastName',
     'birthDate', 'gender', 'city', 'address', 'email', 'role'];
 
   user = new User(_.pick(req.body, to_pick));
+  let msg = "";
   if (req.body.role === 'fan') {
     user = { ...user, isPendding: false };
+    msg = `Welcome, ${user.firstname} ${user.lastname}`;
   }
   else {
     user = { ...user, isPendding: true };
+    msg = `Welcome, ${user.firstname} ${user.lastname}, your management request is pending!`;
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -57,14 +60,14 @@ router.post('/', async (req, res) => {
 
   await user.save();
 
-  const token = user.generateAuthToken();
+  const authToken = user.generateAuthToken();
 
-  res.header('x-auth-token', token).send(`Welcome, ${user.firstname} ${user.lastname}`);
+  res.send({ authToken, msg });
 });
 
 router.put('/me', auth, async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({ err: error.details[0].message });
 
   const to_pick = ['password', 'firstname', 'lastName', 'birthDate', 'gender', 'city', 'address'];
 
