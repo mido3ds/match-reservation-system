@@ -710,6 +710,8 @@ components:
           type: string
         secondLinesman:
           type: string
+        ticketPrice:
+          type: integer
         uuid:
           type: string
       required:
@@ -720,25 +722,11 @@ components:
       - mainReferee
       - firstLinesman
       - secondLinesman
+      - ticketPrice
       - uuid
     Seats:
       type: object
       additionalProperties: false
-      properties:
-        reserved:
-          type: array
-          description: reserved seats in this stadium
-          items:
-            type: string
-            description: name of seat
-            example: 'A1'
-        reservedByUser:
-          type: object
-          description: tickets and seats reserved by user, if they provided their auth token
-          additionalProperties: true
-          example: '{"A2": "asdfohw82-82uero-8whfo-aoshdf", "B3": "jasodf-238hadufu-13ihr-833"}'
-      required:
-      - reserved
     CreditCard:
       type: object
       additionalProperties: false

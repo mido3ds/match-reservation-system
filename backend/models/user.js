@@ -32,7 +32,7 @@ function validateUser(user) {
     password: Joi.string().min(5).max(255).required(),
     firstName: Joi.string().min(3).max(20).required(),
     lastName: Joi.string().min(3).max(20).required(),
-    birthDate: Joi.date().required(),
+    birthDate: Joi.date().required().max('now'),
     gender: Joi.string().valid('male', 'female').required(),
     city: Joi.string().min(3).max(15).required(),
     address: Joi.string().min(5).max(100).required(),

@@ -257,6 +257,12 @@ export interface ListedMatch {
     secondLinesman: string;
     /**
      * 
+     * @type {number}
+     * @memberof ListedMatch
+     */
+    ticketPrice: number;
+    /**
+     * 
      * @type {string}
      * @memberof ListedMatch
      */
@@ -352,25 +358,6 @@ export enum ListedUserGenderEnum {
     Female = 'female'
 }
 
-/**
- * 
- * @export
- * @interface Seats
- */
-export interface Seats {
-    /**
-     * reserved seats in this stadium
-     * @type {Array<string>}
-     * @memberof Seats
-     */
-    reserved: Array<string>;
-    /**
-     * tickets and seats reserved by user, if they provided their auth token
-     * @type {{ [key: string]: object; }}
-     * @memberof Seats
-     */
-    reservedByUser?: { [key: string]: object; };
-}
 /**
  * 
  * @export
@@ -1615,7 +1602,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSeats(matchId: string, xAuthToken?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Seats>> {
+        async getSeats(matchId: string, xAuthToken?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getSeats(matchId, xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1857,7 +1844,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSeats(matchId: string, xAuthToken?: string, options?: any): AxiosPromise<Seats> {
+        getSeats(matchId: string, xAuthToken?: string, options?: any): AxiosPromise<object> {
             return DefaultApiFp(configuration).getSeats(matchId, xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**

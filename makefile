@@ -5,7 +5,7 @@ docs: openapi-generator-cli.jar
 
 client: openapi-generator-cli.jar
 	mkdir -p frontend/src/api
-	./openapi-generator-cli.jar generate -i api.yaml -g typescript-axios -o frontend/src/api
+	java -jar ./openapi-generator-cli.jar generate -i api.yaml -g typescript-axios -o frontend/src/api
 	rm -rf frontend/src/api/.openapi* frontend/src/api/git_push.sh
 
 openapi-generator-cli.jar: 
