@@ -19,7 +19,7 @@ router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (req.params.page < 1) return res.status(406).send({ err: 'not acceptable page < 1' });
 
-  const users = await User.find({ isPendding: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
+  const users = await User.find({ isPending: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
 
   res.send(users);
 });
@@ -41,23 +41,25 @@ router.post('/', async (req, res) => {
 
   if (user) return res.status(400).send({ err: 'This username or/and email is already registered.' });
 
-  const to_pick = ['username', 'password', 'firstname', 'lastName',
+  const to_pick = ['username', 'password', 'firstName', 'lastName',
     'birthDate', 'gender', 'city', 'address', 'email', 'role'];
 
-  user = new User(_.pick(req.body, to_pick));
+  user = _.pick(req.body, to_pick);
   let msg = "";
   if (req.body.role === 'fan') {
-    user = { ...user, isPendding: false };
-    msg = `Welcome, ${user.firstname} ${user.lastname}`;
+    user = { ...user, isPending: false };
+    msg = `Welcome, ${user.firstName} ${user.lastName}`;
   }
   else {
-    user = { ...user, isPendding: true };
-    msg = `Welcome, ${user.firstname} ${user.lastname}, your management request is pending!`;
+    user = { ...user, isPending: true };
+    msg = `Welcome, ${user.firstName} ${user.lastName}, your management request is pending!`;
   }
+
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 
+  user = new User(user);
   await user.save();
 
   const authToken = user.generateAuthToken();

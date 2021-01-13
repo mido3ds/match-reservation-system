@@ -19,6 +19,7 @@ function Register() {
   const [role, setRole] = useState("fan");
   
   function validateForm() {
+    // TODO perform proper validation
     return (
       username.length > 0 &&
       email.length > 0 &&
@@ -52,7 +53,6 @@ function Register() {
           <Form.Group className="col-md-6" size="lg" controlId="firstname">
             <Form.Label className="input-label">Firstname</Form.Label>
             <Form.Control className = "register-input-text-area"
-              
               type="firstname"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}

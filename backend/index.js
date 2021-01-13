@@ -2,7 +2,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('config'); // e.g: config.get('database.password')
 const startupDebugger = require('debug')('app:startup');
@@ -51,7 +51,7 @@ async function connectDB() {
 function setupPort() {
   // process.env.NODE_ENV
   if (app.get('env') === 'development') {
-    app.use(morgan());
+    app.use(morgan('combined'));
     startupDebugger('Morgan is enabled...');
   }
 

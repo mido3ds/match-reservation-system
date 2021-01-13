@@ -1,5 +1,6 @@
 import PlayerImage from '../../images/player-kick.png';
 import './Error.css';
+import { Link } from "react-router-dom";
 
 function Error() {
     return (
@@ -14,8 +15,10 @@ function Error() {
                     <p>The page you are looking for does not exist.
                     How you got here is a mystery. But you can click the button below
                     to go back to the homepage.
-                </p>
-                    <button type="button" className="home-button btn btn-primary"> HOME </button>
+                    </p>
+                    <Link to="/">
+                        <button type="button" className="home-button btn btn-primary"> HOME </button>
+                    </Link>
                 </div>
             </div>
         </div>

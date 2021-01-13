@@ -35,7 +35,7 @@ function EditProfile() {
         <Form onSubmit={handleSubmit}>
           <div className="row">
             <Form.Group className="col-md-6" size="lg" controlId="firstname">
-              <Form.Label>Firstname</Form.Label>
+              <Form.Label>First Name</Form.Label>
               <Form.Control
                 
                 type="firstname"
@@ -44,7 +44,7 @@ function EditProfile() {
               />
             </Form.Group>
             <Form.Group className="col-md-6" size="lg" controlId="lastname">
-              <Form.Label>Lastname</Form.Label>
+              <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="lastname"
                 value={lastname}

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('config');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true, minlength: 5, maxlength: 50, lowercase: true },
@@ -13,14 +14,14 @@ const userSchema = new mongoose.Schema({
   address: { type: String, required: true },
   email: { type: String, unique: true, required: true, minlength: 5, maxlength: 255, lowercase: true },
   role: { type: String, required: true, enum: ['fan', 'manager', 'admin'] },
-  isPendding: { type: Boolean, default: true, required: true },
+  isPending: { type: Boolean, default: true, required: true },
   createdIn: { type: Date, default: Date.now, required: true }
 });
 
 userSchema.methods.generateAuthToken = function () {
-  const payload = { _id: user.id, username: user.username, role: user.role };
+  const payload = { _id: this.id, username: this.username, role: this.role, isPending: this.isPending };
   const token = jwt.sign(payload, config.get('jwt_private_key'));
-  return [token, user.role];
+  return [token, this.role];
 }
 
 const User = mongoose.model('User', userSchema);
@@ -32,11 +33,11 @@ function validateUser(user) {
     firstName: Joi.string().min(3).max(20).required(),
     lastName: Joi.string().min(3).max(20).required(),
     birthDate: Joi.date().required(),
-    gender: Joi.string().valid(['male', 'female']).required(),
+    gender: Joi.string().valid('male', 'female').required(),
     city: Joi.string().min(3).max(15).required(),
     address: Joi.string().min(5).max(100).required(),
     email: Joi.string().min(5).max(255).required().email(),
-    role: Joi.string().valid(['fan', 'manager', 'admin']).required()
+    role: Joi.string().valid('fan', 'manager', 'admin').required()
   }).validate(user);
 }
 
