@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DefaultApi } from '../../api';
+import { authToken } from '../../Auth';
 import CardsArea from '../CardsArea/CardsArea';
 import UsersHeader from './UsersHeader/UsersHeader';
 
@@ -15,8 +16,7 @@ function Users() {
     const [page, setPage] = useState(1);
 
     useEffect(async () => {
-        const authToken = "TODO";
-        const resp = await api.getUsers(authToken, page);
+        const resp = await api.getUsers(authToken(), page);
         if (resp.status == 200) {
             setUsers(resp.data.map((x, i) => { x.id = i; return x; }));
         } else {

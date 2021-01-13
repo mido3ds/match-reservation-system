@@ -20,10 +20,6 @@ export function setUserType(type) {
     }
 }
 
-export function removeUserType() {
-    Cookie.remove('usertype');
-}
-
 export function authToken() {
     return Cookie.get('authtoken');
 }
@@ -36,6 +32,11 @@ export function setAuthToken(token) {
     }
 }
 
-export function removeAuthToken(token) {
+export function logout() {
+    if (!isLoggedIn()) {
+        console.error('cant logout and its not logged in');
+        return;
+    }
     Cookie.remove('authoken');
+    Cookie.remove('usertype');
 }

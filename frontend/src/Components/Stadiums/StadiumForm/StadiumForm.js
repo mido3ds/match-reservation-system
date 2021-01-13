@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DefaultApi } from '../../../api';
 import './StadiumForm.css';
-import { authToken, isLoggedIn } from '../../../Auth';
+import { authToken } from '../../../Auth';
 
 const api = new DefaultApi();
 

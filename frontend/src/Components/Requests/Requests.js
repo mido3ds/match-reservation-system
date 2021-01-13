@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DefaultApi } from '../../api';
+import { authToken } from '../../Auth';
 import CardsArea from '../CardsArea/CardsArea';
 import RequestsHeader from './RequestsHeader/RequestsHeader';
 
@@ -15,8 +16,7 @@ function Requests() {
   const [page, setPage] = useState(1);
 
   useEffect(async () => {
-    const authToken = "TODO";
-    const resp = await api.getManagersRequests(authToken, page);
+    const resp = await api.getManagersRequests(authToken(), page);
     if (resp.status == 200) {
       setRequests(resp.data.map((x, i) => { x.id = i; return x; }));
     } else {
