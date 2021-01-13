@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   address: { type: String, required: true },
   email: { type: String, unique: true, required: true, minlength: 5, maxlength: 255, lowercase: true },
   role: { type: String, required: true, enum: ['fan', 'manager', 'admin'] },
-  isPendding: { type: Boolean, default: true, required: true },
+  isPending: { type: Boolean, default: true, required: true },
   createdIn: { type: Date, default: Date.now, required: true }
 });
 

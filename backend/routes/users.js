@@ -19,7 +19,7 @@ router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (req.params.page < 1) return res.status(406).send({ err: 'not acceptable page < 1' });
 
-  const users = await User.find({ isPendding: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
+  const users = await User.find({ isPending: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
 
   res.send(users);
 });
@@ -47,11 +47,11 @@ router.post('/', async (req, res) => {
   user = _.pick(req.body, to_pick);
   let msg = "";
   if (req.body.role === 'fan') {
-    user = { ...user, isPendding: false };
+    user = { ...user, isPending: false };
     msg = `Welcome, ${user.firstName} ${user.lastName}`;
   }
   else {
-    user = { ...user, isPendding: true };
+    user = { ...user, isPending: true };
     msg = `Welcome, ${user.firstName} ${user.lastName}, your management request is pending!`;
   }
 
