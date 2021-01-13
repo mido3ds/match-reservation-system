@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateAuthToken = function () {
-  const payload = { _id: this.id, username: this.username, role: this.role };
+  const payload = { _id: this.id, username: this.username, role: this.role, isPending: this.isPending };
   const token = jwt.sign(payload, config.get('jwt_private_key'));
   return [token, this.role];
 }
