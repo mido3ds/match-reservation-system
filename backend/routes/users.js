@@ -41,23 +41,25 @@ router.post('/', async (req, res) => {
 
   if (user) return res.status(400).send({ err: 'This username or/and email is already registered.' });
 
-  const to_pick = ['username', 'password', 'firstname', 'lastName',
+  const to_pick = ['username', 'password', 'firstName', 'lastName',
     'birthDate', 'gender', 'city', 'address', 'email', 'role'];
 
-  user = new User(_.pick(req.body, to_pick));
+  user = _.pick(req.body, to_pick);
   let msg = "";
   if (req.body.role === 'fan') {
     user = { ...user, isPendding: false };
-    msg = `Welcome, ${user.firstname} ${user.lastname}`;
+    msg = `Welcome, ${user.firstName} ${user.lastName}`;
   }
   else {
     user = { ...user, isPendding: true };
-    msg = `Welcome, ${user.firstname} ${user.lastname}, your management request is pending!`;
+    msg = `Welcome, ${user.firstName} ${user.lastName}, your management request is pending!`;
   }
+
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 
+  user = new User(user);
   await user.save();
 
   const authToken = user.generateAuthToken();
