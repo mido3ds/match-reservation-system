@@ -18,7 +18,7 @@ const router = express.Router();
 router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (isNaN(req.query.page) || req.query.page < 1)
-    res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
+    return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
   const users = await User.find({ isPending: false, role: { $ne: 'admin'} })
                           .select('-password')
@@ -26,7 +26,7 @@ router.get('/', [auth, admin], async (req, res) => {
                           .skip((req.query.page - 1) * pageSize)
                           .limit(pageSize);
   
-  let totalConfirmedUsers = await User.count({ isPending: false, role: { $ne: 'admin'} });
+  let totalConfirmedUsers = await User.countDocuments({ isPending: false, role: { $ne: 'admin'} });
   let has_next = (req.query.page - 1) * pageSize + users.length < totalConfirmedUsers;
   res.status(200).send({
     has_next: has_next,

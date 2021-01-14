@@ -1,9 +1,11 @@
 @host = http://localhost:3000
-
+@admin_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
+@manager_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGE4ZDQ5ZjQ4YzlhZDZlZDIzZmYiLCJ1c2VybmFtZSI6ImlhbW1hbmFnZXIiLCJyb2xlIjoibWFuYWdlciIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1NDM3fQ.Hi1E4fHbzS4DpBI47fMbV7Mb1KOj8nhyxLSjvJm1-RQ
+@fan_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGI5MDI2MzZjZjliNzM3MzRlOWIiLCJ1c2VybmFtZSI6ImlhbWZhbiIsInJvbGUiOiJmYW4iLCJpc1BlbmRpbmciOmZhbHNlLCJpYXQiOjE2MTA2MTU2OTZ9.MLJmE3-0gP0eyhtslswrDqhgTkf2RQ0tkBu2HCU9cCU
 // Get all not pendding users
 // Request by: only by admin
 GET {{host}}/api/users?page=1 HTTP/1.1
-Authorization: token
+x-auth-token: {{admin_token}}
 
 // Get my info
 // Request by: anyone (fan, manager, admin)
@@ -14,7 +16,7 @@ GET {{host}}/api/users/me HTTP/1.1
 // Request by: anyone
 ###
 // create admin
-// admin token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
+// admin token
 POST {{host}}/api/users HTTP/1.1
 Content-Type: application/json
 
@@ -32,7 +34,7 @@ Content-Type: application/json
 }
 ###
 // create manager
-// manager token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGE4ZDQ5ZjQ4YzlhZDZlZDIzZmYiLCJ1c2VybmFtZSI6ImlhbW1hbmFnZXIiLCJyb2xlIjoibWFuYWdlciIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1NDM3fQ.Hi1E4fHbzS4DpBI47fMbV7Mb1KOj8nhyxLSjvJm1-RQ
+// manager token: 
 POST {{host}}/api/users HTTP/1.1
 Content-Type: application/json
 
@@ -50,7 +52,7 @@ Content-Type: application/json
 }
 ###
 // create fan
-// fan token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGI5MDI2MzZjZjliNzM3MzRlOWIiLCJ1c2VybmFtZSI6ImlhbWZhbiIsInJvbGUiOiJmYW4iLCJpc1BlbmRpbmciOmZhbHNlLCJpYXQiOjE2MTA2MTU2OTZ9.MLJmE3-0gP0eyhtslswrDqhgTkf2RQ0tkBu2HCU9cCU
+// fan token: 
 POST {{host}}/api/users HTTP/1.1
 Content-Type: application/json
 
@@ -71,7 +73,7 @@ Content-Type: application/json
 ###
 PUT {{host}}/api/users/me
 Content-Type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
 
 {
 
@@ -79,5 +81,5 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MD
 // Delete user
 // Request by: Only admin
 ###
-DELETE {{host}}/users/:username
-Conten
+DELETE {{host}}/api/users/iamfan
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684"
