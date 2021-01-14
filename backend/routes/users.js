@@ -41,10 +41,7 @@ router.get('/me', auth, async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
-  console.log('works');
   if (error) return res.status(400).send({ err: error.details[0].message });
-  console.log(req.body.username);
-  console.log(req.body.email);
   let user;
   try {
     user = await User.findOne({
@@ -87,9 +84,9 @@ router.post('/', async (req, res) => {
     return res.status(400).send({ err: error.message });
   }
 
+  if (user.isPending) return res.send({msg: 'Registeration is pending, waiting for admin approval'});
 
   const authToken = user.generateAuthToken();
-
   res.send({ authToken, msg });
 });
 

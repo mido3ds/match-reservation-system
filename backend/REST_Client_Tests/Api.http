@@ -2,18 +2,20 @@
 
 // Get all not pendding users
 // Request by: only by admin
-GET {{host}}/api/users?page=1 HTTP/2.0
+GET {{host}}/api/users?page=1 HTTP/1.1
 Authorization: token
 
 // Get my info
 // Request by: anyone (fan, manager, admin)
 ###
-GET {{host}}/api/users/me HTTP/2.0
+GET {{host}}/api/users/me HTTP/1.1
 
 // Register user
 // Request by: anyone
 ###
-POST {{host}}/api/users HTTP/2.0
+// create admin
+// admin token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
+POST {{host}}/api/users HTTP/1.1
 Content-Type: application/json
 
 {
@@ -24,21 +26,56 @@ Content-Type: application/json
     "birthDate": "{{$datetime 'YYYY-MM-DD'}}",
     "gender":"male",
     "city":"cairo",
-    "address": "46 Girgis Hanna, AinShams",
+    "address": "20 elnahda st, Eltagamoo",
     "email": "abdulrahman.elshafei98@gmail.com",
     "role": "admin"
+}
+###
+// create manager
+// manager token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGE4ZDQ5ZjQ4YzlhZDZlZDIzZmYiLCJ1c2VybmFtZSI6ImlhbW1hbmFnZXIiLCJyb2xlIjoibWFuYWdlciIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1NDM3fQ.Hi1E4fHbzS4DpBI47fMbV7Mb1KOj8nhyxLSjvJm1-RQ
+POST {{host}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "IamManager",
+    "password": "helloworld", 
+    "firstName":"Hoda",
+    "lastName":"elkhateeb",
+    "birthDate": "{{$datetime 'YYYY-MM-DD'}}",
+    "gender":"female",
+    "city":"Giza",
+    "address": "22 elnahda st, Eltagamoo",
+    "email": "manager@gmail.com",
+    "role": "manager"
+}
+###
+// create fan
+// fan token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGI5MDI2MzZjZjliNzM3MzRlOWIiLCJ1c2VybmFtZSI6ImlhbWZhbiIsInJvbGUiOiJmYW4iLCJpc1BlbmRpbmciOmZhbHNlLCJpYXQiOjE2MTA2MTU2OTZ9.MLJmE3-0gP0eyhtslswrDqhgTkf2RQ0tkBu2HCU9cCU
+POST {{host}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "IamFan",
+    "password": "helloworld", 
+    "firstName":"fanny",
+    "lastName":"el4aba7",
+    "birthDate": "{{$datetime 'YYYY-MM-DD'}}",
+    "gender":"male",
+    "city":"Monofya",
+    "address": "100 elnahda st, Eltagamoo",
+    "email": "fan@gmail.com",
+    "role": "fan"
 }
 // Edit my info
 // Request by: anyone except guest
 ###
 PUT {{host}}/api/users/me
 Content-Type: application/json
-Authorization: token 
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
 
 {
 
 }
-
 // Delete user
 // Request by: Only admin
 ###
