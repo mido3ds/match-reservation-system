@@ -4,5 +4,5 @@
 		"connection_with_login": "mongodb://root:password@localhost:27017",
 		"password": "app_password"
 	},
-	"jwt_private_key": "app_jwt_private_key"
+	"jwt_private_key": "very secret key"
 }
