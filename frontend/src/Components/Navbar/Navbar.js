@@ -5,8 +5,6 @@ import Navigation from '../../images/menu.png';
 import PremieurLeagueLogo from '../../images/premier-league-logo.png';
 import './Navbar.css';
 
-let lastScrollY = 0;
-let ticking = false;
 
 function Navbar() {
     const [loggedin, setLoggedIn] = useState(isLoggedIn());
@@ -33,7 +31,6 @@ function Navbar() {
         }
 
         if (window.pageYOffset > 0) {
-            navbar.classList.add("sticky")
             if (!navbar.classList.contains("is-active")) {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
@@ -46,7 +43,6 @@ function Navbar() {
             }
 
         } else {
-            navbar.classList.remove("sticky");
             if (navbar.classList.contains("is-active")) {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
@@ -58,7 +54,7 @@ function Navbar() {
                 }
             }
         }
-
+        
         event.preventDefault();
     };
 

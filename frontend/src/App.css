@@ -84,3 +84,7 @@ a {
     justify-content: initial;
     flex-direction: column;
 }
+
+.content {
+    margin-top: 125px;
+}

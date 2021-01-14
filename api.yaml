@@ -65,9 +65,17 @@ paths:
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ListedUser'
+                type: object
+                properties:
+                  has_next:
+                    type: boolean
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListedUser'
+                required:
+                - has_next
+                - users
         '406':
           description: not acceptable, if page < 1
   /api/users/me:
@@ -205,9 +213,17 @@ paths:
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ListedUser'
+                type: object
+                properties:
+                  has_next:
+                    type: boolean
+                  requestedManagers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListedUser'
+                required:
+                - has_next
+                - requestedManagers
         '401':
           description: not authorized
           content:
@@ -293,9 +309,17 @@ paths:
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ListedMatch'
+                type: object
+                properties:
+                  has_next:
+                    type: boolean
+                  matches:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListedMatch'
+                required:
+                - has_next
+                - matches
         '406':
           description: not acceptable, if page < 1
     post:
@@ -516,9 +540,17 @@ paths:
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ListedStadium'
+                type: object
+                properties:
+                  has_next:
+                    type: boolean
+                  stadiums:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListedStadium'
+                required:
+                - has_next
+                - stadiums
         '406':
           description: not acceptable, if page < 1
     post:
@@ -710,6 +742,8 @@ components:
           type: string
         secondLinesman:
           type: string
+        ticketPrice:
+          type: integer
         uuid:
           type: string
       required:
@@ -720,25 +754,11 @@ components:
       - mainReferee
       - firstLinesman
       - secondLinesman
+      - ticketPrice
       - uuid
     Seats:
       type: object
       additionalProperties: false
-      properties:
-        reserved:
-          type: array
-          description: reserved seats in this stadium
-          items:
-            type: string
-            description: name of seat
-            example: 'A1'
-        reservedByUser:
-          type: object
-          description: tickets and seats reserved by user, if they provided their auth token
-          additionalProperties: true
-          example: '{"A2": "asdfohw82-82uero-8whfo-aoshdf", "B3": "jasodf-238hadufu-13ihr-833"}'
-      required:
-      - reserved
     CreditCard:
       type: object
       additionalProperties: false

@@ -1,5 +1,5 @@
 .confirmation-area {
-    width: 32%;
+    width: 400px;
     margin: auto;
     border-radius: 20px;
 }
@@ -39,15 +39,3 @@
     color: white;
 }
 
-.vertical-alignment-helper {
-    display:table !important;
-    height: 100% !important;
-    width: 100% !important;
-    pointer-events:none;
-}
-.vertical-align-center {
-    /* To center vertically */
-    display: table-cell !important;
-    vertical-align: middle !important;
-    pointer-events:none !important;
-}

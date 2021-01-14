@@ -11,7 +11,7 @@
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left: 77px
+    margin-left: 67px
 }
 
 .reject {
@@ -19,7 +19,11 @@
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left: 103px
+    margin-left: 93px
+}
+
+.accept:hover, .reject:hover {
+    cursor: pointer;
 }
 
 

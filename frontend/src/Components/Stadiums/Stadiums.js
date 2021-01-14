@@ -6,18 +6,15 @@ import StadiumHeader from './StadiumHeader/StadiumHeader';
 const api = new DefaultApi();
 
 function Stadiums() {
-  const cards = []
-  for (var i = 0; i < 4; i++) {
-    cards.push({ id: i, name: "Name", city: "city" })
-  }
-
-  const [stadiums, setStadiums] = useState(cards);
+  const [hasNext, setHasNext] = useState(false);
+  const [stadiums, setStadiums] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(async () => {
     const resp = await api.getStadiums(page);
     if (resp.status == 200) {
-      setStadiums(resp.data.map((x, i) => { x.id = i; return x; }));
+      setHasNext(resp.data.has_next);
+      setStadiums(resp.data.stadiums.map((stadium, i) => { stadium.id = i; return stadium; }));
     } else {
       console.error(`api.getStadiums returned ${resp.status}`);
     }
@@ -26,7 +23,7 @@ function Stadiums() {
   return (
     <div className="flex-container-column-vcenter-hcenter">
       <StadiumHeader />
-      <CardsArea cards={stadiums} cardIdentifier="stadium" onSetPage={setPage} />
+      <CardsArea cards={stadiums} hasNext={hasNext} cardIdentifier="stadium" onSetPage={setPage} />
     </div>
   );
 }

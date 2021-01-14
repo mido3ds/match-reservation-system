@@ -1,17 +1,15 @@
 import { Cookie } from 'js-cookie';
 
 export function isLoggedIn() {
-    /*try {
+    try {
         return authToken() && userType();
     } catch (e) {
         return false;
-    }*/
-    return true;
+    }
 }
 
 export function userType() {
-    //return Cookie.get('usertype');
-    return 'admin'
+    return Cookie.get('usertype');
 }
 
 export function setUserType(type) {

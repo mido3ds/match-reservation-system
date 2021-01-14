@@ -17,11 +17,21 @@ const router = express.Router();
 
 router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
-  if (req.params.page < 1) return res.status(406).send({ err: 'not acceptable page < 1' });
+  if (isNaN(req.query.page) || req.query.page < 1)
+    res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
-  const users = await User.find({ isPending: false }).select('-password').sort('-createdIn').skip((req.query.page - 1) * pageSize).limit(pageSize);
-
-  res.send(users);
+  const users = await User.find({ isPending: false, role: { $ne: 'admin'} })
+                          .select('-password')
+                          .sort('createdIn')
+                          .skip((req.query.page - 1) * pageSize)
+                          .limit(pageSize);
+  
+  let totalConfirmedUsers = await User.count({ isPending: false, role: { $ne: 'admin'} });
+  let has_next = (req.query.page - 1) * pageSize + users.length < totalConfirmedUsers;
+  res.status(200).send({
+    has_next: has_next,
+    users: users
+  });
 });
 
 router.get('/me', auth, async (req, res) => {
@@ -81,8 +91,11 @@ router.put('/me', auth, async (req, res) => {
 });
 
 router.delete('/:username', [auth, admin], async (req, res) => {
-  const user = await User.deleteOne({ username: req.params.username });
-  res.send(user);
+  const { ok } = await User.deleteOne({ username: req.params.username });
+  if (ok)
+    res.status(200).send({ msg: 'User deleted successfully!' });
+  else
+    res.status(500).send({ err: 'User could not be deleted.'});
 });
 
 module.exports = router;
