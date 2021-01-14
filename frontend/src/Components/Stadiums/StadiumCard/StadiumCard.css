@@ -32,3 +32,12 @@
     line-height: 22px;
     /* or 137% */
 }
+
+.remove-stadium-icon {
+    position:absolute;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+    margin-left:90px;
+    cursor: pointer;
+}

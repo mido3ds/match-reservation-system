@@ -1,8 +1,8 @@
 import './StadiumCard.css';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
+import { isLoggedIn, userType, authToken } from '../../../Auth';
 import Delete from "../../../images/delete2.png";
 import { DefaultApi } from '../../../api';
-import { authToken } from '../../../Auth';
 
 const api = new DefaultApi();
 
@@ -25,11 +25,13 @@ function StadiumCard({ card }) {
 
   return (
     <div className="stadium-card flex-container-col-centered">
-      <img alt="remove-stadium-icon" className="remove-icon" src={Delete} data-toggle="modal" 
+      <span style={{ visibility: isLoggedIn() && userType() === 'manager' ? 'visible': 'hidden'}} >
+      <img alt="remove-stadium-icon" className="remove-stadium-icon" src={Delete} data-toggle="modal" 
            data-target={'#deleteModal' + stadium.id}/>
       <ConfirmationModal id={'deleteModal' + stadium.id} 
                          text={ 'Are you sure you want to delete this stadium? '}
                          onOK={ deleteStadium } />
+      </span>
       <h1 className="name-area">{stadium.name}</h1>
       <h2 className="city-area">{stadium.city}</h2>
     </div>
