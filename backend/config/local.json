@@ -1,6 +1,6 @@
 {
 	"database": {
-		"connection": "mongodb://yosrym93:password@localhost:27017",
+		"connection": "mongodb://root:password@localhost:27017",
 		"password": "app_password"
 	},
 	"jwt_private_key": "app_jwt_private_key"
