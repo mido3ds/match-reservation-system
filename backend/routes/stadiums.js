@@ -51,4 +51,8 @@ router.post('/', [auth, manager], async (req, res) => {
   }
 });
 
+router.delete('/:stadium_id', async (req, resp) => {
+  // TODO
+});
+
 module.exports = router;

@@ -104,4 +104,8 @@ router.put('/:match_id', async (req, res) => {
   }
 });
 
+router.delete('/:match_id', async (req, resp) => {
+  // TODO
+});
+
 module.exports = router;

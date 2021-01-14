@@ -408,6 +408,31 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: delete a match
+      operationId: deleteMatch
+      parameters:
+        - name: x-auth-token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: match_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+        '404':
+          description: match not found
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/matches/{match_id}/seats:
     get:
       summary: get seats of given match
@@ -548,6 +573,32 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '403':
           description: invalid data
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/stadiums/{stadium_id}:
+    delete:
+      summary: delete a stadium
+      operationId: deleteStadium
+      parameters:
+        - name: x-auth-token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: stadium_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+        '404':
+          description: stadium not found
+        '401':
+          description: not authorized
           content:
             'application/json':
               schema:
