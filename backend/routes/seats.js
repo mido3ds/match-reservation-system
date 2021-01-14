@@ -10,8 +10,4 @@ router.post('/reserve/:seat_id', (req, res) => {
   // TODO
 });
 
-router.delete('/:seat_id', (req, res) => {
-  // TODO
-});
-
 module.exports = router;

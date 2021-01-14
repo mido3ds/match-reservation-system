@@ -467,36 +467,6 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-    delete:
-      summary: cancel seat
-      operationId: cancelSeat
-      parameters:
-        - name: match_id
-          schema:
-            type: string
-          required: true
-          in: path
-        - name: seat_id
-          schema:
-            type: string
-          required: true
-          in: path
-        - name: x-auth-token
-          schema:
-            type: string
-          required: true
-          in: header
-      responses:
-        '200':
-          description: ok
-        '404':
-          description: match/seat not found
-        '401':
-          description: not authorized, or not reserved
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
   /api/tickets/{ticket_id}:
     delete:
       summary: cancel ticket

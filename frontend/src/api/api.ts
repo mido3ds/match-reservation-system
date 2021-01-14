@@ -648,64 +648,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary cancel seat
-         * @param {string} matchId 
-         * @param {string} seatId 
-         * @param {string} xAuthToken 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cancelSeat: async (matchId: string, seatId: string, xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'matchId' is not null or undefined
-            if (matchId === null || matchId === undefined) {
-                throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling cancelSeat.');
-            }
-            // verify required parameter 'seatId' is not null or undefined
-            if (seatId === null || seatId === undefined) {
-                throw new RequiredError('seatId','Required parameter seatId was null or undefined when calling cancelSeat.');
-            }
-            // verify required parameter 'xAuthToken' is not null or undefined
-            if (xAuthToken === null || xAuthToken === undefined) {
-                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling cancelSeat.');
-            }
-            const localVarPath = `/api/matches/{match_id}/seats/reserve/{seat_id}`
-                .replace(`{${"match_id"}}`, encodeURIComponent(String(matchId)))
-                .replace(`{${"seat_id"}}`, encodeURIComponent(String(seatId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (xAuthToken !== undefined && xAuthToken !== null) {
-                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
-            }
-
-
-    
-            const queryParameters = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                queryParameters.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                queryParameters.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary cancel ticket
          * @param {string} ticketId 
          * @param {string} xAuthToken 
@@ -1551,22 +1493,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary cancel seat
-         * @param {string} matchId 
-         * @param {string} seatId 
-         * @param {string} xAuthToken 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async cancelSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).cancelSeat(matchId, seatId, xAuthToken, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
          * @summary cancel ticket
          * @param {string} ticketId 
          * @param {string} xAuthToken 
@@ -1825,18 +1751,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary cancel seat
-         * @param {string} matchId 
-         * @param {string} seatId 
-         * @param {string} xAuthToken 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cancelSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): AxiosPromise<void> {
-            return DefaultApiFp(configuration).cancelSeat(matchId, seatId, xAuthToken, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary cancel ticket
          * @param {string} ticketId 
          * @param {string} xAuthToken 
@@ -2030,20 +1944,6 @@ export class DefaultApi extends BaseAPI {
      */
     public acceptManagersRequest(xAuthToken: string, username: string, options?: any) {
         return DefaultApiFp(this.configuration).acceptManagersRequest(xAuthToken, username, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary cancel seat
-     * @param {string} matchId 
-     * @param {string} seatId 
-     * @param {string} xAuthToken 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public cancelSeat(matchId: string, seatId: string, xAuthToken: string, options?: any) {
-        return DefaultApiFp(this.configuration).cancelSeat(matchId, seatId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
