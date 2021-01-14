@@ -11,7 +11,7 @@
     filter: brightness(30%);
     border-radius: 50px;
     display:block;
-    margin: 20px auto;
+    margin: 0 auto 20px auto;
 }
 
 .match-details {

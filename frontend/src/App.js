@@ -15,6 +15,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      <div className='content'>
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -41,6 +42,7 @@ function App() {
           <Error />
         </Route>
       </Switch>
+      </div>
     </div>
   );
 }

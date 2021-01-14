@@ -1,16 +1,13 @@
 .page-navbar {
-    overflow: hidden;
-    height: 100px;
-    transition: height 1000ms;
-    background-color: white;
-    z-index: 100;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .4);
-}
-
-.sticky {
     position: fixed;
     top: 0;
     width: 100%;
+    overflow: hidden;
+    height: 100px;
+    transition: height 800ms;
+    background-color: white;
+    z-index: 100;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .4);
 }
 
 .page-navbar.is-active {
@@ -19,14 +16,14 @@
 
 .brand-logo {
     width: 150px;
-    transition: width 1000ms;
+    transition: width 800ms;
 }
 
 .brand-text {
     margin-top: 20px;
-    transition: margin-top 1000ms;
+    transition: margin-top 800ms;
     font-size: 30px;
-    transition: font-size 1000ms;
+    transition: font-size 800ms;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
     border-width: 10px;
@@ -36,7 +33,7 @@
     margin-left: auto;
     width: 300px;
     height: 100px;
-    transition: height 1000ms;
+    transition: height 800ms;
 }
 
 .navigation-icon {
@@ -70,7 +67,7 @@
 
 .edit-profile-button {
     width: 110px !important;
-    transition: width 1000ms !important;
+    transition: width 800ms !important;
     background-color: #0880AE !important;
     border-color: #0880AE !important;
     margin: 0px 20px;
@@ -84,7 +81,7 @@
 
 .log-out-profile-button {
     width: 110px !important;
-    transition: width 1000ms !important;
+    transition: width 800ms !important;
     border-color: #0880AE !important;
     margin: 0px 20px;
 }
