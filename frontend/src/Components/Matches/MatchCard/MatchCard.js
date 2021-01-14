@@ -16,13 +16,13 @@ function MatchCard({ card }) {
   let deleteMatch = async () => {
     // match.id -> frontend card id
     // match.uuid -> actual id of the match
+    try {
     const resp = await api.deleteMatch(authToken(), match.uuid);
-    if (resp.status == 200) {
-      alert('Match deleted successfully!');
-      removeCard();
-    } else {
-      alert('A problem occurred during deleting the match.');
-      console.error(`api.deleteMatch returned ${resp.status}`);
+    alert('Match deleted successfully!');
+    removeCard();
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }
 

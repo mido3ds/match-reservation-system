@@ -17,16 +17,17 @@ function Stadiums() {
   } 
 
   useEffect(async () => {
-    const resp = await api.getStadiums(page);
-    if (resp.status == 200) {
+    try {
+      const resp = await api.getStadiums(page);
       setHasNext(resp.data.has_next);
       setStadiums(resp.data.stadiums.map((stadium, i) => { 
         stadium.id = i;
         stadium.removeCard = () => { removeStadium(i); }; 
         return stadium; 
       }));
-    } else {
-      console.error(`api.getStadiums returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }, [page]);
 

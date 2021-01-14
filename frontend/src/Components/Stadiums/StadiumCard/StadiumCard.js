@@ -13,13 +13,13 @@ function StadiumCard({ card }) {
   let deleteStadium = async () => {
     // stadium.id -> frontend card id
     // stadium.uuid -> actual id of the match
-    const resp = await api.deleteStadium(authToken(), stadium.uuid);
-    if (resp.status == 200) {
+    try {
+      const resp = await api.deleteStadium(authToken(), stadium.uuid);
       alert('Stadium deleted successfully!');
       removeCard();
-    } else {
-      alert('A problem occurred during deleting the stadium.');
-      console.error(`api.deleteStadium returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }
 

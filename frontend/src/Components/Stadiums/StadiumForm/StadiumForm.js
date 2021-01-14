@@ -18,18 +18,17 @@ function StadiumForm({ title }) {
     } else {
       (async () => {
         try {
-          const resp = await api.submitStadium(authToken, { name, city });
-          if (resp.status == 200) {
-            console.log('submitted stadium successfully');
-            setShowSuccess(true);
-            setErrMsg('');
-          } else {
-            console.error(`api.submitStadium returned code ${resp.status}`);
-            setErrMsg(`Failed at submitting, ${resp.data.err}`);
+          await api.submitStadium(authToken(), { name, city });
+          console.log('submitted stadium successfully');
+          setShowSuccess(true);
+          setErrMsg('');
+        } catch(err) {
+          console.log('hi');
+          console.error(err.message);
+          if (err.response.data.err) {
+            console.error(err.response.data.err);
+            setErrMsg(`Failed at submitting, ${err.response.data.err}`);
           }
-        } catch (e) {
-          console.error(`api.submitStadium, ${e}`);
-          setErrMsg(`Failed at submitting, ${e}`);
         }
       })()
     }

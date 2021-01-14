@@ -17,16 +17,17 @@ function Matches() {
   } 
 
   useEffect(async () => {
-    const resp = await api.getMatches(page)
-    if (resp.status == 200) {
+    try {
+      const resp = await api.getMatches(page);
       setHasNext(resp.data.has_next);
       setMatches(resp.data.matches.map((match, i) => { 
         match.id = i;
         match.removeCard = () => { removeMatch(i); };
         return match; 
       }));
-    } else {
-      console.error(`api.getMatches returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }, [page]);
 

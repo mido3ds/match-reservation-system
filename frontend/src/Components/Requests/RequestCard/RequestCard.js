@@ -15,24 +15,24 @@ function RequestCard({ card }) {
   requestedManager.name = requestedManager.firstName + ' ' + requestedManager.lastName;
 
   let acceptManagerRequest = async () => {
-    const resp = await api.acceptManagersRequest(authToken(), requestedManager.username);
-    if (resp.status == 200) {
+    try {
+      const resp = await api.acceptManagersRequest(authToken(), requestedManager.username);
       alert(requestedManager.name + '\'s management request was accepted successfully!');
       removeCard();
-    } else {
-      alert('A problem occurred during accepting the management request of ' + requestedManager.name);
-      console.error(`api.acceptManagersRequest returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }
 
   let rejectManagerRequest = async () => {
-    const resp = await api.rejectManagersRequest(authToken(), requestedManager.username);
-    if (resp.status == 200) {
+    try {
+      const resp = await api.rejectManagersRequest(authToken(), requestedManager.username);
       alert(requestedManager.name + '\'s management request was rejected successfully!');
       removeCard();
-    } else {
-      alert('A problem occurred during accepting the management request of ' + requestedManager.name);
-      console.error(`api.rejectManagersRequest returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }  
   }
 
