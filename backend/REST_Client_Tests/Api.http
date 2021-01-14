@@ -1,0 +1,46 @@
+@host = http://localhost:3000
+
+// Get all not pendding users
+// Request by: only by admin
+GET {{host}}/api/users?page=1 HTTP/2.0
+Authorization: token
+
+// Get my info
+// Request by: anyone (fan, manager, admin)
+###
+GET {{host}}/api/users/me HTTP/2.0
+
+// Register user
+// Request by: anyone
+###
+POST {{host}}/api/users HTTP/2.0
+Content-Type: application/json
+
+{
+    "username": "abdulrahman-khalid",
+    "password": "helloworld", 
+    "firstName":"Abdulrahman",
+    "lastName":"kalid",
+    "birthDate": "{{$datetime 'YYYY-MM-DD'}}",
+    "gender":"male",
+    "city":"cairo",
+    "address": "46 Girgis Hanna, AinShams",
+    "email": "abdulrahman.elshafei98@gmail.com",
+    "role": "admin"
+}
+// Edit my info
+// Request by: anyone except guest
+###
+PUT {{host}}/api/users/me
+Content-Type: application/json
+Authorization: token 
+
+{
+
+}
+
+// Delete user
+// Request by: Only admin
+###
+DELETE {{host}}/users/:username
+Conten

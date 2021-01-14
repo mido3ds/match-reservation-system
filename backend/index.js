@@ -45,6 +45,7 @@ async function connectDB() {
     // const Ticket = mongoose.model('Ticket', schema.ticketSchema);
   } catch {
     dbDebugger('couldn\'t connect to MongoDB...');
+    process.exit(1);
   }
 }
 

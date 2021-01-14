@@ -32,13 +32,22 @@ router.get('/me', auth, async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body);
+  console.log('works');
   if (error) return res.status(400).send({ err: error.details[0].message });
-  let user = await User.findOne({
-    $or: [
-      { username: req.body.username },
-      { email: req.body.email }
-    ]
-  });
+  console.log(req.body.username);
+  console.log(req.body.email);
+  let user;
+  try {
+    user = await User.findOne({
+      $or: [
+        { username: req.body.username },
+        { email: req.body.email }
+      ]
+    });
+  } 
+  catch (error) {
+    return res.status(400).send({ err: error.message });
+  }
 
   if (user) return res.status(400).send({ err: 'This username or/and email is already registered.' });
 
@@ -61,7 +70,14 @@ router.post('/', async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
 
   user = new User(user);
-  await user.save();
+
+  try {
+    await user.save();
+  } 
+  catch (err) {
+    return res.status(400).send({ err: error.message });
+  }
+
 
   const authToken = user.generateAuthToken();
 
