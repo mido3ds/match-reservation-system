@@ -36,12 +36,13 @@ function setupRoutes() {
 
 // setup database
 async function connectDB() {
+  const settings = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false };
   try {
-    await mongoose.connect(config.get('database.connection'), { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(config.get('database.connection'), settings);
     dbDebugger('connected to MongoDB...');
   } catch {
     try {
-      await mongoose.connect(config.get('database.connection_with_login'), { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.connect(config.get('database.connection_with_login'), settings);
       dbDebugger('connected to MongoDB...');
     } catch {
       dbDebugger('couldn\'t connect to MongoDB...');

@@ -41,6 +41,19 @@ function validateUser(user) {
   }).validate(user);
 }
 
+function validateUpdatedUser(user) {
+  return Joi.object({
+    password: Joi.string().min(5).max(255).required(),
+    firstName: Joi.string().min(3).max(20).required(),
+    lastName: Joi.string().min(3).max(20).required(),
+    birthDate: Joi.date().required().max('now'),
+    gender: Joi.string().valid('male', 'female').required(),
+    city: Joi.string().min(3).max(15).required(),
+    address: Joi.string().min(5).max(100).required(),
+    role: Joi.string().valid('fan', 'manager', 'admin').required()
+  }).validate(user);
+}
+
 function validateLoginUser(user) {
   return Joi.object({
     username: Joi.string().min(5).max(50).required(),
@@ -50,4 +63,5 @@ function validateLoginUser(user) {
 
 exports.User = User;
 exports.validate = validateUser;
+exports.validateUpdated = validateUpdatedUser;
 exports.validateLogin = validateLoginUser;

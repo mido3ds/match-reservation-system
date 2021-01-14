@@ -1,7 +1,8 @@
 @host = http://localhost:3000
 @admin_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
-@manager_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGE4ZDQ5ZjQ4YzlhZDZlZDIzZmYiLCJ1c2VybmFtZSI6ImlhbW1hbmFnZXIiLCJyb2xlIjoibWFuYWdlciIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1NDM3fQ.Hi1E4fHbzS4DpBI47fMbV7Mb1KOj8nhyxLSjvJm1-RQ
-@fan_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMGI5MDI2MzZjZjliNzM3MzRlOWIiLCJ1c2VybmFtZSI6ImlhbWZhbiIsInJvbGUiOiJmYW4iLCJpc1BlbmRpbmciOmZhbHNlLCJpYXQiOjE2MTA2MTU2OTZ9.MLJmE3-0gP0eyhtslswrDqhgTkf2RQ0tkBu2HCU9cCU
+@manager_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwM2ZkODBkYWU4OGM5YTUxMzg5NWEiLCJ1c2VybmFtZSI6ImlhbW1hbmFnZXIiLCJyb2xlIjoibWFuYWdlciIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjI5MDgwfQ.7zad6mr5strjtOkGRpSXwUUVZXaZ4nmkc667at0cf60
+@fan_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMjU3NjI2YTYwM2I0NzQ5YjNlYTUiLCJ1c2VybmFtZSI6ImlhbWZhbiIsInJvbGUiOiJmYW4iLCJpc1BlbmRpbmciOmZhbHNlLCJpYXQiOjE2MTA2MjIzMjZ9.cEhYdjXlTj5RwOBGbw5i_VKWQrBzbioy4ZGE8gJCLLg
+
 // Get all not pendding users
 // Request by: only by admin
 GET {{host}}/api/users?page=1 HTTP/1.1
@@ -11,6 +12,7 @@ x-auth-token: {{admin_token}}
 // Request by: anyone (fan, manager, admin)
 ###
 GET {{host}}/api/users/me HTTP/1.1
+x-auth-token: {{fan_token}}
 
 // Register user
 // Request by: anyone
@@ -68,18 +70,29 @@ Content-Type: application/json
     "email": "fan@gmail.com",
     "role": "fan"
 }
+
 // Edit my info
 // Request by: anyone except guest
 ###
 PUT {{host}}/api/users/me
+x-auth-token: {{manager_token}}
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684
 
 {
-
+    "username": "dummy",
+    "password": "helloworld", 
+    "firstName":"dummy",
+    "lastName":"dumdum",
+    "birthDate": "{{$datetime 'YYYY-MM-DD'}}",
+    "gender":"male",
+    "city":"Monofya",
+    "address": "200 elnahda st, Eltagamoo",
+    "email": "dummy",
+    "role": "fan"
 }
+
 // Delete user
 // Request by: Only admin
 ###
-DELETE {{host}}/api/users/iamfan
-Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDAwMDk4MDQ5ZjQ4YzlhZDZlZDIzZmUiLCJ1c2VybmFtZSI6ImFiZHVscmFobWFuLWtoYWxpZCIsInJvbGUiOiJhZG1pbiIsImlzUGVuZGluZyI6dHJ1ZSwiaWF0IjoxNjEwNjE1MTY4fQ.wv5yddIqhzeCoTnI_DIAdLoK_yG_smR5Hw6_fUWj684"
+DELETE {{host}}/api/users/iammanager
+x-auth-token: {{admin_token}}

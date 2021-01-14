@@ -1,18 +1,18 @@
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const express = require('express');
-const { User, validate } = require('../models/user');
+const { User, validate, validateUpdated } = require('../models/user');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 
 const router = express.Router();
 
 /***
- * get /users (get all users (not pendding)) (only by admin)
- * get /users/me (get my info) (any type of user)
- * post /users (register user) (anyone)
+ * get /users (get all users (not pendding)) (only by admin) (Tested)
+ * get /users/me (get my info) (any type of user) (Tested)
+ * post /users (register user) (anyone) (Tested)
  * put /users/me (edit my info) (anyone)
- * delete /users/:username  (delete user) (only by admin)
+ * delete /users/:username  (delete user) (only by admin) (Tested)
  */
 
 router.get('/', [auth, admin], async (req, res) => {
@@ -27,10 +27,10 @@ router.get('/', [auth, admin], async (req, res) => {
                             .skip((req.query.page - 1) * pageSize)
                             .limit(pageSize);
     totalConfirmedUsers = await User.countDocuments({ isPending: false, role: { $ne: 'admin'} });
-  } catch (error) {
-    return res.status(400).send({ err: error.message });
+  } catch (err) {
+    return res.status(400).send({ err: err.message });
   }
-
+  if (totalConfirmedUsers == 0) return res.status(404).send({err: 'No Users Found'});
   let has_next = (req.query.page - 1) * pageSize + users.length < totalConfirmedUsers;
   res.status(200).send({
     has_next: has_next,
@@ -39,8 +39,14 @@ router.get('/', [auth, admin], async (req, res) => {
 });
 
 router.get('/me', auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select('-password');
-  res.send(user);
+  let user;
+  try {
+    user = await User.findById(req.user._id).select('-password -isPending');
+  } catch (err) {
+    return res.status(400).send({ err: err.message });
+  }
+  if (user) return res.status(200).send(user);
+  return res.status(404).send({err: 'User Not Found'});
 });
 
 router.post('/', async (req, res) => {
@@ -54,8 +60,8 @@ router.post('/', async (req, res) => {
         { email: req.body.email }
       ]
     });
-  } catch (error) {
-    return res.status(400).send({ err: error.message });
+  } catch (err) {
+    return res.status(400).send({ err: err.message });
   }
 
   if (user) return res.status(400).send({ err: 'This username or/and email is already registered.' });
@@ -74,7 +80,6 @@ router.post('/', async (req, res) => {
     msg = `Welcome, ${user.firstName} ${user.lastName}, your management request is pending!`;
   }
 
-
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 
@@ -84,34 +89,45 @@ router.post('/', async (req, res) => {
     await user.save();
   } 
   catch (err) {
-    return res.status(400).send({ err: error.message });
+    return res.status(400).send({ err: err.message });
   }
 
-  if (user.isPending) return res.send({msg: 'Registeration is pending, waiting for admin approval'});
+  if (user.isPending) return res.status(200).send({ msg });
 
   const authToken = user.generateAuthToken();
-  res.send({ authToken, msg });
+  res.status(200).send({ authToken, msg });
 });
 
 router.put('/me', auth, async (req, res) => {
-  const { error } = validate(req.body);
+  const to_pick = ['password', 'firstName', 'lastName', 'birthDate', 'gender', 'city', 'address', 'role'];
+  let user = _.pick(req.body, to_pick);
+
+  const { error } = validateUpdated(user);
   if (error) return res.status(400).send({ err: error.details[0].message });
 
-  const to_pick = ['password', 'firstname', 'lastName', 'birthDate', 'gender', 'city', 'address'];
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
 
-  user = new User(_.pick(req.body, to_pick));
+  let logout = false;
+  try {
+    if (req.user.role !== user.role) {
+      user.isPending = (req.user.role !== "fan");
+      logout = true;
+    }
+    user = await User.findByIdAndUpdate(req.user._id, user, {new: true}).select('-password');
+  }
+  catch (err) {
+    return res.status(400).send({ err: err.message });
+  }
 
-  const user = await User.findByIdAndUpdate(req.user._id, user).select('-password');
-
-  res.send(user);
+  res.status(200).send({logout, user});
 });
 
 router.delete('/:username', [auth, admin], async (req, res) => {
-  const { ok } = await User.deleteOne({ username: req.params.username });
-  if (ok)
-    res.status(200).send({ msg: 'User deleted successfully!' });
-  else
-    res.status(500).send({ err: 'User could not be deleted.'});
+  const info = await User.deleteOne({ username: req.params.username });
+  if (info.n == 0) return res.status(404).send({ err: 'User to delete is not found'});
+  if (info.deletedCount && info.ok) return res.status(200).send({ msg: 'User deleted successfully!' });
+  res.status(500).send({ err: 'User could not be deleted.'});
 });
 
 module.exports = router;
