@@ -116,7 +116,7 @@ export default class MatchReservationSeats extends Component {
               </div>
             ))}
           </div>
-          <TicketsForm> </TicketsForm>
+          <TicketsForm />
           <button type="button" className="tickets-purchase-button btn btn-primary"
                   data-toggle="modal" data-target="#TicketsModal"> Purchase </button> 
         </div>

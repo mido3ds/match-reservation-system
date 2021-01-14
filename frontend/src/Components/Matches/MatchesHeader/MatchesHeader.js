@@ -17,7 +17,7 @@ function AddMatches() {
 
 function MatchesHeader() {
   return (
-    <div class="matches-header">
+    <div className="matches-header">
       <img className="matches-header-image" alt="matches-header" src={Ball} />
       <div className="matches-text-block">
         <h1> Matches </h1>

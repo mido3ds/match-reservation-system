@@ -8,7 +8,9 @@ import { authToken } from '../../../Auth';
 
 const api = new DefaultApi();
 
-function RequestCard({ card: requestedManager }) {
+function RequestCard({ card }) {
+  const {removeCard, ...requestedManager} = card;
+
   requestedManager.birthDate = requestedManager.birthDate.slice(0,10).replace(/-/g,'/');
   requestedManager.name = requestedManager.firstName + ' ' + requestedManager.lastName;
 
@@ -16,10 +18,10 @@ function RequestCard({ card: requestedManager }) {
     const resp = await api.acceptManagersRequest(authToken(), requestedManager.username);
     if (resp.status == 200) {
       alert(requestedManager.name + '\'s management request was accepted successfully!');
-      requestedManager.remove();
+      removeCard();
     } else {
       alert('A problem occurred during accepting the management request of ' + requestedManager.name);
-      console.error(`api.getManagersRequests returned ${resp.status}`);
+      console.error(`api.acceptManagersRequest returned ${resp.status}`);
     }
   }
 
@@ -27,24 +29,22 @@ function RequestCard({ card: requestedManager }) {
     const resp = await api.rejectManagersRequest(authToken(), requestedManager.username);
     if (resp.status == 200) {
       alert(requestedManager.name + '\'s management request was rejected successfully!');
-      requestedManager.remove();
+      removeCard();
     } else {
       alert('A problem occurred during accepting the management request of ' + requestedManager.name);
-      console.error(`api.getManagersRequests returned ${resp.status}`);
+      console.error(`api.rejectManagersRequest returned ${resp.status}`);
     }  
   }
 
   return (
     <div className="request-card flex-container-column-vcenter">
-      <a data-toggle="modal" data-target={'#acceptModal'+ requestedManager.id}>
-        <img alt="accept-icon" className="accept" src="https://www.flaticon.com/svg/static/icons/svg/58/58679.svg" />
-      </a>
+      <img alt="accept-icon" className="accept" src="https://www.flaticon.com/svg/static/icons/svg/58/58679.svg" 
+           data-toggle="modal" data-target={'#acceptModal'+ requestedManager.id}/>
       <ConfirmationModal id={'acceptModal'+ requestedManager.id} 
                          text={ 'Are you sure you want to accept the management request of ' + requestedManager.name + '?'}
                          onOK={ acceptManagerRequest } />
-      <a data-toggle="modal" data-target={'#rejectModal' + requestedManager.id}>
-        <img alt="reject-icon" className="reject" src="https://www.flaticon.com/svg/static/icons/svg/58/58253.svg" />
-      </a>
+      <img alt="reject-icon" className="reject" src="https://www.flaticon.com/svg/static/icons/svg/58/58253.svg" 
+            data-toggle="modal" data-target={'#rejectModal' + requestedManager.id}/>
       <ConfirmationModal id={'rejectModal' + requestedManager.id} 
                          text={ 'Are you sure you want to reject the management request of ' + requestedManager.name + '?'}
                          onOK={ rejectManagerRequest } />

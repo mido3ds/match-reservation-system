@@ -11,10 +11,9 @@ function Users() {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
 
-  function removeUser(id) {
+  let removeUser = (id) => {
     setUsers(users => {
-      return users.filter(user => { return user.id != id }
-      )
+      return users.filter(user => { return user.id != id })
     });
   }
 
@@ -24,7 +23,7 @@ function Users() {
       setHasNext(resp.data.has_next);
       setUsers(resp.data.users.map((user, i) => { 
         user.id = i; 
-        user.remove = () => { removeUser(i); };
+        user.removeCard = () => { removeUser(i); };
         return user; 
       }));
     } else {

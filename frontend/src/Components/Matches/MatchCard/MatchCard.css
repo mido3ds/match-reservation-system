@@ -11,23 +11,26 @@
 }
 
 .upper-area {
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .edit {
-    position:absolute;
+    position: relative;
+    left: 195px;
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left:77px
+    cursor: pointer;
 }
 
 .delete {
-    position:absolute;
+    position: relative;
+    left: 130px;
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left:103px
+    cursor: pointer;
 }
 
 .home-team {
@@ -55,12 +58,14 @@
     width: 120px;
     height: 30px;
     margin: 0px 5px;
+    text-align: center;
 }
 
 .referee {
     width: 120px;
     height: 30px;
     margin: 0px 5px;
+    text-align: center;
 }
 
 .home-team img {

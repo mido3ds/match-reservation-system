@@ -9,7 +9,9 @@ import './UserCard.css';
 const api = new DefaultApi();
 
 
-function UserCard({ card: user }) {
+function UserCard({ card }) {
+  const {removeCard, ...user} = card;
+
   user.birthDate = user.birthDate.slice(0,10).replace(/-/g,'/');
   user.name = user.firstName + ' ' + user.lastName;
 
@@ -17,18 +19,16 @@ function UserCard({ card: user }) {
     const resp = await api.deleteUser(user.username, authToken());
     if (resp.status == 200) {
       alert(user.name + '\'s account was deleted successfully!');
-      user.remove();
+      removeCard();
     } else {
       alert('A problem occurred during deleting ' + user.name + '\'s account.');
-      console.error(`api.getManagersRequests returned ${resp.status}`);
+      console.error(`api.deleteUser returned ${resp.status}`);
     }
   }
 
   return (
     <div className="user-card flex-container-column-vcenter">
-      <a data-toggle="modal" data-target={'#deleteModal' + user.id}>
-        <img alt="remove-user-icon" className="remove-icon" src={Delete} />
-      </a>
+      <img alt="remove-user-icon" className="remove-icon" src={Delete} data-toggle="modal" data-target={'#deleteModal' + user.id}/>
       <ConfirmationModal id={'deleteModal' + user.id} 
                          text={ 'Are you sure you want to delete ' + user.name + '\'s account?'}
                          onOK={ deleteUser } />

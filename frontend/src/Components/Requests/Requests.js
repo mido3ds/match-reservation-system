@@ -11,10 +11,10 @@ function Requests() {
   const [requestedManagers, setRequestedManagers] = useState([]);
   const [page, setPage] = useState(1);
 
-  function removeRequest(id) {
+  let removeRequest = (id) => {
     setRequestedManagers(requestedManagers => {
-      return requestedManagers.filter(requestedManager => { return requestedManager.id != id }
-    )});
+      return requestedManagers.filter(requestedManager => { return requestedManager.id != id })
+    });
   } 
 
   useEffect(async () => {
@@ -23,7 +23,7 @@ function Requests() {
       setHasNext(resp.data.has_next);
       setRequestedManagers(resp.data.requestedManagers.map((requestedManager, i) => {
         requestedManager.id = i;
-        requestedManager.remove = () => { removeRequest(i); };
+        requestedManager.removeCard = () => { removeRequest(i); };
         return requestedManager; 
       }));
     } else {

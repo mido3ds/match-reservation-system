@@ -10,11 +10,21 @@ function Matches() {
   const [matches, setMatches] = useState([]);
   const [page, setPage] = useState(1);
 
+  let removeMatch = (id) => {
+    setMatches(matches => {
+      return matches.filter(match => { return match.id != id })
+    });
+  } 
+
   useEffect(async () => {
     const resp = await api.getMatches(page)
     if (resp.status == 200) {
       setHasNext(resp.data.has_next);
-      setMatches(resp.data.matches.map((match, i) => { match.id = i; return match; }));
+      setMatches(resp.data.matches.map((match, i) => { 
+        match.id = i;
+        match.removeCard = () => { removeMatch(i); };
+        return match; 
+      }));
     } else {
       console.error(`api.getMatches returned ${resp.status}`);
     }
