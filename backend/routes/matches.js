@@ -104,8 +104,18 @@ router.put('/:match_id', async (req, res) => {
   }
 });
 
-router.delete('/:match_id', async (req, resp) => {
-  // TODO
+router.delete('/:match_id', [auth, manager], async (req, res) => {
+  let matchID = req.params.match_id;
+  if(!mongoose.Types.ObjectId.isValid(matchID))
+    return res.status(400).send({ err: 'Invalid match ID format.'});
+  try {
+    const info = await Match.deleteOne({ _id: matchID });
+    if (info.deletedCount == 0) return res.status(404).send({ err: 'Match to delete is not found'});
+    if (info.deletedCount && info.ok) return res.status(200).send({ msg: 'Match deleted successfully!' });
+    res.status(500).send({ err: 'Match could not be deleted.'});
+  } catch (err) {
+    return res.status(500).send({ err: err.message });
+  }
 });
 
 module.exports = router;
