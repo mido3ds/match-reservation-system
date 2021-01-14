@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { DefaultApi } from '../../../api';
-import { authToken } from '../../../Auth';
+import { isLoggedIn, userType } from '../../../Auth';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete.png";
 import Edit from "../../../images/edit.png";
@@ -30,12 +30,14 @@ function MatchCard({ card }) {
   return (
       <div className='match-card-container'>
         <div className="match-card">
-          <img alt="edit-icon" className="edit" src={Edit} data-toggle="modal" data-target={'#editMatchFormModal' + match.id}/> 
-          <MatchForm title="Edit Match" onSubmit={()=>{console.log("Yousryyyy2")}} id={'editMatchFormModal' + match.id} />
-          <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
-          <ConfirmationModal id={'deleteModal' + match.id} 
-                            text={ 'Are you sure you want to delete this match?'}
-                            onOK={ deleteMatch } />
+          <span style={{ visibility: isLoggedIn() && userType() === 'manager' ? 'visible': 'hidden'}} >
+            <img alt="edit-icon" className="edit" src={Edit} data-toggle="modal" data-target={'#editMatchFormModal' + match.id}/> 
+            <MatchForm title="Edit Match" onSubmit={()=>{console.log("Yousryyyy2")}} id={'editMatchFormModal' + match.id} />
+            <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
+            <ConfirmationModal id={'deleteModal' + match.id} 
+                              text={ 'Are you sure you want to delete this match?'}
+                              onOK={ deleteMatch } /> : ''
+          </span> 
           <Link className="noHover" to={{ pathname: `/match-reservation/${ match.id }`, state: { } }}>
             <div className='flex-container-row-hcenter'>
               <div className="upper-area flex-container-row-hcenter" >
