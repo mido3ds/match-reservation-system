@@ -84,9 +84,6 @@ function Home() {
                 <Register />
             </div>
          }
-
-      {/*This is just to test unauthorized redirection until log in is implemented:*/}
-      {/* <button type="button" className="btn btn-light" onClick={onSuccessfulLogin}> Successful Login </button> */}
     </>
   );
 }

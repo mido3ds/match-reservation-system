@@ -44,7 +44,6 @@ function Register() {
           <Form.Group className="col-md-6" size="lg" controlId="username">
             <Form.Label className="input-label">Username</Form.Label>
             <Form.Control className = "register-input-text-area"
-              autoFocus
               type="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}

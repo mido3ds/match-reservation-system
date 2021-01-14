@@ -24,7 +24,6 @@ function Login_Card() {
         <Form.Group size="lg" controlId="email">
           <Form.Label className="input-label">Email</Form.Label>
           <Form.Control className = "login-input-text-area"
-            autoFocus
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
