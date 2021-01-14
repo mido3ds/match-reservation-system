@@ -52,15 +52,15 @@ router.post('/', [auth, manager], async (req, res) => {
   }
 });
 
-router.delete('/:stadium_id', async (req, res) => {
+router.delete('/:stadium_id', [auth, manager], async (req, res) => {
   let stadiumID = req.params.stadium_id;
   if(!mongoose.Types.ObjectId.isValid(stadiumID))
     return res.status(400).send({ err: 'Invalid stadium ID format.'});
   try {
-    const info = await Stadium.deleteOne({ _id: stadiumID });
-    if (info.deletedCount == 0) return res.status(404).send({ err: 'Stadium to delete is not found'});
-    if (info.deletedCount && info.ok) return res.status(200).send({ msg: 'Stadium deleted successfully!' });
-    res.status(500).send({ err: 'Stadium could not be deleted.'});
+    let stadium = await Stadium.findOne({ _id: stadiumID});
+    if(!stadium) return res.status(404).send({ err: 'Stadium to delete is not found'});
+    await stadium.remove();
+    res.status(200).send({ msg: 'Stadium deleted successfully!' });
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }

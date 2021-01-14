@@ -125,10 +125,10 @@ router.put('/me', auth, async (req, res) => {
 
 router.delete('/:username', [auth, admin], async (req, res) => {
   try {
-    const info = await User.deleteOne({ username: req.params.username });
-    if (info.deletedCount == 0) return res.status(404).send({ err: 'User to delete is not found'});
-    if (info.deletedCount && info.ok) return res.status(200).send({ msg: 'User deleted successfully!' });
-    res.status(500).send({ err: 'User could not be deleted.'});
+    let user = await User.findOne({ username: req.params.username });
+    if (!user) return res.status(404).send({ err: 'User to delete is not found'});
+    await user.remove();
+    res.status(200).send({ msg: 'User deleted successfully!' });
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }

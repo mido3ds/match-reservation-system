@@ -16,13 +16,13 @@ function UserCard({ card }) {
   user.name = user.firstName + ' ' + user.lastName;
 
   let deleteUser = async () => {
-    const resp = await api.deleteUser(user.username, authToken());
-    if (resp.status == 200) {
+    try {
+      const resp = await api.deleteUser(user.username, authToken());
       alert(user.name + '\'s account was deleted successfully!');
       removeCard();
-    } else {
-      alert('A problem occurred during deleting ' + user.name + '\'s account.');
-      console.error(`api.deleteUser returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }
 

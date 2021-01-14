@@ -1,7 +1,6 @@
 import { Cookie } from 'js-cookie';
 
 export function isLoggedIn() {
-    return true;
     try {
         return authToken() && userType();
     } catch (e) {
@@ -10,7 +9,6 @@ export function isLoggedIn() {
 }
 
 export function userType() {
-    return 'manager';
     return Cookie.get('usertype');
 }
 
@@ -23,7 +21,6 @@ export function setUserType(type) {
 }
 
 export function authToken() {
-    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZmMmI3NjI5ZTUwMDM5ZmFmZjFjMWYiLCJ1c2VybmFtZSI6Inlvc3J5bTkzX2FkbWluIiwicm9sZSI6ImFkbWluIiwiaXNQZW5kaW5nIjpmYWxzZSwiaWF0IjoxNjEwNjM3MTQ4fQ.S7tF8lx8phgtuU6PT0X_2UXGs8anN6WLHBdSt4z6k0o";
     return Cookie.get('authtoken');
 }
 

@@ -18,16 +18,17 @@ function Users() {
   }
 
   useEffect(async () => {
-    const resp = await api.getUsers(authToken(), page);
-    if (resp.status == 200) {
+    try {
+      const resp = await api.getUsers(authToken(), page);
       setHasNext(resp.data.has_next);
       setUsers(resp.data.users.map((user, i) => { 
         user.id = i; 
         user.removeCard = () => { removeUser(i); };
         return user; 
       }));
-    } else {
-      console.error(`api.getUsers returned ${resp.status}`);
+    } catch(err) {
+      console.error(err.message);
+      if (err.response.data.err) console.error(err.response.data.err);
     }
   }, [page]);
 

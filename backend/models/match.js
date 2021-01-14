@@ -26,6 +26,11 @@ const matchSchema = new mongoose.Schema({
   seatMap: { type: Object, min: 0, default: defaultSeatMap }
 });
 
+matchSchema.post('remove', async (deletedMatch, next) => {
+  // TODO: delete associated tickets
+  next();
+});
+
 const Match = mongoose.model('Match', matchSchema);
 
 function validateMatch(match) {

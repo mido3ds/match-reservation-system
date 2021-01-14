@@ -24,6 +24,11 @@ userSchema.methods.generateAuthToken = function () {
   return [token, this.role];
 }
 
+userSchema.post('remove', async (deletedUser, next) => {
+  // TODO: delete associated tickets
+  next();
+});
+
 const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {
