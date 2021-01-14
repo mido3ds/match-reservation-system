@@ -1,5 +1,5 @@
 .confirmation-area {
-    width: 400px;
+    width: 400px !important;
     margin: auto;
     border-radius: 20px;
 }
@@ -21,21 +21,20 @@
 
 .confirmation-modal-buttons-area {
     margin-top: 15px;
-    margin-left: 155px;
+    margin-left: 140px;
     margin-bottom: 5px;
 }
 
 .confirmation-modal-cancel-btn {
-    width: 90px;
-    transition: width 1000ms;
-    border-color: #0880AE;
-    margin: 0px 20px;
+    width: 90px !important;
+    border-color: #0880AE !important;
+    margin: 0px 20px !important;
 }
 
 .confirmation-modal-ok-btn {
-    width: 90px;
-    background-color: #0880AE;
-    border-color: #0880AE;
-    color: white;
+    width: 90px !important;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important; 
+    color: white !important;
 }
 
