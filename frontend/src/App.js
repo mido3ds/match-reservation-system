@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Requests from './Components/Requests/Requests';
 import Stadiums from './Components/Stadiums/Stadiums';
 import Users from './Components/Users/Users';
+import Tickets from './Components/Tickets/Tickets'
 
 function App() {
   return (

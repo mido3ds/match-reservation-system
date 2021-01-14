@@ -1,0 +1,84 @@
+.vertical-alignment-helper {
+    display:table !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events:none !important;
+}
+.vertical-align-center {
+    display: table-cell !important;
+    vertical-align: middle !important;
+    pointer-events:none !important;
+}
+
+.tickets-form-area {
+    width: 400px !important;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.tickets-form-title {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.tickets-form-modal-cancel-btn {
+    width: 90px !important;
+    transition: width 1000ms !important;
+    border-color: #0880AE !important;
+    margin: 0px 20px !important;
+}
+
+.tickets-form-modal-purchase-btn {
+    width: 90px !important;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+    color: white !important;
+}
+
+.tickets-input-label {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 3px;
+    color: rgba(112, 110, 110, 0.849);
+}
+
+.tickets-input-text-area {
+    margin-top: 5px;
+    background-color: white !important;
+    border-radius: 10px !important;
+    border-color: #0880AE !important;
+    border-width: 2px !important;
+    width: 300px !important;
+    height: 50px !important;
+    line-height: 35px !important;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.tickets-form-modal-buttons-area {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 140px;
+}
+
+.credit-card-area {
+    margin-left: 30px;
+}
+
+.pin-area {
+    margin-top: 10px !important;
+    margin-left: 30px;
+}
+
+.tickets-form-body h2 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 32px;
+    margin-top: 25px;
+}

@@ -1,5 +1,5 @@
 .confirmation-area {
-    width: 32%;
+    width: 400px;
     margin: auto;
     border-radius: 20px;
 }
@@ -38,3 +38,4 @@
     border-color: #0880AE;
     color: white;
 }
+
