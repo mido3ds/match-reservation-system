@@ -39,13 +39,14 @@ async function connectDB() {
   try {
     await mongoose.connect(config.get('database.connection'), { useNewUrlParser: true, useUnifiedTopology: true });
     dbDebugger('connected to MongoDB...');
-    // const User = mongoose.model('User', schema.userSchema);
-    // const Stadium = mongoose.model('Stadium', schema.stadiumSchema);
-    // const Match = mongoose.model('Match', schema.matchSchema);
-    // const Ticket = mongoose.model('Ticket', schema.ticketSchema);
   } catch {
-    dbDebugger('couldn\'t connect to MongoDB...');
-    process.exit(1);
+    try {
+      await mongoose.connect(config.get('database.connection_with_login'), { useNewUrlParser: true, useUnifiedTopology: true });
+      dbDebugger('connected to MongoDB...');
+    } catch {
+      dbDebugger('couldn\'t connect to MongoDB...');
+      process.exit(1);
+    }
   }
 }
 
