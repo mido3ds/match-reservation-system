@@ -36,7 +36,7 @@ function setupRoutes() {
 
 // setup database
 async function connectDB() {
-  const settings = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false };
+  const settings = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex: true };
   try {
     await mongoose.connect(config.get('database.connection'), settings);
     dbDebugger('connected to MongoDB...');
