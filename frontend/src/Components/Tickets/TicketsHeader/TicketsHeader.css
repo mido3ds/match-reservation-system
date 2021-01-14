@@ -1,8 +1,8 @@
-.stadiums-header {
+.tickets-header {
     position: relative;
 }
 
-.stadiums-header-image {
+.tickets-header-image {
     width: 96%;
     height: 350px;
     object-fit: cover;
@@ -11,16 +11,16 @@
     filter: brightness(30%);
     border-radius: 50px;
     display:block;
-    margin: 0 auto 20px auto;
+    margin: 0px auto 20px auto;
 }
 
-.stadiums-text-block {
+.tickets-text-block {
     position: absolute;
     bottom: 120px;
     left: 100px;
 }
 
-.stadiums-text-block h1 {
+.tickets-text-block h1 {
     color: white;
     font-size: 56px;
     line-height: 56px;
@@ -28,22 +28,4 @@
     font-family: 'IBM Plex Sans', sans-serif;
     border-width: 10px;
     border-color: black;
-}
-
-.stadiums-button-area {
-    position: absolute;
-    bottom: 60px;
-    left: 100px;
-}
-
-.stadiums-add-button {
-    width: 100px;
-    background-color: #0880AE !important;
-    border-color: #0880AE !important;
-}
-
-.stadiums-add-button:focus,
-.stadiums-add-button:active,
-.stadiums-add-button:hover {
-    box-shadow: 0 0 0 0.2rem #0880AE !important;
 }

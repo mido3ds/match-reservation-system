@@ -1,0 +1,117 @@
+.reservation-area {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 80px 25px;
+}
+
+.tickets-area {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 10px 25px;
+}
+
+.seats-area {
+    margin-left: -35px;
+}
+
+.seat {
+    background-color: white;
+    background-image: url("../../../images/seat-icon.png");
+    width: 20;
+    height: 20;
+}
+
+.seat--reserved {
+    background-image: url("../../../images/seat-icon-gray.png");
+
+}
+
+.seat--selected {
+    background-image: url("../../../images/seat-icon-green.png");
+
+}
+
+.seat__number {
+    font-size: 0px;
+}
+
+.blank {
+    height: 0px;
+    width: 0px;
+}
+
+.tickets-title {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.ticket-image {
+    width: 60px;
+    height: 60px;
+    margin-left: 30px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+
+.seat-number-area img {
+    width: 15px;
+    height: 15px;
+}
+
+.price-area img {
+    width: 15px;
+    height: 15px;
+}
+
+.seat-number-area {
+    margin-right: 10px;
+}
+
+.price-area {
+    margin-left: 10px;
+}
+
+.ticket-area {
+    margin: 5px 5px;
+    background-color: rgb(199, 223, 199);
+    border-radius: 20px;
+    width: 120px;
+    height: 120px;
+}
+
+.cancel-ticket {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    margin-top: -42px;
+    margin-left: 97px;
+}
+
+.column-number-area {
+    margin-right: 19px;
+}
+
+.column-number-area h3 {
+    font-size: 20px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.column-numbers {
+    margin-left: 35px;
+}
+
+.seat-picker__row__number {
+    font-size: 20px !important;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+    margin-right: 10px !important;
+    color: black !important;
+}
+
+.tickets-purchase-button {
+    width: 110px;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+    margin: 10px 0px;
+    margin-left: 400px;
+}

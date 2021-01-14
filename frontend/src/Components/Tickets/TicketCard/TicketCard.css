@@ -1,0 +1,41 @@
+.tickets-price-area {
+    margin: 0px 5px;
+}
+
+.tickets-seat-number-area {
+    margin: 0px 5px;
+}
+
+.tickets-price-area img {
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+}
+
+.tickets-seat-number-area img {
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+}
+
+.tickets-price-area span {
+    font-size: 13px;
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.tickets-seat-number-area span {
+    font-size: 13px;
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.ticket-card {
+    width: 235px;
+    height: 240px;
+    background-color: #3d4949;
+    border-radius: 20px;
+    margin: 5px;
+}

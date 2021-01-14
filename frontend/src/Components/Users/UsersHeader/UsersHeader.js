@@ -4,7 +4,7 @@ import './UsersHeader.css';
 
 function UsersHeader() {
   return (
-    <div class="users-header">
+    <div className="users-header">
       <img className="users-header-image" alt="users-header" src={UsersImage} />
       <div className="users-text-block">
         <h1> Users </h1>

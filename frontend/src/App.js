@@ -10,11 +10,13 @@ import Navbar from './Components/Navbar/Navbar';
 import Requests from './Components/Requests/Requests';
 import Stadiums from './Components/Stadiums/Stadiums';
 import Users from './Components/Users/Users';
+import Tickets from './Components/Tickets/Tickets'
 
 function App() {
   return (
     <div className="App">
       <Navbar />
+      <div className='content'>
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -34,13 +36,14 @@ function App() {
         <AuthorizedRoute path='/users' allowedUsers={["admin"]}>
           <Users />
         </AuthorizedRoute>
-        <AuthorizedRoute path='/requests' allowedUsers={["admin"]}>
+        <AuthorizedRoute path='/management-requests' allowedUsers={["admin"]}>
           <Requests />
         </AuthorizedRoute>
         <Route path='*'>
           <Error />
         </Route>
       </Switch>
+      </div>
     </div>
   );
 }

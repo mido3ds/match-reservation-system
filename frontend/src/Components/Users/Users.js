@@ -7,29 +7,37 @@ import UsersHeader from './UsersHeader/UsersHeader';
 const api = new DefaultApi();
 
 function Users() {
-    const cards = []
-    for (var i = 0; i < 6; i++) {
-        cards.push({ id: i })
+  const [hasNext, setHasNext] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(1);
+
+  function removeUser(id) {
+    setUsers(users => {
+      return users.filter(user => { return user.id != id }
+      )
+    });
+  }
+
+  useEffect(async () => {
+    const resp = await api.getUsers(authToken(), page);
+    if (resp.status == 200) {
+      setHasNext(resp.data.has_next);
+      setUsers(resp.data.users.map((user, i) => { 
+        user.id = i; 
+        user.remove = () => { removeUser(i); };
+        return user; 
+      }));
+    } else {
+      console.error(`api.getUsers returned ${resp.status}`);
     }
+  }, [page]);
 
-    const [users, setUsers] = useState(cards);
-    const [page, setPage] = useState(1);
-
-    useEffect(async () => {
-        const resp = await api.getUsers(authToken(), page);
-        if (resp.status == 200) {
-            setUsers(resp.data.map((x, i) => { x.id = i; return x; }));
-        } else {
-            console.error(`api.getUsers returned ${resp.status}`);
-        }
-    }, [page]);
-
-    return (
-        <div className="flex-container-col">
-            <UsersHeader />
-            <CardsArea cards={users} cardIdentifier="user" onSetPage={setPage} />
-        </div>
-    );
+  return (
+    <div className="flex-container-col">
+      <UsersHeader />
+      <CardsArea cards={users} hasNext={hasNext} cardIdentifier="user" onSetPage={setPage} />
+    </div>
+  );
 }
 
 export default Users;

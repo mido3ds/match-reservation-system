@@ -10,13 +10,19 @@ router.get('/', [auth, admin], async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
-  const users = await User.find({ role: "manager", isPending: true })
-                          .select('-password')
-                          .sort('-createdIn')
-                          .skip((req.query.page - 1) * pageSize)
-                          .limit(pageSize)
+  let users = await User.find({ role: "manager", isPending: true })
+                        .select({ password: 0 })
+                        .sort('createdIn')
+                        .skip((req.query.page - 1) * pageSize)
+                        .limit(pageSize);
 
-  res.status(200).send(users);
+  let totalManagerRequests = await User.count({ role: "manager", isPending: true });
+  let has_next = (req.query.page - 1) * pageSize + users.length < totalManagerRequests;
+
+  res.status(200).send({
+    has_next: has_next,
+    requestedManagers: users
+  });
 });
 
 router.post('/accept/:username', async (req, res) => {

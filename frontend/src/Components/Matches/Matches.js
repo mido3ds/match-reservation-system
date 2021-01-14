@@ -6,18 +6,15 @@ import MatchesHeader from './MatchesHeader/MatchesHeader';
 const api = new DefaultApi();
 
 function Matches() {
-  const cards = []
-  for (var i = 0; i < 50; i++) {
-    cards.push({ id: i })
-  }
-
-  const [matches, setMatches] = useState(cards);
+  const [hasNext, setHasNext] = useState(false);
+  const [matches, setMatches] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(async () => {
     const resp = await api.getMatches(page)
     if (resp.status == 200) {
-      setMatches(resp.data.map((x, i) => { x.id = i; return x; }));
+      setHasNext(resp.data.has_next);
+      setMatches(resp.data.matches.map((match, i) => { match.id = i; return match; }));
     } else {
       console.error(`api.getMatches returned ${resp.status}`);
     }
@@ -26,7 +23,7 @@ function Matches() {
   return (
     <div className="flex-container-column-vcenter-hcenter">
       <MatchesHeader />
-      <CardsArea cards={matches} cardIdentifier="match" onSetPage={setPage} />
+      <CardsArea cards={matches} hasNext={hasNext} cardIdentifier="match" onSetPage={setPage} />
     </div>
   );
 }
