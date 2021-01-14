@@ -1,9 +1,18 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { Match } = require('./match');
+const { remove } = require('lodash');
 
 const stadiumSchema = mongoose.Schema({
   name: { type: String, required: true },
   city: { type: String, required: true },
+});
+
+
+stadiumSchema.post('remove', async (deletedStadium, next) => {
+  let matches = await Match.find({ venue: deletedStadium.name });
+  matches.forEach(async (match) => { await match.remove(); });
+  next();
 });
 
 const Stadium = mongoose.model('Stadium', stadiumSchema);
