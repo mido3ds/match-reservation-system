@@ -1,35 +1,76 @@
-import ManagerImage from "../../../images/manager.png";
 import './RequestCard.css';
 import '../../Users/UserCard/UserCard.css';
+import { DefaultApi } from '../../../api';
+import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
+import ManagerImage from "../../../images/manager.png";
+import { authToken } from '../../../Auth';
 
-function RequestCard({ card }) {
+
+const api = new DefaultApi();
+
+function RequestCard({ card: requestedManager }) {
+  requestedManager.birthDate = requestedManager.birthDate.slice(0,10).replace(/-/g,'/');
+  requestedManager.name = requestedManager.firstName + ' ' + requestedManager.lastName;
+
+  let acceptManagerRequest = async () => {
+    const resp = await api.acceptManagersRequest(authToken(), requestedManager.username);
+    if (resp.status == 200) {
+      alert(requestedManager.name + '\'s management request was accepted successfully!');
+      requestedManager.remove();
+    } else {
+      alert('A problem occurred during accepting the management request of ' + requestedManager.name);
+      console.error(`api.getManagersRequests returned ${resp.status}`);
+    }
+  }
+
+  let rejectManagerRequest = async () => {
+    const resp = await api.rejectManagersRequest(authToken(), requestedManager.username);
+    if (resp.status == 200) {
+      alert(requestedManager.name + '\'s management request was rejected successfully!');
+      requestedManager.remove();
+    } else {
+      alert('A problem occurred during accepting the management request of ' + requestedManager.name);
+      console.error(`api.getManagersRequests returned ${resp.status}`);
+    }  
+  }
+
   return (
     <div className="request-card flex-container-column-vcenter">
-      <img alt="accept-icon" className="accept" src="https://www.flaticon.com/svg/static/icons/svg/58/58679.svg" />
-      <img alt="reject-icon" className="reject" src="https://www.flaticon.com/svg/static/icons/svg/58/58253.svg" />
+      <a data-toggle="modal" data-target={'#acceptModal'+ requestedManager.id}>
+        <img alt="accept-icon" className="accept" src="https://www.flaticon.com/svg/static/icons/svg/58/58679.svg" />
+      </a>
+      <ConfirmationModal id={'acceptModal'+ requestedManager.id} 
+                         text={ 'Are you sure you want to accept the management request of ' + requestedManager.name + '?'}
+                         onOK={ acceptManagerRequest } />
+      <a data-toggle="modal" data-target={'#rejectModal' + requestedManager.id}>
+        <img alt="reject-icon" className="reject" src="https://www.flaticon.com/svg/static/icons/svg/58/58253.svg" />
+      </a>
+      <ConfirmationModal id={'rejectModal' + requestedManager.id} 
+                         text={ 'Are you sure you want to reject the management request of ' + requestedManager.name + '?'}
+                         onOK={ rejectManagerRequest } />
       <div className="role-badge">
         <img alt="role-bage" src={ManagerImage} />
       </div>
-      <p className="user-name"> Ahmed Afifi </p>
-      <p className="user-username"> @ahmed_afifi98 </p>
+      <p className="user-name"> { requestedManager.name } </p>
+      <p className="user-username"> { '@' + requestedManager.username } </p>
 
       <div className="flex-container-column-vcenter-hcenter">
         <div className="address-area">
           <img alt="address-icon" src="https://www.flaticon.com/svg/static/icons/svg/1076/1076323.svg" />
-          <span> Egypt, Cairo, El-Mokattam </span>
+          <span> { requestedManager.address } </span>
         </div>
         <div className="email-area">
           <img alt="email-icon" src="https://www.flaticon.com/svg/static/icons/svg/732/732200.svg" />
-          <span> Ahmed.Afifi98@eng-st.cu.ed.eg </span>
+          <span> { requestedManager.email } </span>
         </div>
         <div className="flex-container-row-vcenter">
           <div className="gender-area">
             <img alt="gender-icon" src="https://www.flaticon.com/svg/static/icons/svg/3939/3939800.svg" />
-            <span> Male </span>
+            <span> { requestedManager.gender } </span>
           </div>
           <div className="birthdate-area">
             <img alt="birthdate-icon" src="https://www.flaticon.com/svg/static/icons/svg/3078/3078971.svg" />
-            <span> 5 jan 2021 </span>
+            <span> { requestedManager.birthDate } </span>
           </div>
         </div>
       </div>

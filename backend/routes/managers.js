@@ -14,9 +14,15 @@ router.get('/', [auth, admin], async (req, res) => {
                         .select({ password: 0 })
                         .sort('createdIn')
                         .skip((req.query.page - 1) * pageSize)
-                        .limit(pageSize)
+                        .limit(pageSize);
 
-  res.status(200).send(users);
+  let totalManagerRequests = await User.count({ role: "manager", isPending: true });
+  let has_next = (req.query.page - 1) * pageSize + users.length < totalManagerRequests;
+
+  res.status(200).send({
+    has_next: has_next,
+    requestedManagers: users
+  });
 });
 
 router.post('/accept/:username', async (req, res) => {

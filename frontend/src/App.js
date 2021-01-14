@@ -34,7 +34,7 @@ function App() {
         <AuthorizedRoute path='/users' allowedUsers={["admin"]}>
           <Users />
         </AuthorizedRoute>
-        <AuthorizedRoute path='/requests' allowedUsers={["admin"]}>
+        <AuthorizedRoute path='/management-requests' allowedUsers={["admin"]}>
           <Requests />
         </AuthorizedRoute>
         <Route path='*'>

@@ -14,7 +14,7 @@ router.use('/:match_id/seats', seats);
 router.get('/', async (req, res) => {
   const pageSize = 10;
   if (isNaN(req.query.page) || req.query.page < 1)
-    res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
+    return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
   let matches = await Match.find()
                            .select({ seatMap: 0 })
@@ -23,7 +23,13 @@ router.get('/', async (req, res) => {
   matches = matches.map( match => {
     return {...match.toObject(), uuid: match._id};
   });
-  res.status(200).send(matches);
+
+  let totalMatches = await Match.count();
+  let has_next = (req.query.page - 1) * pageSize + matches.length < totalMatches;
+  res.status(200).send({
+    has_next: has_next,
+    matches: matches
+  });
 });
 
 router.get('/:match_id', async (req, res) => {
@@ -57,8 +63,10 @@ router.post('/', [auth, manager], async (req, res) => {
 });
 
 router.put('/:match_id', async (req, res) => {
-  let matchEdit = req.body;
-  const { error } = validateMatchEdit(matchEdit);
+  const to_pick = ['homeTeam', 'awayTeam', 'venue', 'dateTime', 'mainReferee', 'firstLinesman', 'secondLinesman', 'ticketPrice'];
+  let matchEdit = _.pick(req.body, to_pick);
+  const { error } = validateMatchEdit(matchEdit);  
+
   if (error) 
     return res.status(403).send({ err: error.details[0].message });
 
@@ -73,11 +81,13 @@ router.put('/:match_id', async (req, res) => {
   if(matchEdit.venue) {
     let stadium = await Stadium.findOne( { name: matchEdit.venue } );
     if (!stadium)
-      return res.status(400).send( { err: 'The venue (stadium) of the match does not exist'} );
+      return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});
   }
 
-  await Match.findByIdAndUpdate(matchID, matchEdit);
-  res.status(200).send({ msg: 'Match edited successfully!' });
+  if (await Match.findByIdAndUpdate('5fff4cf524fb3518b662c102', matchEdit))
+    res.status(200).send({ msg: 'Match edited successfully!' });
+  else
+    res.status(500).send({ err: 'An error occurred while trying to edit the match.'});
 });
 
 module.exports = router;

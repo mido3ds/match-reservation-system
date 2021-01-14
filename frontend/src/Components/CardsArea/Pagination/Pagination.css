@@ -172,6 +172,14 @@
     opacity: 0.6;
 }
 
+.custom-btn-disabled {
+    position: absolute;
+    top: 50%;
+    fill: lightgray;
+    transform: translateY(-50%);
+    cursor: inherit !important;
+}
+
 .btn--next {
     left: calc(100% + 20px);
 }

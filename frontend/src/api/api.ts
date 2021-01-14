@@ -146,67 +146,143 @@ export interface InlineObject {
     password: string;
 }
 /**
- * successful signup
+ * 
  * @export
  * @interface InlineResponse200
  */
 export interface InlineResponse200 {
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof InlineResponse200
+     */
+    has_next: boolean;
+    /**
+     * 
+     * @type {Array<ListedUser>}
+     * @memberof InlineResponse200
+     */
+    users: Array<ListedUser>;
+}
+/**
+ * successful signup
+ * @export
+ * @interface InlineResponse2001
+ */
+export interface InlineResponse2001 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
      */
     authToken: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof InlineResponse2001
      */
     msg: string;
 }
 /**
  * successful edit
  * @export
- * @interface InlineResponse2001
+ * @interface InlineResponse2002
  */
-export interface InlineResponse2001 {
+export interface InlineResponse2002 {
     /**
      * in case the user asked to be a manger, send a message to display to assure they will be reviewed
      * @type {string}
-     * @memberof InlineResponse2001
+     * @memberof InlineResponse2002
      */
     msg?: string;
 }
 /**
  * 
  * @export
- * @interface InlineResponse2002
+ * @interface InlineResponse2003
  */
-export interface InlineResponse2002 {
+export interface InlineResponse2003 {
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2002
+     * @memberof InlineResponse2003
      */
     authToken: string;
     /**
      * used by the forntend to know the type of the user, the backend still needs to check the payload of the authToken payload
      * @type {string}
-     * @memberof InlineResponse2002
+     * @memberof InlineResponse2003
      */
-    userType: InlineResponse2002UserTypeEnum;
+    userType: InlineResponse2003UserTypeEnum;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum InlineResponse2002UserTypeEnum {
+export enum InlineResponse2003UserTypeEnum {
     Fan = 'fan',
     Manager = 'manager',
     Admin = 'admin'
 }
 
+/**
+ * 
+ * @export
+ * @interface InlineResponse2004
+ */
+export interface InlineResponse2004 {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2004
+     */
+    has_next: boolean;
+    /**
+     * 
+     * @type {Array<ListedUser>}
+     * @memberof InlineResponse2004
+     */
+    requestedManagers: Array<ListedUser>;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2005
+ */
+export interface InlineResponse2005 {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2005
+     */
+    has_next: boolean;
+    /**
+     * 
+     * @type {Array<ListedMatch>}
+     * @memberof InlineResponse2005
+     */
+    matches: Array<ListedMatch>;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2006
+ */
+export interface InlineResponse2006 {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2006
+     */
+    has_next: boolean;
+    /**
+     * 
+     * @type {Array<ListedStadium>}
+     * @memberof InlineResponse2006
+     */
+    stadiums: Array<ListedStadium>;
+}
 /**
  * 
  * @export
@@ -1544,7 +1620,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+        async editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editUser(username, xAuthToken, editedUser, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1559,7 +1635,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagersRequests(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedUser>>> {
+        async getManagersRequests(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getManagersRequests(xAuthToken, page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1587,7 +1663,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMatches(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedMatch>>> {
+        async getMatches(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getMatches(page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1616,7 +1692,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStadiums(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedStadium>>> {
+        async getStadiums(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getStadiums(page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1631,7 +1707,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsers(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ListedUser>>> {
+        async getUsers(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getUsers(xAuthToken, page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1645,7 +1721,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async login(inlineObject?: InlineObject, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+        async login(inlineObject?: InlineObject, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).login(inlineObject, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1690,7 +1766,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signup(submittedUser?: SubmittedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+        async signup(submittedUser?: SubmittedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).signup(submittedUser, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1802,7 +1878,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): AxiosPromise<InlineResponse2001> {
+        editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): AxiosPromise<InlineResponse2002> {
             return DefaultApiFp(configuration).editUser(username, xAuthToken, editedUser, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1813,7 +1889,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagersRequests(xAuthToken: string, page?: number, options?: any): AxiosPromise<Array<ListedUser>> {
+        getManagersRequests(xAuthToken: string, page?: number, options?: any): AxiosPromise<InlineResponse2004> {
             return DefaultApiFp(configuration).getManagersRequests(xAuthToken, page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1833,7 +1909,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMatches(page?: number, options?: any): AxiosPromise<Array<ListedMatch>> {
+        getMatches(page?: number, options?: any): AxiosPromise<InlineResponse2005> {
             return DefaultApiFp(configuration).getMatches(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1854,7 +1930,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStadiums(page?: number, options?: any): AxiosPromise<Array<ListedStadium>> {
+        getStadiums(page?: number, options?: any): AxiosPromise<InlineResponse2006> {
             return DefaultApiFp(configuration).getStadiums(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1865,7 +1941,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsers(xAuthToken: string, page?: number, options?: any): AxiosPromise<Array<ListedUser>> {
+        getUsers(xAuthToken: string, page?: number, options?: any): AxiosPromise<InlineResponse200> {
             return DefaultApiFp(configuration).getUsers(xAuthToken, page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1875,7 +1951,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(inlineObject?: InlineObject, options?: any): AxiosPromise<InlineResponse2002> {
+        login(inlineObject?: InlineObject, options?: any): AxiosPromise<InlineResponse2003> {
             return DefaultApiFp(configuration).login(inlineObject, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1908,7 +1984,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signup(submittedUser?: SubmittedUser, options?: any): AxiosPromise<InlineResponse200> {
+        signup(submittedUser?: SubmittedUser, options?: any): AxiosPromise<InlineResponse2001> {
             return DefaultApiFp(configuration).signup(submittedUser, options).then((request) => request(axios, basePath));
         },
         /**

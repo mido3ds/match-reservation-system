@@ -7,18 +7,25 @@ import RequestsHeader from './RequestsHeader/RequestsHeader';
 const api = new DefaultApi();
 
 function Requests() {
-  const cards = []
-  for (var i = 0; i < 37; i++) {
-    cards.push({ id: i })
-  }
-
-  const [requests, setRequests] = useState(cards);
+  const [hasNext, setHasNext] = useState(false);
+  const [requestedManagers, setRequestedManagers] = useState([]);
   const [page, setPage] = useState(1);
+
+  function removeRequest(id) {
+    setRequestedManagers(requestedManagers => {
+      return requestedManagers.filter(requestedManager => { return requestedManager.id != id }
+    )});
+  } 
 
   useEffect(async () => {
     const resp = await api.getManagersRequests(authToken(), page);
     if (resp.status == 200) {
-      setRequests(resp.data.map((x, i) => { x.id = i; return x; }));
+      setHasNext(resp.data.has_next);
+      setRequestedManagers(resp.data.requestedManagers.map((requestedManager, i) => {
+        requestedManager.id = i;
+        requestedManager.remove = () => { removeRequest(i); };
+        return requestedManager; 
+      }));
     } else {
       console.error(`api.getManagersRequests returned ${resp.status}`);
     }
@@ -27,7 +34,7 @@ function Requests() {
   return (
     <div className="flex-container-col">
       <RequestsHeader />
-      <CardsArea cards={requests} cardIdentifier="request" onSetPage={setPage} />
+      <CardsArea cards={requestedManagers} hasNext={hasNext} cardIdentifier="request" onSetPage={setPage} />
     </div>
   );
 }
