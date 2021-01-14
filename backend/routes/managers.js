@@ -17,7 +17,7 @@ router.get('/', [auth, admin], async (req, res) => {
                           .skip((req.query.page - 1) * pageSize)
                           .limit(pageSize);
 
-    let totalManagerRequests = await User.count({ role: "manager", isPending: true });
+    let totalManagerRequests = await User.countDocuments({ role: "manager", isPending: true });
 
     let has_next = (req.query.page - 1) * pageSize + users.length < totalManagerRequests;
 

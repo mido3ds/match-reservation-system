@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
       .skip((req.query.page - 1) * pageSize)
       .limit(pageSize);
 
-    let totalStadiums = await Stadium.count();
+    let totalStadiums = await Stadium.countDocuments();
     let has_next = (req.query.page - 1) * pageSize + stadiums.length < totalStadiums;
     res.status(200).send({
       has_next: has_next,

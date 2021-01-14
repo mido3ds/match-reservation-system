@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
       return {...match.toObject(), uuid: match._id};
     });
 
-    let totalMatches = await Match.count();
+    let totalMatches = await Match.countDocuments();
     let has_next = (req.query.page - 1) * pageSize + matches.length < totalMatches;
     res.status(200).send({
       has_next: has_next,
