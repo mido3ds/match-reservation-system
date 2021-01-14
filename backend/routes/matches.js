@@ -105,6 +105,7 @@ router.put('/:match_id', async (req, res) => {
 });
 
 router.delete('/:match_id', [auth, manager], async (req, res) => {
+  // TODO: delete any associated tickets
   let matchID = req.params.match_id;
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});

@@ -53,6 +53,7 @@ router.post('/', [auth, manager], async (req, res) => {
 });
 
 router.delete('/:stadium_id', async (req, res) => {
+  // TODO: delete any associated match (and tickets)
   let stadiumID = req.params.stadium_id;
   if(!mongoose.Types.ObjectId.isValid(stadiumID))
     return res.status(400).send({ err: 'Invalid stadium ID format.'});

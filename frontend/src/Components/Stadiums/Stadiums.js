@@ -10,11 +10,21 @@ function Stadiums() {
   const [stadiums, setStadiums] = useState([]);
   const [page, setPage] = useState(1);
 
+  let removeStadium = (id) => {
+    setStadiums(stadiums => {
+      return stadiums.filter(stadium => { return stadium.id != id })
+    });
+  } 
+
   useEffect(async () => {
     const resp = await api.getStadiums(page);
     if (resp.status == 200) {
       setHasNext(resp.data.has_next);
-      setStadiums(resp.data.stadiums.map((stadium, i) => { stadium.id = i; return stadium; }));
+      setStadiums(resp.data.stadiums.map((stadium, i) => { 
+        stadium.id = i;
+        stadium.removeCard = () => { removeStadium(i); }; 
+        return stadium; 
+      }));
     } else {
       console.error(`api.getStadiums returned ${resp.status}`);
     }

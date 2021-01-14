@@ -16,7 +16,7 @@ function MatchCard({ card }) {
   let deleteMatch = async () => {
     // match.id -> frontend card id
     // match.uuid -> actual id of the match
-    const resp = {status:200}//await api.deleteMatch(authToken(), match.uuid);
+    const resp = await api.deleteMatch(authToken(), match.uuid);
     if (resp.status == 200) {
       alert('Match deleted successfully!');
       removeCard();
