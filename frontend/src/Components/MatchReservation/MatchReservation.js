@@ -12,8 +12,8 @@ function MatchReservation() {
   }
   return (
     <div className="flex-container-column-vcenter-hcenter">
-      <MatchReservationHeader />
-      <MatchReservationSeats />
+      <MatchReservationHeader/>
+      <MatchReservationSeats/>
     </div>
   );
 }
