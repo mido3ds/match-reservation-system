@@ -28,7 +28,7 @@ router.get('/', [auth, admin], async (req, res) => {
                             .limit(pageSize);
     totalConfirmedUsers = await User.countDocuments({ isPending: false, role: { $ne: 'admin'} });
   } catch (err) {
-    return res.status(400).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
   if (totalConfirmedUsers == 0) return res.status(404).send({err: 'No Users Found'});
   let has_next = (req.query.page - 1) * pageSize + users.length < totalConfirmedUsers;
@@ -43,7 +43,7 @@ router.get('/me', auth, async (req, res) => {
   try {
     user = await User.findById(req.user._id).select('-password -isPending');
   } catch (err) {
-    return res.status(400).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
   if (user) return res.status(200).send(user);
   return res.status(404).send({err: 'User Not Found'});
@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
       ]
     });
   } catch (err) {
-    return res.status(400).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
 
   if (user) return res.status(400).send({ err: 'This username or/and email is already registered.' });
@@ -89,7 +89,7 @@ router.post('/', async (req, res) => {
     await user.save();
   } 
   catch (err) {
-    return res.status(400).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
 
   if (user.isPending) return res.status(200).send({ msg });
@@ -117,17 +117,21 @@ router.put('/me', auth, async (req, res) => {
     user = await User.findByIdAndUpdate(req.user._id, user, {new: true}).select('-password');
   }
   catch (err) {
-    return res.status(400).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
 
   res.status(200).send({logout, user});
 });
 
 router.delete('/:username', [auth, admin], async (req, res) => {
-  const info = await User.deleteOne({ username: req.params.username });
-  if (info.n == 0) return res.status(404).send({ err: 'User to delete is not found'});
-  if (info.deletedCount && info.ok) return res.status(200).send({ msg: 'User deleted successfully!' });
-  res.status(500).send({ err: 'User could not be deleted.'});
+  try {
+    const info = await User.deleteOne({ username: req.params.username });
+    if (info.deletedCount == 0) return res.status(404).send({ err: 'User to delete is not found'});
+    if (info.deletedCount && info.ok) return res.status(200).send({ msg: 'User deleted successfully!' });
+    res.status(500).send({ err: 'User could not be deleted.'});
+  } catch (err) {
+    return res.status(500).send({ err: err.message });
+  }
 });
 
 module.exports = router;
