@@ -4,6 +4,7 @@ import { isLoggedIn, userType } from '../../Auth';
 import Stadiums from "../../images/match.png";
 import Matches from "../../images/ball2.jpg";
 import Users from "../../images/fans.jpg";
+import Tickets from "../../images/tickets-header.jpeg";
 import HomeCard from './Card/HomeCard';
 import HomeHeader from './HomeHeader/HomeHeader';
 import Login_Card from './Login/Login_Card';
@@ -59,6 +60,9 @@ function Home() {
               {/* <button type="button" className="btn btn-light"> Stadiums </button> */}
             </Link>
           </div>
+          { isLoggedIn() && userType() === 'admin' ? 
+            <div class="line-break"></div> : ''
+          }
           {
             isLoggedIn() && userType() === 'admin' ?
               <div className="home-card-item">
@@ -67,19 +71,28 @@ function Home() {
                   <HomeCard img={Users} name="Users" />
                   {/* <button type="button" className="btn btn-light"> Users </button> */}
                 </Link>
-              </div> : <div/>
+              </div> : ''
           }
           {
           isLoggedIn() ?
-            <div /> :
+            '' :
             <div className="home-card-item">
                 <Login_Card />
             </div>
          }
+
+          {
+          isLoggedIn() ?
+            <div className="home-card-item">
+              <Link to='/tickets'>
+                <HomeCard img={Tickets} name="Tickets"/>
+              </Link>
+            </div>  : '' 
+          }
       </div>
         {
         isLoggedIn() ?
-            <div /> :
+            '' :
             <div>
                 <Register />
             </div>

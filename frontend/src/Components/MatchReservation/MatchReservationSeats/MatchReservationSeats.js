@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Pitch from "../../../images/pitch.png";
 import Ticket from "../../../images/ticket.png";
-import Seat from "../../../images/seat-icon-green.png";
+import Seat from "../../../images/seat-icon-gray.png";
 import Price from "../../../images/money.png";
 import SeatPicker from 'react-seat-picker'
 import TicketsForm from '../TicketsForm/TicketsForm'

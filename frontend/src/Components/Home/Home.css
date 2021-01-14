@@ -7,6 +7,10 @@
     flex-basis: 0;
 }
 
+.line-break {
+  width: 100%;
+}
+
 @media (max-width: 1200px) {
   .home-card-item {
     flex-grow: 0;

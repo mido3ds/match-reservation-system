@@ -39,3 +39,12 @@
     border-radius: 20px;
     margin: 5px;
 }
+
+.cancel-ticket-icon {
+    position: relative;
+    left: 105px;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+    cursor: pointer;
+}

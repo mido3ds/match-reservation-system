@@ -1,4 +1,5 @@
 import './TicketsForm.css';
+import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
 
 function TicketsForm() {
  
@@ -23,8 +24,12 @@ function TicketsForm() {
                            id="PINInput"></input>
                 </div>
                 <h2>Total Price: 15$ </h2>
+                <ConfirmationModal  id="TicketConfirmation"
+                                    text={'Are you sure you want to purchase these tickets ?' }
+                                    onOK={ ()=> {console.log("Purchasing")}} />
                 <div className="tickets-form-modal-buttons-area">
-                  <button type="button" className="btn tickets-form-modal-purchase-btn" data-dismiss="modal"> Purchase </button>
+                  <button type="button" className="btn tickets-form-modal-purchase-btn" 
+                          data-toggle="modal" data-target="#TicketConfirmation"> Purchase </button>
                   <button type="button" className="btn tickets-form-modal-cancel-btn" data-dismiss="modal"> Cancel </button>
                 </div>
               </div>
