@@ -11,37 +11,44 @@ router.get('/', async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
-  const stadiums = await Stadium
-    .aggregate([{
-      $project: {
-        _id: 0, uuid: "$_id",
-        name: 1, city: 1,
-      }
-    }])
-    .skip((req.query.page - 1) * pageSize)
-    .limit(pageSize);
+  try {
+    const stadiums = await Stadium
+      .aggregate([{
+        $project: {
+          _id: 0, uuid: "$_id",
+          name: 1, city: 1,
+        }
+      }])
+      .skip((req.query.page - 1) * pageSize)
+      .limit(pageSize);
 
-  let totalStadiums = await Stadium.count();
-  let has_next = (req.query.page - 1) * pageSize + stadiums.length < totalStadiums;
-  res.status(200).send({
-    has_next: has_next,
-    stadiums: stadiums
-  });
+    let totalStadiums = await Stadium.count();
+    let has_next = (req.query.page - 1) * pageSize + stadiums.length < totalStadiums;
+    res.status(200).send({
+      has_next: has_next,
+      stadiums: stadiums
+    });
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
 });
 
 router.post('/', [auth, manager], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(403).send({ err: error.details[0].message });
 
-  let stadium = await Stadium.findOne({ name: req.body.name });
-  if (stadium) return res.status(403).send({ err: 'This stadium already exists.' });
+  try {
+    let stadium = await Stadium.findOne({ name: req.body.name });
+    if (stadium) return res.status(403).send({ err: 'This stadium already exists.' });
 
-  const to_pick = ['name', 'city'];
-  stadium = new Stadium(_.pick(req.body, to_pick));
-  console.log(stadium);
+    const to_pick = ['name', 'city'];
+    stadium = new Stadium(_.pick(req.body, to_pick));
 
-  await stadium.save();
-  res.send({})
+    await stadium.save();
+    res.status(200).send({ msg: 'Stadium added successfully' });
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
 });
 
 module.exports = router;

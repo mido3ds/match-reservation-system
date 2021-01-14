@@ -16,20 +16,24 @@ router.get('/', async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
-  let matches = await Match.find()
-                           .select({ seatMap: 0 })
-                           .skip((req.query.page - 1) * pageSize)
-                           .limit(pageSize);
-  matches = matches.map( match => {
-    return {...match.toObject(), uuid: match._id};
-  });
+  try {
+    let matches = await Match.find()
+                            .select({ seatMap: 0 })
+                            .skip((req.query.page - 1) * pageSize)
+                            .limit(pageSize);
+    matches = matches.map( match => {
+      return {...match.toObject(), uuid: match._id};
+    });
 
-  let totalMatches = await Match.count();
-  let has_next = (req.query.page - 1) * pageSize + matches.length < totalMatches;
-  res.status(200).send({
-    has_next: has_next,
-    matches: matches
-  });
+    let totalMatches = await Match.count();
+    let has_next = (req.query.page - 1) * pageSize + matches.length < totalMatches;
+    res.status(200).send({
+      has_next: has_next,
+      matches: matches
+    });
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
 });
 
 router.get('/:match_id', async (req, res) => {
@@ -37,12 +41,16 @@ router.get('/:match_id', async (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});
   
-  let match = await Match.findById(matchID).select({ seatMap: 0});
-  if(!match)
-     return res.status(404).send({ err: 'No matches exist the given uuid.'});
+  try {
+    let match = await Match.findById(matchID).select({ seatMap: 0});
+    if(!match)
+      return res.status(404).send({ err: 'No matches exist the given uuid.'});
 
     match = {...match.toObject(), uuid: match._id};
     res.status(200).send(match);
+  } catch (err) {
+    res.status(500).send({ err: err.msg });
+  }
 });
 
 router.post('/', [auth, manager], async (req, res) => {
@@ -51,15 +59,19 @@ router.post('/', [auth, manager], async (req, res) => {
   if (error) 
     return res.status(403).send({ err: error.details[0].message });
 
-  let stadium = await Stadium.findOne( { name: addedMatch.venue } );
-  if (!stadium)
-    return res.status(400).send( { err: 'The venue (stadium) of the match does not exist'} );
+  try {
+    let stadium = await Stadium.findOne( { name: addedMatch.venue } );
+    if (!stadium)
+      return res.status(400).send( { err: 'The venue (stadium) of the match does not exist'} );
 
-  const to_pick = ['homeTeam', 'awayTeam', 'venue', 'dateTime', 'mainReferee', 'firstLinesman', 'secondLinesman', 'ticketPrice'];
-  let match = new Match(_.pick(req.body, to_pick));
+    const to_pick = ['homeTeam', 'awayTeam', 'venue', 'dateTime', 'mainReferee', 'firstLinesman', 'secondLinesman', 'ticketPrice'];
+    let match = new Match(_.pick(req.body, to_pick));
 
-  await match.save();
-  res.status(200).send( { msg: 'Match added successfully!'});
+    await match.save();
+    res.status(200).send({ msg: 'Match added successfully!'});
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
 });
 
 router.put('/:match_id', async (req, res) => {
@@ -74,20 +86,22 @@ router.put('/:match_id', async (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});
 
-  let match = await Match.findById(matchID);
-  if(!match)
-    return res.status(404).send({ err: 'No matches exist the given uuid.'});
+  try {
+    let match = await Match.findById(matchID);
+    if(!match)
+      return res.status(404).send({ err: 'No matches exist the given uuid.'});
 
-  if(matchEdit.venue) {
-    let stadium = await Stadium.findOne( { name: matchEdit.venue } );
-    if (!stadium)
-      return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});
-  }
+    if(matchEdit.venue) {
+      let stadium = await Stadium.findOne( { name: matchEdit.venue } );
+      if (!stadium)
+        return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});
+    }
 
-  if (await Match.findByIdAndUpdate('5fff4cf524fb3518b662c102', matchEdit))
+    await Match.findByIdAndUpdate('5fff4cf524fb3518b662c102', matchEdit);
     res.status(200).send({ msg: 'Match edited successfully!' });
-  else
-    res.status(500).send({ err: 'An error occurred while trying to edit the match.'});
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
 });
 
 module.exports = router;

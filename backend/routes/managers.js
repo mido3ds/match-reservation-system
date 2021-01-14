@@ -8,43 +8,56 @@ const router = express.Router();
 router.get('/', [auth, admin], async (req, res) => {
   const pageSize = 10;
   if (isNaN(req.query.page) || req.query.page < 1)
-    res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
+    return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
-  let users = await User.find({ role: "manager", isPending: true })
-                        .select({ password: 0 })
-                        .sort('createdIn')
-                        .skip((req.query.page - 1) * pageSize)
-                        .limit(pageSize);
+  try {
+    let users = await User.find({ role: "manager", isPending: true })
+                          .select({ password: 0 })
+                          .sort('createdIn')
+                          .skip((req.query.page - 1) * pageSize)
+                          .limit(pageSize);
 
-  let totalManagerRequests = await User.count({ role: "manager", isPending: true });
-  let has_next = (req.query.page - 1) * pageSize + users.length < totalManagerRequests;
+    let totalManagerRequests = await User.count({ role: "manager", isPending: true });
 
-  res.status(200).send({
-    has_next: has_next,
-    requestedManagers: users
-  });
+    let has_next = (req.query.page - 1) * pageSize + users.length < totalManagerRequests;
+
+    res.status(200).send({
+      has_next: has_next,
+      requestedManagers: users
+    });
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
 });
 
 router.post('/accept/:username', async (req, res) => {
-  let username = req.params.username;
-  let user = await User.findOne({ role: 'manager', isPending: true, username: username });
-  if(!user)
-    res.status(404).send({ err: 'No pending managers exist with the given username.'});
-  else {
-    user.isPending = false;
-    await user.save();
-    res.status(200).send( { msg: 'Manager accepted successfully!'});
+  try {
+    let username = req.params.username;
+    let user = await User.findOne({ role: 'manager', isPending: true, username: username });
+    if(!user)
+      res.status(404).send({ err: 'No pending managers exist with the given username.'});
+    else {
+      user.isPending = false;
+      await user.save();
+      res.status(200).send( { msg: 'Manager accepted successfully!'});
+    }
+  } catch(err) {
+    res.status(500).send({ err: err.message });
   }
 });
 
 router.post('/reject/:username', async (req, res) => {
-  let username = req.params.username;
-  let user = await User.findOne({ role: 'manager', isPending: true, username: username });
-  if(!user)
-    res.status(404).send({ err: 'No pending managers exist with the given username.'});
-  else {
-    user.remove();
-    res.status(200).send( { msg: 'Manager rejected successfully!'});
+  try {
+    let username = req.params.username;
+    let user = await User.findOne({ role: 'manager', isPending: true, username: username });
+    if(!user)
+      res.status(404).send({ err: 'No pending managers exist with the given username.'});
+    else {
+      user.remove();
+      res.status(200).send( { msg: 'Manager rejected successfully!'});
+    }
+  } catch(err) {
+    res.status(500).send({ err: err.message });
   }
 });
 
