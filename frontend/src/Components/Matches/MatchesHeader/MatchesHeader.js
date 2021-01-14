@@ -8,9 +8,9 @@ function AddMatches() {
     <div>
       <div className="matches-button-area">
         <button type="button" className="matches-add-button btn btn-primary"
-          data-toggle="modal" data-target="#MatchFormModal"> Add </button>
+          data-toggle="modal" data-target="#AddMatchFormModal"> Add </button>
       </div>
-      <MatchForm title="Add Match" />
+      <MatchForm title="Add Match" onSubmit={()=>{console.log("Yousryyyy")}} id="AddMatchFormModal" />
     </div>
   );
 }

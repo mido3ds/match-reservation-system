@@ -1,10 +1,14 @@
+import $ from 'jquery'; 
 import './ConfirmationModal.css';
+import React, { useRef } from 'react'
+
 
 function ConfirmationModal({ id, text, onOK }) {
 
+  const modal = useRef(null);
   return (
-    <div className="confirmation">
-      <div className="modal fade" id={ id } tabIndex="-1" role="dialog">
+    <div className="confirmation"ref={modal}>
+      <div className="modal fade" id={ id } tabIndex="-1" role="dialog" aria-labelledby={ id } aria-hidden="true" >
         <div className="vertical-alignment-helper ">
           <div className="modal-dialog vertical-align-center" role="document">
             <div className="confirmation-area modal-content">
@@ -15,7 +19,7 @@ function ConfirmationModal({ id, text, onOK }) {
                 <p> { text }  </p>
                 <div className="confirmation-modal-buttons-area">
                   <button type="button" className="btn confirmation-modal-ok-btn" data-dismiss="modal" onClick={onOK}> Ok </button>
-                  <button type="button" className="btn confirmation-modal-cancel-btn" data-dismiss="modal"> Cancel </button>
+                  <button type="button" className="btn confirmation-modal-cancel-btn" data-toggle="modal" data-target={"#" + id}> Cancel </button>
                 </div>
               </div>
             </div>

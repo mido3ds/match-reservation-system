@@ -6,10 +6,10 @@ import Logo2 from "../../../images/teams_logos_30x30/7.png";
 import Logo3 from "../../../images/teams_logos_30x30/8.png";
 import Logo1 from "../../../images/teams_logos_30x30/9.png";
 import './MatchForm.css';
+import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 
 
-
-function MatchForm({ title }) {
+function MatchForm({ title, onSubmit, id }) {
   const [startDate, setStartDate] = useState(new Date());
   const ExampleCustomTimeInput = ({ date, value, onChange }) => (
     <input
@@ -19,8 +19,8 @@ function MatchForm({ title }) {
     />)
 
   return (
-    <div class="modal fade" id="MatchFormModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document"></div>
+    <div className="modal fade" id={ id } tabIndex="-1" role="dialog">
+      <div className="modal-dialog" role="document"></div>
       <div className="form-area modal-content">
         <div className="modal-header">
           <h1 className=" form-title"> {title} </h1>
@@ -125,8 +125,14 @@ function MatchForm({ title }) {
             <input type="text" className="form-control input-text-area"
               id="SecondLinesmanInput"></input>
           </div>
+          <ConfirmationModal  id={id + "Confirmation"} 
+                            text={title == "Add Match" ? 
+                                  'Are you sure you want to add this match ?' :
+                                  'Are you sure you want to edit this match ?' }
+                            onOK={ onSubmit } />
           <div className="match-form-buttons-area">
-            <button type="button" className="btn match-form-save-btn" > Save changes </button>
+            <button type="button" className="btn match-form-save-btn" 
+                    data-toggle="modal" data-target={'#' + id + "Confirmation"}> Save changes </button>
             <button type="button" className="btn match-form-close-btn" data-dismiss="modal">Close</button>
           </div>
         </div>

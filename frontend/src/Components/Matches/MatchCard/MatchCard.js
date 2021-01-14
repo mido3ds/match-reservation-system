@@ -7,6 +7,7 @@ import Edit from "../../../images/edit.png";
 import Logo1 from "../../../images/teams_logos_60x60/15.png";
 import Logo2 from "../../../images/teams_logos_60x60/7.png";
 import './MatchCard.css';
+import MatchForm from '../MatchForm/MatchForm';
 
 const api = new DefaultApi();
 
@@ -29,7 +30,8 @@ function MatchCard({ card }) {
   return (
       <div className='match-card-container'>
         <div className="match-card">
-          <img alt="edit-icon" className="edit" src={Edit} />    
+          <img alt="edit-icon" className="edit" src={Edit} data-toggle="modal" data-target={'#editMatchFormModal' + match.id}/> 
+          <MatchForm title="Edit Match" onSubmit={()=>{console.log("Yousryyyy2")}} id={'editMatchFormModal' + match.id} />
           <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
           <ConfirmationModal id={'deleteModal' + match.id} 
                             text={ 'Are you sure you want to delete this match?'}

@@ -1,6 +1,7 @@
 import { Cookie } from 'js-cookie';
 
 export function isLoggedIn() {
+    return true;
     try {
         return authToken() && userType();
     } catch (e) {
@@ -9,7 +10,7 @@ export function isLoggedIn() {
 }
 
 export function userType() {
-    return 'admin';
+    return 'manager';
     return Cookie.get('usertype');
 }
 
