@@ -54,6 +54,9 @@ function MatchForm({ title, saveChanges, id }) {
   let tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
+  // homeTeam, awayTeam, stadium and dateTime are not selected using native HTML forms.
+  // Therefore, they cannot be directly binded with React Hook Form.
+  // They must be registered, set and triggered manually.
   const [homeTeam, setHomeTeam] = useState('');
   const [awayTeam, setAwayTeam] = useState('');
   const [stadium, setStadium] = useState('');
@@ -83,11 +86,16 @@ function MatchForm({ title, saveChanges, id }) {
     trigger('venue');
   }
 
+  // The user could leave the date/time unchanged (which is valid), so if a callback similar to the ones
+  // above is used, it may never be invoked, and we will never call setValue for dateTime. 
+  // useEffect will be invoked when the dateTime state is initialized (and whenever it changes), 
+  // guaranteeing that we always have value for date/time.  
   useEffect(() => {
     setValue('dateTime', dateTime);
     trigger('dateTime');
   }, [dateTime]);
 
+  // result = { success: boolean, message: string }
   let onSubmit = async (match) => {
     let result = await saveChanges(match);
     alert(result.message);
