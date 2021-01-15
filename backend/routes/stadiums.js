@@ -34,6 +34,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/names', async (req, res) => {
+  try {
+    const stadiums = await Stadium.find();
+    res.status(200).send(stadiums.map(stadium => stadium.name));
+  } catch(err) {
+    res.status(500).send({ err: err.message });
+  }
+});
+
 router.post('/', [auth, manager], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(403).send({ err: error.details[0].message });

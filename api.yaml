@@ -577,6 +577,19 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /api/stadiums/names:
+    get:
+      summary: get all stadiums names
+      operationId: getStadiumsNames
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: string
   /api/stadiums/{stadium_id}:
     delete:
       summary: delete a stadium

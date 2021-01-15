@@ -1206,6 +1206,43 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary get all stadiums names
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStadiumsNames: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/stadiums/names`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary get all users
          * @param {string} xAuthToken 
          * @param {number} [page] 
@@ -1761,6 +1798,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary get all stadiums names
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStadiumsNames(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getStadiumsNames(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @summary get all users
          * @param {string} xAuthToken 
          * @param {number} [page] 
@@ -2005,6 +2055,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary get all stadiums names
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStadiumsNames(options?: any): AxiosPromise<Array<string>> {
+            return DefaultApiFp(configuration).getStadiumsNames(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary get all users
          * @param {string} xAuthToken 
          * @param {number} [page] 
@@ -2242,6 +2301,17 @@ export class DefaultApi extends BaseAPI {
      */
     public getStadiums(page?: number, options?: any) {
         return DefaultApiFp(this.configuration).getStadiums(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get all stadiums names
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getStadiumsNames(options?: any) {
+        return DefaultApiFp(this.configuration).getStadiumsNames(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
