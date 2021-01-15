@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Login_Card.css";
+import "./LoginCard.css"
 
-function Login_Card() {
+function LoginCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -45,4 +45,4 @@ function Login_Card() {
   );
 }
 
-export default Login_Card;
+export default LoginCard;

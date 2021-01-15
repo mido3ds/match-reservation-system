@@ -6,7 +6,7 @@ import './MatchesHeader.css';
 
 const api = new DefaultApi();
 
-function AddMatches() {
+function AddMatches({ reloadCards}) {
   let addMatch = async (match) => {
     try {
       const resp = await api.submitMatch(authToken(), match);
@@ -32,7 +32,7 @@ function AddMatches() {
   );
 }
 
-function MatchesHeader() {
+function MatchesHeader({ reloadCards }) {
   return (
     <div className="matches-header">
       <img className="matches-header-image" alt="matches-header" src={Ball} />

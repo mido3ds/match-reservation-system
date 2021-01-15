@@ -13,7 +13,7 @@ function Users() {
 
   let removeUser = (id) => {
     setUsers(users => {
-      return users.filter(user => { return user.id != id })
+      return users.filter(user => { return user.id !== id })
     });
   }
 

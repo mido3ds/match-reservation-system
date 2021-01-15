@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Cards from './Cards/Cards';
 import Pagination from './Pagination/Pagination';
 
 
 function CardsArea({ cards, hasNext, cardIdentifier, onSetPage }) {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   return (
     <div className = "flex-container-column-vcenter-hcenter">

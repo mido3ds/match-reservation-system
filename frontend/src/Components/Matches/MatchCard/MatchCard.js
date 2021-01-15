@@ -19,7 +19,7 @@ function MatchCard({ card }) {
     // match.uuid -> actual id of the match
     try {
     const resp = await api.deleteMatch(authToken(), match.uuid);
-    alert('Match deleted successfully!');
+    alert(resp.data?.msg);
     removeCard();
     } catch(err) {
       console.error(err.message);

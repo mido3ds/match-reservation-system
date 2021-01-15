@@ -12,7 +12,7 @@ function Matches() {
 
   let removeMatch = (id) => {
     setMatches(matches => {
-      return matches.filter(match => { return match.id != id })
+      return matches.filter(match => { return match.id !== id })
     });
   } 
 
@@ -33,7 +33,7 @@ function Matches() {
 
   return (
     <div className="flex-container-column-vcenter-hcenter">
-      <MatchesHeader />
+      <MatchesHeader/>
       <CardsArea cards={matches} hasNext={hasNext} cardIdentifier="match" onSetPage={setPage} />
     </div>
   );

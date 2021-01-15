@@ -18,7 +18,7 @@ function UserCard({ card }) {
   let deleteUser = async () => {
     try {
       const resp = await api.deleteUser(user.username, authToken());
-      alert(user.name + '\'s account was deleted successfully!');
+      alert(resp.data?.msg);
       removeCard();
     } catch(err) {
       console.error(err.message);
@@ -33,7 +33,7 @@ function UserCard({ card }) {
                          text={ 'Are you sure you want to delete ' + user.name + '\'s account?'}
                          onOK={ deleteUser } />
       <div className="role-badge">
-        <img alt="role-bage" src={ user.role == 'fan' ? FanImage : ManagerImage } />
+        <img alt="role-bage" src={ user.role === 'fan' ? FanImage : ManagerImage } />
       </div>
       <p className="user-name"> { user.name } </p>
       <p className="user-username"> { '@' + user.username } </p>

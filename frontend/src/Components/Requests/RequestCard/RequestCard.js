@@ -17,7 +17,7 @@ function RequestCard({ card }) {
   let acceptManagerRequest = async () => {
     try {
       const resp = await api.acceptManagersRequest(authToken(), requestedManager.username);
-      alert(requestedManager.name + '\'s management request was accepted successfully!');
+      alert(resp.data?.msg);
       removeCard();
     } catch(err) {
       console.error(err.message);
@@ -28,7 +28,7 @@ function RequestCard({ card }) {
   let rejectManagerRequest = async () => {
     try {
       const resp = await api.rejectManagersRequest(authToken(), requestedManager.username);
-      alert(requestedManager.name + '\'s management request was rejected successfully!');
+      alert(resp.data?.msg);
       removeCard();
     } catch(err) {
       console.error(err.message);

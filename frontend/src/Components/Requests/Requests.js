@@ -13,7 +13,7 @@ function Requests() {
 
   let removeRequest = (id) => {
     setRequestedManagers(requestedManagers => {
-      return requestedManagers.filter(requestedManager => { return requestedManager.id != id })
+      return requestedManagers.filter(requestedManager => { return requestedManager.id !== id })
     });
   } 
 

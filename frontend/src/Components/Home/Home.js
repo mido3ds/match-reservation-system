@@ -7,7 +7,7 @@ import Users from "../../images/fans.jpg";
 import Tickets from "../../images/tickets-header.jpeg";
 import HomeCard from './Card/HomeCard';
 import HomeHeader from './HomeHeader/HomeHeader';
-import Login_Card from './Login/Login_Card';
+import LoginCard from './Login/LoginCard';
 import Register from './Register/Register';
 import './Home.css';
 
@@ -20,7 +20,7 @@ function Home() {
 
   // useEffect with an empty array as a second parameter resembles componentDidMount in class components
   useEffect(() => {
-    if (state && state.from) {
+    if (state?.from) {
       // We arrived at the home page as a result of an authorization indirection
       console.log("Authorization redirection to home");
       if (/*user not logged in*/false) {
@@ -33,7 +33,7 @@ function Home() {
         setRedirectTo(state.from);
       }
     }
-  }, []);
+  }, [state]);
 
   // TODO: call this function if a user logs in successfully
   let onSuccessfulLogin = () => {
@@ -77,7 +77,7 @@ function Home() {
           isLoggedIn() ?
             '' :
             <div className="home-card-item">
-                <Login_Card />
+                <LoginCard />
             </div>
          }
 

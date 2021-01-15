@@ -13,7 +13,7 @@ function StadiumForm({ title }) {
 
   function submit() {
     // if wrong values show error
-    if (name.length == 0 || city.length == 0) {
+    if (name.length === 0 || city.length === 0) {
       setErrMsg("Name and City must not be empty");
     } else {
       (async () => {

@@ -7,9 +7,12 @@ import Logo2 from "../../../images/teams_logos_30x30/7.png";
 import Logo3 from "../../../images/teams_logos_30x30/8.png";
 import Logo1 from "../../../images/teams_logos_30x30/9.png";
 import './MatchForm.css';
+import { NotificationManager } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+
 
 const teams = [
   { name: 'Smouha', logo: Logo1 },
@@ -34,13 +37,16 @@ const schema = yup.object().shape({
                .required('Required field'),
   mainReferee: yup.string()
                   .required('Required field.')
-                  .matches(/^[aA-zZ\s]+$/, 'Names must contain letters and spaces only.'),
+                  .matches(/^[aA-zZ\s]+$/, 'Must contain letters and spaces only.')
+                  .min(5, 'Must be at least 5 characters'),
   firstLinesman: yup.string()
                     .required('Required field.')
-                    .matches(/^[aA-zZ\s]+$/, 'Names must contain letters and spaces only.'),
+                    .matches(/^[aA-zZ\s]+$/, 'Must contain letters and spaces only.')
+                    .min(5, 'Must be at least 5 characters'),
   secondLinesman: yup.string()
                      .required('Required field.')
-                     .matches(/^[aA-zZ\s]+$/, 'Names must contain letters and spaces only.'),
+                     .matches(/^[aA-zZ\s]+$/, 'Must contain letters and spaces only.')
+                     .min(5, 'Must be at least 5 characters'),
   ticketPrice: yup.number()
                   .required('Required field.')
                   .typeError('Must be a number.')
@@ -71,7 +77,8 @@ function MatchForm({ title, saveChanges, id }) {
     setHomeTeam(homeTeam);
     setValue('homeTeam', homeTeam);
     trigger('homeTeam');
-    trigger('awayTeam');
+    if(awayTeam)
+      trigger('awayTeam');
   }
 
   let onSelectAwayTeam = (awayTeam) => {
@@ -93,14 +100,16 @@ function MatchForm({ title, saveChanges, id }) {
   useEffect(() => {
     setValue('dateTime', dateTime);
     trigger('dateTime');
-  }, [dateTime]);
+  }, [dateTime, setValue, trigger]);
 
   // result = { success: boolean, message: string }
   let onSubmit = async (match) => {
     let result = await saveChanges(match);
-    alert(result.message);
     if (result.success) {
-      window.location.reload();
+      NotificationManager.success(result.message, 'Match added successfully!', 3000);
+      document.querySelector('#close-btn').click();
+    } else {
+      NotificationManager.error(result.message, 'Adding match failed!', 3000);
     }
   }
 
@@ -204,8 +213,8 @@ function MatchForm({ title, saveChanges, id }) {
             <p className='error-message'>{errors.ticketPrice?.message}</p>
           </div>
           <div className="match-form-buttons-area">
-            <button type="submit" className="btn match-form-save-btn"> Save changes </button>
-            <button type="button" className="btn match-form-close-btn" data-dismiss="modal"> Close </button>
+            <button type="submit" className="btn match-form-save-btn"> {title} </button>
+            <button type="button" id='close-btn' className="btn match-form-close-btn" data-dismiss="modal"> Close </button>
           </div>
         </div>
       </form>

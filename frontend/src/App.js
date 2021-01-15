@@ -10,7 +10,9 @@ import Navbar from './Components/Navbar/Navbar';
 import Requests from './Components/Requests/Requests';
 import Stadiums from './Components/Stadiums/Stadiums';
 import Users from './Components/Users/Users';
-import Tickets from './Components/Tickets/Tickets'
+import Tickets from './Components/Tickets/Tickets';
+import { NotificationContainer } from 'react-notifications';
+
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
           <Error />
         </Route>
       </Switch>
+      <NotificationContainer/>
       </div>
     </div>
   );

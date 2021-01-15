@@ -15,7 +15,7 @@ function StadiumCard({ card }) {
     // stadium.uuid -> actual id of the match
     try {
       const resp = await api.deleteStadium(authToken(), stadium.uuid);
-      alert('Stadium deleted successfully!');
+      alert(resp.data?.msg);
       removeCard();
     } catch(err) {
       console.error(err.message);

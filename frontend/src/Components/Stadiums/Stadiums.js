@@ -12,7 +12,7 @@ function Stadiums() {
 
   let removeStadium = (id) => {
     setStadiums(stadiums => {
-      return stadiums.filter(stadium => { return stadium.id != id })
+      return stadiums.filter(stadium => { return stadium.id !== id })
     });
   } 
 
