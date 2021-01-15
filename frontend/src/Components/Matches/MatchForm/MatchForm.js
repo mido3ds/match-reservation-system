@@ -12,17 +12,14 @@ import 'react-notifications/lib/notifications.css';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { DefaultApi } from '../../../api';
 
+const api = new DefaultApi();
 
 const teams = [
   { name: 'Smouha', logo: Logo1 },
   { name: 'El-Zamalek', logo: Logo2 },
   { name: 'Pyramids', logo: Logo3 }
-]
-
-const stadiums = [
-  { name: 'Borg Al Arab' },
-  { name: 'Cairo Stadium' }
 ]
 
 const schema = yup.object().shape({
@@ -59,6 +56,18 @@ function MatchForm({ title, saveChanges, id }) {
 
   let tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [stadiums, setStadiums] = useState([]);
+
+  useEffect(async () => {
+    try {
+      const resp = await api.getStadiumsNames();
+      setStadiums(resp.data);
+    } catch(err) {
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+    }
+  }, []);
 
   // homeTeam, awayTeam, stadium and dateTime are not selected using native HTML forms.
   // Therefore, they cannot be directly binded with React Hook Form.
@@ -169,8 +178,8 @@ function MatchForm({ title, saveChanges, id }) {
 
               <Dropdown.Menu>
                 {stadiums.map((stadium, index) =>
-                  (<Dropdown.Item key={index} eventKey={stadium.name}>
-                  <span className="team-dd-item-text"> {stadium.name} </span>
+                  (<Dropdown.Item key={index} eventKey={stadium}>
+                  <span className="team-dd-item-text"> {stadium} </span>
                   </Dropdown.Item>)
                 )}
               </Dropdown.Menu>
