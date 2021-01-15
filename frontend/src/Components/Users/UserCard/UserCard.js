@@ -1,5 +1,6 @@
 import { DefaultApi } from '../../../api';
 import { authToken } from '../../../Auth';
+import { NotificationManager } from 'react-notifications';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete2.png";
 import FanImage from "../../../images/fan.png";
@@ -18,11 +19,11 @@ function UserCard({ card }) {
   let deleteUser = async () => {
     try {
       const resp = await api.deleteUser(user.username, authToken());
-      alert(resp.data?.msg);
+      NotificationManager.success(resp.data?.msg);
       removeCard();
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

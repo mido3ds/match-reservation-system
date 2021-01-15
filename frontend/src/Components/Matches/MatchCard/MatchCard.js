@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { DefaultApi } from '../../../api';
 import { isLoggedIn, userType, authToken } from '../../../Auth';
+import { NotificationManager } from 'react-notifications';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete.png";
 import Edit from "../../../images/edit.png";
@@ -19,11 +20,11 @@ function MatchCard({ card }) {
     // match.uuid -> actual id of the match
     try {
     const resp = await api.deleteMatch(authToken(), match.uuid);
-    alert(resp.data?.msg);
+    NotificationManager.success(resp.data?.msg);
     removeCard();
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

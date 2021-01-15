@@ -106,10 +106,10 @@ function MatchForm({ title, saveChanges, id }) {
   let onSubmit = async (match) => {
     let result = await saveChanges(match);
     if (result.success) {
-      NotificationManager.success(result.message, 'Match added successfully!', 3000);
+      NotificationManager.success(result.message);
       document.querySelector('#close-btn').click();
     } else {
-      NotificationManager.error(result.message, 'Adding match failed!', 3000);
+      NotificationManager.error(result.message);
     }
   }
 

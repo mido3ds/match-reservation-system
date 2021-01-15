@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DefaultApi } from '../../api';
 import { authToken } from '../../Auth';
+import { NotificationManager } from 'react-notifications';
 import CardsArea from '../CardsArea/CardsArea';
 import UsersHeader from './UsersHeader/UsersHeader';
 
@@ -27,8 +28,8 @@ function Users() {
         return user; 
       }));
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }, [page]);
 

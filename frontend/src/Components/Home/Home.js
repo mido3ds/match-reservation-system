@@ -9,6 +9,7 @@ import HomeCard from './Card/HomeCard';
 import HomeHeader from './HomeHeader/HomeHeader';
 import LoginCard from './Login/LoginCard';
 import Register from './Register/Register';
+import { NotificationManager } from 'react-notifications';
 import './Home.css';
 
 function Home() {
@@ -22,13 +23,10 @@ function Home() {
   useEffect(() => {
     if (state?.from) {
       // We arrived at the home page as a result of an authorization indirection
-      console.log("Authorization redirection to home");
-      if (/*user not logged in*/false) {
-        // TODO: Replace with a nice popup
-        alert("You don't have access to this page");
+      if (!isLoggedIn()) {
+        NotificationManager.error("You don't have access to this page");
       } else {
-        // TODO: Replace with a nice popup
-        alert("Please log in or create an account to be able access this page");
+        NotificationManager.warning("Please log in or create an account to be able access this page");
         setRedirectOnLogin(true);
         setRedirectTo(state.from);
       }
@@ -48,16 +46,12 @@ function Home() {
       <div className="home-cards-area flex-container-row-vcenter-hcenter">
           <div className="home-card-item">
             <Link to='/matches'>
-              {/* TODO: replace with a card */}
               <HomeCard img={Matches} name="Matches" />
-              {/* <button type="button" className="btn btn-light"> Matches </button> */}
             </Link>
           </div>
           <div className="home-card-item">
             <Link to='/stadiums'>
-              {/* TODO: replace with a card */}
               <HomeCard img={Stadiums} name="Stadiums" />
-              {/* <button type="button" className="btn btn-light"> Stadiums </button> */}
             </Link>
           </div>
           { isLoggedIn() && userType() === 'admin' ? 
@@ -67,9 +61,7 @@ function Home() {
             isLoggedIn() && userType() === 'admin' ?
               <div className="home-card-item">
                 <Link to='/users'>
-                  {/* TODO: replace with a card */}
                   <HomeCard img={Users} name="Users" />
-                  {/* <button type="button" className="btn btn-light"> Users </button> */}
                 </Link>
               </div> : ''
           }

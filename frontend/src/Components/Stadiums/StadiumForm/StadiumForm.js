@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DefaultApi } from '../../../api';
+import { NotificationManager } from 'react-notifications';
 import './StadiumForm.css';
 import { authToken } from '../../../Auth';
 
@@ -19,13 +20,13 @@ function StadiumForm({ title }) {
       (async () => {
         try {
           await api.submitStadium(authToken(), { name, city });
-          console.log('submitted stadium successfully');
+          NotificationManager.success('Stadium added successfully');
           setShowSuccess(true);
           setErrMsg('');
         } catch(err) {
-          console.error(err.message);
+          Notification.error(err.message);
           if (err.response?.data?.err) {
-            console.error(err.response.data.err);
+            Notification.error(err.response.data.err);
             setErrMsg(`Failed at submitting, ${err.response.data.err}`);
           }
         }
