@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { DefaultApi } from '../../../api';
-import { isLoggedIn, userType } from '../../../Auth';
+import { isLoggedIn, userType, authToken } from '../../../Auth';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete.png";
 import Edit from "../../../images/edit.png";
@@ -23,7 +23,8 @@ function MatchCard({ card }) {
     removeCard();
     } catch(err) {
       console.error(err.message);
-      if (err.response.data.err) console.error(err.response.data.err);
+      if (err.response?.data?.err) console.error(err.response.data.err);
+      if (err.request) console.error('Cannot connect to the backend');
     }
   }
 
