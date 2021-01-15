@@ -22,29 +22,6 @@
     color: rgba(112, 110, 110, 0.849);
 }
 
-.dropdown-button {
-    margin-top: 5px;
-    background-color: white;
-    border-radius: 10px;
-    border-color: #0880AE;
-    border-width: 2px;
-    width: 300px;
-    height: 52px;
-    line-height: 35px; 
-}
-
-.dropdown-item {
-    width: 300px;
-}
-
-.dropdown-toggle::after {
-    display: none;
-}
-
-.dropdown-arrow {
-    margin-left: 180px;
-}
-
 .team-dd-item-text {
     margin-left: 10px;
 }
@@ -57,23 +34,8 @@
     margin-top: 20px;
 }
 
-.date-time-area {
-    margin-top: 20px;
-    margin-left: 100px;
-}
-
 .main-referee-area {
     margin-top: 20px;
-}
-
-.firstlinesman-area {
-    margin-top: 20px;
-    margin-left: 100px;
-}
-
-.secondlinesman-area {
-    margin-top: 20px;
-    margin-bottom: 40px;
 }
 
 .input-text-area {
@@ -85,21 +47,6 @@
     width: 300px;
     height: 50px;
     line-height: 35px; 
-    font-weight: bold;
-    font-family: 'IBM Plex Sans', sans-serif;
-}
-
-.date-time-picker {
-    margin-top: 5px;
-    background-color: white;
-    border-radius: 10px;
-    border-color: #0880AE;
-    border-width: 2px;
-    width: 300px;
-    height: 50px;
-    line-height: 35px;
-    font-size: 15px;
-    padding-left: 10px;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
 }

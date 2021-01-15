@@ -20,7 +20,6 @@ function StadiumCard({ card }) {
     } catch(err) {
       console.error(err.message);
       if (err.response?.data?.err) console.error(err.response.data.err);
-      if (err.request) console.error('Cannot connect to the backend');
     }
   }
 

@@ -41,8 +41,16 @@
     display: none !important;
 }
 
+.btn-black-text {
+    position: relative;
+    float: left;
+    color: black;
+}
+
 .dropdown-arrow {
-    margin-left: 180px;
+    position: relative;
+    float: right;
+    top: 25%;
 }
 
 .team-dd-item-text {
@@ -73,7 +81,6 @@
 
 .secondlinesman-area {
     margin-top: 20px;
-    margin-bottom: 40px;
 }
 
 .input-text-area {
@@ -96,7 +103,7 @@
     border-color: #0880AE;
     border-width: 2px;
     width: 300px;
-    height: 50px;
+    height: 52px;
     line-height: 35px;
     font-size: 15px;
     padding-left: 10px;
@@ -120,9 +127,12 @@
 }
  
 .match-form-buttons-area {
-    margin-top: 130px;
-    margin-left: 133px;
-    margin-bottom: 20px;
+    position: relative;
+    left: 405px;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px 20px;
+    margin: 10px;
 }
 
 .match-form-close-btn {
@@ -137,6 +147,15 @@
     background-color: #0880AE !important;
     border-color: #0880AE !important;
     color: white !important;
+}
+
+.error-message {
+    font-size: small;
+    color: darkred;
+    font-family: monospace;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
 }
 
 .vertical-alignment-helper {
