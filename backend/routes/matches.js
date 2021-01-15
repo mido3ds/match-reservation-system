@@ -97,7 +97,8 @@ router.put('/:match_id', async (req, res) => {
         return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});
     }
 
-    await Match.findByIdAndUpdate('5fff4cf524fb3518b662c102', matchEdit);
+    console.log(matchEdit);
+    await Match.findByIdAndUpdate(matchID, matchEdit);
     res.status(200).send({ msg: 'Match edited successfully!' });
   } catch(err) {
     res.status(500).send({ err: err.message });

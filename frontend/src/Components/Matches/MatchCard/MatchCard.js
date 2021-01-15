@@ -15,6 +15,21 @@ const api = new DefaultApi();
 function MatchCard({ card }) {
   const {removeCard, ...match} = card;
 
+  let editMatch = async (editedMatch) => {
+    // match.id -> frontend card id
+    // match.uuid -> actual id of the match
+    try {
+      const resp = await api.editMatch(authToken(), match.uuid, editedMatch);
+      return { success: true, message: resp.data.msg };
+    } catch(err) {
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) {
+        NotificationManager.error(err.response.data.err);
+      }
+      return { success: false, message: err.response?.data?.err };
+    }
+  }
+
   let deleteMatch = async () => {
     // match.id -> frontend card id
     // match.uuid -> actual id of the match
@@ -33,7 +48,7 @@ function MatchCard({ card }) {
         <div className="match-card">
           <span style={{ visibility: isLoggedIn() && userType() === 'manager' ? 'visible': 'hidden'}} >
             <img alt="edit-icon" className="edit" src={Edit} data-toggle="modal" data-target={'#editMatchFormModal' + match.id}/> 
-            <MatchForm title="Edit Match" onSubmit={()=>{console.log("Yousryyyy2")}} id={'editMatchFormModal' + match.id} />
+            <MatchForm title="Edit Match" submit={editMatch} id={'editMatchFormModal' + match.id} defaultValues={match}/>
             <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
             <ConfirmationModal id={'deleteModal' + match.id} 
                               text={ 'Are you sure you want to delete this match?'}

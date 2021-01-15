@@ -51,11 +51,10 @@ const schema = yup.object().shape({
 });
 
 
-function MatchForm({ title, saveChanges, id }) {
-  const { register, handleSubmit, errors, setValue, trigger } = useForm({ resolver: yupResolver(schema) });
-
-  let tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+function MatchForm({ title, submit, defaultValues, id }) {
+  const { register, handleSubmit, errors, setValue, trigger } = useForm(
+    { resolver: yupResolver(schema), defaultValues: defaultValues }
+  );
 
   const [stadiums, setStadiums] = useState([]);
 
@@ -72,10 +71,15 @@ function MatchForm({ title, saveChanges, id }) {
   // homeTeam, awayTeam, stadium and dateTime are not selected using native HTML forms.
   // Therefore, they cannot be directly binded with React Hook Form.
   // They must be registered, set and triggered manually.
-  const [homeTeam, setHomeTeam] = useState('');
-  const [awayTeam, setAwayTeam] = useState('');
-  const [stadium, setStadium] = useState('');
-  const [dateTime, setDateTime] = useState(tomorrow);
+  const [homeTeam, setHomeTeam] = useState(defaultValues?.homeTeam);
+  const [awayTeam, setAwayTeam] = useState(defaultValues?.awayTeam);
+  const [stadium, setStadium] = useState(defaultValues?.venue);
+
+  let tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const initialDate = new Date(defaultValues?.dateTime ? defaultValues.dateTime : tomorrow);
+  const [dateTime, setDateTime] = useState(initialDate);
 
   register('homeTeam');
   register('awayTeam');
@@ -113,10 +117,10 @@ function MatchForm({ title, saveChanges, id }) {
 
   // result = { success: boolean, message: string }
   let onSubmit = async (match) => {
-    let result = await saveChanges(match);
+    let result = await submit(match);
     if (result.success) {
       NotificationManager.success(result.message);
-      document.querySelector('#close-btn').click();
+      document.querySelector('#close-btn' + id).click();
     } else {
       NotificationManager.error(result.message);
     }
@@ -223,7 +227,7 @@ function MatchForm({ title, saveChanges, id }) {
           </div>
           <div className="match-form-buttons-area">
             <button type="submit" className="btn match-form-save-btn"> {title} </button>
-            <button type="button" id='close-btn' className="btn match-form-close-btn" data-dismiss="modal"> Close </button>
+            <button type="button" id={'close-btn' + id} className="btn match-form-close-btn" data-dismiss="modal"> Close </button>
           </div>
         </div>
       </form>
