@@ -163,7 +163,7 @@ function MatchForm({ title, saveChanges, id }) {
             <label className="info-text"> Match Venue: </label>
             <Dropdown onSelect={onSelectStadium}>
               <Dropdown.Toggle className="dropdown-button">
-                <span className="btn-black-text"> {stadium ? stadium : 'Select the away stadium..'} </span>
+                <span className="btn-black-text"> {stadium ? stadium : 'Select the stadium..'} </span>
                 <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
               </Dropdown.Toggle>
 
