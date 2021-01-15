@@ -3,7 +3,7 @@ import Delete from "../../../images/delete.png";
 import Price from "../../../images/money.png";
 import Seat from "../../../images/seat-icon-gray.png";
 import Logo1 from "../../../images/teams_logos_60x60/15.png";
-import Logo2 from "../../../images/teams_logos_60x60/7.png";
+import Logo2 from "../../../images/teams_logos_60x60/07.png";
 import '../../Matches/MatchCard/MatchCard.css';
 import './TicketCard.css';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';

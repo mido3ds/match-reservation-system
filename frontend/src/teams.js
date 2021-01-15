@@ -83,5 +83,7 @@ function teamsLogos(r) {
     return logos;
 }
 
-const logos = teamsLogos(require.context('./images/teams_logos_30x30/', false, /\.(png)$/));
-export {teams, logos}
+const logos_30x30 = teamsLogos(require.context('./images/teams_logos_30x30/', false, /\.(png)$/));
+const logos_60x60 = teamsLogos(require.context('./images/teams_logos_60x60/', false, /\.(png)$/));
+const logos_120x120 = teamsLogos(require.context('./images/teams_logos_120x120/', false, /\.(png)$/));
+export {teams, logos_30x30, logos_60x60, logos_120x120}

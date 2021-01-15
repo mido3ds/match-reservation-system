@@ -1,6 +1,6 @@
 import UsersImage from "../../../images/match.png";
 import Logo2 from "../../../images/teams_logos_120x120/10.png";
-import Logo1 from "../../../images/teams_logos_120x120/9.png";
+import Logo1 from "../../../images/teams_logos_120x120/09.png";
 import './MatchReservationHeader.css';
 
 function MatchReservationHeader({ match }) {

@@ -5,9 +5,11 @@ import { NotificationManager } from 'react-notifications';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete.png";
 import Edit from "../../../images/edit.png";
-import {teams, logos} from "../../../teams"
+import {teams, logos_60x60} from "../../../teams"
 import './MatchCard.css';
 import MatchForm from '../MatchForm/MatchForm';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 const api = new DefaultApi();
 
@@ -42,15 +44,15 @@ function MatchCard({ card }) {
             <div className='flex-container-row-hcenter'>
               <div className="upper-area flex-container-row-hcenter" >
                 <div className="home-team" >
-                  <img alt="Logo" src={logos[match.homeTeam]} />
+                  <img alt="Logo" src={logos_60x60[match.homeTeam]} />
                   <p> { match.homeTeam } </p>
                 </div>
                 <div className="date-time" >
-                  <p className="time"> {match.dateTime.getHours() + ":" + match.dateTime.getMinutes()} </p>
-                  <p className="date"> match.dateTime.getDate() </p>
+                  <p className="time"> <Moment format="hh:mm" date={match.dateTime} /> </p>
+                  <p className="date"> <Moment format="ll" date={match.dateTime} /></p>
                 </div>
                 <div className="away-team" >
-                  <img alt="Logo" src={logos[match.awayTeam]} />
+                  <img alt="Logo" src={logos_60x60[match.awayTeam]} />
                   <p> { match.awayTeam }  </p>
                 </div>
               </div>
