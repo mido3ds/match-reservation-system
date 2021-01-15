@@ -3,6 +3,7 @@ import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import { isLoggedIn, userType, authToken } from '../../../Auth';
 import Delete from "../../../images/delete2.png";
 import { DefaultApi } from '../../../api';
+import { NotificationManager } from 'react-notifications';
 
 const api = new DefaultApi();
 
@@ -15,11 +16,11 @@ function StadiumCard({ card }) {
     // stadium.uuid -> actual id of the match
     try {
       const resp = await api.deleteStadium(authToken(), stadium.uuid);
-      alert('Stadium deleted successfully!');
+      NotificationManager.success(resp.data?.msg);
       removeCard();
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

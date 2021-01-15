@@ -6,7 +6,7 @@ import UserCard from '../../Users/UserCard/UserCard';
 import TicketCard from '../../Tickets/TicketCard/TicketCard';
 
 function CardComponent({ id, card }) {
-    const [components, _] = useState({
+    const [components] = useState({
         match: MatchCard,
         user: UserCard,
         request: RequestCard,

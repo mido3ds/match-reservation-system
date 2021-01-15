@@ -2,20 +2,21 @@ import Ball from "../../../images/ball.jpg";
 import { authToken, isLoggedIn, userType } from '../../../Auth';
 import MatchForm from '../MatchForm/MatchForm';
 import { DefaultApi } from '../../../api';
+import { NotificationManager } from 'react-notifications';
 import './MatchesHeader.css';
 
 const api = new DefaultApi();
 
-function AddMatches() {
+function AddMatches({ reloadCards}) {
   let addMatch = async (match) => {
     try {
       const resp = await api.submitMatch(authToken(), match);
       console.log(resp.data.msgs);
       return { success: true, message: resp.data.msg };
     } catch(err) {
-      console.error(err.message);
+      NotificationManager.error(err.message);
       if (err.response?.data?.err) {
-        console.error(err.response.data.err);
+        NotificationManager.error(err.response.data.err);
       }
       return { success: false, message: err.response?.data?.err };
     }
@@ -32,7 +33,7 @@ function AddMatches() {
   );
 }
 
-function MatchesHeader() {
+function MatchesHeader({ reloadCards }) {
   return (
     <div className="matches-header">
       <img className="matches-header-image" alt="matches-header" src={Ball} />

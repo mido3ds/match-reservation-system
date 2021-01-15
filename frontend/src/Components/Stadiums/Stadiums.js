@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DefaultApi } from '../../api';
+import { NotificationManager } from 'react-notifications';
 import CardsArea from '../CardsArea/CardsArea';
 import StadiumHeader from './StadiumHeader/StadiumHeader';
 
@@ -12,7 +13,7 @@ function Stadiums() {
 
   let removeStadium = (id) => {
     setStadiums(stadiums => {
-      return stadiums.filter(stadium => { return stadium.id != id })
+      return stadiums.filter(stadium => { return stadium.id !== id })
     });
   } 
 
@@ -26,8 +27,8 @@ function Stadiums() {
         return stadium; 
       }));
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }, [page]);
 

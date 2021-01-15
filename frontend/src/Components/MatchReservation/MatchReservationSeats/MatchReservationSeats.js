@@ -62,7 +62,7 @@ export default class MatchReservationSeats extends Component {
     }
 
     const column_numbers = []
-    for (var i = 1; i <= 10; i++) {
+    for (i = 1; i <= 10; i++) {
       column_numbers.push({ id: i })
     }
 

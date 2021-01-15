@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import './Pagination.css';
 
-let pageNumber = 1;
 
 function Pagination({ paginate, hasNext }) {
+  let pageNumber = 1;
   var paginationWrapper = document.querySelector('.pagination-wrapper');
 
   useEffect(() => {

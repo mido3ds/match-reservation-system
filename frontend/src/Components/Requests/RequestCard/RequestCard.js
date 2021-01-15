@@ -4,6 +4,7 @@ import { DefaultApi } from '../../../api';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import ManagerImage from "../../../images/manager.png";
 import { authToken } from '../../../Auth';
+import { NotificationManager } from 'react-notifications';
 
 
 const api = new DefaultApi();
@@ -17,22 +18,22 @@ function RequestCard({ card }) {
   let acceptManagerRequest = async () => {
     try {
       const resp = await api.acceptManagersRequest(authToken(), requestedManager.username);
-      alert(requestedManager.name + '\'s management request was accepted successfully!');
+      NotificationManager.success(resp.data?.msg);
       removeCard();
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 
   let rejectManagerRequest = async () => {
     try {
       const resp = await api.rejectManagersRequest(authToken(), requestedManager.username);
-      alert(requestedManager.name + '\'s management request was rejected successfully!');
+      NotificationManager.success(resp.data?.msg);
       removeCard();
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     } 
   }
 

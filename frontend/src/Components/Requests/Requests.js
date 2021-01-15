@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DefaultApi } from '../../api';
 import { authToken } from '../../Auth';
+import { NotificationManager } from 'react-notifications';
 import CardsArea from '../CardsArea/CardsArea';
 import RequestsHeader from './RequestsHeader/RequestsHeader';
 
@@ -13,7 +14,7 @@ function Requests() {
 
   let removeRequest = (id) => {
     setRequestedManagers(requestedManagers => {
-      return requestedManagers.filter(requestedManager => { return requestedManager.id != id })
+      return requestedManagers.filter(requestedManager => { return requestedManager.id !== id })
     });
   } 
 
@@ -27,8 +28,8 @@ function Requests() {
         return requestedManager; 
       }));
     } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) console.error(err.response.data.err);
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }, [page]);
 

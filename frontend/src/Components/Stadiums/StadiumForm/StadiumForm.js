@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DefaultApi } from '../../../api';
+import { NotificationManager } from 'react-notifications';
 import './StadiumForm.css';
 import { authToken } from '../../../Auth';
 
@@ -13,19 +14,19 @@ function StadiumForm({ title }) {
 
   function submit() {
     // if wrong values show error
-    if (name.length == 0 || city.length == 0) {
+    if (name.length === 0 || city.length === 0) {
       setErrMsg("Name and City must not be empty");
     } else {
       (async () => {
         try {
           await api.submitStadium(authToken(), { name, city });
-          console.log('submitted stadium successfully');
+          NotificationManager.success('Stadium added successfully');
           setShowSuccess(true);
           setErrMsg('');
         } catch(err) {
-          console.error(err.message);
+          Notification.error(err.message);
           if (err.response?.data?.err) {
-            console.error(err.response.data.err);
+            Notification.error(err.response.data.err);
             setErrMsg(`Failed at submitting, ${err.response.data.err}`);
           }
         }
