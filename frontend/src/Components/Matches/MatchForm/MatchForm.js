@@ -3,19 +3,11 @@ import DatePicker from "react-datepicker";
 import Dropdown from "react-bootstrap/Dropdown";
 import "react-datepicker/dist/react-datepicker.css";
 import DropArrow from "../../../images/down-arrow.png";
-import Logo2 from "../../../images/teams_logos_30x30/7.png";
-import Logo3 from "../../../images/teams_logos_30x30/8.png";
-import Logo1 from "../../../images/teams_logos_30x30/9.png";
+import { teams, logos } from "../../../teams";
 import './MatchForm.css';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-
-const teams = [
-  { name: 'Smouha', logo: Logo1 },
-  { name: 'El-Zamalek', logo: Logo2 },
-  { name: 'Pyramids', logo: Logo3 }
-]
 
 const stadiums = [
   { name: 'Borg Al Arab' },
@@ -116,14 +108,17 @@ function MatchForm({ title, saveChanges, id }) {
             <label className="info-text"> Home Team: </label>
             <Dropdown name='homeTeam' onSelect={onSelectHomeTeam} ref={register}>
               <Dropdown.Toggle className="dropdown-button">
+                { homeTeam ?
+                  <img className="button-team-logo" src={logos[homeTeam]} /> 
+                  : "" }
                 <span className="btn-black-text"> {homeTeam ? homeTeam : 'Select the home team..'} </span>
                 <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                {teams.map((team, index) =>
-                  (<Dropdown.Item key={index} eventKey={team.name}>
-                  <img alt={team.name + 'logo'} src={team.logo} />
+              <Dropdown.Menu className="teams-dropdown-menu" >
+                {teams.map(team =>
+                  (<Dropdown.Item className="team-dd-item" key={team.id} eventKey={team.name}>
+                  <img className="team-logo" alt={team.name + '-logo'} src={logos[team.name]} />
                   <span className="team-dd-item-text"> {team.name} </span>
                   </Dropdown.Item>)
                 )}
@@ -135,14 +130,17 @@ function MatchForm({ title, saveChanges, id }) {
             <label className="info-text"> Away Team: </label>
             <Dropdown onSelect={onSelectAwayTeam}>
               <Dropdown.Toggle className="dropdown-button">
+              { awayTeam ?
+                  <img className="button-team-logo" src={logos[awayTeam]} /> 
+                  : "" }
                 <span className="btn-black-text"> {awayTeam ? awayTeam : 'Select the away team..'} </span>
                 <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu className="teams-dropdown-menu" >
                 {teams.map((team, index) =>
-                  (<Dropdown.Item key={index} eventKey={team.name}>
-                  <img alt={team.name + 'logo'} src={team.logo} />
+                  (<Dropdown.Item className="team-dd-item" key={team.id} eventKey={team.name}>
+                  <img className="team-logo" alt={team.name + '-logo'} src={logos[team.name]} />
                   <span className="team-dd-item-text"> {team.name} </span>
                   </Dropdown.Item>)
                 )}
@@ -158,10 +156,10 @@ function MatchForm({ title, saveChanges, id }) {
                 <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu className="stadium-dropdown-menu">
                 {stadiums.map((stadium, index) =>
-                  (<Dropdown.Item key={index} eventKey={stadium.name}>
-                  <span className="team-dd-item-text"> {stadium.name} </span>
+                  (<Dropdown.Item className="stadium-dd-item" key={index} eventKey={stadium.name}>
+                  <span className="stadium-dd-item-text"> {stadium.name} </span>
                   </Dropdown.Item>)
                 )}
               </Dropdown.Menu>
