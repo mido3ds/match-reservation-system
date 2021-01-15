@@ -4,8 +4,7 @@ import { isLoggedIn, userType, authToken } from '../../../Auth';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete.png";
 import Edit from "../../../images/edit.png";
-import Logo1 from "../../../images/teams_logos_60x60/15.png";
-import Logo2 from "../../../images/teams_logos_60x60/7.png";
+import {teams, logos} from "../../../teams"
 import './MatchCard.css';
 import MatchForm from '../MatchForm/MatchForm';
 
@@ -42,15 +41,15 @@ function MatchCard({ card }) {
             <div className='flex-container-row-hcenter'>
               <div className="upper-area flex-container-row-hcenter" >
                 <div className="home-team" >
-                  <img alt="Logo" src={Logo1} />
+                  <img alt="Logo" src={logos[match.homeTeam]} />
                   <p> { match.homeTeam } </p>
                 </div>
                 <div className="date-time" >
-                  <p className="time"> 23:15  </p>
-                  <p className="date"> 5 jan 2021 </p>
+                  <p className="time"> {match.dateTime.getHours() + ":" + match.dateTime.getMinutes()} </p>
+                  <p className="date"> match.dateTime.getDate() </p>
                 </div>
                 <div className="away-team" >
-                  <img alt="Logo" src={Logo2} />
+                  <img alt="Logo" src={logos[match.awayTeam]} />
                   <p> { match.awayTeam }  </p>
                 </div>
               </div>
