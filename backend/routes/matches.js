@@ -6,6 +6,7 @@ const { Match, validateMatch, validateMatchEdit } = require('../models/match');
 const { Stadium } = require('../models/stadium');
 const _ = require('lodash');
 const seats = require('./seats');
+const { Ticket } = require('../models/ticket');
 
 const router = express.Router();
 
@@ -91,7 +92,12 @@ router.put('/:match_id', async (req, res) => {
     if(!match)
       return res.status(404).send({ err: 'No matches exist the given uuid.'});
 
-    if(matchEdit.venue) {
+    let bookedTickets = await Ticket.countDocuments({ matchUUID: matchID });
+    if(matchEdit.ticketPrice !== match.ticketPrice && bookedTickets) {
+      return res.status(400).send({ err: 'Cannot change the ticket price after being booked.'});
+    }
+
+    if(matchEdit.venue !== match.venue) {
       let stadium = await Stadium.findOne( { name: matchEdit.venue } );
       if (!stadium)
         return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});

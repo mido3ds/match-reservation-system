@@ -4,8 +4,7 @@ const Joi = require('joi');
 const ticketSchema = mongoose.Schema({
   matchUUID: { type: String, required: true },
   seatID: {type: String, required: true},
-  username: { type: String, required: true },
-  price: { type: Number, required: true }
+  username: { type: String, required: true }
 });
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
