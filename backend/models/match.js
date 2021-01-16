@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { Ticket } = require('./ticket');
 
 const rowsCount = 3;
 const colsCount = 10;
@@ -31,9 +32,11 @@ const matchSchema = new mongoose.Schema({
 });
 
 matchSchema.post('remove', async (deletedMatch, next) => {
-  // TODO: delete associated tickets
+  let tickets = await Ticket.find({ matchUUID: deletedMatch._id });
+  tickets.forEach(async (ticket) => await ticket.remove());
   next();
 });
+
 
 const Match = mongoose.model('Match', matchSchema);
 

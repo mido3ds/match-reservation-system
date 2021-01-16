@@ -44,7 +44,8 @@ const schema = yup.object().shape({
 
 
 function MatchForm({ show, title, submit, hide, defaultValues }) {
-  const { register, handleSubmit, errors, setValue, trigger, reset, clearErrors } = useForm(
+  // TODO: check validation problems
+  const { register, handleSubmit, errors, setValue, trigger, clearErrors } = useForm(
     { resolver: yupResolver(schema) }
   );
   const [stadiums, setStadiums] = useState([]);

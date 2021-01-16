@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 const { Match } = require('./match');
-const { remove } = require('lodash');
 
 const stadiumSchema = mongoose.Schema({
   name: { type: String, required: true },
@@ -11,7 +10,7 @@ const stadiumSchema = mongoose.Schema({
 
 stadiumSchema.post('remove', async (deletedStadium, next) => {
   let matches = await Match.find({ venue: deletedStadium.name });
-  matches.forEach(async (match) => { await match.remove(); });
+  matches.forEach(async (match) => await match.remove());
   next();
 });
 

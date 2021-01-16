@@ -522,9 +522,14 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/MatchTicket'
+                  matches:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListedMatch'
                 required:
                 - has_next
                 - tickets
+                - matches
         '406':
           description: not acceptable, if page < 1       
   /api/tickets/{match_id}:
@@ -550,7 +555,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UserTickets'
+                  $ref: '#/components/schemas/MatchTicket'
   /api/tickets/{ticket_id}:
     delete:
       summary: cancel ticket
@@ -892,28 +897,15 @@ components:
       type: object
       additionalProperties: false
       properties:
-        matchID:
+        uuid:
+          type: string
+        matchUUID:
           type: string
         seatID:
           type: string
         price:
           type: integer
       required:
+      - uuid
       - matchID
       - seatID
-      - price
-    UserTickets:
-      type: object
-      additionalProperties: false
-      properties:
-        tickets:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatchTicket'
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListedMatch'
-      required:
-      - tickets
-      - matches

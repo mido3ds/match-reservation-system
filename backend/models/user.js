@@ -25,7 +25,8 @@ userSchema.methods.generateAuthToken = function () {
 }
 
 userSchema.post('remove', async (deletedUser, next) => {
-  // TODO: delete associated tickets
+  let tickets = await Ticket.find({ username: deletedUser.username });
+  tickets.forEach(async (ticket) => await ticket.remove());
   next();
 });
 
