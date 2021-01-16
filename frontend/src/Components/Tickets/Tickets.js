@@ -19,17 +19,19 @@ function Tickets() {
 
   useEffect(async () => {
     try {
-      // const resp = await api.getTickets(page);
-      // setHasNext(resp.data.has_next);
-      // setTickets(resp.data.tickets.map((ticket, i) => {
-      //  ticket.id = i;
-      //  ticket.removeCard = () => { removeTicket(i); };
-      //  return ticket;
-      // }));
+      const resp = await api.getTickets(page);
+      const {tickets, matches, has_next} = resp.data;
+      setHasNext(has_next);
+      setTickets(tickets.map((ticket, i) => {
+        ticket.id = i;
+        ticket.removeCard = () => { removeTicket(i); };
+        ticket.match = matches.find(match => match.uuid === ticket.match.uuid)
+        return ticket;
+      }));
     } catch (err) {
-      // NotificationManager.error(err.message);
-      // if (err.response?.data?.err) 
-      //  NotificationManager.error(err.response.data.err);
+        NotificationManager.error(err.message);
+        if (err.response?.data?.err) 
+          NotificationManager.error(err.response.data.err);
     }
   }, [page]);
 
