@@ -47,7 +47,7 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
 
     let seatMap = match.seatMap;
     console.assert(seatMap[row][col].id === ticket.seatID, 'Seat ID wrong index calculation');
-
+    
     if(seatMap[row][col].isReserved)
       return res.status(409).send({ err: 'Ticket already booked.'});
     else {

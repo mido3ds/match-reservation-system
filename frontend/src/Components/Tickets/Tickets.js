@@ -25,7 +25,7 @@ function Tickets() {
       setTickets(tickets.map((ticket, i) => {
         ticket.id = i;
         ticket.removeCard = () => { removeTicket(i); };
-        ticket.match = matches.find(match => match.uuid === ticket.match.uuid)
+        ticket.match = matches.find(match => match.uuid === ticket.matchUUID)
         return ticket;
       }));
     } catch (err) {

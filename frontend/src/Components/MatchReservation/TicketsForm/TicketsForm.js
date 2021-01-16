@@ -1,8 +1,6 @@
 import './TicketsForm.css';
-import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
 
 function TicketsForm({onReserve}) {
- 
   return (
     <div className="tickets-form">
       <div className="modal fade" id="TicketsModal" tabIndex="-1" role="dialog">
