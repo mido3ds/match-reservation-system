@@ -3,6 +3,7 @@ import CardsArea from '../CardsArea/CardsArea';
 import TicketsHeader from './TicketsHeader/TicketsHeader';
 import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
+import { authToken } from '../../Auth';
 
 const api = new DefaultApi();
 
@@ -19,7 +20,7 @@ function Tickets() {
 
   let getTickets = async () => {
     try {
-      const resp = await api.getTickets(page);
+      const resp = await api.getTickets(authToken(), page);
       const {tickets, matches, has_next} = resp.data;
       setHasNext(has_next);
       setTickets(tickets.map((ticket, i) => {
