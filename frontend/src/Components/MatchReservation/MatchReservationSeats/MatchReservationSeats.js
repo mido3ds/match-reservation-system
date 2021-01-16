@@ -4,19 +4,21 @@ import Ticket from "../../../images/ticket.png";
 import Seat from "../../../images/seat-icon-gray.png";
 import Price from "../../../images/money.png";
 import SeatPicker from 'react-seat-picker'
-import { DefaultApi } from '../../api';
+import { DefaultApi } from '../../../api';
 import TicketsForm from '../TicketsForm/TicketsForm'
 import "./MatchReservationSeats.css";
 import { useEffect, useState } from "react";
 import { authToken } from '../../../Auth';
 import Delete from "../../../images/delete.png";
 import Cancel from "../../../images/cancel.svg";
+import { NotificationManager } from 'react-notifications';
+import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 
 const api = new DefaultApi();
 
-function MatchReservationSeats({match, seatMap}) {
-  const [userTickets, setUserTickets] = useState();
-  const [matchSeatMap, setMatchSeatMap] = useState();
+function MatchReservationSeats({match}) {
+  const [userTickets, setUserTickets] = useState([]);
+  const [matchSeatMap, setMatchSeatMap] = useState([]);
 
   let getUserTickets = async () => {
     try {
@@ -24,6 +26,7 @@ function MatchReservationSeats({match, seatMap}) {
       setUserTickets(resp.data.map((userTicket, i) => { 
         userTicket.id = i;
         userTicket.isReserved = true;
+        userTicket.cancelTicket = () => { cancelTicket(userTicket); }
         return userTicket; 
       }));
     } catch(err) {
@@ -34,7 +37,7 @@ function MatchReservationSeats({match, seatMap}) {
 
   let getMatchSeatMap = async () => {
     try {
-      const resp = await api.getSeats(matchID, authToken())
+      const resp = await api.getSeats(match.uuid, authToken())
       setMatchSeatMap(resp.data);
     } catch(err) {
       NotificationManager.error(err.message);
@@ -47,8 +50,9 @@ function MatchReservationSeats({match, seatMap}) {
     getUserTickets();
     getMatchSeatMap();
   }, []);
-  
-  let cancelTicket = (ticket) => {
+
+
+  let cancelTicket = async (ticket) => {
     if(ticket.isReserved) {
       try {
         const resp = await api.cancelTicket(authToken(), ticket.uuid);
@@ -62,8 +66,9 @@ function MatchReservationSeats({match, seatMap}) {
     removeSeat()  
   }
   
-  let reserveSeat = () => {
-    userTickets.forEach((ticket, index) => {
+  let reserveSeats = async () => {
+    
+    await Promise.all(userTickets.map(async(ticket, index) => {
       try {
         if(!ticket.isReserved) {
           const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken());
@@ -75,18 +80,19 @@ function MatchReservationSeats({match, seatMap}) {
           if (err.response?.data?.err) 
             NotificationManager.error(err.response.data.err);
       }
-    });
+    }));
   }
 
   let addSeat = async ({ row, number, id }, addCb) => {
-      await new Promise(resolve => setTimeout(resolve, 1500))
       console.log(`Added seat ${number}, row ${row}, id ${id}`)
       addCb(row, number, id, '')
-      lastTicketId =  userTickets[userTickets.length - 1];
-      userTickets.push({id:lastTicketId + 1, 
+      const lastTicketId =  userTickets.length ? userTickets[userTickets.length - 1].id : 0;
+      let newTicket = { id: lastTicketId + 1, 
                         isReserved: false, 
                         seatID: id, 
-                        price: match.price })
+                        price: match.ticketPrice,
+                        cancelTicket: () => { cancelTicket(newTicket); }}
+      setUserTickets([...userTickets , newTicket]); 
   }
  
   let removeSeat = async  ({ row, number, id }, removeCb) => {
@@ -94,7 +100,7 @@ function MatchReservationSeats({match, seatMap}) {
       console.log(`Removed seat ${number}, row ${row}, id ${id}`)
       removeCb(row, number, '')
       setUserTickets(userTickets => {
-        return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
+        return userTickets.filter(userTicket => { return userTicket.seatId !== id })
       });
   }
 
@@ -114,15 +120,16 @@ function MatchReservationSeats({match, seatMap}) {
 
   return (
     <div className="flex-container-row-hcenter">
+      {rows.length ? 
       <div className="reservation-area flex-container-column-vcenter">
-      <div className="column-numbers flex-container-row">
+        <div className="column-numbers flex-container-row">
           {columnNumbers}
         </div> 
-      <div className = "seats-area">
+        <div className = "seats-area">
           <SeatPicker 
             addSeatCallback={addSeat}
             removeSeatCallback={removeSeat}
-            rows={rows} /*seatMap*/
+            rows={rows} 
             maxReservableSeats={10}
             alpha
             visible
@@ -133,15 +140,17 @@ function MatchReservationSeats({match, seatMap}) {
         </div>
         <img className="pitch-image" alt="pitch" src={Pitch} />
       </div>
+    : ''}
+    {userTickets.length ?
       <div className="tickets-area flex-container-column-hcenter">
-        <h2 className="tickets-title"> Tickets: </h2>
-        <div className="flex-container-row-vcenter">
-          {userTickets.map(ticket => (
+       <h2 className="tickets-title"> Tickets: </h2>
+         <div className="flex-container-row-vcenter">
+           {userTickets.map(ticket => (
             <div key={ticket.id.toString()} className={`ticket-area flex-container-column-hcenter ${ticket.isReserved ? "dark-red" : "light-green"}`}>
-              <img alt="reject-icon" className="cancel-ticket" src={ticket.isReserved ? Delete : Cancel}/>
+              <img alt="reject-icon" className="cancel-ticket" data-toggle="modal" data-target={'#cancelTicket' + ticket.id}  src={ticket.isReserved ? Delete : Cancel}/>
               <ConfirmationModal id={'cancelTicket' + ticket.id} 
                                 text={ 'Are you sure you want to cancel this ticket?'}
-                                onOK={ cancelTicket(ticket) } /> : ''
+                                onOK={ ticket.cancelTicket } />
               <img className="ticket-image" alt="pitch" src={Ticket}/>
               <div className="flex-container-row-hcenter">
                 <div className="seat-number-area"> 
@@ -159,7 +168,8 @@ function MatchReservationSeats({match, seatMap}) {
         <TicketsForm />
         <button type="button" className="tickets-purchase-button btn btn-primary"
                 data-toggle="modal" data-target="#TicketsModal"> Purchase </button> 
-      </div>
+        <TicketsForm onReserve={reserveSeats}/>
+      </div> : ''}
   </div>
   );
 }

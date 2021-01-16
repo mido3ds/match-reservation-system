@@ -38,7 +38,7 @@ function MatchReservation() {
       match ?
       <div className="flex-container-column-vcenter-hcenter">
         <MatchReservationHeader match={match}/>
-        <MatchReservationSeats match={match} seatMap={matchSeatMap}/>
+        <MatchReservationSeats match={match}/>
       </div>
       : <div/>
      }
