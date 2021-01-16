@@ -65,7 +65,7 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
     ticket = new Ticket(ticket);
     ticket.price = match.ticketPrice;
     await ticket.save();
-    res.status(200).send( { msg: 'Ticket booked successfully.'});
+    res.status(200).send( { msg: 'Ticket for seat ' + ticket.seatID + ' booked successfully.'});
   } catch (err) {
     res.status(500).send({ err: err.msg });
   }
