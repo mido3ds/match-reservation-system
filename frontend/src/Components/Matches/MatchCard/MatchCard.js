@@ -13,7 +13,7 @@ import 'moment-timezone';
 const api = new DefaultApi();
 
 function MatchCard({ card }) {
-  const {removeCard, ...match} = card;
+  const {removeCard, showEditModal, ...match} = card;
 
   let deleteMatch = async () => {
     // match.id -> frontend card id
@@ -32,13 +32,13 @@ function MatchCard({ card }) {
       <div className='match-card-container'>
         <div className="match-card">
           <span style={{ visibility: isLoggedIn() && userType() === 'manager' ? 'visible': 'hidden'}} >
-            <img alt="edit-icon" className="edit" src={Edit} onClick={ match.showEditModal }/> 
+            <img alt="edit-icon" className="edit" src={Edit} onClick={ showEditModal }/> 
             <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
             <ConfirmationModal id={'deleteModal' + match.id} 
                               text={ 'Are you sure you want to delete this match?'}
                               onOK={ deleteMatch } /> : ''
           </span> 
-          <Link className="noHover" to={{ pathname: `/match-reservation/${ match.id }`, state: { } }}>
+          <Link className="noHover" to={{ pathname: `/match-reservation/${ match.uuid }`, state: { match } }}>
             <div className='flex-container-row-hcenter'>
               <div className="upper-area flex-container-row-hcenter" >
                 <div className="home-team" >

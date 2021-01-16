@@ -1,7 +1,8 @@
 import UsersImage from "../../../images/match.png";
-import Logo2 from "../../../images/teams_logos_120x120/10.png";
-import Logo1 from "../../../images/teams_logos_120x120/09.png";
+import { logos_120x120 } from "../../../teams"
 import './MatchReservationHeader.css';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function MatchReservationHeader({ match }) {
   return (
@@ -10,36 +11,36 @@ function MatchReservationHeader({ match }) {
       <div className="match-details flex-container-column-vcenter">
         <div className="teams-area flex-container-row-hcenter" >
           <div className="match-home-team" >
-            <img alt="Logo" src={Logo1} />
-            <p> Wadi Degla </p>
+            <img alt="Logo" src={logos_120x120[match.homeTeam]} />
+            <p> { match.homeTeam } </p>
           </div>
           <div className="match-date-time flex-container-column">
-            <p className="match-time"> 23:15  </p>
-            <p className="match-date"> 5 january 2021 </p>
+            <p className="match-time"> <Moment format="hh:mm" date={match.dateTime} /> </p>
+            <p className="match-date"> <Moment format="ll" date={match.dateTime} /> </p>
             <div className="stad-refere-area flex-container-row-hcenter">
               <span className="match-stadium">
                 <img alt="stadium-icon" src="https://www.flaticon.com/svg/static/icons/svg/1259/1259792.svg" />
-                <span> Burg El-Arab </span>
+                <span> { match.venue }  </span>
               </span>
               <span className="match-referee" >
                 <img alt="referee-icon" src="https://www.flaticon.com/svg/static/icons/svg/850/850989.svg" />
-                <span> Gehad Grisha </span>
+                <span> { match.mainReferee }  </span>
               </span>
             </div>
             <div className="flex-container-row-hcenter">
               <span className="first-linesman">
                 <img alt="linesman-icon" src="https://www.flaticon.com/svg/static/icons/svg/1031/1031387.svg" />
-                <span> Ayman Dgesh </span>
+                <span> { match.firstLinesman }  </span>
               </span>
               <span className="second-linesman" >
                 <img alt="linesman-icon" src="https://www.flaticon.com/svg/static/icons/svg/1031/1031387.svg" />
-                <span> Abo El-regal </span>
+                <span> { match.secondLinesman }  </span>
               </span>
             </div>
           </div>
           <div className="match-away-team" >
-            <img alt="Logo" src={Logo2} />
-            <p> El-Zamalek  </p>
+            <img alt="Logo" src={logos_120x120[match.awayTeam]} />
+            <p> { match.awayTeam }   </p>
           </div>
         </div>
       </div>

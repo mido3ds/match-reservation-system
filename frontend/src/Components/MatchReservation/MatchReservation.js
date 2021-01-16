@@ -1,20 +1,47 @@
+import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { DefaultApi } from '../../api';
+import { NotificationManager } from 'react-notifications';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader';
 import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
 
+const api = new DefaultApi();
+
 function MatchReservation() {
-  let { match_id } = useParams();
+  let { match_id: matchID } = useParams();
   let { state } = useLocation();
-  if (state && state.card) {
-    // Extract match info from the passed card
-  } else {
-    // No passed card (link was accessed directly), fetch the match info from the server
-  }
+
+  const[match, setMatch] = useState();
+
+  let getMatch = async () => {
+    try {
+      const resp = await api.getMatch(matchID);
+      setMatch(resp.data);
+    } catch(err) {
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+    }
+  };
+
+  useEffect(async () => {
+    if (state?.match) {
+      setMatch(state.match);
+    } else {
+      getMatch();
+    }
+  }, []);
+
   return (
-    <div className="flex-container-column-vcenter-hcenter">
-      <MatchReservationHeader/>
-      <MatchReservationSeats/>
-    </div>
+    <>
+    {
+      match ?
+      <div className="flex-container-column-vcenter-hcenter">
+        <MatchReservationHeader match={match}/>
+        <MatchReservationSeats match={match}/>
+      </div>
+      : <div/>
+     }
+    </>
   );
 }
 
