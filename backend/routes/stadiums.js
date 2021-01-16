@@ -12,8 +12,9 @@ router.get('/', async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
+  let stadiums, totalStadiums;
   try {
-    const stadiums = await Stadium
+    stadiums = await Stadium
       .aggregate([{
         $project: {
           _id: 0, uuid: "$_id",
@@ -23,15 +24,16 @@ router.get('/', async (req, res) => {
       .skip((req.query.page - 1) * pageSize)
       .limit(pageSize);
 
-    let totalStadiums = await Stadium.countDocuments();
-    let has_next = (req.query.page - 1) * pageSize + stadiums.length < totalStadiums;
-    res.status(200).send({
-      has_next: has_next,
-      stadiums: stadiums
-    });
+    totalStadiums = await Stadium.countDocuments();
   } catch(err) {
-    res.status(500).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
+
+  let has_next = (req.query.page - 1) * pageSize + stadiums.length < totalStadiums;
+  res.status(200).send({
+    has_next: has_next,
+    stadiums: stadiums
+  });
 });
 
 router.get('/names', async (req, res) => {

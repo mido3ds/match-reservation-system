@@ -11,36 +11,42 @@ router.get('/', auth, async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
+  let tickets;
   try {
     // Get tickets per user per page
-    let tickets = await Ticket.find({ username: req.user.username })
+    tickets = await Ticket.find({ username: req.user.username })
                               .skip((req.query.page - 1) * pageSize)
                               .limit(pageSize);
-
-    // Extract unique match uuids
-    let matchUUIDs = new Set();
-    tickets = tickets.map( ticket => {
-      matchUUIDs.add(ticket.matchUUID);
-      return {...ticket.toObject(), uuid: ticket._id};
-    });
-
-    // Get related matches
-    let matches = await Match.find({ _id: Array.from(matchUUIDs) }).select({ seatMap: 0});
-    matches = matches.map( match => {
-      return {...match.toObject(), uuid: match._id};
-    });
-
-    let totalTickets = await Ticket.countDocuments({ username: req.user.username });
-    let has_next = (req.query.page - 1) * pageSize + tickets.length < totalTickets;
-
-    res.status(200).send({
-      has_next: has_next,
-      tickets: tickets,
-      matches: matches
-    });
   } catch(err) {
-    res.status(500).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
+
+  // Extract unique match uuids
+  let matchUUIDs = new Set();
+  tickets = tickets.map( ticket => {
+    matchUUIDs.add(ticket.matchUUID);
+    return {...ticket.toObject(), uuid: ticket._id};
+  });
+
+  let matches, totalTickets;
+  try {
+    matches = await Match.find({ _id: Array.from(matchUUIDs) }).select({ seatMap: 0});
+    totalTickets = await Ticket.countDocuments({ username: req.user.username });
+  } catch(err) {
+    return res.status(500).send({ err: err.message });
+  }
+
+  matches = matches.map( match => {
+    return {...match.toObject(), uuid: match._id};
+  });
+  
+  let has_next = (req.query.page - 1) * pageSize + tickets.length < totalTickets;
+
+  res.status(200).send({
+    has_next: has_next,
+    tickets: tickets,
+    matches: matches
+  });
 });
 
 router.get('/:match_id', auth, async (req, res) => {
@@ -48,21 +54,22 @@ router.get('/:match_id', auth, async (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});
 
+  let tickets;
   try {
     let match = await Match.findById(matchID).select({ seatMap: 0});
     if(!match)
       return res.status(404).send({ err: 'No matches exist the given uuid.'});
 
-    let tickets = await Ticket.find({ username: req.user.username, matchUUID: matchID });
-
-    tickets = tickets.map( ticket => {
-      return {...ticket.toObject(), uuid: ticket._id};
-    });
-
-    res.status(200).send(tickets);
+    tickets = await Ticket.find({ username: req.user.username, matchUUID: matchID });
   } catch(err) {
-    res.status(500).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
+
+  tickets = tickets.map( ticket => {
+    return {...ticket.toObject(), uuid: ticket._id};
+  });
+
+  res.status(200).send(tickets);
 });
 
 router.delete('/:ticket_id', async (req, res) => {
