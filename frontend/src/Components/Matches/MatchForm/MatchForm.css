@@ -237,8 +237,8 @@
     }
     
     .match-form-buttons-area {
-        margin-top: 0px;
-        margin-left: 20px;
+        margin-top: 10px;
+        margin-left: -400px;
         margin-bottom: 0px;
     }
 }
