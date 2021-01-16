@@ -80,7 +80,7 @@ router.delete('/:ticket_id', async (req, res) => {
     let ticket = await Ticket.findOne({ _id: ticketID });
     if (!ticket) return res.status(404).send({ err: 'Ticket to delete is not found'});
     await ticket.remove();
-    res.status(200).send({ msg: 'Ticket deleted successfully!' });
+    res.status(200).send({ msg: 'Ticket for seat ' + ticket.seatID + ' deleted successfully!' });
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }
