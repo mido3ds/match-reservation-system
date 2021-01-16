@@ -24,7 +24,6 @@
 }
 
 .teams-area {
-    margin-top: 80px;
     width: 100%;
 }
 
@@ -101,13 +100,11 @@
 }
 
 .match-stadium {
-    width: 120px;
     height: 30px;
     margin: 0px 5px;
 }
 
 .first-linesman {
-    width: 120px;
     height: 30px;
     margin: 0px 5px
 }
@@ -127,7 +124,6 @@
 }
 
 .second-linesman {
-    width: 120px;
     height: 30px;
     margin: 0px 5px
 }
@@ -159,7 +155,6 @@
 }
 
 .match-referee {
-    width: 120px;
     height: 30px;
     margin: 0px 5px;
 }

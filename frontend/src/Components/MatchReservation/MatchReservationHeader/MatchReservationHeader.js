@@ -8,13 +8,13 @@ function MatchReservationHeader({ match }) {
   return (
     <div className="match-reservation-header">
       <img className="match-reservation-header-image" alt="match-header" src={UsersImage} />
-      <div className="match-details flex-container-column-vcenter">
-        <div className="teams-area flex-container-row-hcenter" >
+      <div className="match-details">
+        <div className="teams-area flex-container-row-vcenter-hcenter" >
           <div className="match-home-team" >
             <img alt="Logo" src={logos_120x120[match.homeTeam]} />
             <p> { match.homeTeam } </p>
           </div>
-          <div className="match-date-time flex-container-column">
+          <div className="match-date-time flex-container-column-vcenter-hcenter">
             <p className="match-time"> <Moment format="hh:mm" date={match.dateTime} /> </p>
             <p className="match-date"> <Moment format="ll" date={match.dateTime} /> </p>
             <div className="stad-refere-area flex-container-row-hcenter">
