@@ -477,13 +477,14 @@ paths:
             type: string
           required: true
           in: header
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/CreditCard'
       responses:
         '200':
           description: ok
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/CreditCard'
         '404':
           description: match/seat not found
         '401':
@@ -857,17 +858,6 @@ components:
     Seats:
       type: object
       additionalProperties: false
-    CreditCard:
-      type: object
-      additionalProperties: false
-      properties:
-        creditCardNumber:
-          type: string
-        pin:
-          type: integer
-      required:
-      - creditCardNumber
-      - pin
     SubmittedStadium:
       type: object
       additionalProperties: false
@@ -909,3 +899,14 @@ components:
       - uuid
       - matchID
       - seatID
+    CreditCard:
+      type: object
+      additionalProperties: false
+      properties:
+        creditCardNumber:
+          type: string
+        pin:
+          type: string
+      required:
+      - creditCardNumber
+      - pin

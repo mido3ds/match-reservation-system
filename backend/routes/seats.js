@@ -48,25 +48,25 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
     return res.status(404).send({ err: 'No matches exist the given uuid.'});
   }
 
-  let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
-  let col = ticket.seatID[1] - 1;
-
   let seatMap = match.seatMap;
+  let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
+  let col = ticket.seatID.substring(1) - 1;
+
   console.assert(seatMap[row][col].id === ticket.seatID, 'Seat ID wrong index calculation');
 
-  if(seatMap[row][col].isReserved)
+  if(match.seatMap[row][col].isReserved)
     return res.status(409).send({ err: 'Ticket already booked.'});
-  else {
-    seatMap[row][col].isReserved = true;
-  }
 
-  try {  
-    await Match.updateOne({ _id: match._id }, { $set: { seatMap: seatMap } });
+  try {
+    let updateCondition = {} 
+    updateCondition['seatMap.' + row + '.' + col + '.isReserved'] = true;
+    await Match.updateOne({ _id: match._id }, { $set: updateCondition });
     ticket = new Ticket(ticket);
     ticket.price = match.ticketPrice;
     await ticket.save();
     res.status(200).send( { msg: 'Ticket for seat ' + ticket.seatID + ' booked successfully.'});
   } catch (err) {
+    console.log(err);
     res.status(500).send({ err: err.msg });
   }
 });

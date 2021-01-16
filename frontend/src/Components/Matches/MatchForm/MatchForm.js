@@ -129,7 +129,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
   useEffect(() => {
     setValue('dateTime', dateTime);
     trigger('dateTime');
-    // eslint-disable-next-line
+  // eslint-disable-next-line
   }, [dateTime]);
 
   let onSubmit = async (match) => {
