@@ -195,8 +195,8 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
 
               <Dropdown.Menu className="stadium-dropdown-menu">
                 {stadiums.map((stadium, index) =>
-                  (<Dropdown.Item key={index} eventKey={stadium}>
-                  <span className="team-dd-item-text"> {stadium} </span>
+                  (<Dropdown.Item className="stadium-dd-item" key={index} eventKey={stadium}>
+                  <span className="stadium-dd-item-text"> {stadium} </span>
                   </Dropdown.Item>)
                 )}
               </Dropdown.Menu>
