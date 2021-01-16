@@ -4,6 +4,7 @@ import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader';
 import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
+import { authToken } from '../../Auth';
 
 const api = new DefaultApi();
 
@@ -12,7 +13,7 @@ function MatchReservation() {
   let { state } = useLocation();
 
   const[match, setMatch] = useState();
-
+  
   let getMatch = async () => {
     try {
       const resp = await api.getMatch(matchID);
@@ -37,7 +38,7 @@ function MatchReservation() {
       match ?
       <div className="flex-container-column-vcenter-hcenter">
         <MatchReservationHeader match={match}/>
-        <MatchReservationSeats match={match}/>
+        <MatchReservationSeats match={match} seatMap={matchSeatMap}/>
       </div>
       : <div/>
      }
