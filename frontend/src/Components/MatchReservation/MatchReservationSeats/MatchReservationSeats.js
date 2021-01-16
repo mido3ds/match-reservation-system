@@ -25,6 +25,7 @@ function MatchReservationSeats({match}) {
   let getUserTickets = async () => {
     try {
       const resp = await api.getMatchTickets(authToken(), match.uuid);
+      console.log(resp.data)
       setUserTickets(resp.data.map((userTicket, i) => { 
         userTicket.id = i;
         userTicket.isReserved = true;
@@ -40,7 +41,11 @@ function MatchReservationSeats({match}) {
   let getMatchSeatMap = async () => {
     try {
       const resp = await api.getSeats(match.uuid, authToken())
-      setMatchSeatMap(resp.data);
+      console.log(resp.data)
+      resp.data.forEach(row => { 
+        row.forEach((seat, j) => seat.number = j )
+      })
+      setMatchSeatMap(resp.data)
     } catch(err) {
       console.error(err.message);
       if (err.response?.data?.err) 
@@ -73,6 +78,7 @@ function MatchReservationSeats({match}) {
     await Promise.all(userTickets.map(async(ticket, index) => {
       try {
         if(!ticket.isReserved) {
+          console.log(ticket.seatID)
           const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken());
           NotificationManager.success(resp.data?.msg);
           userTickets[index].isReserved = true;
@@ -91,7 +97,6 @@ function MatchReservationSeats({match}) {
         return true;
   } 
   
-
   let addSeat = async ({ row, number, id }, addCb) => {
       console.log(`Added seat ${number}, row ${row}, id ${id}`)
       addCb(row, number, id, '')
@@ -112,7 +117,6 @@ function MatchReservationSeats({match}) {
       });
   }
 
-
   const columnNumbers = [];
   for (var i = 1; i <= 10; i++) {
     columnNumbers.push(<div key={i.toString()} className="column-number-area">
@@ -128,7 +132,7 @@ function MatchReservationSeats({match}) {
 
   return (
     <div className="flex-container-row-hcenter">
-      {rows.length ? 
+      {matchSeatMap.length ? 
       <div className="reservation-area flex-container-column-vcenter">
         <div className="column-numbers flex-container-row">
           {columnNumbers}
@@ -137,7 +141,7 @@ function MatchReservationSeats({match}) {
           <SeatPicker 
             addSeatCallback={addSeat}
             removeSeatCallback={removeSeat}
-            rows={rows} 
+            rows={matchSeatMap} 
             maxReservableSeats={10}
             alpha
             visible
