@@ -49,7 +49,7 @@ function Matches() {
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) {
         NotificationManager.error(err.response.data.err);
       }
@@ -66,7 +66,7 @@ function Matches() {
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) {
         NotificationManager.error(err.response.data.err);
       }
@@ -95,7 +95,7 @@ function Matches() {
         return match; 
       }));
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }, [page, matches]);

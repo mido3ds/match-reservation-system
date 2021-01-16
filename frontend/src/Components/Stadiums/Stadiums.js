@@ -29,7 +29,7 @@ function Stadiums() {
         return stadium;
       }));
     } catch (err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }, [page, stadiums]);
@@ -41,7 +41,7 @@ function Stadiums() {
       window.$("#StadiumFormModal").modal('hide')
       setStadiums([])
     } catch (err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) {
         NotificationManager.error(err.response.data.err);
       }

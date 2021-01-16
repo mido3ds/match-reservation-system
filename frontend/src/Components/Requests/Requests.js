@@ -28,7 +28,7 @@ function Requests() {
         return requestedManager; 
       }));
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }, [page]);

@@ -30,7 +30,7 @@ function MatchReservationSeats({match}) {
         return userTicket; 
       }));
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   };
@@ -40,7 +40,7 @@ function MatchReservationSeats({match}) {
       const resp = await api.getSeats(match.uuid, authToken())
       setMatchSeatMap(resp.data);
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) 
         NotificationManager.error(err.response.data.err);
     }
@@ -58,7 +58,7 @@ function MatchReservationSeats({match}) {
         const resp = await api.cancelTicket(authToken(), ticket.uuid);
         NotificationManager.success(resp.data?.msg);
       } catch(err) {
-        NotificationManager.error(err.message);
+        console.error(err.message);
         if (err.response?.data?.err) 
           NotificationManager.error(err.response.data.err);
       }
@@ -76,7 +76,7 @@ function MatchReservationSeats({match}) {
           userTickets[index].isReserved = true;
         } 
       } catch(err) {
-          NotificationManager.error(err.message);
+          console.error(err.message);
           if (err.response?.data?.err) 
             NotificationManager.error(err.response.data.err);
       }
