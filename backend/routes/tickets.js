@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const { Match } = require('../models/match');
 const { Ticket } = require('../models/ticket');
@@ -17,14 +18,14 @@ router.get('/', auth, async (req, res) => {
                               .limit(pageSize);
 
     // Extract unique match uuids
-    let matchUUIDs = Set();
+    let matchUUIDs = new Set();
     tickets = tickets.map( ticket => {
       matchUUIDs.add(ticket.matchUUID);
       return {...ticket.toObject(), uuid: ticket._id};
     });
 
     // Get related matches
-    let matches = await Match.find({ _id: matchUUIDs });
+    let matches = await Match.find({ _id: Array.from(matchUUIDs) }).select({ seatMap: 0});
     matches = matches.map( match => {
       return {...match.toObject(), uuid: match._id};
     });
@@ -42,7 +43,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-router.get('/match_id', auth, async (req, res) => {
+router.get('/:match_id', auth, async (req, res) => {
   let matchID = req.params.match_id;
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});

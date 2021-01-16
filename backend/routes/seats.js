@@ -1,8 +1,9 @@
 const express = require('express');
+const { assert } = require('joi');
 const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const { Match } = require('../models/match');
-const { validate } = require('../models/ticket');
+const { validate, Ticket } = require('../models/ticket');
 
 const router = express.Router({ mergeParams: true });
 
@@ -24,35 +25,43 @@ router.get('/', auth, async (req, res) => {
 });
 
 router.post('/reserve/:seat_id', auth, async (req, res) => {
+  // TODO: verify credit card number and pin
   let ticket = {
     matchUUID: req.params.match_id,
     username: req.user.username,
-    seatID: req.params.set_id,
+    seatID: req.params.seat_id
   }
-  const { error } = validate(matchEdit);  
+  const { error } = validate(ticket);  
   if (error) 
     return res.status(403).send({ err: error.details[0].message });
-  
-  try {
-    let match = await Match.findById(matchID).select({ _id: 0, seatMap: 1});
-    if(!match)
-      return res.status(404).send({ err: 'No matches exist the given uuid.'});
 
-    for(let i = 0; i < match.seatMap.length; i++) {
-      for(let j = 0; j < match.seatMap[0].legnth; j++) {
-        if(match.seatMap[i][j].id == ticket.seatID) {
-          if(match.seatMap[i][j].isReserved)
-            return res.status(409).send({ err: 'Ticket already booked.'});
-          else
-            match.seatMap[i][j].isReserved = true;
-        }
-      }
+  try {
+    let match = await Match.findById(ticket.matchUUID).select({ seatMap: 1, ticketPrice: 1 });
+    
+    if(!match) {
+      return res.status(404).send({ err: 'No matches exist the given uuid.'});
+    }
+
+    let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
+    let col = ticket.seatID[1] - 1;
+
+    let seatMap = match.seatMap;
+    console.assert(seatMap[row][col].id === ticket.seatID, 'Seat ID wrong index calculation');
+
+    if(seatMap[row][col].isReserved)
+      return res.status(409).send({ err: 'Ticket already booked.'});
+    else {
+      seatMap[row][col].isReserved = true;
     }
     
-    await match.save();
-    ticket.price = match.price;
+    await Match.updateOne({ _id: match._id }, { $set: { seatMap: seatMap } });
+
+    ticket = new Ticket(ticket);
+    ticket.price = match.ticketPrice;
+    await ticket.save();
     res.status(200).send( { msg: 'Ticket booked successfully.'});
   } catch (err) {
+    console.log(err);
     res.status(500).send({ err: err.msg });
   }
 });
