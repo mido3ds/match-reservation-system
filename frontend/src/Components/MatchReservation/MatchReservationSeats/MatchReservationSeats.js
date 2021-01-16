@@ -9,7 +9,7 @@ import TicketsForm from '../TicketsForm/TicketsForm'
 import "./MatchReservationSeats.css";
 import { useEffect, useState } from "react";
 import { authToken } from '../../../Auth';
-import Delete from "../../../images/delete.png";
+import Delete from "../../../images/delete2.png";
 import Cancel from "../../../images/cancel.svg";
 import { NotificationManager } from 'react-notifications';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
@@ -21,11 +21,12 @@ const api = new DefaultApi();
 function MatchReservationSeats({match}) {
   const [userTickets, setUserTickets] = useState([]);
   const [matchSeatMap, setMatchSeatMap] = useState([]);
+  const [showButton, setShowButton] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   let getUserTickets = async () => {
     try {
       const resp = await api.getMatchTickets(authToken(), match.uuid);
-      console.log(resp.data)
       setUserTickets(resp.data.map((userTicket, i) => { 
         userTicket.id = i;
         userTicket.isReserved = true;
@@ -41,7 +42,6 @@ function MatchReservationSeats({match}) {
   let getMatchSeatMap = async () => {
     try {
       const resp = await api.getSeats(match.uuid, authToken())
-      console.log(resp.data)
       resp.data.forEach(row => { 
         row.forEach((seat, j) => seat.number = j )
       })
@@ -62,7 +62,7 @@ function MatchReservationSeats({match}) {
 
   let cancelTicket = async (ticket) => {
       try {
-        const resp = await api.cancelTicket(authToken(), ticket.uuid);
+        const resp = await api.cancelTicket(ticket.seatID, authToken());
         NotificationManager.success(resp.data?.msg);
         setUserTickets(userTickets => {
           return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
@@ -74,12 +74,11 @@ function MatchReservationSeats({match}) {
       }
   }
   
-  let reserveSeats = async () => {   
+  let reserveSeats = async (creditCard) => { 
     await Promise.all(userTickets.map(async(ticket, index) => {
       try {
         if(!ticket.isReserved) {
-          console.log(ticket.seatID)
-          const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken());
+          const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken(), creditCard);
           NotificationManager.success(resp.data?.msg);
           userTickets[index].isReserved = true;
         } 
@@ -91,11 +90,23 @@ function MatchReservationSeats({match}) {
     }));
   }
 
-  let isThereUnreservedSeats = () => {
-    for(var userTicket in userTickets)
-      if(!userTicket.isReserved)
-        return true;
+  let updatePrice = () => {
+    let totalPrice = 0;
+    let showButton = false;
+      for(var i = 0; i < userTickets.length; ++i) {
+        if(userTickets[i] && !userTickets[i].isReserved) {
+          totalPrice += userTickets[i].price;
+          showButton = true;
+        }
+      }
+    setTotalPrice(totalPrice);
+    setShowButton(showButton);
   } 
+
+  useEffect(() => {
+    updatePrice()
+    // eslint-disable-next-line
+  }, [userTickets]);
   
   let addSeat = async ({ row, number, id }, addCb) => {
       console.log(`Added seat ${number}, row ${row}, id ${id}`)
@@ -106,7 +117,8 @@ function MatchReservationSeats({match}) {
                         seatID: id, 
                         price: match.ticketPrice,
                         cancelTicket: () => { cancelTicket(newTicket); }}
-      setUserTickets([...userTickets , newTicket]); 
+      setUserTickets([...userTickets , newTicket]);
+      console.log("here")  
   }
  
   let removeSeat = async  ({ row, number, id }, removeCb) => {
@@ -179,11 +191,11 @@ function MatchReservationSeats({match}) {
             </div>
           ))}
         </div>
-        { isThereUnreservedSeats ? 
+        { showButton ? 
         <span> 
           <button type="button" className="tickets-purchase-button btn btn-primary"
                   data-toggle="modal" data-target="#TicketsModal"> Purchase </button> 
-          <TicketsForm onReserve={reserveSeats}/>
+          <TicketsForm onSubmit={reserveSeats} totalPrice={totalPrice}/>
         </span>
         :''}
       </div> : ''}

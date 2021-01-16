@@ -82,3 +82,12 @@
     margin-left: 32px;
     margin-top: 25px;
 }
+
+.error-message {
+    font-size: small;
+    color: darkred;
+    font-family: monospace;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
