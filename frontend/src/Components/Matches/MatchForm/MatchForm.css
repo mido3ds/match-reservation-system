@@ -62,7 +62,7 @@
 
 .stadium-dropdown-menu {
     width: 300px !important;
-    height: 150 !important;
+    height: 150px !important;
     overflow-y: scroll;
 }
 
@@ -90,7 +90,6 @@
     font-family: 'IBM Plex Sans', sans-serif;
     color: #495057;
 }
-
 
 .team-logo{
     position: absolute;
