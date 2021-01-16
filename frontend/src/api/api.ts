@@ -33,10 +33,10 @@ export interface CreditCard {
     creditCardNumber: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof CreditCard
      */
-    pin: number;
+    pin: string;
 }
 /**
  * User sends this object when they edit their profile
@@ -1556,10 +1556,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} matchId 
          * @param {string} seatId 
          * @param {string} xAuthToken 
+         * @param {CreditCard} [creditCard] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reserveSeat: async (matchId: string, seatId: string, xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
+        reserveSeat: async (matchId: string, seatId: string, xAuthToken: string, creditCard?: CreditCard, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'matchId' is not null or undefined
             if (matchId === null || matchId === undefined) {
                 throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling reserveSeat.');
@@ -1592,6 +1593,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             const queryParameters = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 queryParameters.set(key, localVarQueryParameter[key]);
@@ -1602,6 +1605,13 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const nonString = typeof creditCard !== 'string';
+            const needsSerialization = nonString && configuration && configuration.isJsonMime
+                ? configuration.isJsonMime(localVarRequestOptions.headers['Content-Type'])
+                : nonString;
+            localVarRequestOptions.data =  needsSerialization
+                ? JSON.stringify(creditCard !== undefined ? creditCard : {})
+                : (creditCard || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -2048,11 +2058,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {string} matchId 
          * @param {string} seatId 
          * @param {string} xAuthToken 
+         * @param {CreditCard} [creditCard] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reserveSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreditCard>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).reserveSeat(matchId, seatId, xAuthToken, options);
+        async reserveSeat(matchId: string, seatId: string, xAuthToken: string, creditCard?: CreditCard, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).reserveSeat(matchId, seatId, xAuthToken, creditCard, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2311,11 +2322,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {string} matchId 
          * @param {string} seatId 
          * @param {string} xAuthToken 
+         * @param {CreditCard} [creditCard] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reserveSeat(matchId: string, seatId: string, xAuthToken: string, options?: any): AxiosPromise<CreditCard> {
-            return DefaultApiFp(configuration).reserveSeat(matchId, seatId, xAuthToken, options).then((request) => request(axios, basePath));
+        reserveSeat(matchId: string, seatId: string, xAuthToken: string, creditCard?: CreditCard, options?: any): AxiosPromise<void> {
+            return DefaultApiFp(configuration).reserveSeat(matchId, seatId, xAuthToken, creditCard, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2595,12 +2607,13 @@ export class DefaultApi extends BaseAPI {
      * @param {string} matchId 
      * @param {string} seatId 
      * @param {string} xAuthToken 
+     * @param {CreditCard} [creditCard] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public reserveSeat(matchId: string, seatId: string, xAuthToken: string, options?: any) {
-        return DefaultApiFp(this.configuration).reserveSeat(matchId, seatId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
+    public reserveSeat(matchId: string, seatId: string, xAuthToken: string, creditCard?: CreditCard, options?: any) {
+        return DefaultApiFp(this.configuration).reserveSeat(matchId, seatId, xAuthToken, creditCard, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
