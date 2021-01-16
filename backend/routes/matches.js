@@ -45,8 +45,9 @@ router.get('/:match_id', async (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});
   
+  let match;
   try {
-    let match = await Match.findById(matchID).select({ seatMap: 0});
+    match = await Match.findById(matchID).select({ seatMap: 0});
     if(!match)
       return res.status(404).send({ err: 'No matches exist the given uuid.'});
   } catch (err) {
