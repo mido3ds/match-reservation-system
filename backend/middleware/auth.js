@@ -13,7 +13,6 @@ async function auth(req, res, next) {
     let user;
     try {
       user = await User.findById(req.user._id);
-      console.log(user)
       if (!user) return res.status(400).send({ err: 'Invalid token!' });
     } catch (err) {
       return res.status(500).send({ err: err.message });
