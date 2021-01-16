@@ -1,12 +1,8 @@
-import { useState } from "react";
-import { DefaultApi } from '../../../api';
-import { NotificationManager } from 'react-notifications';
 import './StadiumForm.css';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-const api = new DefaultApi();
 const schema = yup.object().shape({
   name: yup.string()
     .required('Required field.')

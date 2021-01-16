@@ -18,7 +18,7 @@ function Users() {
     });
   }
 
-  useEffect(async () => {
+  let getUsers = async () => {
     try {
       const resp = await api.getUsers(authToken(), page);
       setHasNext(resp.data.has_next);
@@ -31,6 +31,11 @@ function Users() {
       console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getUsers();
+    // eslint-disable-next-line
   }, [page]);
 
   return (

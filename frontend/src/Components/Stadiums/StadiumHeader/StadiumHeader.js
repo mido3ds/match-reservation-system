@@ -2,10 +2,6 @@ import Stadium from "../../../images/stadium-background-with-green-grass-pitch-d
 import './StadiumHeader.css';
 import { isLoggedIn, userType } from '../../../Auth';
 
-function showAddStadiumModal() {
-  
-}
-
 function AddStadium() {
   return (
       <div className="stadiums-button-area">

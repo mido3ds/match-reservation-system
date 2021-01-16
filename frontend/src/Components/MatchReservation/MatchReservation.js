@@ -4,7 +4,6 @@ import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader';
 import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
-import { authToken } from '../../Auth';
 
 const api = new DefaultApi();
 
@@ -24,13 +23,14 @@ function MatchReservation() {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (state?.match) {
       setMatch(state.match);
     } else {
       getMatch();
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [state.match]);
 
   return (
     <>

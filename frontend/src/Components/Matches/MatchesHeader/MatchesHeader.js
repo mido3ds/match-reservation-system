@@ -1,10 +1,6 @@
 import Ball from "../../../images/ball.jpg";
-import { authToken, isLoggedIn, userType } from '../../../Auth';
-import { DefaultApi } from '../../../api';
-import { NotificationManager } from 'react-notifications';
+import { isLoggedIn, userType } from '../../../Auth';
 import './MatchesHeader.css';
-
-const api = new DefaultApi();
 
 function MatchesHeader({ showAddMatchModal }) {
   return (

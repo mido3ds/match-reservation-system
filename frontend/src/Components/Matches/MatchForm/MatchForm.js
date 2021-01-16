@@ -44,7 +44,6 @@ const schema = yup.object().shape({
 
 
 function MatchForm({ show, title, submit, hide, defaultValues }) {
-  // TODO: check validation problems
   const { register, handleSubmit, errors, setValue, trigger, clearErrors } = useForm(
     { resolver: yupResolver(schema) }
   );
@@ -85,9 +84,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
     clearErrors();
   }
 
-  useEffect(async () => {
-    if(!show) return;
-    // Get stadiums
+  let getStadiums = async() => {
     try {
       const resp = await api.getStadiumsNames();
       setStadiums(resp.data);
@@ -96,6 +93,12 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
     resetForm();
+  }
+
+  useEffect(() => {
+    if(show)
+      getStadiums();
+    // eslint-disable-next-line
   }, [show]);
 
   
@@ -126,6 +129,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
   useEffect(() => {
     setValue('dateTime', dateTime);
     trigger('dateTime');
+    // eslint-disable-next-line
   }, [dateTime]);
 
   let onSubmit = async (match) => {
@@ -148,7 +152,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
             <Dropdown name='homeTeam' onSelect={onSelectHomeTeam} ref={register}>
               <Dropdown.Toggle className="dropdown-button">
                 { homeTeam ?
-                  <img className="button-team-logo" src={logos_30x30[homeTeam]} /> 
+                  <img className="button-team-logo" alt='Home team logo' src={logos_30x30[homeTeam]} /> 
                   : "" }
                 <span className="btn-black-text"> {homeTeam ? homeTeam : 'Select the home team..'} </span>
                 <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />
@@ -170,7 +174,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
             <Dropdown onSelect={onSelectAwayTeam}>
               <Dropdown.Toggle className="dropdown-button">
               { awayTeam ?
-                  <img className="button-team-logo" src={logos_30x30[awayTeam]} /> 
+                  <img className="button-team-logo" alt='Away team logo' src={logos_30x30[awayTeam]} /> 
                   : "" }
                 <span className="btn-black-text"> {awayTeam ? awayTeam : 'Select the away team..'} </span>
                 <img alt="dropdown-arrow-icon" className="dropdown-arrow" src={DropArrow} />

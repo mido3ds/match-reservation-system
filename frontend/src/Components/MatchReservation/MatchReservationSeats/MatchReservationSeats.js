@@ -46,9 +46,10 @@ function MatchReservationSeats({match}) {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     getUserTickets();
     getMatchSeatMap();
+    // eslint-disable-next-line
   }, []);
 
 

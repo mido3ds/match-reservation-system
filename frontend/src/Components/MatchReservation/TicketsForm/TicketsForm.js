@@ -1,5 +1,4 @@
 import './TicketsForm.css';
-import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
 
 function TicketsForm({onReserve}) {
  

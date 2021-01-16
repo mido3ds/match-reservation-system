@@ -16,9 +16,9 @@ function Requests() {
     setRequestedManagers(requestedManagers => {
       return requestedManagers.filter(requestedManager => { return requestedManager.id !== id })
     });
-  } 
+  }
 
-  useEffect(async () => {
+  let getManagersRequests = async () => {
     try {
       const resp = await api.getManagersRequests(authToken(), page);
       setHasNext(resp.data.has_next);
@@ -31,6 +31,11 @@ function Requests() {
       console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getManagersRequests();
+    // eslint-disable-next-line
   }, [page]);
 
   return (
