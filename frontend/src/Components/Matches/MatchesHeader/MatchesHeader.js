@@ -1,38 +1,12 @@
 import Ball from "../../../images/ball.jpg";
 import { authToken, isLoggedIn, userType } from '../../../Auth';
-import MatchForm from '../MatchForm/MatchForm';
 import { DefaultApi } from '../../../api';
 import { NotificationManager } from 'react-notifications';
 import './MatchesHeader.css';
 
 const api = new DefaultApi();
 
-function AddMatches() {
-  let addMatch = async (match) => {
-    try {
-      const resp = await api.submitMatch(authToken(), match);
-      return { success: true, message: resp.data.msg };
-    } catch(err) {
-      NotificationManager.error(err.message);
-      if (err.response?.data?.err) {
-        NotificationManager.error(err.response.data.err);
-      }
-      return { success: false, message: err.response?.data?.err };
-    }
-  }
-
-  return (
-    <div>
-      <div className="matches-button-area">
-        <button type="button" className="matches-add-button btn btn-primary"
-          data-toggle="modal" data-target="#AddMatchFormModal"> Add </button>
-      </div>
-      <MatchForm title="Add Match" submit={addMatch} id="AddMatchFormModal" />
-    </div>
-  );
-}
-
-function MatchesHeader() {
+function MatchesHeader({ showAddMatchModal }) {
   return (
     <div className="matches-header">
       <img className="matches-header-image" alt="matches-header" src={Ball} />
@@ -41,7 +15,10 @@ function MatchesHeader() {
       </div>
       {
         isLoggedIn() && userType() === 'manager' ?
-          <AddMatches /> : <div />
+          <div className="matches-button-area">
+            <button type="button" className="matches-add-button btn btn-primary" onClick={showAddMatchModal}> Add </button>
+          </div> 
+          : <div />
       }
     </div>
   );

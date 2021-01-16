@@ -51,22 +51,11 @@ const schema = yup.object().shape({
 });
 
 
-function MatchForm({ title, submit, defaultValues, id }) {
-  const { register, handleSubmit, errors, setValue, trigger } = useForm(
-    { resolver: yupResolver(schema), defaultValues: defaultValues }
+function MatchForm({ show, title, submit, hide, defaultValues }) {
+  const { register, handleSubmit, errors, setValue, trigger, reset, clearErrors } = useForm(
+    { resolver: yupResolver(schema) }
   );
-
   const [stadiums, setStadiums] = useState([]);
-
-  useEffect(async () => {
-    try {
-      const resp = await api.getStadiumsNames();
-      setStadiums(resp.data);
-    } catch(err) {
-      NotificationManager.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
-    }
-  }, []);
 
   // homeTeam, awayTeam, stadium and dateTime are not selected using native HTML forms.
   // Therefore, they cannot be directly binded with React Hook Form.
@@ -86,6 +75,36 @@ function MatchForm({ title, submit, defaultValues, id }) {
   register('venue');
   register('dateTime');
 
+  let resetForm = () => {
+    // Reset fields
+    setHomeTeam(defaultValues?.homeTeam);
+    setValue('homeTeam', defaultValues?.homeTeam);
+    setAwayTeam(defaultValues?.awayTeam); 
+    setValue('awayTeam', defaultValues?.awayTeam);
+    setStadium(defaultValues?.venue); 
+    setValue('venue', defaultValues?.venue);
+    const initialDate = new Date(defaultValues?.dateTime ? defaultValues.dateTime : tomorrow);
+    setDateTime(initialDate);
+    setValue('mainReferee', defaultValues?.mainReferee);
+    setValue('firstLinesman', defaultValues?.firstLinesman);
+    setValue('secondLinesman', defaultValues?.secondLinesman);
+    setValue('ticketPrice', defaultValues?.ticketPrice);
+    clearErrors();
+  }
+
+  useEffect(async () => {
+    // Get stadiums
+    try {
+      const resp = await api.getStadiumsNames();
+      setStadiums(resp.data);
+    } catch(err) {
+      NotificationManager.error(err.message);
+      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+    }
+    resetForm();
+  }, [show]);
+
+  
   let onSelectHomeTeam = (homeTeam) => {
     setHomeTeam(homeTeam);
     setValue('homeTeam', homeTeam);
@@ -113,21 +132,17 @@ function MatchForm({ title, submit, defaultValues, id }) {
   useEffect(() => {
     setValue('dateTime', dateTime);
     trigger('dateTime');
-  }, [dateTime, setValue, trigger]);
+  }, [dateTime]);
 
-  // result = { success: boolean, message: string }
   let onSubmit = async (match) => {
-    let result = await submit(match);
-    if (result.success) {
-      NotificationManager.success(result.message);
-      document.querySelector('#close-btn' + id).click();
-    } else {
-      NotificationManager.error(result.message);
+    let success = await submit(match);
+    if (success) {
+      hide();
     }
   }
 
   return (
-    <div className="modal fade" id={ id } tabIndex="-1" role="dialog">
+    <div className="modal fade" id="MatchFormModal" tabIndex="-1" role="dialog">
       <div className="modal-dialog" role="document"></div>
       <form className="form-area modal-content" onSubmit={handleSubmit(onSubmit)}>
         <div className="modal-header">
@@ -227,7 +242,7 @@ function MatchForm({ title, submit, defaultValues, id }) {
           </div>
           <div className="match-form-buttons-area">
             <button type="submit" className="btn match-form-save-btn"> {title} </button>
-            <button type="button" id={'close-btn' + id} className="btn match-form-close-btn" data-dismiss="modal"> Close </button>
+            <button type="button" id='close-btn' className="btn match-form-close-btn" onClick={hide}> Close </button>
           </div>
         </div>
       </form>
