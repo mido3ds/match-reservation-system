@@ -58,25 +58,25 @@ export default class MatchReservationSeats extends Component {
   render() {
     const tickets = []
     for (var i = 0; i < 10; i++) {
-      tickets.push({ id: i })
+      tickets.push({ id: i , key: i})
     }
 
     const column_numbers = []
     for (i = 1; i <= 10; i++) {
-      column_numbers.push({ id: i })
+      column_numbers.push({ id: i, key: i })
     }
 
     const rows = [
-      [{id: 1, number:1}, {id: 2, number:2}, null, {id: 3, number:3, isReserved: true}, {id: 4, number:4}, null, {id: 5, number:5}, {id: 6, number:6}, null, {id: 7, number:7}, {id: 8, number:8}, null, {id: 9, number:9}, {id: 10, number:10}],
-      [{id: 11, number:1, isReserved: true}, {id: 12, number:2, isReserved: true}, null, {id: 13, number:3, isReserved: true}, {id: 14, number:4}, null, {id: 15, number:5}, {id: 16, number:6}, null, {id: 17, number:7}, {id: 18, number:8}, null, {id: 19, number:9}, {id: 20, number:10}],
-      [{id: 21, number:1}, {id: 22, number:2}, null, {id: 23, number:3, isReserved: true}, {id: 24, number:4}, null, {id: 25, number:5}, {id: 26, number:6}, null, {id: 27, number:7}, {id: 28, number:8}, null, {id: 29, number:9}, {id: 30, number:10}]
+      [{id: 1, number:1}, {id: 2, number:2}, {id: 3, number:3, isReserved: true}, {id: 4, number:4}, {id: 5, number:5}, {id: 6, number:6}, {id: 7, number:7}, {id: 8, number:8}, {id: 9, number:9}, {id: 10, number:10}],
+      [{id: 11, number:1, isReserved: true}, {id: 12, number:2, isReserved: true}, {id: 13, number:3, isReserved: true}, {id: 14, number:4}, {id: 15, number:5}, {id: 16, number:6}, {id: 17, number:7}, {id: 18, number:8}, {id: 19, number:9}, {id: 20, number:10}],
+      [{id: 21, number:1}, {id: 22, number:2}, {id: 23, number:3, isReserved: true}, {id: 24, number:4}, {id: 25, number:5}, {id: 26, number:6}, {id: 27, number:7}, {id: 28, number:8}, {id: 29, number:9}, {id: 30, number:10}]
     ]
     return (
       <div className="flex-container-row-hcenter">
         <div className="reservation-area flex-container-column-vcenter">
         <div className="column-numbers flex-container-row">
             {column_numbers.map(column_number => (
-              <div className="column-number-area">
+              <div key={column_number.toString()} className="column-number-area">
                 <h3> {column_number.id} </h3>
               </div>
             ))}

@@ -1,20 +1,33 @@
-
-.form-area {
-    margin-bottom: 40px;
-    width: 800px;
-    margin: 0 auto;
+.stadium-form-area {
+    width: 400px !important;
+    margin: auto;
+    border-radius: 20px;
 }
 
-.form-title {
-    font-size: 40px;
+.stadium-form-title {
+    font-size: 30px;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
-    margin-left: 30px;
+    margin-left: 15px;
     margin-top: 10px;
     margin-bottom: 0px;
 }
 
-.info-text {
+.stadium-form-modal-close-btn {
+    width: 90px !important;
+    transition: width 1000ms !important;
+    border-color: #0880AE !important;
+    margin: 0px 20px !important;
+}
+
+.stadium-form-modal-save-btn {
+    width: 120px !important;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+    color: white !important;
+}
+
+.stadium-input-label {
     font-size: 15px;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
@@ -22,101 +35,59 @@
     color: rgba(112, 110, 110, 0.849);
 }
 
-.team-dd-item-text {
-    margin-left: 10px;
-}
-
-.away-team-dd-area {
-    margin-left: 100px;
-}
-
-.stadium-dd-area {
-    margin-top: 20px;
-}
-
-.main-referee-area {
-    margin-top: 20px;
-}
-
-.input-text-area {
+.stadium-input-text-area {
     margin-top: 5px;
-    background-color: white;
-    border-radius: 10px;
-    border-color: #0880AE;
-    border-width: 2px;
-    width: 300px;
-    height: 50px;
-    line-height: 35px; 
-    font-weight: bold;
+    background-color: white !important;
+    border-radius: 10px !important;
+    border-color: #0880AE !important;
+    border-width: 2px !important;
+    width: 300px !important;
+    height: 50px !important;
+    line-height: 35px !important;
+    font-weight: bold !important;
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.time-input-field {
-    border-radius: 7px;
-    border-color: #0880AE;
-    border-width: 2px;
-    padding-left: 5px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.stadium-form-modal-body {
-    width: 800px;
-    margin-left: 30px;
-    margin-top: 15px;
-}
- 
-.stadium-form-buttons-area {
-    margin-top: 130px;
-    margin-left: 133px;
+.stadium-form-modal-buttons-area {
+    margin-top: 30px;
     margin-bottom: 20px;
+    margin-left: 110px;
 }
 
-.stadium-form-close-btn {
-    width: 110px;
-    transition: width 1000ms;
-    border-color: #0880AE;
-    margin: 0px 20px;
+.stadium-name-area {
+    margin-left: 30px;
 }
 
-.stadium-form-save-btn {
-    width: 130px;
-    background-color: #0880AE !important;
-    border-color: #0880AE !important;
-    color: white;
+.stadium-city-area {
+    margin-top: 10px !important;
+    margin-left: 30px;
+}
+
+.stadium-form-body h2 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 32px;
+    margin-top: 25px;
 }
 
 .vertical-alignment-helper {
-    display:table;
-    height: 100%;
-    width: 100%;
-    pointer-events:none;
+    display:table !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events:none !important;
 }
 .vertical-align-center {
-    /* To center vertically */
-    display: table-cell;
-    vertical-align: middle;
-    pointer-events:none;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    pointer-events:none !important;
 }
 
-@media (max-width: 800px) { 
-    .form-area {
-        width: 400px;
-    }
-
-    .stadium-form-modal-body {
-        width: 400px;
-        flex-direction: column;
-    }
-
-    .away-team-dd-area, .date-time-area, .firstlinesman-area {
-        margin-left: 0px;
-        margin-top: 20px;
-    }
-    
-    .stadium-form-buttons-area {
-        margin-top: 0px;
-        margin-left: 20px;
-        margin-bottom: 0px;
-    }
+.error-message {
+    font-size: small;
+    color: darkred;
+    font-family: monospace;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
 }

@@ -5,7 +5,7 @@ import { NotificationManager } from 'react-notifications';
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import Delete from "../../../images/delete.png";
 import Edit from "../../../images/edit.png";
-import {teams, logos_60x60} from "../../../teams"
+import {logos_60x60} from "../../../teams"
 import './MatchCard.css';
 import MatchForm from '../MatchForm/MatchForm';
 import Moment from 'react-moment';
