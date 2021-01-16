@@ -1,16 +1,43 @@
+import { useEffect, useState } from 'react';
 import CardsArea from '../CardsArea/CardsArea';
 import TicketsHeader from './TicketsHeader/TicketsHeader';
+import { DefaultApi } from '../../api';
+import { NotificationManager } from 'react-notifications';
+
+const api = new DefaultApi();
 
 function Tickets() {
-  const cards = []
-  for (var i = 0; i < 50; i++) {
-    cards.push({ id: i })
+  const [hasNext, setHasNext] = useState(false);
+  const [tickets, setTickets] = useState([]);
+  const [page, setPage] = useState(1);
+
+  let removeTicket = (id) => {
+    setTickets(tickets => {
+      return tickets.filter(ticket => { return ticket.id !== id })
+    });
   }
-    return (
-    <div className="flex-container-column-vcenter-hcenter">
-      <TicketsHeader />
-      <CardsArea cards={cards} cardIdentifier="ticket" />
-    </div>
+
+  useEffect(async () => {
+    try {
+      // const resp = await api.getTickets(page);
+      // setHasNext(resp.data.has_next);
+      // setTickets(resp.data.tickets.map((ticket, i) => {
+      //  ticket.id = i;
+      //  ticket.removeCard = () => { removeTicket(i); };
+      //  return ticket;
+      // }));
+    } catch (err) {
+      // NotificationManager.error(err.message);
+      // if (err.response?.data?.err) 
+      //  NotificationManager.error(err.response.data.err);
+    }
+  }, [page]);
+
+  return (
+  <div className="flex-container-column-vcenter-hcenter">
+    <TicketsHeader />
+    <CardsArea cards={tickets} hasNext={hasNext} cardIdentifier="ticket" onSetPage={setPage} />
+  </div>
   );
 }
 

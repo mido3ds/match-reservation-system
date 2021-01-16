@@ -41,10 +41,29 @@
     display: none !important;
 }
 
+.button-team-logo {
+    float: left;
+    margin-right: 15px;
+}
+
 .btn-black-text {
     position: relative;
     float: left;
-    color: black;
+    color: #495057;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.teams-dropdown-menu {
+    width: 300px !important;
+    height: 300px !important;
+    overflow-y: scroll;
+}
+
+.stadium-dropdown-menu {
+    width: 300px !important;
+    height: 150 !important;
+    overflow-y: scroll;
 }
 
 .dropdown-arrow {
@@ -54,7 +73,29 @@
 }
 
 .team-dd-item-text {
-    margin-left: 10px;
+    margin-left: 50px !important;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #495057;
+}
+
+.stadium-dd-item-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #495057;
+}
+
+
+.team-logo{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .away-team-dd-area {
@@ -169,6 +210,16 @@
     display: table-cell !important;
     vertical-align: middle !important;
     pointer-events:none !important;
+}
+
+.team-dd-item {
+    position: relative;
+    height: 60px;
+}
+
+.stadium-dd-item {
+    position: relative;
+    height: 40px;
 }
 
 @media (max-width: 800px) { 
