@@ -278,8 +278,27 @@ export interface InlineResponse2006 {
     has_next: boolean;
     /**
      * 
-     * @type {Array<ListedStadium>}
+     * @type {Array<MatchTicket>}
      * @memberof InlineResponse2006
+     */
+    tickets: Array<MatchTicket>;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2007
+ */
+export interface InlineResponse2007 {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2007
+     */
+    has_next: boolean;
+    /**
+     * 
+     * @type {Array<ListedStadium>}
+     * @memberof InlineResponse2007
      */
     stadiums: Array<ListedStadium>;
 }
@@ -437,6 +456,31 @@ export enum ListedUserGenderEnum {
 /**
  * 
  * @export
+ * @interface MatchTicket
+ */
+export interface MatchTicket {
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchTicket
+     */
+    matchID: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchTicket
+     */
+    seatID: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MatchTicket
+     */
+    price: number;
+}
+/**
+ * 
+ * @export
  * @interface SubmittedMatch
  */
 export interface SubmittedMatch {
@@ -587,6 +631,25 @@ export enum SubmittedUserRoleEnum {
     Manager = 'manager'
 }
 
+/**
+ * 
+ * @export
+ * @interface UserTickets
+ */
+export interface UserTickets {
+    /**
+     * 
+     * @type {Array<MatchTicket>}
+     * @memberof UserTickets
+     */
+    tickets: Array<MatchTicket>;
+    /**
+     * 
+     * @type {Array<ListedMatch>}
+     * @memberof UserTickets
+     */
+    matches: Array<ListedMatch>;
+}
 
 /**
  * DefaultApi - axios parameter creator
@@ -1074,6 +1137,58 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary get all user tickets in a match
+         * @param {string} xAuthToken 
+         * @param {string} matchId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMatchTickets: async (xAuthToken: string, matchId: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling getMatchTickets.');
+            }
+            // verify required parameter 'matchId' is not null or undefined
+            if (matchId === null || matchId === undefined) {
+                throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling getMatchTickets.');
+            }
+            const localVarPath = `/api/tickets/{match_id}`
+                .replace(`{${"match_id"}}`, encodeURIComponent(String(matchId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
+            }
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary get matches
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
@@ -1222,6 +1337,57 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get all user tickets
+         * @param {string} xAuthToken 
+         * @param {number} [page] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTickets: async (xAuthToken: string, page?: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling getTickets.');
+            }
+            const localVarPath = `/api/tickets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
+            }
 
 
     
@@ -1755,6 +1921,21 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary get all user tickets in a match
+         * @param {string} xAuthToken 
+         * @param {string} matchId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMatchTickets(xAuthToken: string, matchId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserTickets>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getMatchTickets(xAuthToken, matchId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @summary get matches
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
@@ -1789,7 +1970,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStadiums(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+        async getStadiums(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2007>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getStadiums(page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -1804,6 +1985,21 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async getStadiumsNames(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getStadiumsNames(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary get all user tickets
+         * @param {string} xAuthToken 
+         * @param {number} [page] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTickets(xAuthToken: string, page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getTickets(xAuthToken, page, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2024,6 +2220,17 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary get all user tickets in a match
+         * @param {string} xAuthToken 
+         * @param {string} matchId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMatchTickets(xAuthToken: string, matchId: string, options?: any): AxiosPromise<Array<UserTickets>> {
+            return DefaultApiFp(configuration).getMatchTickets(xAuthToken, matchId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary get matches
          * @param {number} [page] 
          * @param {*} [options] Override http request option.
@@ -2050,7 +2257,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStadiums(page?: number, options?: any): AxiosPromise<InlineResponse2006> {
+        getStadiums(page?: number, options?: any): AxiosPromise<InlineResponse2007> {
             return DefaultApiFp(configuration).getStadiums(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2061,6 +2268,17 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         getStadiumsNames(options?: any): AxiosPromise<Array<string>> {
             return DefaultApiFp(configuration).getStadiumsNames(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get all user tickets
+         * @param {string} xAuthToken 
+         * @param {number} [page] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTickets(xAuthToken: string, page?: number, options?: any): AxiosPromise<InlineResponse2006> {
+            return DefaultApiFp(configuration).getTickets(xAuthToken, page, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2268,6 +2486,19 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
+     * @summary get all user tickets in a match
+     * @param {string} xAuthToken 
+     * @param {string} matchId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getMatchTickets(xAuthToken: string, matchId: string, options?: any) {
+        return DefaultApiFp(this.configuration).getMatchTickets(xAuthToken, matchId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary get matches
      * @param {number} [page] 
      * @param {*} [options] Override http request option.
@@ -2312,6 +2543,19 @@ export class DefaultApi extends BaseAPI {
      */
     public getStadiumsNames(options?: any) {
         return DefaultApiFp(this.configuration).getStadiumsNames(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get all user tickets
+     * @param {string} xAuthToken 
+     * @param {number} [page] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getTickets(xAuthToken: string, page?: number, options?: any) {
+        return DefaultApiFp(this.configuration).getTickets(xAuthToken, page, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

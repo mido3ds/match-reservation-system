@@ -492,6 +492,65 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /api/tickets:
+    get:
+      summary: get all user tickets
+      operationId: getTickets
+      parameters:
+        - name: x-auth-token
+          schema:
+            type: string
+          required: true
+          in: header
+        - name: page
+          in: query
+          required: false
+          schema:
+            default: 1
+            type: integer      
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  has_next:
+                    type: boolean
+                  tickets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MatchTicket'
+                required:
+                - has_next
+                - tickets
+        '406':
+          description: not acceptable, if page < 1       
+  /api/tickets/{match_id}:
+    get:
+      summary: get all user tickets in a match
+      operationId: getMatchTickets
+      parameters:
+        - name: x-auth-token
+          schema:
+            type: string
+          required: true
+          in: header
+        - name: match_id
+          schema:
+            type: string
+          required: true
+          in: path
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserTickets'
   /api/tickets/{ticket_id}:
     delete:
       summary: cancel ticket
@@ -829,3 +888,32 @@ components:
       - name
       - city
       - uuid
+    MatchTicket:
+      type: object
+      additionalProperties: false
+      properties:
+        matchID:
+          type: string
+        seatID:
+          type: string
+        price:
+          type: integer
+      required:
+      - matchID
+      - seatID
+      - price
+    UserTickets:
+      type: object
+      additionalProperties: false
+      properties:
+        tickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchTicket'
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListedMatch'
+      required:
+      - tickets
+      - matches
