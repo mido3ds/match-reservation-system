@@ -282,6 +282,12 @@ export interface InlineResponse2006 {
      * @memberof InlineResponse2006
      */
     tickets: Array<MatchTicket>;
+    /**
+     * 
+     * @type {Array<ListedMatch>}
+     * @memberof InlineResponse2006
+     */
+    matches: Array<ListedMatch>;
 }
 /**
  * 
@@ -464,7 +470,13 @@ export interface MatchTicket {
      * @type {string}
      * @memberof MatchTicket
      */
-    matchID: string;
+    uuid: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchTicket
+     */
+    matchUUID?: string;
     /**
      * 
      * @type {string}
@@ -476,7 +488,7 @@ export interface MatchTicket {
      * @type {number}
      * @memberof MatchTicket
      */
-    price: number;
+    price?: number;
 }
 /**
  * 
@@ -631,25 +643,6 @@ export enum SubmittedUserRoleEnum {
     Manager = 'manager'
 }
 
-/**
- * 
- * @export
- * @interface UserTickets
- */
-export interface UserTickets {
-    /**
-     * 
-     * @type {Array<MatchTicket>}
-     * @memberof UserTickets
-     */
-    tickets: Array<MatchTicket>;
-    /**
-     * 
-     * @type {Array<ListedMatch>}
-     * @memberof UserTickets
-     */
-    matches: Array<ListedMatch>;
-}
 
 /**
  * DefaultApi - axios parameter creator
@@ -1927,7 +1920,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMatchTickets(xAuthToken: string, matchId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserTickets>>> {
+        async getMatchTickets(xAuthToken: string, matchId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MatchTicket>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getMatchTickets(xAuthToken, matchId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
@@ -2226,7 +2219,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMatchTickets(xAuthToken: string, matchId: string, options?: any): AxiosPromise<Array<UserTickets>> {
+        getMatchTickets(xAuthToken: string, matchId: string, options?: any): AxiosPromise<Array<MatchTicket>> {
             return DefaultApiFp(configuration).getMatchTickets(xAuthToken, matchId, options).then((request) => request(axios, basePath));
         },
         /**
