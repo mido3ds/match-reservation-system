@@ -1,70 +1,73 @@
 .match-card {
-    width: 250px;
-    height: 240px;
+    width: 270px;
+    height: 250px;
     background-color: #2C2738;
     border-radius: 20px;
     margin: 5px;
 }
 
 .middle-area {
+    width: 100%;
     margin-top: 0px;
+    align-items: center;
 }
 
 .upper-area {
     height: 110px;
     margin-top: -10px;
+    margin-bottom: 5px;
 }
 
 .edit {
     position: relative;
-    left: 210px;
+    left: 230px;
     width: 17px;
     height: 17px;
     margin: 10px;
+    margin-top: 15px;
     cursor: pointer;
 }
 
 .delete {
     position: relative;
-    left: 145px;
+    left: 165px;
     width: 17px;
     height: 17px;
     margin: 10px;
+    margin-top: 15px;
     cursor: pointer;
 }
 
 .home-team {
-    width: 70px;
+    width: 80px;
     height: 50px;
     margin: 0px 5px;
     text-align: center;
 }
 
 .away-team {
-    width: 70px;
+    width: 80px;
     height: 50px;
     margin: 0px 5px;
     text-align: center;
 }
 
 .date-time {
-    width: 60px;
+    width: 70px;
     height: 50px;
     margin: 0px 7px;
     text-align: center;
 }
 
 .stadium {
-    width: 120px;
+    width: 100%;
     height: 30px;
-    margin: 0px 5px;
     text-align: center;
 }
 
 .referee {
-    width: 120px;
+    width: 100%;
     height: 30px;
-    margin: 0px 5px;
     text-align: center;
 }
 

@@ -17,7 +17,7 @@ const teams = [
     },
     {
         id: 5,
-        name: "El-Mokawloon El-Arab"
+        name: "El-Mokawloon"
     },
     {
         id: 6,
@@ -50,11 +50,11 @@ const teams = [
     },
     {
         id: 13,
-        name: "El-Entag El-harby"
+        name: "El-Entag"
     },
     {
         id: 14,
-        name: "Masr El-Makassa"
+        name: "El-Makassa"
     },
     {
         id: 15,
@@ -62,7 +62,7 @@ const teams = [
     },
     {
         id: 16,
-        name: "El-Ettahad El-Sakandry",
+        name: "El-Ettahad",
     },
     {
         id: 17,
