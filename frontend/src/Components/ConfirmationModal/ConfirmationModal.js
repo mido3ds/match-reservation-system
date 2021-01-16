@@ -1,5 +1,5 @@
 import './ConfirmationModal.css';
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 
 function ConfirmationModal({ id, text, onOK }) {

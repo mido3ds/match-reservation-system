@@ -19,7 +19,7 @@ function Stadiums() {
     });
   }
 
-  useEffect(async () => {
+  let getStadiums = async () => {
     try {
       const resp = await api.getStadiums(page);
       setHasNext(resp.data.has_next);
@@ -29,9 +29,14 @@ function Stadiums() {
         return stadium;
       }));
     } catch (err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getStadiums();
+    // eslint-disable-next-line
   }, [page, stadiums]);
 
   async function submitStadium(stadium) {
@@ -41,7 +46,7 @@ function Stadiums() {
       window.$("#StadiumFormModal").modal('hide')
       setStadiums([])
     } catch (err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) {
         NotificationManager.error(err.response.data.err);
       }

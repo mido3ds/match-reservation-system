@@ -17,7 +17,7 @@ function Tickets() {
     });
   }
 
-  useEffect(async () => {
+  let getTickets = async () => {
     try {
       const resp = await api.getTickets(page);
       const {tickets, matches, has_next} = resp.data;
@@ -29,10 +29,15 @@ function Tickets() {
         return ticket;
       }));
     } catch (err) {
-        NotificationManager.error(err.message);
+        console.error(err.message);
         if (err.response?.data?.err) 
           NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getTickets();
+    // eslint-disable-next-line
   }, [page]);
 
   return (

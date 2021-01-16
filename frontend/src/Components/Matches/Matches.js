@@ -49,7 +49,7 @@ function Matches() {
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) {
         NotificationManager.error(err.response.data.err);
       }
@@ -66,7 +66,7 @@ function Matches() {
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) {
         NotificationManager.error(err.response.data.err);
       }
@@ -82,9 +82,9 @@ function Matches() {
     setMatches(matches => {
       return matches.filter(match => { return match.id !== id })
     });
-  } 
+  }
 
-  useEffect(async () => {
+  let getMatches = async () => {
     try {
       const resp = await api.getMatches(page);
       setHasNext(resp.data.has_next);
@@ -95,9 +95,14 @@ function Matches() {
         return match; 
       }));
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getMatches();
+    // eslint-disable-next-line
   }, [page, matches]);
 
   return (

@@ -32,7 +32,7 @@ function MatchReservationSeats({match}) {
         return userTicket; 
       }));
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   };
@@ -42,15 +42,16 @@ function MatchReservationSeats({match}) {
       const resp = await api.getSeats(match.uuid, authToken())
       setMatchSeatMap(resp.data);
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) 
         NotificationManager.error(err.response.data.err);
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     getUserTickets();
     getMatchSeatMap();
+    // eslint-disable-next-line
   }, []);
 
 
@@ -62,7 +63,7 @@ function MatchReservationSeats({match}) {
           return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
         });
       } catch(err) {
-        NotificationManager.error(err.message);
+        console.error(err.message);
         if (err.response?.data?.err) 
           NotificationManager.error(err.response.data.err);
       }
@@ -77,7 +78,7 @@ function MatchReservationSeats({match}) {
           userTickets[index].isReserved = true;
         } 
       } catch(err) {
-          NotificationManager.error(err.message);
+          console.error(err.message);
           if (err.response?.data?.err) 
             NotificationManager.error(err.response.data.err);
       }
