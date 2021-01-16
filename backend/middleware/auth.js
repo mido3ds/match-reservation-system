@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const { User } = require('../models/user');
 
 async function auth(req, res, next) {
   const token = req.header('x-auth-token');
@@ -12,11 +13,12 @@ async function auth(req, res, next) {
     let user;
     try {
       user = await User.findById(req.user._id);
+      console.log(user)
+      if (!user) return res.status(400).send({ err: 'Invalid token!' });
     } catch (err) {
       return res.status(500).send({ err: err.message });
     }
-    if (user) next();
-    res.status(400).send({ err: 'Invalid token!' });
+    next();
   } catch (ex) {
     return res.status(400).send({ err: 'Invalid token!' });
   }
