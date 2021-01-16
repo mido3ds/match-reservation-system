@@ -56,14 +56,14 @@
 
 .teams-dropdown-menu {
     width: 300px !important;
-    height: 300px !important;
-    overflow-y: scroll;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .stadium-dropdown-menu {
     width: 300px !important;
-    height: 150px !important;
-    overflow-y: scroll;
+    max-height: 150px;
+    overflow-y: auto;
 }
 
 .dropdown-arrow {

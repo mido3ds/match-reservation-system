@@ -85,6 +85,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
   }
 
   useEffect(async () => {
+    if(!show) return;
     // Get stadiums
     try {
       const resp = await api.getStadiumsNames();
