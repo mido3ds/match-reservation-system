@@ -4,14 +4,28 @@ import Price from "../../../images/money.png";
 import Seat from "../../../images/seat-icon-gray.png";
 import Logo1 from "../../../images/teams_logos_60x60/15.png";
 import Logo2 from "../../../images/teams_logos_60x60/07.png";
+import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
+import { NotificationManager } from 'react-notifications';
+import { DefaultApi } from '../../../api';
 import '../../Matches/MatchCard/MatchCard.css';
 import './TicketCard.css';
-import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
+import Moment from 'react-moment';
+import 'moment-timezone';
+
+const api = new DefaultApi();
 
 function TicketCard({ card }) {
+  const {removeCard, ...ticket} = card;
 
   let cancelTicket = async () => {
-    console.log("Cancel Ticket")
+    try {
+    // const resp = await api.cancelTicket(authToken(), ticket.uuid);
+    // NotificationManager.success(resp.data?.msg);
+    // removeCard();
+    } catch(err) {
+      // NotificationManager.error(err.message);
+      // if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+    }
   }
 
   return (
@@ -21,7 +35,7 @@ function TicketCard({ card }) {
           <ConfirmationModal id={'cancelModal' + card.id} 
                               text={ 'Are you sure you want to cancel this ticket?'}
                               onOK={ cancelTicket } /> : ''
-          <Link className="noHover" to={{ pathname: `/match-reservation/${card.id}`, state: { card } }}>
+          <Link className="noHover" to={{ pathname: `/match-reservation/${ticket.matchID}`, state: { } }}>
             <div className='flex-container-row-hcenter'>
               <div className="upper-area flex-container-row-hcenter" >
                 <div className="home-team" >
@@ -29,8 +43,8 @@ function TicketCard({ card }) {
                   <p> Wadi Degla </p>
                 </div>
                 <div className="date-time" >
-                  <p className="time"> 23:15  </p>
-                  <p className="date"> 5 jan 2021 </p>
+                  <p className="time"> <Moment format="hh:mm" date={ticket.match.dateTime} />  </p>
+                  <p className="date"> <Moment format="ll" date={ticket.match.dateTime} /> </p>
                 </div>
                 <div className="away-team" >
                   <img alt="Logo" src={Logo2} />

@@ -1,15 +1,15 @@
 const teams = [
     {
         id: 1,
-        name: "Al Ahly"
+        name: "Al-Ahly"
     },
     {
         id: 2,
-        name: "Ceramica Cleopatra"
+        name: "C. Cleopatra"
     },
     {
         id: 3,
-        name: "El-Bank Al-Ahly"
+        name: "El-Bank El-Ahly"
     },
     {
         id: 4,

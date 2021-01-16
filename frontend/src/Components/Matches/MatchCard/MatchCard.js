@@ -49,7 +49,7 @@ function MatchCard({ card }) {
                 </div>
                 <div className="date-time" >
                   <p className="time"> <Moment format="hh:mm" date={match.dateTime} /> </p>
-                  <p className="date"> <Moment format="ll" date={match.dateTime} /></p>
+                  <p className="date"> <Moment format="ll" date={match.dateTime} /> </p>
                 </div>
                 <div className="away-team" >
                   <img alt="Logo" src={logos_60x60[match.awayTeam]} />
