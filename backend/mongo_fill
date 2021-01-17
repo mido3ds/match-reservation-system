@@ -1,0 +1,133 @@
+#!/bin/env python3
+import argparse
+import string
+from datetime import datetime
+from random import choice, randint
+
+import bcrypt
+from pymongo import MongoClient
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-u', '--user', default='root', help='mongodb username')
+parser.add_argument('-p', '--password', default='password',
+                    help='mongodb password')
+parser.add_argument('--host', default='localhost', help='mongodb host')
+parser.add_argument('--port', default='27017', help='mongodb port')
+parser.add_argument('--db', default='test', help='mongodb db name')
+parser.add_argument('--drop', action='store_true',
+                    help='drop db')
+parser.add_argument('--managers', default=4, type=int,
+                    help='num of managers to create')
+parser.add_argument('--fans', default=14, type=int,
+                    help='num of fans to create')
+parser.add_argument('--tickets', default=30, type=int,
+                    help='num of tickets to create')
+parser.add_argument('--matches', default=20, type=int,
+                    help='num of matches to create')
+args = parser.parse_args()
+
+# create
+cities = ['Cairo', 'Alex', 'Ismailia', 'Giza', 'Aswan']
+
+teamnames = ["Al-Ahly",
+             "C. Cleopatra",
+             "El-Bank El-Ahly",
+             "El-Masry",
+             "El-Mokawloon",
+             "Aswan",
+             "El-Zamalek",
+             "Pyramids",
+             "Smouha",
+             "Enppi",
+             "El-Esmailly",
+             "El-Gouna",
+             "El-Entag",
+             "El-Makassa",
+             "Wadi Degla",
+             "El-Ettahad",
+             "Tala'ea El-Gaish",
+             "Ghazl El-Mahla"]
+
+
+def get_matches(stadiums):
+    matchdatetimes = [datetime.fromisoformat(f'20{i:02}-02-12T22')
+                      for i in range(22)]
+    return [{
+        'homeTeam': teamnames[i % len(teamnames)],
+        'awayTeam': teamnames[(i+1) % len(teamnames)],
+        'venue': randint(0, len(stadiums)-1),
+        'dateTime': choice(matchdatetimes),
+        'mainReferee': f'referee{i}',
+        'firstLinesman': f'firstLinesman{i}',
+        'secondLinesman': f'secondLinesman{i}',
+        'ticketPrice': 200,
+        'seatMap': 0,  # TODO: update this with the latest schema
+    } for i in range(args.matches)]
+
+
+def get_users():
+    usernames = ['admin',
+                 *[f'manager{i}' for i in range(args.managers)],
+                 *[f'fan{i}' for i in range(args.fans)]]
+    birthdates = [datetime.fromisoformat(
+        f'19{i:02}-12-30') for i in range(100)]
+    creationdates = [datetime.fromisoformat(
+        f'2020-12-{i:02}') for i in range(1, 30)]
+    return [{
+        'username': username,
+        'password': bcrypt.hashpw(str.encode(f'{username}pass'), bcrypt.gensalt()),
+        'firstName': f'First{username}',
+        'lastName': f'Last{username}',
+        'birthDate': choice(birthdates),
+        'gender': choice(['male', 'female']),
+        'city': choice(cities),
+        'address': f'{username} some address here',
+        'email': f'{username}@example.com',
+        'role': 'admin' if username == 'admin' else 'manager' if 'manager' in username else 'fan',
+        'isPending': choice([True, False]) if 'manager' in username else False,
+        'createdIn': choice(creationdates),
+    } for username in usernames]
+
+
+def get_stadiums():
+    # TODO: update this with stadium capacity
+    return [{'name': f'{city} Random Stadium', 'city': city}
+            for city in cities]
+
+
+def get_tickets(users, matches):
+    return [{
+        'matchUUID': choice(matches)['_id'],
+        'seatID': f'{choice(string.ascii_letters.upper())}{i}',
+        'username': choice(users)['username'],
+        'price': 200,
+    } for i in range(args.tickets)]
+
+
+# fill
+connection = f"mongodb://{args.user}:{args.password}@{args.host}:{args.port}"
+
+with MongoClient(connection) as client:
+    if args.drop or input(f'Drop db named {args.db}? y/[n] ').lower() in ['y', 'yes']:
+        client.drop_database(args.db)
+        print('dropped db')
+
+    db = client[args.db]
+
+    stadiums = get_stadiums()
+    db['stadia'].insert_many(stadiums)
+    print('inserted', len(stadiums), 'stadiums')
+
+    matches = get_matches(stadiums)
+    db['matches'].insert_many(matches)
+    print('inserted', len(matches), 'matches')
+
+    users = get_users()
+    db['users'].insert_many(users)
+    print('inserted', len(users), 'users')
+    print('users are', [user['username'] for user in users],
+          'password of {username} is {username}pass')
+
+    tickets = get_tickets(users, matches)
+    db['tickets'].insert_many(tickets)
+    print('inserted', len(tickets), 'tickets')
