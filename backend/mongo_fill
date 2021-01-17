@@ -1,6 +1,5 @@
 #!/bin/env python3
 import argparse
-import string
 from datetime import datetime
 from random import choice, randint, sample
 
@@ -100,7 +99,7 @@ def get_stadiums():
 def get_tickets(users, matches):
     return [{
         'matchUUID': choice(matches)['_id'],
-        'seatID': f'{choice(string.ascii_letters.upper())}{i}',
+        'seatID': f'{choice("ABC")}{randint(1,4)}',
         'username': choice(users)['username'],
         'price': 200,
     } for i in range(args.tickets)]
