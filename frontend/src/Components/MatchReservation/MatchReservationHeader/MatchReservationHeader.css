@@ -4,7 +4,7 @@
 
 .match-reservation-header-image {
     width: 96%;
-    height: 350px;
+    height: 900px;
     object-fit: cover;
     object-position: 50% 90%; /* try 20px 10px */ 
     opacity: 90%;
@@ -18,9 +18,9 @@
     width: 96%;
     height: 350px;
     position: absolute;
-    top: 50%;
+    top: 1%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -5%);
 }
 
 .teams-area {

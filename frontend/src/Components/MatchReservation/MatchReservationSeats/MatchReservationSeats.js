@@ -1,7 +1,7 @@
 import React from 'react'
 import Pitch from "../../../images/pitch.png";
 import Ticket from "../../../images/ticket.png";
-import Seat from "../../../images/seat-icon-gray.png";
+import Seat from "../../../images/seat-icon.png";
 import Price from "../../../images/money.png";
 import SeatPicker from 'react-seat-picker'
 import { DefaultApi } from '../../../api';
@@ -165,7 +165,7 @@ function MatchReservationSeats({ match }) {
   }
 
   return (
-    <div className="flex-container-row-hcenter">
+    <div className="reservation-container flex-container-row">
       {seatMap.length ?
         <div className="reservation-area flex-container-column-vcenter">
           <div className="column-numbers flex-container-row">
@@ -189,7 +189,7 @@ function MatchReservationSeats({ match }) {
         </div>
         : ''}
       {userTickets.length ?
-        <div className="tickets-area flex-container-column-hcenter">
+        <div className="tickets-area flex-container-column">
           <div className="header-area flex-container-row-vcenter">
             <h2 className="tickets-title"> Tickets: </h2>
             {showButton ?

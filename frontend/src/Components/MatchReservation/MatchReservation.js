@@ -3,7 +3,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader';
-import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
 
 const api = new DefaultApi();
 
@@ -38,7 +37,6 @@ function MatchReservation() {
       match ?
       <div className="flex-container-column-vcenter-hcenter">
         <MatchReservationHeader match={match}/>
-        <MatchReservationSeats match={match}/>
       </div>
       : <div/>
      }

@@ -1,29 +1,47 @@
+.reservation-container {
+    width: 100%;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 50px;
+}
+
 .reservation-area {
-    flex-basis: 0;
-    flex-grow: 1;
-    margin: 80px 25px;
+    width: 600px;
 }
 
 .tickets-area {
     width: 550px;
-    margin: 10px 25px;
+    margin-left: 20px;
 }
 
 .seats-area {
     margin-left: -35px;
 }
 
+.seat-picker__row:hover {
+    background-color: transparent;
+}
+
+.seat-picker__row--selected {
+    background-color: transparent;
+}
+
 .seat {
-    background-color: white;
+    background-color: transparent;
     background-image: url("../../../images/seat-icon.png");
     width: 20;
     height: 20;
 }
 
+.seat:hover {
+    background-color: transparent;
+}
+
 .seat--enabled {
     background-image: url("../../../images/seat-icon.png");;
 }
-
 
 .seat--selected {
     background-image: url("../../../images/seat-icon-green.png");
@@ -48,6 +66,7 @@
 }
 
 .tickets-title {
+    color: white;
     font-size: 40px;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
@@ -98,7 +117,7 @@
     position: absolute;
     width: 15px;
     height: 15px;
-    margin-top: -42px;
+    margin-top: -80px;
     margin-left: 97px;
     cursor: pointer;
 }
@@ -114,13 +133,14 @@
 
 .column-numbers {
     margin-left: 35px;
+    color: white !important;
 }
 
 .seat-picker__row__number {
     font-size: 20px !important;
     font-family: 'IBM Plex Sans', sans-serif !important;
     margin-right: 10px !important;
-    color: black !important;
+    color: white !important;
 }
 
 .tickets-purchase-button {
@@ -135,3 +155,4 @@
     justify-content: space-between;
     width: 100% !important;
 }
+

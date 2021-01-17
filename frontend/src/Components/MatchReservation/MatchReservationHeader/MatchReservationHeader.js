@@ -3,6 +3,7 @@ import { logos_120x120 } from "../../../teams"
 import './MatchReservationHeader.css';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import MatchReservationSeats from '../MatchReservationSeats/MatchReservationSeats';
 
 function MatchReservationHeader({ match }) {
   return (
@@ -44,6 +45,7 @@ function MatchReservationHeader({ match }) {
           </div>
         </div>
       </div>
+      <MatchReservationSeats match={match}/>
     </div>
   );
 }
