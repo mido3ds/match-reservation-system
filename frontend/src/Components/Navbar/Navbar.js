@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { isLoggedIn, logout } from '../../Auth';
+import { logout } from '../../Auth';
 import Navigation from '../../images/menu.png';
 import PremieurLeagueLogo from '../../images/premier-league-logo.png';
 import './Navbar.css';
 
 
-function Navbar() {
-    const [loggedin, setLoggedIn] = useState(isLoggedIn());
-
+function Navbar({ loggedIn, setLoggedIn }) {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, true);
         return () => {
@@ -24,7 +22,7 @@ function Navbar() {
         var buttons = undefined;
         var editButton = undefined;
         var logOutButton = undefined;
-        if (isLoggedIn()) {
+        if (loggedIn) {
             buttons = document.getElementsByClassName("navbar-button-area")[0];
             editButton = document.getElementsByClassName("edit-profile-button")[0];
             logOutButton = document.getElementsByClassName("log-out-profile-button")[0];
@@ -35,7 +33,7 @@ function Navbar() {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
                 logo.classList.toggle("is-active");
-                if (isLoggedIn()) {
+                if (loggedIn) {
                     buttons.classList.toggle("is-active");
                     editButton.classList.toggle("is-active");
                     logOutButton.classList.toggle("is-active");
@@ -47,7 +45,7 @@ function Navbar() {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
                 logo.classList.toggle("is-active");
-                if (isLoggedIn()) {
+                if (loggedIn) {
                     buttons.classList.toggle("is-active");
                     editButton.classList.toggle("is-active");
                     logOutButton.classList.toggle("is-active");
@@ -71,7 +69,7 @@ function Navbar() {
                 id="navbarDropDownMenu" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" />
             {
-                loggedin ?
+                loggedIn ?
                     <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
                     <Link to="/edit-profile">
                         <button className="navbar-dd-item dropdown-item"> Edit Proifle </button>
@@ -83,7 +81,7 @@ function Navbar() {
                 : <div />
             }
             {
-                loggedin ?
+                loggedIn ?
                     <div className="navbar-button-area flex-container-row-vcenter-hcenter">
                         <Link to="/edit-profile">
                             <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
