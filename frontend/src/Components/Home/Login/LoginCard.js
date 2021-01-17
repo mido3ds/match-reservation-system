@@ -54,7 +54,7 @@ function LoginCard(props) {
       props.userType(resp.data.userType);
       props.login(true);
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }

@@ -42,10 +42,13 @@ function Matches() {
     window.$('#MatchFormModal').modal('hide')
   };
 
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => setStateCount(stateCounter + 1);
+
   let addMatch = async (match) => {
     try {
       const resp = await api.submitMatch(authToken(), match);
-      setMatches([]); // Set matches state to re-fetch matches
+      refresh();
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
@@ -62,7 +65,7 @@ function Matches() {
     // match.uuid -> actual id of the match
     try {
       const resp = await api.editMatch(authToken(), uuid, editedMatch);
-      setMatches([]); // Set matches state to re-fetch matches
+      refresh();
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
@@ -79,6 +82,7 @@ function Matches() {
   const [page, setPage] = useState(1);
 
   let removeMatchCard = (id) => {
+    console.log(matches);
     setMatches(matches => {
       return matches.filter(match => { return match.id !== id })
     });
@@ -103,7 +107,7 @@ function Matches() {
   useEffect(() => {
     getMatches();
     // eslint-disable-next-line
-  }, [page, matches]);
+  }, [page, stateCounter]);
 
   return (
     <div className="flex-container-column-vcenter-hcenter">

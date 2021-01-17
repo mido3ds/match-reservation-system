@@ -30,7 +30,7 @@ function Home() {
             </Link>
           </div>
           { loggedIn && type === 'admin' ? 
-            <div class="line-break"></div> : ''
+            <div className="line-break"></div> : ''
           }
           {
             loggedIn && type === 'admin' ?
