@@ -12,6 +12,7 @@ function Navbar({ loggedIn, setLoggedIn }) {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
+    // eslint-disable-next-line
     }, []);
 
     let handleScroll = (event) => {
