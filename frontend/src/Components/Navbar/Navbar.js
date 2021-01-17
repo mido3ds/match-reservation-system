@@ -46,12 +46,12 @@ function Navbar({ loggedIn, setLoggedIn }) {
 
     let handleScroll = (event) => {
         // Get the navbar
-        var navbar = document.getElementsByClassName("page-navbar")[0];
-        var text = document.getElementsByClassName("brand-text")[0];
-        var logo = document.getElementsByClassName("brand-logo")[0];
-        var buttons = document.getElementsByClassName("navbar-button-area")[0];
-        var editButton = document.getElementsByClassName("edit-profile-button")[0];
-        var logOutButton = document.getElementsByClassName("log-out-profile-button")[0];
+        var navbar = window.$(".page-navbar")[0];
+        var text =  window.$(".brand-text")[0];
+        var logo =  window.$(".brand-logo")[0];
+        var buttons =  window.$(".navbar-button-area")[0];
+        var editButton =  window.$(".edit-profile-button")[0];
+        var logOutButton =  window.$(".log-out-profile-button")[0];
 
         if (window.pageYOffset > 0) {
             if (!navbar.classList.contains("is-active")) {
