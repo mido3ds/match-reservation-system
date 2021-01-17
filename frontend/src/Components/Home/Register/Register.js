@@ -13,7 +13,7 @@ import "./Register.css";
 
 const api = new DefaultApi();
 
-const minYearsOld = 10;
+const minYearsOld = 18;
 const maxYearsOld = 130;
 
 const minBirthDate = new Date();
@@ -84,7 +84,7 @@ function Register(props) {
         props.userType(resp.data.userType);
       }
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
