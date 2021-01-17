@@ -5,6 +5,35 @@ import Navigation from '../../images/menu.png';
 import PremieurLeagueLogo from '../../images/premier-league-logo.png';
 import './Navbar.css';
 
+function LoggedInButtons({ setLoggedIn }) {
+    return (
+        <>
+            <img alt="navigation-icon" className="navigation-icon dropdown-toggle"
+                src={Navigation} href="#" role="button"
+                id="navbarDropDownMenu" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" />
+            <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
+                <Link to="/edit-profile">
+                    <button className="navbar-dd-item dropdown-item"> Edit Proifle </button>
+                </Link>
+                <Link to="/">
+                    <button className="navbar-dd-item dropdown-item"> Logout </button>
+                </Link>
+            </div>
+            <div className="navbar-button-area flex-container-row-vcenter-hcenter">
+                <Link to="/edit-profile">
+                    <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
+                </Link>
+                <Link to="/">
+                    <button type="button" className="log-out-profile-button btn btn-light" onClick={() => {
+                        logout();
+                        setLoggedIn(false);
+                    }}> Logout </button>
+                </Link>
+            </div>
+        </>
+    );
+}
 
 function Navbar({ loggedIn, setLoggedIn }) {
     useEffect(() => {
@@ -12,7 +41,7 @@ function Navbar({ loggedIn, setLoggedIn }) {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []);
 
     let handleScroll = (event) => {
@@ -43,7 +72,7 @@ function Navbar({ loggedIn, setLoggedIn }) {
                 logOutButton?.classList.toggle("is-active");
             }
         }
-        
+
         event.preventDefault();
     };
 
@@ -55,37 +84,7 @@ function Navbar({ loggedIn, setLoggedIn }) {
             <Link to="/" className="text-link">
                 <p className="brand-text">  Egyptian Premier League </p>
             </Link>
-            <img alt="navigation-icon" className="navigation-icon dropdown-toggle"
-                src={Navigation} href="#" role="button"
-                id="navbarDropDownMenu" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" />
-            {
-                loggedIn ?
-                    <div className="dropdown-menu navigation-menu" aria-labelledby="navbarDropDownMenu">
-                    <Link to="/edit-profile">
-                        <button className="navbar-dd-item dropdown-item"> Edit Proifle </button>
-                    </Link>
-                    <Link to="/">
-                        <button className="navbar-dd-item dropdown-item"> Logout </button>
-                    </Link>
-                </div>
-                : <div />
-            }
-            {
-                loggedIn ?
-                    <div className="navbar-button-area flex-container-row-vcenter-hcenter">
-                        <Link to="/edit-profile">
-                            <button type="button" className="edit-profile-button btn btn-primary"> Edit Profile </button>
-                        </Link>
-                        <Link to="/">
-                            <button type="button" className="log-out-profile-button btn btn-light" onClick={() => {
-                                logout();
-                                setLoggedIn(false);
-                            }}> Logout </button>
-                        </Link>
-                    </div>
-                    : <div />
-            }
+            {loggedIn ? <LoggedInButtons setLoggedIn={setLoggedIn} /> : <div />}
         </nav>
     );
 }
