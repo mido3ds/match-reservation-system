@@ -85,7 +85,7 @@ def get_matches(stadiums):
 def get_users():
     usernames = ['admin',
                  *[f'manager{i}' for i in range(args.managers)],
-                 *[f'fan{i}' for i in range(args.fans)]]
+                 *[f'justfan{i}' for i in range(args.fans)]]
     birthdates = [datetime.fromisoformat(
         f'19{i:02}-12-30') for i in range(100)]
     creationdates = [datetime.fromisoformat(
