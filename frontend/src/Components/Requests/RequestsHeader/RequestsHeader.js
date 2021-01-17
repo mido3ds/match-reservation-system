@@ -1,5 +1,5 @@
 import './RequestsHeader.css';
-import UsersImage from "../../../images/requests.png";
+import UsersImage from "../../../images/requests.webp";
 
 function RequestsHeader() {
   return (

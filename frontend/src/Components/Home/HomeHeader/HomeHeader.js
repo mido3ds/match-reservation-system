@@ -1,4 +1,4 @@
-import Ball from "../../../images/seats.jpg";
+import Ball from "../../../images/seats.webp";
 import './HomeHeader.css';
 
 function HomeHeader() {
