@@ -8,6 +8,7 @@ const config = require('config'); // e.g: config.get('database.password')
 const startupDebugger = require('debug')('app:startup');
 const dbDebugger = require('debug')('app:db');
 const app = express();
+const chalk = require('chalk');
 
 // routes modules
 const login = require('./routes/login');
@@ -36,18 +37,21 @@ function setupRoutes() {
 
 // setup database
 async function connectDB() {
-  const settings = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex: true };
+  const settings = { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true, 
+    useFindAndModify:false, 
+    useCreateIndex: true, 
+    serverSelectionTimeoutMS: 5000
+  };
   try {
     await mongoose.connect(config.get('database.connection'), settings);
-    dbDebugger('connected to MongoDB...');
+    console.log(chalk.green('Connected to MongoDB...'));
+    dbDebugger('Connected to MongoDB...');
   } catch {
-    try {
-      await mongoose.connect(config.get('database.connection_with_login'), settings);
-      dbDebugger('connected to MongoDB...');
-    } catch {
-      dbDebugger('couldn\'t connect to MongoDB...');
-      process.exit(1);
-    }
+    dbDebugger('Couldn\'t connect to MongoDB...');
+    console.log(chalk.red('couldn\'t connect to MongoDB...'));
+    process.exit(1);
   }
 }
 
