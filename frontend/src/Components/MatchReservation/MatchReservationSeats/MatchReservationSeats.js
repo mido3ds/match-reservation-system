@@ -158,7 +158,7 @@ function MatchReservationSeats({ match }) {
   }
 
   return (
-    <div className="reservation-container flex-container-row">
+    <div className="reservation-container flex-container-row-hcenter">
       {seatMap.length ?
         <div className="reservation-area flex-container-column-vcenter">
           <div className="column-numbers flex-container-row">
