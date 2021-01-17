@@ -35,10 +35,8 @@
     text-align: center;
 }
 
+.match-price {
 
-.match-home-team img {
-    display:block;
-    margin:auto;
 }
 
 .match-home-team p {
@@ -88,11 +86,27 @@
     margin: 0px 5px;
 }
 
+.match-price {
+
+}
+
+.match-price img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.match-price span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
 .first-linesman {
     height: 30px;
     margin: 0px 5px
 }
-
 
 .first-linesman img {
     width: 20px;

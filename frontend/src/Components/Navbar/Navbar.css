@@ -2,7 +2,9 @@
     position: fixed;
     top: 0;
     width: 100%;
-    overflow: hidden;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     height: 100px;
     transition: height 800ms;
     background-color: white;
@@ -49,6 +51,7 @@
 .navigation-menu {
     margin-top: 10px;
     margin-right: 30px;
+    overflow: visible;
 }
 
 .navbar-dd-item {

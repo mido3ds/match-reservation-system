@@ -17,7 +17,9 @@ function LoggedInButtons({ setLoggedIn }) {
                     <button className="navbar-dd-item dropdown-item"> Edit Proifle </button>
                 </Link>
                 <Link to="/">
-                    <button className="navbar-dd-item dropdown-item"> Logout </button>
+                    <button className="navbar-dd-item dropdown-item" onClick={() => {
+                        logout();
+                        setLoggedIn(false);}}> Logout </button>
                 </Link>
             </div>
             <div className="navbar-button-area flex-container-row-vcenter-hcenter">

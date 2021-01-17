@@ -2,6 +2,7 @@ import { logos_120x120 } from "../../../teams"
 import './MatchReservationHeader.css';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import Price from "../../../images/money.png";
 
 
 function MatchReservationHeader({ match }) {
@@ -35,6 +36,10 @@ function MatchReservationHeader({ match }) {
               <span> { match.secondLinesman }  </span>
             </span>
           </div>
+          <span className="match-price" >
+              <img alt="match-price-icon" src={Price} />
+              <span> { match.ticketPrice + " $"}  </span>
+          </span>
         </div>
         <div className="match-away-team" >
           <img alt="Logo" src={logos_120x120[match.awayTeam]} />
