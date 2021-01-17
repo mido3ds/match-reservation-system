@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./LoginCard.css"
-import * as yup from "yup";
 import { DefaultApi } from '../../../api';
 import { NotificationManager } from 'react-notifications';
-import { isLoggedIn, setUserType, setAuthToken } from "../../../Auth";
+import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { isLoggedIn, setUserType, setAuthToken } from "../../../Auth";
+
+import "./LoginCard.css"
 
 const api = new DefaultApi();
 
@@ -42,29 +43,22 @@ function LoginCard(props) {
     }
   }, [state]);
 
-  function validateForm() {
-    // perform proper validation
-    return true;
-  }
-
   let onSubmit = async (user) => {
     try {
       const resp = await api.login({username: user.username, password: user.password});
+      NotificationManager.success(resp.data.msg);
+      await setTimeout(500);
       setUserType(resp.data.userType);
       setAuthToken(resp.data.authToken);
       if (isRedirected) history.push(redirectTo);
       props.userType(resp.data.userType);
       props.login(true);
     } catch(err) {
-      NotificationManager.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      console.error(err.message);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
-
-
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  // }
 
   return (
     <div className="login-card border border-dark">
@@ -74,12 +68,14 @@ function LoginCard(props) {
         <Form.Group size="lg" controlId="username">
           <Form.Label className="input-label">Username</Form.Label>
           <Form.Control className = "login-input-text-area" name ="username" ref={register} />
+          <p className="err-login">{errors.username?.message}</p>
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label className="input-label">Password</Form.Label>
           <Form.Control className = "login-input-text-area" type="password" name ="password" ref={register}/>
+          <p className="err-login">{errors.password?.message}</p>
         </Form.Group>
-        <Button className = "login-button" block size="lg" type="submit" disabled={false}>
+        <Button className = "login-button" block size="lg" type="submit">
           Login
         </Button>
       </Form>

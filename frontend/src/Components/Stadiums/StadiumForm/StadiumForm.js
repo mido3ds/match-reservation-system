@@ -10,7 +10,15 @@ const schema = yup.object().shape({
     .min(5, 'Must be at least 5 characters'),
   city: yup.string()
     .required('Required field.')
-    .matches(/^[aA-zZ\s]+$/, 'Must contain letters and spaces only.')
+    .matches(/^[aA-zZ\s]+$/, 'Must contain letters and spaces only.'),
+  rows: yup.number()
+    .required('Required field.')
+    .min(1)
+    .max(4),
+  seatsPerRow: yup.number()
+    .required('Required field.')
+    .min(5)
+    .max(10),
 });
 
 function StadiumForm({onSubmit}) {
@@ -39,6 +47,20 @@ function StadiumForm({onSubmit}) {
                     id="StadiumCityInput" ref={register}>
                   </input>
                   <p className='error-message'>{errors.city?.message}</p>
+                </div>
+                <div className="pin-area">
+                  <span className="stadium-input-label"> # Rows </span>
+                  <input type="number" defaultValue='1' min='1' max='4' name="rows" className="form-control stadium-input-text-area"
+                    id="StadiumRowsInput" ref={register}>
+                  </input>
+                  <p className='error-message'>{errors.rows?.message}</p>
+                </div>
+                <div className="pin-area">
+                  <span className="stadium-input-label"> # Seats Per Row </span>
+                  <input type="number" defaultValue='5' min='5' max='10' name="seatsPerRow" className="form-control stadium-input-text-area"
+                    id="StadiumSeatsPerRowInput" ref={register}>
+                  </input>
+                  <p className='error-message'>{errors.seatsPerRow?.message}</p>
                 </div>
                 <div className="stadium-form-modal-buttons-area">
                   <button type="submit" className="btn stadium-form-modal-save-btn"> Add Stadium </button>

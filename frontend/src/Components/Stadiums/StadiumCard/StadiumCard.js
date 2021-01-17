@@ -20,7 +20,8 @@ function StadiumCard({ card }) {
       removeCard();
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 
@@ -34,7 +35,8 @@ function StadiumCard({ card }) {
                          onOK={ deleteStadium } />
       </span>
       <h1 className="name-area">{stadium.name}</h1>
-      <h2 className="city-area">{stadium.city}</h2>
+      <div className="city-area">{stadium.city}</div>
+      <div clasName="capacity-area"><strong>Capacity:</strong> {stadium.rows * stadium.seatsPerRow} seats </div>
     </div>
   );
 }

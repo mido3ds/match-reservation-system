@@ -50,7 +50,9 @@ router.get('/me', auth, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req.body);
   const { error } = validate(req.body);
+  console.log(error);
   if (error) return res.status(400).send({ err: error.details[0].message });
   let user;
   try {

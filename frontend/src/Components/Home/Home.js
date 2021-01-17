@@ -30,7 +30,7 @@ function Home() {
             </Link>
           </div>
           { loggedIn && type === 'admin' ? 
-            <div class="line-break"></div> : ''
+            <div className="line-break"></div> : ''
           }
           {
             loggedIn && type === 'admin' ?
@@ -61,7 +61,7 @@ function Home() {
         loggedIn ?
             '' :
             <div>
-                <Register />
+                <Register login={checkLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
             </div>
          }
     </>

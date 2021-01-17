@@ -81,4 +81,11 @@
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
-
+.err-register {
+    font-size: small;
+    color: darkred;
+    font-family: monospace;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
