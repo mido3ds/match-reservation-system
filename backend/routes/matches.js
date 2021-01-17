@@ -17,24 +17,27 @@ router.get('/', async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
+  let matches, totalMatches;
   try {
-    let matches = await Match.find()
+    matches = await Match.find()
                             .select({ seatMap: 0 })
                             .skip((req.query.page - 1) * pageSize)
                             .limit(pageSize);
-    matches = matches.map( match => {
-      return {...match.toObject(), uuid: match._id};
-    });
 
-    let totalMatches = await Match.countDocuments();
-    let has_next = (req.query.page - 1) * pageSize + matches.length < totalMatches;
-    res.status(200).send({
-      has_next: has_next,
-      matches: matches
-    });
+    totalMatches = await Match.countDocuments();
   } catch(err) {
-    res.status(500).send({ err: err.message });
+    return res.status(500).send({ err: err.message });
   }
+
+  matches = matches.map( match => {
+    return {...match.toObject(), uuid: match._id};
+  });
+
+  let has_next = (req.query.page - 1) * pageSize + matches.length < totalMatches;
+  res.status(200).send({
+    has_next: has_next,
+    matches: matches
+  });
 });
 
 router.get('/:match_id', async (req, res) => {
@@ -42,16 +45,17 @@ router.get('/:match_id', async (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});
   
+  let match;
   try {
-    let match = await Match.findById(matchID).select({ seatMap: 0});
+    match = await Match.findById(matchID).select({ seatMap: 0});
     if(!match)
       return res.status(404).send({ err: 'No matches exist the given uuid.'});
-
-    match = {...match.toObject(), uuid: match._id};
-    res.status(200).send(match);
   } catch (err) {
-    res.status(500).send({ err: err.msg });
+    return res.status(500).send({ err: err.msg });
   }
+
+  match = {...match.toObject(), uuid: match._id};
+  res.status(200).send(match);
 });
 
 router.post('/', [auth, manager], async (req, res) => {

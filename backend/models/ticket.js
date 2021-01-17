@@ -18,8 +18,12 @@ function validateTicket(ticket) {
       return helpers.message('Invalid match id');
     }),
     seatID: Joi.string().required().custom((value, helpers) => {
-      let valid = value.length === 2 && ['A', 'B', 'C'].includes(value[0]) && value[1] >= 1 && value[1] <= 10;
-      if(valid) return value;
+      let valid = false;
+      if (value.length >= 2) {
+        let row = value[0], col = value.substring(1);
+        valid = ['A', 'B', 'C'].includes(row) && !isNaN(col) && col >= 1 && col <= 10;
+        if(valid) return value;
+      }
       return helpers.message('Invalid seat id');
     }),
     username: Joi.string().min(5).max(50).required()
