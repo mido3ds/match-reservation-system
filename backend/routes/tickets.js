@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const { Match } = require('../models/match');
 const { Ticket } = require('../models/ticket');
+const { notifyClients } = require('./seats_live_updates');
 
 const router = express.Router();
 
@@ -106,6 +107,7 @@ router.delete('/:ticket_id', async (req, res) => {
     await Match.updateOne({ _id: match._id }, { $set: updateCondition });
     await ticket.remove();
     res.status(200).send({ msg: 'Ticket for seat ' + ticket.seatID + ' deleted successfully!' });
+    notifyClients(ticket.matchUUID, ticket.seatID, false);
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }

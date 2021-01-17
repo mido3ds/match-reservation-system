@@ -1,12 +1,13 @@
 const express = require('express');
-const { assert } = require('joi');
 const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const { Match } = require('../models/match');
 const { validate, Ticket } = require('../models/ticket');
 const { validateCreditCard } = require('../models/creditCard');
+const { router: seatsLiveUpdates, notifyClients } = require('./seats_live_updates');
 
 const router = express.Router({ mergeParams: true });
+router.use('/live-updates', seatsLiveUpdates);
 
 router.get('/', auth, async (req, res) => {
   let matchID = req.params.match_id;
@@ -81,6 +82,7 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
     ticket.price = match.ticketPrice;
     await ticket.save();
     res.status(200).send( { msg: 'Ticket for seat ' + ticket.seatID + ' booked successfully.'});
+    notifyClients(ticket.matchUUID, ticket.seatID, true)
   } catch (err) {
     console.log(err);
     res.status(500).send({ err: err.msg });
