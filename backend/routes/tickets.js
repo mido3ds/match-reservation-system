@@ -76,9 +76,29 @@ router.delete('/:ticket_id', async (req, res) => {
   let ticketID = req.params.ticket_id;
   if(!mongoose.Types.ObjectId.isValid(ticketID))
     return res.status(400).send({ err: 'Invalid ticket ID format.'});
+
+  let ticket, match;
   try {
-    let ticket = await Ticket.findOne({ _id: ticketID });
+    ticket = await Ticket.findOne({ _id: ticketID });
+    match = await Match.findById(ticket.matchUUID).select({ seatMap: 1 });
+  } catch (err) {
+    return res.status(500).send({ err: err.message });
+  }
+
     if (!ticket) return res.status(404).send({ err: 'Ticket to delete is not found'});
+    
+    let seatMap = match.seatMap;
+    let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
+    let col = ticket.seatID.substring(1) - 1;
+
+    console.assert(seatMap[row][col].id === ticket.seatID, 'Seat ID wrong index calculation');
+    console.assert(seatMap[row][col].isReserved === true, 'Seat must be already reserved');
+
+    let updateCondition = {} 
+    updateCondition['seatMap.' + row + '.' + col + '.isReserved'] = false;
+
+  try {
+    await Match.updateOne({ _id: match._id }, { $set: updateCondition });
     await ticket.remove();
     res.status(200).send({ msg: 'Ticket for seat ' + ticket.seatID + ' deleted successfully!' });
   } catch (err) {
