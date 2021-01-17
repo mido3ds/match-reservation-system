@@ -27,6 +27,6 @@
 .home-button {
     margin-top: 20px;
     width: 110px;
-    background-color: #0880AE;
-    border-color: #0880AE;
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
 }

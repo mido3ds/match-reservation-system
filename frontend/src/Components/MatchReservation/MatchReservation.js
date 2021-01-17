@@ -6,6 +6,7 @@ import MatchReservationHeader from './MatchReservationHeader/MatchReservationHea
 import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
 import './MatchReservation.css'
 import UsersImage from "../../images/match.webp";
+import { useHistory } from "react-router-dom";
 
 const api = new DefaultApi();
 
@@ -14,7 +15,9 @@ function MatchReservation() {
   let { state } = useLocation();
 
   const[match, setMatch] = useState();
-  
+  // Used for redirection to the error page in case of error (invalid match id) 
+  let history = useHistory();
+
   let getMatch = async () => {
     try {
       const resp = await api.getMatch(matchID);
@@ -23,6 +26,7 @@ function MatchReservation() {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      history.push('/error')
     }
   };
 

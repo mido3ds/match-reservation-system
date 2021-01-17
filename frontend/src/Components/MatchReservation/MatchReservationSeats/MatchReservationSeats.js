@@ -16,12 +16,27 @@ import ConfirmationModal from '../../ConfirmationModal/ConfirmationModal';
 const api = new DefaultApi();
 
 function MatchReservationSeats({ match }) {
-  const [userTickets, setUserTickets] = useState([]);
-  const [seatMap, setSeatMap] = useState([]);
-  const [showButton, setShowButton] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [confirmedTicket, setConfirmedTicket] = useState();
-  const [loading, setLoading] = useState(false);
+  const [ userTickets, setUserTickets ] = useState([]);
+  const [ seatMap, setSeatMap ] = useState([]);
+  const [ showButton, setShowButton ] = useState(false);
+  const [ totalPrice, setTotalPrice ] = useState(0);
+  const [ confirmedTicket, setConfirmedTicket ] = useState();
+  const [ loading, setLoading ] = useState(false);
+  const [ listening, setListening ] = useState(false);
+
+  useEffect( () => {
+    if (!listening) {
+      const events = new EventSource(`http://localhost:3000/api/matches/${match.uuid}/seats/live-update`);
+      events.onmessage = (event) => {
+        const {seatID, isReserved} = JSON.parse(event.data);
+        setLoading(true)
+        updateSeatMap(seatID, isReserved);
+        setLoading(false)
+        NotificationManager.info(seatID.toString() + " is reserved");
+      };
+      setListening(true);
+    }
+  }, [listening, seatMap]);
 
   let getUserTickets = async () => {
     try {
@@ -62,10 +77,10 @@ function MatchReservationSeats({ match }) {
     // eslint-disable-next-line
   }, []);
 
-  let updateSeatMap = (ticket, isReserved) => {
+  let updateSeatMap = (seatID, isReserved) => {
     setSeatMap(seatMaps => {
-      const row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
-      const column = ticket.seatID.substring(1) - 1;
+      const row = seatID.charCodeAt(0) - 'A'.charCodeAt(0);
+      const column = seatID.substring(1) - 1;
       seatMaps[row][column].isReserved = isReserved;
       seatMaps[row][column].isSelected = false;
       return seatMaps;
@@ -77,7 +92,7 @@ function MatchReservationSeats({ match }) {
     try {
       const resp = await api.cancelTicket(ticket.uuid, authToken());
       NotificationManager.success(resp.data?.msg);
-      updateSeatMap(ticket, false)
+      updateSeatMap(ticket.seatID, false)
       setUserTickets(userTickets => {
         return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
       });
@@ -101,7 +116,7 @@ function MatchReservationSeats({ match }) {
         if (!ticket.isReserved) {
           const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken(), creditCard);
           NotificationManager.success(resp.data?.msg);
-          updateSeatMap(ticket, true)
+          updateSeatMap(ticket.seatID, true)
           getUserTickets();
         }
       } catch(err) {
