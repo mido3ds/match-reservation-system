@@ -13,6 +13,9 @@ function Stadiums() {
   const [stadiums, setStadiums] = useState([]);
   const [page, setPage] = useState(1);
 
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => setStateCount(stateCounter + 1);
+
   let removeStadium = (id) => {
     setStadiums(stadiums => {
       return stadiums.filter(stadium => { return stadium.id !== id })
@@ -37,14 +40,14 @@ function Stadiums() {
   useEffect(() => {
     getStadiums();
     // eslint-disable-next-line
-  }, [page, stadiums]);
+  }, [page]);
 
   async function submitStadium(stadium) {
     try {
       await api.submitStadium(authToken(), stadium);
       NotificationManager.success('Stadium added successfully');
       window.$("#StadiumFormModal").modal('hide')
-      setStadiums([])
+      refresh();
     } catch (err) {
       console.error(err.message);
       if (err.response?.data?.err) {

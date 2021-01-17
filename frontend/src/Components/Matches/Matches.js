@@ -42,10 +42,13 @@ function Matches() {
     window.$('#MatchFormModal').modal('hide')
   };
 
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => setStateCount(stateCounter + 1);
+
   let addMatch = async (match) => {
     try {
       const resp = await api.submitMatch(authToken(), match);
-      setMatches([]); // Set matches state to re-fetch matches
+      refresh();
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
@@ -62,7 +65,7 @@ function Matches() {
     // match.uuid -> actual id of the match
     try {
       const resp = await api.editMatch(authToken(), uuid, editedMatch);
-      setMatches([]); // Set matches state to re-fetch matches
+      refresh();
       NotificationManager.success(resp.data.msg);
       return true;
     } catch(err) {
@@ -103,7 +106,7 @@ function Matches() {
   useEffect(() => {
     getMatches();
     // eslint-disable-next-line
-  }, [page, matches]);
+  }, [page]);
 
   return (
     <div className="flex-container-column-vcenter-hcenter">
