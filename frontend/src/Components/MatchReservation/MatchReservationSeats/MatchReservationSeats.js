@@ -50,13 +50,8 @@ function MatchReservationSeats({ match }) {
       setSeatMap(resp.data)
     } catch (err) {
       console.error(err.message);
-<<<<<<< HEAD
-      if (err.response?.data?.err)
-        NotificationManager.error(err.response.data.err);
-=======
       if (!err.response && err.request) NotificationManager.error('Connection error');
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
->>>>>>> 0e3853fa726431416c5f69d0b447a911aa7c198e
     }
   };
 
@@ -77,7 +72,6 @@ function MatchReservationSeats({ match }) {
   }
 
   let cancelTicket = async (ticket) => {
-<<<<<<< HEAD
     setLoading(true)
     try {
       const resp = await api.cancelTicket(ticket.uuid, authToken());
@@ -96,19 +90,6 @@ function MatchReservationSeats({ match }) {
           .siblings(`:contains(${ticket.seatID.substring(1)})`)
           .first()
           .click();
-=======
-      try {
-        const resp = await api.cancelTicket(ticket.uuid, authToken());
-        NotificationManager.success(resp.data?.msg);
-        setUserTickets(userTickets => {
-          return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
-        });
-      } catch(err) {
-        console.error(err.message);
-        if (!err.response && err.request) NotificationManager.error('Connection error');
-        else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
-      }
->>>>>>> 0e3853fa726431416c5f69d0b447a911aa7c198e
   }
 
   let reserveSeats = async (creditCard) => {
@@ -119,23 +100,14 @@ function MatchReservationSeats({ match }) {
         if (!ticket.isReserved) {
           const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken(), creditCard);
           NotificationManager.success(resp.data?.msg);
-<<<<<<< HEAD
           updateSeatMap(ticket, true)
           getUserTickets();
         }
-      } catch (err) {
-        failedRequest = true;
-        console.error(err.message);
-        if (err.response?.data?.err)
-          NotificationManager.error(err.response.data.err);
-=======
-          userTickets[index].isReserved = true;
-        } 
       } catch(err) {
+        failedRequest = true;
         console.error(err.message);
         if (!err.response && err.request) NotificationManager.error('Connection error');
         else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
->>>>>>> 0e3853fa726431416c5f69d0b447a911aa7c198e
       }
     }));
     if (!failedRequest)
