@@ -80,7 +80,6 @@ function Matches() {
   const [page, setPage] = useState(1);
 
   let removeMatchCard = (id) => {
-    console.log(matches);
     setMatches(matches => {
       return matches.filter(match => { return match.id !== id })
     });
