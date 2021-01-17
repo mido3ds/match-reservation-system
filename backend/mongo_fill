@@ -50,19 +50,35 @@ teamnames = ["Al-Ahly",
              "Ghazl El-Mahla"]
 
 
+def get_seat_map(stadium):
+    def get_seat(i, j):
+        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        return {
+            'id': f'{letters[i]}{j}',
+            'isReserved': choice([True, False])
+        }
+
+    def get_row(i):
+        return [get_seat(i, j) for j in range(1, stadium['seatsPerRow']+1)]
+
+    return [get_row(i) for i in range(stadium['rows'])]
+
+
 def get_matches(stadiums):
     matchdatetimes = [datetime.fromisoformat(f'20{i:02}-02-12T22')
                       for i in range(22)]
+    stadiums = [stadiums[randint(0, len(stadiums)-1)]
+                for _ in range(args.matches)]
     return [{
         'homeTeam': teamnames[i % len(teamnames)],
         'awayTeam': teamnames[(i+1) % len(teamnames)],
-        'venue': randint(0, len(stadiums)-1),
+        'venue': stadiums[i]['_id'],
         'dateTime': choice(matchdatetimes),
         'mainReferee': f'referee{i}',
         'firstLinesman': f'firstLinesman{i}',
         'secondLinesman': f'secondLinesman{i}',
         'ticketPrice': 200,
-        'seatMap': 0,  # TODO: update this with the latest schema
+        'seatMap': get_seat_map(stadiums[i]),
     } for i in range(args.matches)]
 
 
