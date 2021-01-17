@@ -15,7 +15,7 @@ export function userType() {
 }
 
 export function setUserType(type) {
-    if (type && type in ['fan', 'manager', 'admin']) {
+    if (type && ['fan', 'manager', 'admin'].includes(type)) {
         Cookies.set('usertype', type);
     } else {
         throw Error('invalid type to store');
