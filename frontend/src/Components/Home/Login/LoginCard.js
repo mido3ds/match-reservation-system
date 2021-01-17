@@ -42,11 +42,6 @@ function LoginCard(props) {
     }
   }, [state]);
 
-  function validateForm() {
-    // perform proper validation
-    return true;
-  }
-
   let onSubmit = async (user) => {
     try {
       const resp = await api.login({username: user.username, password: user.password});
@@ -56,7 +51,7 @@ function LoginCard(props) {
       props.userType(resp.data.userType);
       props.login(true);
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
