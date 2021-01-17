@@ -7,7 +7,7 @@ import { DefaultApi } from '../../../api';
 import { NotificationManager } from 'react-notifications';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { isLoggedIn, setUserType, setAuthToken } from "../../../Auth";
+import { setUserType, setAuthToken } from "../../../Auth";
 
 import "./LoginCard.css"
 
@@ -33,13 +33,9 @@ function LoginCard(props) {
   useEffect(() => {
     if (state?.from) {
       // We arrived at the home page as a result of an authorization indirection
-      if (isLoggedIn()) {
-        NotificationManager.error("You don't have access to this page");
-      } else {
-        NotificationManager.warning("Please log in or create an account to be able access this page");
-        setRedirectTo(state.from);
-        setIsRedirected(true);
-      }
+      NotificationManager.warning("Please log in or create an account to be able access this page");
+      setRedirectTo(state.from);
+      setIsRedirected(true);
     }
   }, [state]);
 

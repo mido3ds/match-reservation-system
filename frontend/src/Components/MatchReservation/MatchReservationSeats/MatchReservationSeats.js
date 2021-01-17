@@ -100,7 +100,7 @@ function MatchReservationSeats({ match }) {
   let cancelTicket = async (ticket) => {
     setLoading(true)
     try {
-      const resp = await api.cancelTicket(ticket.uuid, authToken());
+      await api.cancelTicket(ticket.uuid, authToken());
       updateSeatMap(ticket.seatID, false)
       setUserTickets(userTickets => {
         return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
@@ -123,7 +123,7 @@ function MatchReservationSeats({ match }) {
     await Promise.all(userTickets.map(async (ticket, index) => {
       try {
         if (!ticket.isReserved) {
-          const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken(), creditCard);
+          await api.reserveSeat(match.uuid, ticket.seatID, authToken(), creditCard);
           updateSeatMap(ticket.seatID, true)
           getUserTickets();
         }
