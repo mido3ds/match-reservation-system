@@ -107,6 +107,10 @@ router.put('/:match_id', async (req, res) => {
       let stadium = await Stadium.findOne( { name: matchEdit.venue } );
       if (!stadium)
         return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});
+      // Cancel all tickets in the old stadium (assume they are refunded)
+      let tickets = await Ticket.find({ matchUUID: matchID });
+      tickets.forEach(async (ticket) => await ticket.remove());
+      // Create a new empty seatmap
       matchEdit.seatMap = createEmptySeatMap(stadium.rows, stadium.seatsPerRow);
     }
 
