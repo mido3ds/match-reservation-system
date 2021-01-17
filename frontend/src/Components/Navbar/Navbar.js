@@ -44,35 +44,32 @@ function Navbar({ loggedIn, setLoggedIn }) {
         // eslint-disable-next-line
     }, []);
 
-    let handleScroll = (event) => {
-        // Get the navbar
+    let toggleNavbar = () => {
         var navbar = window.$(".page-navbar")[0];
         var text =  window.$(".brand-text")[0];
         var logo =  window.$(".brand-logo")[0];
         var buttons =  window.$(".navbar-button-area")[0];
         var editButton =  window.$(".edit-profile-button")[0];
         var logOutButton =  window.$(".log-out-profile-button")[0];
+        navbar.classList.toggle("is-active");
+        text.classList.toggle("is-active");
+        logo.classList.toggle("is-active");
+        buttons?.classList.toggle("is-active");
+        editButton?.classList.toggle("is-active");
+        logOutButton?.classList.toggle("is-active");
+    }
 
+    let handleScroll = (event) => {
+        var navbar = window.$(".page-navbar")[0];
         if (window.pageYOffset > 0) {
             if (!navbar.classList.contains("is-active")) {
-                navbar.classList.toggle("is-active");
-                text.classList.toggle("is-active");
-                logo.classList.toggle("is-active");
-                buttons?.classList.toggle("is-active");
-                editButton?.classList.toggle("is-active");
-                logOutButton?.classList.toggle("is-active");
+                toggleNavbar()
             }
         } else {
             if (navbar.classList.contains("is-active")) {
-                navbar.classList.toggle("is-active");
-                text.classList.toggle("is-active");
-                logo.classList.toggle("is-active");
-                buttons?.classList.toggle("is-active");
-                editButton?.classList.toggle("is-active");
-                logOutButton?.classList.toggle("is-active");
+                toggleNavbar()
             }
         }
-
         event.preventDefault();
     };
 
