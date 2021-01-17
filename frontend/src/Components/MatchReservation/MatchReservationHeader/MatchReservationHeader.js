@@ -1,4 +1,4 @@
-import UsersImage from "../../../images/match.png";
+import UsersImage from "../../../images/match.webp";
 import { logos_120x120 } from "../../../teams"
 import './MatchReservationHeader.css';
 import Moment from 'react-moment';

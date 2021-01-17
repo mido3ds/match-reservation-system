@@ -1,4 +1,4 @@
-import Ball from "../../../images/ball.jpg";
+import Ball from "../../../images/ball.webp";
 import { isLoggedIn, userType } from '../../../Auth';
 import './MatchesHeader.css';
 

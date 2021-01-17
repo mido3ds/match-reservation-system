@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { userType } from '../../Auth';
-import Stadiums from "../../images/match.png";
-import Matches from "../../images/ball2.jpg";
-import Users from "../../images/fans.jpg";
-import Tickets from "../../images/tickets-header.jpeg";
+import Stadiums from "../../images/match.webp";
+import Matches from "../../images/ball2.webp";
+import Users from "../../images/fans.webp";
+import Tickets from "../../images/tickets-header.webp";
 import HomeCard from './Card/HomeCard';
 import HomeHeader from './HomeHeader/HomeHeader';
 import LoginCard from './Login/LoginCard';
