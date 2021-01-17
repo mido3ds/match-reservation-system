@@ -15,7 +15,7 @@ export function userType() {
 }
 
 export function setUserType(type) {
-    if (type && (type === 'user' || type === 'manager' || type === 'admin')) {
+    if (type && type in ['fan', 'manager', 'admin']) {
         Cookies.set('usertype', type);
     } else {
         throw Error('invalid type to store');
