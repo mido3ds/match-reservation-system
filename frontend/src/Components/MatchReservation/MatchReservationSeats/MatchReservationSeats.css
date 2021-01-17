@@ -21,15 +21,16 @@
     height: 20;
 }
 
+.seat--selected {
+    background-image: url("../../../images/seat-icon-green.png");
+
+}
+
 .seat--reserved {
     background-image: url("../../../images/seat-icon-gray.png");
 
 }
 
-.seat--selected {
-    background-image: url("../../../images/seat-icon-green.png");
-
-}
 
 .seat__number {
     font-size: 0px;
@@ -121,5 +122,9 @@
     background-color: #0880AE !important;
     border-color: #0880AE !important;
     margin: 25px 0px;
-    margin-left: 400px;
+    margin-right: 50px;
+}
+
+.header-area {
+    justify-content: space-between;
 }

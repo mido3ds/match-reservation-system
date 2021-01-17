@@ -74,19 +74,35 @@ function MatchReservationSeats({match}) {
   }
   
   let reserveSeats = async (creditCard) => { 
+    let wrongSubmission = false;
+    let tickets = [...userTickets];
+    let row = 0, column = 0;
     await Promise.all(userTickets.map(async(ticket, index) => {
       try {
         if(!ticket.isReserved) {
           const resp = await api.reserveSeat(match.uuid, ticket.seatID, authToken(), creditCard);
           NotificationManager.success(resp.data?.msg);
-          userTickets[index].isReserved = true;
+  
+          tickets[index].isReserved = true;
+          row = ticket.seatID[0]
+          column = ticket.seatID.substring(1) - 1
+          window.$(`.seat-picker__row__number:contains('${row}')`).siblings(`.seat:contains('${column}')`).removeClass("seat--selected").addClass("seat--reserved")
+         
         } 
       } catch(err) {
+          console.log("I'm here")
+          wrongSubmission = true;
           console.error(err.message);
           if (err.response?.data?.err) 
             NotificationManager.error(err.response.data.err);
       }
     }));
+    if(!wrongSubmission) {
+      window.$("#TicketsModal").modal('hide');
+    }
+    window.$("#TicketsModal").modal('hide');
+    setUserTickets(tickets);
+    console.log(tickets);
   }
 
   let updatePrice = () => {
@@ -117,14 +133,13 @@ function MatchReservationSeats({match}) {
                         price: match.ticketPrice,
                         cancelTicket: () => { cancelTicket(newTicket); }}
       setUserTickets([...userTickets , newTicket]);
-      console.log("here")  
   }
  
   let removeSeat = async  ({ row, number, id }, removeCb) => {
       console.log(`Removed seat ${number}, row ${row}, id ${id}`)
       removeCb(row, number, '')
       setUserTickets(userTickets => {
-        return userTickets.filter(userTicket => { return userTicket.seatID !== id })
+        return userTickets.filter(userTicket => { return userTicket.seatID !== id || userTicket.isReserved})
       });
   }
 
@@ -160,7 +175,16 @@ function MatchReservationSeats({match}) {
     : ''}
     {userTickets.length ?
       <div className="tickets-area flex-container-column-hcenter">
-       <h2 className="tickets-title"> Tickets: </h2>
+        <div className="header-area flex-container-row-vcenter">
+          <h2 className="tickets-title"> Tickets: </h2>
+          { showButton ? 
+          <span> 
+            <button type="button" className="tickets-purchase-button btn btn-primary"
+                    data-toggle="modal" data-target="#TicketsModal"> Purchase </button> 
+            <TicketsForm onSubmit={reserveSeats} totalPrice={totalPrice}/>
+          </span>
+          :''}
+        </div>
          <div className="flex-container-row-vcenter">
            {userTickets.map(ticket => (
             <div key={ticket.id.toString()} className={`ticket-area flex-container-column-hcenter ${ticket.isReserved ? "dark-red" : "light-green"}`}>
@@ -184,13 +208,6 @@ function MatchReservationSeats({match}) {
             </div>
           ))}
         </div>
-        { showButton ? 
-        <span> 
-          <button type="button" className="tickets-purchase-button btn btn-primary"
-                  data-toggle="modal" data-target="#TicketsModal"> Purchase </button> 
-          <TicketsForm onSubmit={reserveSeats} totalPrice={totalPrice}/>
-        </span>
-        :''}
       </div> : ''}
   </div>
   );
