@@ -40,7 +40,7 @@ function Stadiums() {
   useEffect(() => {
     getStadiums();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, stateCounter]);
 
   async function submitStadium(stadium) {
     try {

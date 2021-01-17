@@ -82,6 +82,7 @@ function Matches() {
   const [page, setPage] = useState(1);
 
   let removeMatchCard = (id) => {
+    console.log(matches);
     setMatches(matches => {
       return matches.filter(match => { return match.id !== id })
     });
@@ -106,7 +107,7 @@ function Matches() {
   useEffect(() => {
     getMatches();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, stateCounter]);
 
   return (
     <div className="flex-container-column-vcenter-hcenter">
