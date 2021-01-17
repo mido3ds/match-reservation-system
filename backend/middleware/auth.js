@@ -4,6 +4,7 @@ const { User } = require('../models/user');
 
 async function auth(req, res, next) {
   const token = req.header('x-auth-token');
+  console.log(token);
   if (!token) return res.status(401).send({ err: 'No token' });
 
   try {
@@ -11,8 +12,11 @@ async function auth(req, res, next) {
     req.user = decoded;
     // Make sure the user still exists in the datatbase (could be deleted by the admin)
     try {
-      let user = await User.findById(req.user._id);
+      let user = await User.findById(req.user._id).select('isPending');
+      console.log(user);
       if (!user) return res.status(400).send({ err: 'Invalid token!' });
+      console.log(user);
+      if (user.isPending) return res.status(400).send({ err: 'Invalid token!' });
     } catch (err) {
       return res.status(500).send({ err: err.message });
     }

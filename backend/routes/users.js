@@ -101,19 +101,29 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/me', auth, async (req, res) => {
-  const to_pick = ['password', 'firstName', 'lastName', 'birthDate', 'gender', 'city', 'address', 'role'];
+  let to_pick = ['password', 'firstName', 'lastName', 'birthDate', 'gender', 'city', 'address', 'role'];
   let user = _.pick(req.body, to_pick);
 
   const { error } = validateUpdated(user);
   if (error) return res.status(400).send({ err: error.details[0].message });
 
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
+  if (user.password !== '') {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+  }
+
+  // don't change if empty string
+  user = _.omitBy(user, _.isEmpty);
+  // don't change role if admin
+  if (req.user.role === 'admin') user.role = 'admin';
+
+  console.log(user);
 
   let logout = false;
+  let msg = `Successfull Edit, you have changed your role to ${user.role}`;
   try {
     if (req.user.role !== user.role) {
-      user.isPending = (req.user.role !== "fan");
+      user.isPending = (user.role !== "fan");
       logout = true;
     }
     user = await User.findByIdAndUpdate(req.user._id, user, {new: true}).select('-password');
@@ -121,8 +131,10 @@ router.put('/me', auth, async (req, res) => {
   catch (err) {
     return res.status(500).send({ err: err.message });
   }
-
-  res.status(200).send({logout, user});
+  if (user.isPending) msg += ', waiting for admin approval';
+  msg += ', logging out..';
+  if (logout) return res.status(200).send({logout, user, msg});
+  res.status(200).send({logout, user, msg: 'Successfull Edit'});
 });
 
 router.delete('/:username', [auth, admin], async (req, res) => {

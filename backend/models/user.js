@@ -49,13 +49,13 @@ function validateUser(user) {
 
 function validateUpdatedUser(user) {
   return Joi.object({
-    password: Joi.string().min(5).max(255).required(),
-    firstName: Joi.string().min(3).max(20).required(),
-    lastName: Joi.string().min(3).max(20).required(),
+    password: Joi.string().allow('').optional().min(5).max(255).required(),
+    firstName: Joi.string().allow('').optional().min(3).max(20).required(),
+    lastName: Joi.string().allow('').optional().min(3).max(20).required(),
     birthDate: Joi.date().required().max('now'),
     gender: Joi.string().valid('male', 'female').required(),
-    city: Joi.string().min(3).max(15).required(),
-    address: Joi.string().max(200),
+    city: Joi.string().allow('').optional().min(3).max(15).required(),
+    address: Joi.string().allow('').optional().max(200),
     role: Joi.string().valid('fan', 'manager', 'admin').required()
   }).validate(user);
 }

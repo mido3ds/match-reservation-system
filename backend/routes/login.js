@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   const { error } = validateLogin(req.body);
   if (error) return res.status(400).send({ err: error.details[0].message });
 
-  let user = await User.findOne({ username: req.body.username });
+  let user = await User.findOne({ username: req.body.username, isPending: false });
   if (!user) return res.status(400).send({ err: 'Invalid username or password!' });
 
   const isValidPassword = await bcrypt.compare(req.body.password, user.password);

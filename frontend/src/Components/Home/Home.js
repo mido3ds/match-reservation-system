@@ -46,7 +46,7 @@ function Home() {
             <div className="home-card-item">
                 <LoginCard login={checkLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
             </div>
-         }
+          }
 
           {
           loggedIn ?

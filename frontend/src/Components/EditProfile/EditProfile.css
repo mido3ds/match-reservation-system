@@ -1,12 +1,90 @@
 .edit-profile-field {
     position: relative;
-    margin: 100px;
-    padding: 50px 30px;
+    margin: 20px;
+    padding: 30px 0px;
     border-radius: 20px;
     border-width: 1px;
+    display:block;
     background-color: white;
 }
 
+.edit-profile-card {
+    position: relative;
+    border-radius: 20px;
+    background-color: white;
+    padding: 15px 40px 30px 40px;
+}
+
 .edit-profile-field Button {
-    margin-top: 30px;
+    margin-top: 20px;
+}
+
+.edit-profile-button {
+    background-color: #0880AE !important;
+    border-color: #0880AE !important;
+}
+
+.edit-profile-button:focus,
+.edit-profile-button:active,
+.edit-profile-button:hover {
+    box-shadow: 0 0 0 0.2rem #b6dcebe7 !important;
+}
+
+.edit-profile-label {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-bottom: 15px;
+}
+
+.edit-profile-input-text-area {
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px !important;
+    height: 45px !important;
+    line-height: 20px !important;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+
+.edit-profile-input-label {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 3px;
+    color: rgba(112, 110, 110, 0.849);
+}
+
+.edit-profile-date-time-picker {
+    background-color: white !important;
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px;
+    height: 43px !important;;
+    line-height: 35px !important;
+    font-size: 15px !important;
+    padding-left: 10px;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
+.edit-profile-drop-down-button {
+    background-color: white !important;
+    border-radius: 5px !important;
+    border-color: #0880AE !important;
+    border-width: 1px !important;
+    height: 45px !important;
+    line-height: 35px !important;
+    font-weight: bold !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.err-edit-profile {
+    font-size: small;
+    color: darkred;
+    font-family: monospace;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
 }

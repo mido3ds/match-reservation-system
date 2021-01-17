@@ -79,15 +79,32 @@ paths:
         '406':
           description: not acceptable, if page < 1
   /api/users/me:
+    get:
+      summary: get my info
+      operationId: getMyInfo
+      parameters:
+        - name: x-auth-token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ListedUser'
+        '401':
+          description: not authorized
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       summary: edit user
       operationId: editUser
       parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
         - name: x-auth-token
           in: header
           required: true
@@ -105,11 +122,28 @@ paths:
             'application/json':
               schema:
                 type: object
-                description: successful edit
                 properties:
+                  logout:
+                    type: boolean
+                  user:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/ListedUser'
                   msg:
                     type: string
                     description: in case the user asked to be a manger, send a message to display to assure they will be reviewed
+                required:
+                - logout
+                - user
+          # content:
+          #   'application/json':
+          #     schema:
+          #       type: object
+          #       description: successful edit
+          #       properties:
+          #         msg:
+          #           type: string
+          #           description: in case the user asked to be a manger, send a message to display to assure they will be reviewed
         '401':
           description: not authorized
           content:

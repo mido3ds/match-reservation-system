@@ -184,11 +184,23 @@ export interface InlineResponse2001 {
     msg: string;
 }
 /**
- * successful edit
+ * 
  * @export
  * @interface InlineResponse2002
  */
 export interface InlineResponse2002 {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2002
+     */
+    logout: boolean;
+    /**
+     * 
+     * @type {Array<ListedUser>}
+     * @memberof InlineResponse2002
+     */
+    user: Array<ListedUser>;
     /**
      * in case the user asked to be a manger, send a message to display to assure they will be reviewed
      * @type {string}
@@ -975,23 +987,17 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary edit user
-         * @param {string} username 
          * @param {string} xAuthToken 
          * @param {EditedUser} [editedUser] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editUser: async (username: string, xAuthToken: string, editedUser?: EditedUser, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'username' is not null or undefined
-            if (username === null || username === undefined) {
-                throw new RequiredError('username','Required parameter username was null or undefined when calling editUser.');
-            }
+        editUser: async (xAuthToken: string, editedUser?: EditedUser, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'xAuthToken' is not null or undefined
             if (xAuthToken === null || xAuthToken === undefined) {
                 throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling editUser.');
             }
-            const localVarPath = `/api/users/me`
-                .replace(`{${"username"}}`, encodeURIComponent(String(username)));
+            const localVarPath = `/api/users/me`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1202,6 +1208,52 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get my info
+         * @param {string} xAuthToken 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMyInfo: async (xAuthToken: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'xAuthToken' is not null or undefined
+            if (xAuthToken === null || xAuthToken === undefined) {
+                throw new RequiredError('xAuthToken','Required parameter xAuthToken was null or undefined when calling getMyInfo.');
+            }
+            const localVarPath = `/api/users/me`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (xAuthToken !== undefined && xAuthToken !== null) {
+                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
             }
 
 
@@ -1880,14 +1932,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary edit user
-         * @param {string} username 
          * @param {string} xAuthToken 
          * @param {EditedUser} [editedUser] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editUser(username, xAuthToken, editedUser, options);
+        async editUser(xAuthToken: string, editedUser?: EditedUser, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).editUser(xAuthToken, editedUser, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1946,6 +1997,20 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async getMatches(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getMatches(page, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary get my info
+         * @param {string} xAuthToken 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMyInfo(xAuthToken: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListedUser>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getMyInfo(xAuthToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2192,14 +2257,13 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary edit user
-         * @param {string} username 
          * @param {string} xAuthToken 
          * @param {EditedUser} [editedUser] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any): AxiosPromise<InlineResponse2002> {
-            return DefaultApiFp(configuration).editUser(username, xAuthToken, editedUser, options).then((request) => request(axios, basePath));
+        editUser(xAuthToken: string, editedUser?: EditedUser, options?: any): AxiosPromise<InlineResponse2002> {
+            return DefaultApiFp(configuration).editUser(xAuthToken, editedUser, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2242,6 +2306,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         getMatches(page?: number, options?: any): AxiosPromise<InlineResponse2005> {
             return DefaultApiFp(configuration).getMatches(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get my info
+         * @param {string} xAuthToken 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMyInfo(xAuthToken: string, options?: any): AxiosPromise<ListedUser> {
+            return DefaultApiFp(configuration).getMyInfo(xAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2453,15 +2527,14 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary edit user
-     * @param {string} username 
      * @param {string} xAuthToken 
      * @param {EditedUser} [editedUser] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public editUser(username: string, xAuthToken: string, editedUser?: EditedUser, options?: any) {
-        return DefaultApiFp(this.configuration).editUser(username, xAuthToken, editedUser, options).then((request) => request(this.axios, this.basePath));
+    public editUser(xAuthToken: string, editedUser?: EditedUser, options?: any) {
+        return DefaultApiFp(this.configuration).editUser(xAuthToken, editedUser, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2512,6 +2585,18 @@ export class DefaultApi extends BaseAPI {
      */
     public getMatches(page?: number, options?: any) {
         return DefaultApiFp(this.configuration).getMatches(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get my info
+     * @param {string} xAuthToken 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getMyInfo(xAuthToken: string, options?: any) {
+        return DefaultApiFp(this.configuration).getMyInfo(xAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

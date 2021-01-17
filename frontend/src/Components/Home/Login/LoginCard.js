@@ -46,7 +46,7 @@ function LoginCard(props) {
   let onSubmit = async (user) => {
     try {
       const resp = await api.login({username: user.username, password: user.password});
-      NotificationManager.success(resp.data.msg);
+      NotificationManager.success(resp?.data?.msg);
       await setTimeout(500);
       setUserType(resp.data.userType);
       setAuthToken(resp.data.authToken);

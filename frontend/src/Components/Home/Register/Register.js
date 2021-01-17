@@ -69,10 +69,9 @@ function Register(props) {
   }
 
   let onSubmit = async (user) => {
-    console.log(user);
     try {
       const resp = await api.signup(user);
-      NotificationManager.success(resp.data.msg);
+      NotificationManager.success(resp?.data?.msg);
       resetForm();
       await setTimeout(500);
       if (resp.data.authToken) {
@@ -95,12 +94,12 @@ function Register(props) {
       <hr></hr>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
-          <Form.Group size="lg" className="col-md-6" controlId="username">
+          <Form.Group size="lg" className="col-md-6">
             <Form.Label className="input-label">Username</Form.Label>
             <Form.Control className = "register-input-text-area" name="username" ref={register}/>
             <p className="err-register">{errors.username?.message}</p>
           </Form.Group>
-          <Form.Group size="lg" className="col-md-6" controlId="firstName">
+          <Form.Group size="lg" className="col-md-6">
             <Form.Label className="input-label">First Name</Form.Label>
             <Form.Control className = "register-input-text-area" name="firstName" ref={register}/>
             <p className="err-register">{errors.firstName?.message}</p>
@@ -112,19 +111,19 @@ function Register(props) {
             <Form.Control className = "register-input-text-area" name="email" ref={register}/>
             <p className="err-register" onClick={()=>console.log(errors)}>{errors.email?.message}</p>
           </Form.Group>
-          <Form.Group className="col-md-6" size="lg" controlId="lastName">
+          <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Last Name</Form.Label>
             <Form.Control className = "register-input-text-area" name="lastName" ref={register}/>
             <p className="err-register">{errors.lastName?.message}</p>
           </Form.Group>
         </div>
         <div className="row">
-          <Form.Group className="col-md-6" size="lg" controlId="password">
+          <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Password</Form.Label>
             <Form.Control className = "register-input-text-area" type="password" name="password" ref={register} />
             <p className="err-register">{errors.password?.message}</p>
           </Form.Group>
-          <Form.Group className="col-md-6" size="lg" controlId="gender">
+          <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Gender</Form.Label>
 
             <Form.Control className="register-drop-down-button" as="select" name="gender" ref={register}>
@@ -135,12 +134,12 @@ function Register(props) {
           </Form.Group>
         </div>
         <div className="row">
-          <Form.Group className="col-md-6" size="lg" controlId="address">
+          <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Address</Form.Label>
             <Form.Control className = "register-input-text-area" name="address" ref={register}/>
             <p className="err-register">{errors.address?.message}</p>
           </Form.Group>
-          <Form.Group className="col-md-6" size="lg" controlId="birthDate">
+          <Form.Group className="col-md-6" size="lg">
             <div className="container pr-0 mr-0">
               <Form.Label className="row input-label">Birth Date</Form.Label>
               <DatePicker className="row register-date-time-picker form-control pr=0 mr-0"
@@ -155,7 +154,7 @@ function Register(props) {
           </Form.Group>
         </div>
         <div className="row">
-          <Form.Group className="col-md-6" size="lg" controlId="city">
+          <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">City</Form.Label>
             <Form.Control className = "register-input-text-area"
               name="city"
@@ -163,7 +162,7 @@ function Register(props) {
             />
             <p className="err-register">{errors.city?.message}</p>
           </Form.Group>
-          <Form.Group className="col-md-6" size="lg" controlId="role">
+          <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Role</Form.Label>
             <Form.Control className="register-drop-down-button" as="select" name="role" ref={register}>
               <option selected value="fan">Fan</option>
