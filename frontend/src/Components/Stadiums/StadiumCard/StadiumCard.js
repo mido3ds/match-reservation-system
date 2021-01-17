@@ -34,7 +34,8 @@ function StadiumCard({ card }) {
                          onOK={ deleteStadium } />
       </span>
       <h1 className="name-area">{stadium.name}</h1>
-      <h2 className="city-area">{stadium.city}</h2>
+      <div className="city-area">{stadium.city}</div>
+      <div clasName="capacity-area">Capacity: {stadium.rows * stadium.seatsPerRow}</div>
     </div>
   );
 }

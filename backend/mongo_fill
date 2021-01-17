@@ -2,7 +2,7 @@
 import argparse
 import string
 from datetime import datetime
-from random import choice, randint
+from random import choice, randint, sample
 
 import bcrypt
 from pymongo import MongoClient
@@ -24,6 +24,8 @@ parser.add_argument('--tickets', default=30, type=int,
                     help='num of tickets to create')
 parser.add_argument('--matches', default=20, type=int,
                     help='num of matches to create')
+parser.add_argument('--stadiums', default=30, type=int,
+                    help='num of stadiums to create')
 args = parser.parse_args()
 
 # create
@@ -90,9 +92,9 @@ def get_users():
 
 
 def get_stadiums():
-    # TODO: update this with stadium capacity
-    return [{'name': f'{city} Random Stadium', 'city': city}
-            for city in cities]
+    return [{'name': f'{city} Stadium {i}', 'city': city,
+             'rows': randint(1, 4), 'seatsPerRow': randint(5, 10)}
+            for i, city in enumerate(sample(cities*3*args.stadiums, args.stadiums))]
 
 
 def get_tickets(users, matches):

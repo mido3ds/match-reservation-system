@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
         $project: {
           _id: 0, uuid: "$_id",
           name: 1, city: 1,
+          rows: 1, seatsPerRow: 1,
         }
       }])
       .skip((req.query.page - 1) * pageSize)
@@ -53,7 +54,7 @@ router.post('/', [auth, manager], async (req, res) => {
     let stadium = await Stadium.findOne({ name: req.body.name });
     if (stadium) return res.status(403).send({ err: 'This stadium already exists.' });
 
-    const to_pick = ['name', 'city'];
+    const to_pick = ['name', 'city', 'rows', 'seatsPerRow'];
     stadium = new Stadium(_.pick(req.body, to_pick));
 
     await stadium.save();
