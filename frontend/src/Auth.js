@@ -1,4 +1,4 @@
-import { Cookie } from 'js-cookie';
+import Cookies from 'js-cookie';
 
 export function isLoggedIn() {
     return true;
@@ -15,8 +15,8 @@ export function userType() {
 }
 
 export function setUserType(type) {
-    if (type && (type === 'user' || type === 'manager' || type === 'admin')) {
-        Cookie.set('usertype', type);
+    if (type && ['fan', 'manager', 'admin'].includes(type)) {
+        Cookies.set('usertype', type);
     } else {
         throw Error('invalid type to store');
     }
@@ -29,7 +29,7 @@ export function authToken() {
 
 export function setAuthToken(token) {
     if (token && token.length > 0) {
-        Cookie.set('authtoken', token);
+        Cookies.set('authtoken', token);
     } else {
         throw Error('invalid token to store');
     }
@@ -40,6 +40,6 @@ export function logout() {
         console.error('cant logout and its not logged in');
         return;
     }
-    Cookie.remove('authoken');
-    Cookie.remove('usertype');
+    Cookies.remove('authtoken');
+    Cookies.remove('usertype');
 }

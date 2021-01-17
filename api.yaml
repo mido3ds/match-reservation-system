@@ -487,6 +487,8 @@ paths:
           description: ok
         '404':
           description: match/seat not found
+        '400':
+          description: invalid credit card details
         '401':
           description: not authorized, or reserved
           content:

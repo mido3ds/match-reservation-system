@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const { Match } = require('../models/match');
 const { validate, Ticket } = require('../models/ticket');
+const { validateCreditCard } = require('../models/creditCard');
 
 const router = express.Router({ mergeParams: true });
 
@@ -26,14 +27,18 @@ router.get('/', auth, async (req, res) => {
 });
 
 router.post('/reserve/:seat_id', auth, async (req, res) => {
-  // TODO: verify credit card number and pin
+  let creditCard = req.body;
+  const { creditCardError } = validateCreditCard(creditCard);
+  if (creditCardError)
+    return res.status(400).send({ err: error.details[0].message });
+
   let ticket = {
     matchUUID: req.params.match_id,
     username: req.user.username,
     seatID: req.params.seat_id
   }
-  const { error } = validate(ticket);  
-  if (error) 
+  const { ticketError } = validate(ticket);  
+  if (ticketError) 
     return res.status(403).send({ err: error.details[0].message });
 
   let match;

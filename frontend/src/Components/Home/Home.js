@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from "react-router-dom";
 import { isLoggedIn, userType } from '../../Auth';
 import Stadiums from "../../images/match.png";
 import Matches from "../../images/ball2.jpg";
@@ -9,36 +9,11 @@ import HomeCard from './Card/HomeCard';
 import HomeHeader from './HomeHeader/HomeHeader';
 import LoginCard from './Login/LoginCard';
 import Register from './Register/Register';
-import { NotificationManager } from 'react-notifications';
 import './Home.css';
 
 function Home() {
-  let { state } = useLocation();
-  let history = useHistory();
-
-  const [redirectOnLogin, setRedirectOnLogin] = useState(false);
-  const [redirectTo, setRedirectTo] = useState(null);
-
-  // useEffect with an empty array as a second parameter resembles componentDidMount in class components
-  useEffect(() => {
-    if (state?.from) {
-      // We arrived at the home page as a result of an authorization indirection
-      if (!isLoggedIn()) {
-        NotificationManager.error("You don't have access to this page");
-      } else {
-        NotificationManager.warning("Please log in or create an account to be able access this page");
-        setRedirectOnLogin(true);
-        setRedirectTo(state.from);
-      }
-    }
-  }, [state]);
-
-  // TODO: call this function if a user logs in successfully
-  let onSuccessfulLogin = () => {
-    if (redirectOnLogin) {
-      history.replace(redirectTo);
-    };
-  };
+  const [loggedIn, checkLoggedIn] = useState(isLoggedIn());
+  const [type, checkUserType] = useState(userType());
 
   return (
     <>
@@ -54,11 +29,11 @@ function Home() {
               <HomeCard img={Stadiums} name="Stadiums" />
             </Link>
           </div>
-          { isLoggedIn() && userType() === 'admin' ? 
+          { loggedIn && type === 'admin' ? 
             <div class="line-break"></div> : ''
           }
           {
-            isLoggedIn() && userType() === 'admin' ?
+            loggedIn && type === 'admin' ?
               <div className="home-card-item">
                 <Link to='/users'>
                   <HomeCard img={Users} name="Users" />
@@ -66,15 +41,15 @@ function Home() {
               </div> : ''
           }
           {
-          isLoggedIn() ?
+          loggedIn ?
             '' :
             <div className="home-card-item">
-                <LoginCard />
+                <LoginCard login={checkLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
             </div>
          }
 
           {
-          isLoggedIn() ?
+          loggedIn ?
             <div className="home-card-item">
               <Link to='/tickets'>
                 <HomeCard img={Tickets} name="Tickets"/>
@@ -83,7 +58,7 @@ function Home() {
           }
       </div>
         {
-        isLoggedIn() ?
+        loggedIn ?
             '' :
             <div>
                 <Register />

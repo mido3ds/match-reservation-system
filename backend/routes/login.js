@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
   const [authToken, userType] = user.generateAuthToken();
 
-  res.send({ authToken, userType });
+  res.status(200).send({ authToken, userType });
 });
 
 module.exports = router;
