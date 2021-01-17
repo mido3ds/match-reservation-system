@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Pagination.css';
 
 
 function Pagination({ paginate, hasNext }) {
-  let pageNumber = 1;
+  const [pageNumber, setPageNumber] = useState(1);
   var paginationWrapper = document.querySelector('.pagination-wrapper');
 
   useEffect(() => {
@@ -28,13 +28,19 @@ function Pagination({ paginate, hasNext }) {
   const btnClick = (inc) => {
     if (!inc && pageNumber > 1) {
       paginationWrapper.classList.add('transition-prev');
-      pageNumber = pageNumber - 1;
-      paginate(pageNumber);
+      setPageNumber(pageNumber => {
+        pageNumber = pageNumber - 1
+        paginate(pageNumber);
+        return pageNumber;
+      });
     }
     else if (inc && hasNext) {
       paginationWrapper.classList.add('transition-next');
-      pageNumber = pageNumber + 1;
-      paginate(pageNumber);
+      setPageNumber(pageNumber => {
+        pageNumber = pageNumber + 1
+        paginate(pageNumber);
+        return pageNumber;
+      });
     }
 
     setTimeout(cleanClasses, 500);
