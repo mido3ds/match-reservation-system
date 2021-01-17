@@ -30,9 +30,9 @@ function Tickets() {
         return ticket;
       }));
     } catch (err) {
-        console.error(err.message);
-        if (err.response?.data?.err) 
-          NotificationManager.error(err.response.data.err);
+      console.error(err.message);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

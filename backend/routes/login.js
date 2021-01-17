@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
   const [authToken, userType] = user.generateAuthToken();
 
-  res.status(200).send({ authToken, userType });
+  res.status(200).send({ authToken, userType, msg:'Successfull Login' });
 });
 
 module.exports = router;
