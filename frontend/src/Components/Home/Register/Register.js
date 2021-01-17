@@ -69,7 +69,6 @@ function Register(props) {
   }
 
   let onSubmit = async (user) => {
-    console.log(user);
     try {
       const resp = await api.signup(user);
       NotificationManager.success(resp.data.msg);
@@ -128,8 +127,8 @@ function Register(props) {
           <Form.Group className="col-md-6" size="lg" controlId="gender">
             <Form.Label className="input-label">Gender</Form.Label>
 
-            <Form.Control className="register-drop-down-button" as="select" name="gender" ref={register}>
-              <option selected value="male">Male</option>
+            <Form.Control className="register-drop-down-button" as="select" name="gender" ref={register} defaultValue="male">
+              <option value="male">Male</option>
               <option value="female">Female</option>
             </Form.Control>
             <p className="err-register">{errors.gender?.message}</p>
@@ -166,8 +165,8 @@ function Register(props) {
           </Form.Group>
           <Form.Group className="col-md-6" size="lg" controlId="role">
             <Form.Label className="input-label">Role</Form.Label>
-            <Form.Control className="register-drop-down-button" as="select" name="role" ref={register}>
-              <option selected value="fan">Fan</option>
+            <Form.Control className="register-drop-down-button" as="select" name="role" ref={register} defaultValue="fan">
+              <option value="fan">Fan</option>
               <option value="manager">Manager</option>
             </Form.Control>
             <p className="err-register">{errors.role?.message}</p>

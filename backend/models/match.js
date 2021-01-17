@@ -2,22 +2,6 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const { Ticket } = require('./ticket');
 
-const rowsCount = 3;
-const colsCount = 10;
-
-let defaultSeatMap = [];
-for(let i = 0; i < rowsCount; i++) {
-  let rowLetter = String.fromCharCode('A'.charCodeAt(0) + i);
-  let row = [];
-  for(let j = 1; j <= colsCount; j++) {
-    let seatCode = rowLetter + j;
-    row.push({
-      id: seatCode,
-      isReserved: false
-    })
-  }
-  defaultSeatMap.push(row);
-}
 
 const matchSchema = new mongoose.Schema({
   homeTeam: { type: String, required: true },
@@ -28,7 +12,7 @@ const matchSchema = new mongoose.Schema({
   firstLinesman: { type: String, required: true },
   secondLinesman: { type: String, required: true },
   ticketPrice: { type: Number, required: true},
-  seatMap: { type: Object, min: 0, default: defaultSeatMap }
+  seatMap: { type: [[Object]], required: true}
 });
 
 matchSchema.post('remove', async (deletedMatch, next) => {
@@ -66,6 +50,24 @@ function validateMatchEdit(match) {
   }).validate(match);
 }
 
+function createEmptySeatMap(rows, seatsPerRow) {
+  let seatMap = [];
+  for(let i = 0; i < rows; i++) {
+    let rowLetter = String.fromCharCode('A'.charCodeAt(0) + i);
+    let row = [];
+    for(let j = 1; j <= seatsPerRow; j++) {
+      let seatCode = rowLetter + j;
+      row.push({
+        id: seatCode,
+        isReserved: false
+      })
+    }
+    seatMap.push(row);
+  }
+  return seatMap;
+}
+
 exports.Match = Match;
 exports.validateMatch = validateMatch;
 exports.validateMatchEdit = validateMatchEdit;
+exports.createEmptySeatMap = createEmptySeatMap;

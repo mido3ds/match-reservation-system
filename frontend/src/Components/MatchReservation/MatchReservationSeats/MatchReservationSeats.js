@@ -157,27 +157,25 @@ function MatchReservationSeats({ match }) {
     setLoading(false)
   }
 
-  const columnNumbers = [];
-  for (var i = 1; i <= 10; i++) {
-    columnNumbers.push(
-      <div key={i.toString()} className="column-number-area">
-        <h3> {i} </h3>
-      </div>);
-  }
-
   return (
     <div className="reservation-container flex-container-row">
       {seatMap.length ?
         <div className="reservation-area flex-container-column-vcenter">
           <div className="column-numbers flex-container-row">
-            {columnNumbers}
+            {seatMap[0].map((_, i) => { 
+                return (
+                <div key={i.toString()} className="column-number-area">
+                  <h3> {i} </h3>
+                </div>)
+              })
+            }
           </div>
           <div className="seats-area">
             <SeatPicker
               addSeatCallback={addSeat}
               removeSeatCallback={removeSeat}
               rows={seatMap}
-              maxReservableSeats={30}
+              maxReservableSeats={seatMap.length * seatMap[0].length}
               loading={loading}
               alpha
               visible

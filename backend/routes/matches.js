@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const manager = require('../middleware/manager');
 const auth = require('../middleware/auth');
-const { Match, validateMatch, validateMatchEdit } = require('../models/match');
+const { Match, validateMatch, validateMatchEdit, createEmptySeatMap } = require('../models/match');
 const { Stadium } = require('../models/stadium');
 const _ = require('lodash');
 const seats = require('./seats');
@@ -69,9 +69,11 @@ router.post('/', [auth, manager], async (req, res) => {
     if (!stadium)
       return res.status(400).send( { err: 'The venue (stadium) of the match does not exist'} );
 
-    const to_pick = ['homeTeam', 'awayTeam', 'venue', 'dateTime', 'mainReferee', 'firstLinesman', 'secondLinesman', 'ticketPrice'];
-    let match = new Match(_.pick(req.body, to_pick));
 
+    const to_pick = ['homeTeam', 'awayTeam', 'venue', 'dateTime', 'mainReferee', 'firstLinesman', 'secondLinesman', 'ticketPrice'];
+    let match = _.pick(req.body, to_pick);
+    match.seatMap = createEmptySeatMap(stadium.rows, stadium.seatsPerRow);
+    match = new Match(match);
     await match.save();
     res.status(200).send({ msg: 'Match added successfully!'});
   } catch(err) {
@@ -105,6 +107,7 @@ router.put('/:match_id', async (req, res) => {
       let stadium = await Stadium.findOne( { name: matchEdit.venue } );
       if (!stadium)
         return res.status(400).send({ err: 'The venue (stadium) of the match does not exist'});
+      matchEdit.seatMap = createEmptySeatMap(stadium.rows, stadium.seatsPerRow);
     }
 
     await Match.findByIdAndUpdate(matchID, matchEdit);

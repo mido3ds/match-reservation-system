@@ -13,10 +13,12 @@ const schema = yup.object().shape({
     .matches(/^[aA-zZ\s]+$/, 'Must contain letters and spaces only.'),
   rows: yup.number()
     .required('Required field.')
+    .typeError('Must be a number.')
     .min(1)
     .max(4),
   seatsPerRow: yup.number()
     .required('Required field.')
+    .typeError('Must be a number.')
     .min(5)
     .max(10),
 });

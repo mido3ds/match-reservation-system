@@ -30,7 +30,7 @@ function MatchReservation() {
       getMatch();
     }
     // eslint-disable-next-line
-  }, [state.match]);
+  }, [state]);
 
   return (
     <>
