@@ -4,7 +4,6 @@ import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader';
 import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
-import { authToken } from '../../Auth';
 
 const api = new DefaultApi();
 
@@ -19,18 +18,19 @@ function MatchReservation() {
       const resp = await api.getMatch(matchID);
       setMatch(resp.data);
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (state?.match) {
       setMatch(state.match);
     } else {
       getMatch();
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [state.match]);
 
   return (
     <>

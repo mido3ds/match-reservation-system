@@ -1,13 +1,10 @@
-import $ from 'jquery'; 
 import './ConfirmationModal.css';
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 
 function ConfirmationModal({ id, text, onOK }) {
-
-  const modal = useRef(null);
   return (
-    <div className="confirmation"ref={modal}>
+    <div className="confirmation">
       <div className="modal fade" id={ id } tabIndex="-1" role="dialog" aria-labelledby={ id } aria-hidden="true" >
         <div className="vertical-alignment-helper ">
           <div className="modal-dialog vertical-align-center" role="document">
