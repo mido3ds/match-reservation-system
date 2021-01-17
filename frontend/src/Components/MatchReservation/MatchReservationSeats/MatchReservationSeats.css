@@ -5,8 +5,7 @@
 }
 
 .tickets-area {
-    flex-basis: 0;
-    flex-grow: 1;
+    width: 550px;
     margin: 10px 25px;
 }
 
@@ -21,6 +20,11 @@
     height: 20;
 }
 
+.seat--enabled {
+    background-image: url("../../../images/seat-icon.png");;
+}
+
+
 .seat--selected {
     background-image: url("../../../images/seat-icon-green.png");
 
@@ -30,6 +34,8 @@
     background-image: url("../../../images/seat-icon-gray.png");
 
 }
+
+
 
 
 .seat__number {
@@ -127,4 +133,5 @@
 
 .header-area {
     justify-content: space-between;
+    width: 100% !important;
 }
