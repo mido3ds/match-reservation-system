@@ -1,6 +1,6 @@
 .login-card {
     position: relative;
-    height: 350px;
+    height: 400px;
     margin: 5px 14px;
     margin-bottom: 20px;
     padding: 10px 32px 0px 25px;
@@ -45,9 +45,17 @@
     margin-bottom: 15px;
 }
 
+.err-login {
+    font-size: small;
+    color: darkred;
+    font-family: monospace;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
 @media (max-width: 1200px) {
     .login-button {
         margin-top: 25px;
     }
-  }
-  
+}

@@ -56,11 +56,6 @@ function LoginCard(props) {
     }
   }
 
-
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  // }
-
   return (
     <div className="login-card border border-dark">
       <div className="login-label">Login</div>
@@ -69,12 +64,14 @@ function LoginCard(props) {
         <Form.Group size="lg" controlId="username">
           <Form.Label className="input-label">Username</Form.Label>
           <Form.Control className = "login-input-text-area" name ="username" ref={register} />
+        <p className="err-login">{errors.username?.message}</p>
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label className="input-label">Password</Form.Label>
           <Form.Control className = "login-input-text-area" type="password" name ="password" ref={register}/>
+        <p className="err-login">{errors.password?.message}</p>
         </Form.Group>
-        <Button className = "login-button" block size="lg" type="submit" disabled={false}>
+        <Button className = "login-button" block size="lg" type="submit">
           Login
         </Button>
       </Form>
