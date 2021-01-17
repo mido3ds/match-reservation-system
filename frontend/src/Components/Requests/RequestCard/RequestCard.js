@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import './RequestCard.css';
 import '../../Users/UserCard/UserCard.css';
 import { DefaultApi } from '../../../api';
@@ -82,4 +80,3 @@ function RequestCard({ card }) {
 }
 
 export default RequestCard;
->>>>>>> c35e58a2eedfbcb4a991792206f49ccf61ccadaf
