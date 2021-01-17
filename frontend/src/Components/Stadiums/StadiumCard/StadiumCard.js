@@ -36,7 +36,7 @@ function StadiumCard({ card }) {
       </span>
       <h1 className="name-area">{stadium.name}</h1>
       <div className="city-area">{stadium.city}</div>
-      <div clasName="capacity-area">Capacity: {stadium.rows * stadium.seatsPerRow}</div>
+      <div clasName="capacity-area"><strong>Capacity:</strong> {stadium.rows * stadium.seatsPerRow} seats </div>
     </div>
   );
 }

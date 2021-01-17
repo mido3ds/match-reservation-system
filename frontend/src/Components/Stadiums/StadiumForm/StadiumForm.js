@@ -50,14 +50,14 @@ function StadiumForm({onSubmit}) {
                 </div>
                 <div className="pin-area">
                   <span className="stadium-input-label"> # Rows </span>
-                  <input type="number" value='1' min='1' max='4' name="rows" className="form-control stadium-input-text-area"
+                  <input type="number" defaultValue='1' min='1' max='4' name="rows" className="form-control stadium-input-text-area"
                     id="StadiumRowsInput" ref={register}>
                   </input>
                   <p className='error-message'>{errors.rows?.message}</p>
                 </div>
                 <div className="pin-area">
                   <span className="stadium-input-label"> # Seats Per Row </span>
-                  <input type="number" value='5' min='5' max='10' name="seatsPerRow" className="form-control stadium-input-text-area"
+                  <input type="number" defaultValue='5' min='5' max='10' name="seatsPerRow" className="form-control stadium-input-text-area"
                     id="StadiumSeatsPerRowInput" ref={register}>
                   </input>
                   <p className='error-message'>{errors.seatsPerRow?.message}</p>
