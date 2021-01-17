@@ -3,6 +3,7 @@ import CardsArea from '../CardsArea/CardsArea';
 import TicketsHeader from './TicketsHeader/TicketsHeader';
 import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
+import { authToken } from '../../Auth';
 
 const api = new DefaultApi();
 
@@ -17,22 +18,27 @@ function Tickets() {
     });
   }
 
-  useEffect(async () => {
+  let getTickets = async () => {
     try {
-      const resp = await api.getTickets(page);
+      const resp = await api.getTickets(authToken(), page);
       const {tickets, matches, has_next} = resp.data;
       setHasNext(has_next);
       setTickets(tickets.map((ticket, i) => {
         ticket.id = i;
         ticket.removeCard = () => { removeTicket(i); };
-        ticket.match = matches.find(match => match.uuid === ticket.match.uuid)
+        ticket.match = matches.find(match => match.uuid === ticket.matchUUID)
         return ticket;
       }));
     } catch (err) {
-        NotificationManager.error(err.message);
+        console.error(err.message);
         if (err.response?.data?.err) 
           NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getTickets();
+    // eslint-disable-next-line
   }, [page]);
 
   return (

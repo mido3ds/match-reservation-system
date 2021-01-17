@@ -19,11 +19,11 @@ function TicketCard({ card }) {
 
   let cancelTicket = async () => {
     try {
-      const resp = await api.cancelTicket(authToken(), ticket.uuid);
+      const resp = await api.cancelTicket(ticket.uuid, authToken());
       NotificationManager.success(resp.data?.msg);
       removeCard();
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) 
         NotificationManager.error(err.response.data.err);
     }

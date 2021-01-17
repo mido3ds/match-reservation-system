@@ -18,7 +18,7 @@ export function setUserType(type) {
     if (type && (type === 'user' || type === 'manager' || type === 'admin')) {
         Cookies.set('usertype', type);
     } else {
-        throw 'invalid type to store';
+        throw Error('invalid type to store');
     }
 }
 
@@ -31,7 +31,7 @@ export function setAuthToken(token) {
     if (token && token.length > 0) {
         Cookies.set('authtoken', token);
     } else {
-        throw 'invalid token to store';
+        throw Error('invalid token to store');
     }
 }
 

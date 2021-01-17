@@ -18,7 +18,7 @@ function Users() {
     });
   }
 
-  useEffect(async () => {
+  let getUsers = async () => {
     try {
       const resp = await api.getUsers(authToken(), page);
       setHasNext(resp.data.has_next);
@@ -28,9 +28,14 @@ function Users() {
         return user; 
       }));
     } catch(err) {
-      NotificationManager.error(err.message);
+      console.error(err.message);
       if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
+  }
+
+  useEffect(() => {
+    getUsers();
+    // eslint-disable-next-line
   }, [page]);
 
   return (
