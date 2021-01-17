@@ -20,6 +20,7 @@ function MatchReservationSeats({ match }) {
   const [seatMap, setSeatMap] = useState([]);
   const [showButton, setShowButton] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [confirmedTicket, setConfirmedTicket] = useState();
   const [loading, setLoading] = useState(false);
 
   let getUserTickets = async () => {
@@ -158,14 +159,20 @@ function MatchReservationSeats({ match }) {
   }
 
   return (
+    <>
+    <TicketsForm onSubmit={reserveSeats} totalPrice={totalPrice} />
+    {confirmedTicket ? 
+    <ConfirmationModal id={'cancelTicket' + confirmedTicket.id}
+                  text={'Are you sure you want to cancel this ticket?'}
+                  onOK={confirmedTicket.cancelTicket} /> : ''}
     <div className="reservation-container flex-container-row-hcenter">
       {seatMap.length ?
         <div className="reservation-area flex-container-column-vcenter">
           <div className="column-numbers flex-container-row">
             {seatMap[0].map((_, i) => { 
                 return (
-                <div key={i.toString()} className="column-number-area">
-                  <h3> {i} </h3>
+                <div key={(i+1).toString()} className="column-number-area">
+                  <h3> {i + 1} </h3>
                 </div>)
               })
             }
@@ -195,7 +202,6 @@ function MatchReservationSeats({ match }) {
               <span>
                 <button type="button" className="tickets-purchase-button btn btn-primary"
                   data-toggle="modal" data-target="#TicketsModal"> Purchase </button>
-                <TicketsForm onSubmit={reserveSeats} totalPrice={totalPrice} />
               </span>
               : ''}
           </div>
@@ -203,11 +209,8 @@ function MatchReservationSeats({ match }) {
             {userTickets.map(ticket => (
               <div key={ticket.id.toString()} className={`ticket-area flex-container-column-hcenter ${ticket.isReserved ? "dark-red" : "light-green"}`}>
                 {ticket.isReserved ?
-                  <img alt="reject-icon" className="cancel-ticket" data-toggle="modal" data-target={'#cancelTicket' + ticket.id} src={Delete} />
+                  <img alt="reject-icon" className="cancel-ticket" onClick={()=> setConfirmedTicket(ticket)} data-toggle="modal" data-target={'#cancelTicket' + ticket.id} src={Delete} />
                   : ''}
-                <ConfirmationModal id={'cancelTicket' + ticket.id}
-                  text={'Are you sure you want to cancel this ticket?'}
-                  onOK={ticket.cancelTicket} />
                 <img className="ticket-image" alt="pitch" src={Ticket} />
                 <div className="flex-container-row-hcenter">
                   <div className="seat-number-area">
@@ -224,6 +227,7 @@ function MatchReservationSeats({ match }) {
           </div>
         </div> : ''}
     </div>
+    </>
   );
 }
 export default MatchReservationSeats;

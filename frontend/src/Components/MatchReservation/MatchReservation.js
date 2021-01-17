@@ -3,6 +3,9 @@ import { useLocation, useParams } from "react-router-dom";
 import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
 import MatchReservationHeader from './MatchReservationHeader/MatchReservationHeader';
+import MatchReservationSeats from './MatchReservationSeats/MatchReservationSeats';
+import './MatchReservation.css'
+import UsersImage from "../../images/match.webp";
 
 const api = new DefaultApi();
 
@@ -36,8 +39,10 @@ function MatchReservation() {
     <>
     {
       match ?
-      <div className="flex-container-column-vcenter-hcenter">
+      <div className="match-reservation-page flex-container-column-vcenter-hcenter">
+        <img className="match-reservation-header-image" alt="match-header" src={UsersImage} />
         <MatchReservationHeader match={match}/>
+        <MatchReservationSeats match={match}/>
       </div>
       : <div/>
      }
