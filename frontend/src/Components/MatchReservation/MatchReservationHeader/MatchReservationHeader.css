@@ -1,26 +1,10 @@
-.match-reservation-header {
-    position: relative;
-}
-
-.match-reservation-header-image {
-    width: 96%;
-    height: 350px;
-    object-fit: cover;
-    object-position: 50% 90%; /* try 20px 10px */ 
-    opacity: 90%;
-    filter: brightness(30%);
-    border-radius: 50px;
-    display:block;
-    margin: 0 auto 20px auto;
-}
-
 .match-details {
     width: 96%;
     height: 350px;
     position: absolute;
-    top: 50%;
+    top: 1%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -5%);
 }
 
 .teams-area {
@@ -51,10 +35,8 @@
     text-align: center;
 }
 
+.match-price {
 
-.match-home-team img {
-    display:block;
-    margin:auto;
 }
 
 .match-home-team p {
@@ -104,11 +86,27 @@
     margin: 0px 5px;
 }
 
+.match-price {
+
+}
+
+.match-price img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.match-price span {
+    color: white;
+    margin-top: 7px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
 .first-linesman {
     height: 30px;
     margin: 0px 5px
 }
-
 
 .first-linesman img {
     width: 20px;

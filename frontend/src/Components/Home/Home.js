@@ -1,19 +1,31 @@
-import { useState } from 'react';
-import { Link } from "react-router-dom";
-import { isLoggedIn, userType } from '../../Auth';
-import Stadiums from "../../images/match.png";
-import Matches from "../../images/ball2.jpg";
-import Users from "../../images/fans.jpg";
-import Tickets from "../../images/tickets-header.jpeg";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom";
+import { userType } from '../../Auth';
+import Stadiums from "../../images/match.webp";
+import Matches from "../../images/ball2.webp";
+import Users from "../../images/fans.webp";
+import Tickets from "../../images/tickets-header.webp";
 import HomeCard from './Card/HomeCard';
 import HomeHeader from './HomeHeader/HomeHeader';
 import LoginCard from './Login/LoginCard';
 import Register from './Register/Register';
+import { NotificationManager } from 'react-notifications';
+import { isLoggedIn } from "../../Auth";
 import './Home.css';
 
-function Home() {
-  const [loggedIn, checkLoggedIn] = useState(isLoggedIn());
+function Home({ loggedIn, setLoggedIn }) {
   const [type, checkUserType] = useState(userType());
+  let { state } = useLocation();
+
+  // useEffect with an empty array as a second parameter resembles componentDidMount in class components
+  useEffect(() => {
+    if (state?.from) {
+      // We arrived at the home page as a result of an authorization indirection
+      if (isLoggedIn()) {
+        NotificationManager.error("You don't have access to this page");
+      }
+    }
+  }, [state]);
 
   return (
     <>
@@ -44,7 +56,7 @@ function Home() {
           loggedIn ?
             '' :
             <div className="home-card-item">
-                <LoginCard login={checkLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
+                <LoginCard login={setLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
             </div>
           }
 
@@ -61,7 +73,7 @@ function Home() {
         loggedIn ?
             '' :
             <div>
-                <Register login={checkLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
+                <Register login={setLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
             </div>
          }
     </>

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
 const { Match } = require('../models/match');
 const { Ticket } = require('../models/ticket');
+const { notifyClients } = require('./seats_live_updates');
 
 const router = express.Router();
 
@@ -80,27 +81,33 @@ router.delete('/:ticket_id', async (req, res) => {
   let ticket, match;
   try {
     ticket = await Ticket.findOne({ _id: ticketID });
-    match = await Match.findById(ticket.matchUUID).select({ seatMap: 1 });
+    match = await Match.findById(ticket.matchUUID).select({ seatMap: 1, dateTime: 1 });
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }
 
-    if (!ticket) return res.status(404).send({ err: 'Ticket to delete is not found'});
-    
-    let seatMap = match.seatMap;
-    let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
-    let col = ticket.seatID.substring(1) - 1;
+  if (!ticket)
+    return res.status(404).send({ err: 'Ticket to delete is not found'});
 
-    console.assert(seatMap[row][col].id === ticket.seatID, 'Seat ID wrong index calculation');
-    console.assert(seatMap[row][col].isReserved === true, 'Seat must be already reserved');
+  let daysBeforeMatch = (match.dateTime.getTime() - Date.now()) / (1000 * 60 * 60 * 24);
+  if(daysBeforeMatch < 3)
+    return res.status(400).send({ err: 'Cannot cancel a ticket of a match that is less than 3 days away!'});
 
-    let updateCondition = {} 
-    updateCondition['seatMap.' + row + '.' + col + '.isReserved'] = false;
+  let seatMap = match.seatMap;
+  let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
+  let col = ticket.seatID.substring(1) - 1;
+
+  console.assert(seatMap[row][col].id === ticket.seatID, 'Seat ID wrong index calculation');
+  console.assert(seatMap[row][col].isReserved === true, 'Seat must be already reserved');
+
+  let updateCondition = {}
+  updateCondition['seatMap.' + row + '.' + col + '.isReserved'] = false;
 
   try {
     await Match.updateOne({ _id: match._id }, { $set: updateCondition });
     await ticket.remove();
     res.status(200).send({ msg: 'Ticket for seat ' + ticket.seatID + ' deleted successfully!' });
+    notifyClients(ticket.matchUUID, ticket.seatID, false);
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }

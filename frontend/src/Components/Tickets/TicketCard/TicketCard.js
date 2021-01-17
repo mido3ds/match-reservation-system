@@ -24,8 +24,8 @@ function TicketCard({ card }) {
       removeCard();
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) 
-        NotificationManager.error(err.response.data.err);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 
@@ -35,21 +35,21 @@ function TicketCard({ card }) {
           <img alt="delete-icon" className="cancel-ticket-icon" src={Delete} data-toggle="modal" data-target={'#cancelModal' + card.id}/>
           <ConfirmationModal id={'cancelModal' + card.id} 
                               text={ 'Are you sure you want to cancel this ticket?'}
-                              onOK={ cancelTicket } /> : ''
+                              onOK={ cancelTicket } /> 
           <Link className="noHover" to={{ pathname: `/match-reservation/${ticket.match.uuid}`, state: ticket.match }}>
             <div className='flex-container-row-hcenter'>
               <div className="upper-area flex-container-row-hcenter" >
                 <div className="home-team" >
-                  <img alt={ticket.match.homeTeam.name + '-logo'} src={logos_60x60[ticket.match.homeTeam.name]} />
-                  <p> {ticket.match.homeTeam.name} </p>
+                  <img alt={ticket.match.homeTeam + '-logo'} src={logos_60x60[ticket.match.homeTeam]} />
+                  <p> {ticket.match.homeTeam} </p>
                 </div>
                 <div className="date-time" >
                   <p className="time"> <Moment format="hh:mm" date={ticket.match.dateTime} />  </p>
                   <p className="date"> <Moment format="ll" date={ticket.match.dateTime} /> </p>
                 </div>
                 <div className="away-team" >
-                  <img alt={ticket.match.awayTeam.name + '-logo'} src={logos_60x60[ticket.match.awayTeam.name]} />
-                  <p> {ticket.match.awayTeam.name}  </p>
+                  <img alt={ticket.match.awayTeam + '-logo'} src={logos_60x60[ticket.match.awayTeam]} />
+                  <p> {ticket.match.awayTeam}  </p>
                 </div>
               </div>
             </div>

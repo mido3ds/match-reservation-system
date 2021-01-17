@@ -90,7 +90,8 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
       setStadiums(resp.data);
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
     resetForm();
   }

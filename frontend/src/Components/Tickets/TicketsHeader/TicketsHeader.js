@@ -1,4 +1,4 @@
-import Tickets from "../../../images/tickets-header.jpeg";
+import Tickets from "../../../images/tickets-header.webp";
 import './TicketsHeader.css';
 
 

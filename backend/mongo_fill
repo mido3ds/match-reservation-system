@@ -1,8 +1,7 @@
 #!/bin/env python3
 import argparse
-import string
 from datetime import datetime
-from random import choice, randint
+from random import choice, randint, sample
 
 import bcrypt
 from pymongo import MongoClient
@@ -24,6 +23,8 @@ parser.add_argument('--tickets', default=30, type=int,
                     help='num of tickets to create')
 parser.add_argument('--matches', default=20, type=int,
                     help='num of matches to create')
+parser.add_argument('--stadiums', default=30, type=int,
+                    help='num of stadiums to create')
 args = parser.parse_args()
 
 # create
@@ -49,26 +50,42 @@ teamnames = ["Al-Ahly",
              "Ghazl El-Mahla"]
 
 
+def get_seat_map(stadium):
+    def get_seat(i, j):
+        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        return {
+            'id': f'{letters[i]}{j}',
+            'isReserved': choice([True, False])
+        }
+
+    def get_row(i):
+        return [get_seat(i, j) for j in range(1, stadium['seatsPerRow']+1)]
+
+    return [get_row(i) for i in range(stadium['rows'])]
+
+
 def get_matches(stadiums):
     matchdatetimes = [datetime.fromisoformat(f'20{i:02}-02-12T22')
                       for i in range(22)]
+    stadiums = [stadiums[randint(0, len(stadiums)-1)]
+                for _ in range(args.matches)]
     return [{
         'homeTeam': teamnames[i % len(teamnames)],
         'awayTeam': teamnames[(i+1) % len(teamnames)],
-        'venue': randint(0, len(stadiums)-1),
+        'venue': f"{stadiums[i]['name']}, {stadiums[i]['city']}",
         'dateTime': choice(matchdatetimes),
         'mainReferee': f'referee{i}',
         'firstLinesman': f'firstLinesman{i}',
         'secondLinesman': f'secondLinesman{i}',
         'ticketPrice': 200,
-        'seatMap': 0,  # TODO: update this with the latest schema
+        'seatMap': get_seat_map(stadiums[i]),
     } for i in range(args.matches)]
 
 
 def get_users():
     usernames = ['admin',
                  *[f'manager{i}' for i in range(args.managers)],
-                 *[f'fan{i}' for i in range(args.fans)]]
+                 *[f'justfan{i}' for i in range(args.fans)]]
     birthdates = [datetime.fromisoformat(
         f'19{i:02}-12-30') for i in range(100)]
     creationdates = [datetime.fromisoformat(
@@ -90,15 +107,15 @@ def get_users():
 
 
 def get_stadiums():
-    # TODO: update this with stadium capacity
-    return [{'name': f'{city} Random Stadium', 'city': city}
-            for city in cities]
+    return [{'name': f'{city} Stadium {i}', 'city': city,
+             'rows': randint(1, 4), 'seatsPerRow': randint(5, 10)}
+            for i, city in enumerate(sample(cities*3*args.stadiums, args.stadiums))]
 
 
 def get_tickets(users, matches):
     return [{
         'matchUUID': choice(matches)['_id'],
-        'seatID': f'{choice(string.ascii_letters.upper())}{i}',
+        'seatID': f'{choice("ABC")}{randint(1,4)}',
         'username': choice(users)['username'],
         'price': 200,
     } for i in range(args.tickets)]

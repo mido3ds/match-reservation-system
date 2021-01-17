@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import { useState } from 'react';
 import './App.css';
 import AuthorizedRoute from './Components/AuthorizedRoute/AuthorizedRoute';
 import EditProfile from './Components/EditProfile/EditProfile';
@@ -12,16 +13,19 @@ import Stadiums from './Components/Stadiums/Stadiums';
 import Users from './Components/Users/Users';
 import Tickets from './Components/Tickets/Tickets';
 import { NotificationContainer } from 'react-notifications';
+import { isLoggedIn } from './Auth';
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
       <div className='content'>
       <Switch>
         <Route exact path='/'>
-          <Home />
+          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         </Route>
         <Route path='/edit-profile' allowedUsers={["fan", "manager", "admin"]}>
           <EditProfile />

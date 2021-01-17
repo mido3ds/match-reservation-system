@@ -405,6 +405,18 @@ export interface ListedStadium {
      * @memberof ListedStadium
      */
     uuid: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListedStadium
+     */
+    rows: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ListedStadium
+     */
+    seatsPerRow: number;
 }
 /**
  * This is the object sent to frontend when it asks to list user
@@ -569,6 +581,18 @@ export interface SubmittedStadium {
      * @memberof SubmittedStadium
      */
     city: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SubmittedStadium
+     */
+    rows: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SubmittedStadium
+     */
+    seatsPerRow: number;
 }
 /**
  * User sends this object when they first signup

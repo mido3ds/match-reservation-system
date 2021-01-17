@@ -7,7 +7,7 @@ import { DefaultApi } from '../../../api';
 import { NotificationManager } from 'react-notifications';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { isLoggedIn, setUserType, setAuthToken } from "../../../Auth";
+import { setUserType, setAuthToken } from "../../../Auth";
 
 import "./LoginCard.css"
 
@@ -33,15 +33,26 @@ function LoginCard(props) {
   useEffect(() => {
     if (state?.from) {
       // We arrived at the home page as a result of an authorization indirection
-      if (isLoggedIn()) {
-        NotificationManager.error("You don't have access to this page");
-      } else {
-        NotificationManager.warning("Please log in or create an account to be able access this page");
-        setRedirectTo(state.from);
-        setIsRedirected(true);
-      }
+      NotificationManager.warning("Please log in or create an account to be able access this page");
+      setRedirectTo(state.from);
+      setIsRedirected(true);
     }
   }, [state]);
+
+  let toggleNavbar = () => {
+    var navbar = window.$(".page-navbar")[0];
+    var text =  window.$(".brand-text")[0];
+    var logo =  window.$(".brand-logo")[0];
+    var buttons =  window.$(".navbar-button-area")[0];
+    var editButton =  window.$(".edit-profile-button")[0];
+    var logOutButton =  window.$(".log-out-profile-button")[0];
+    navbar.classList.add("is-active");
+    text.classList.add("is-active");
+    logo.classList.add("is-active");
+    buttons?.classList.add("is-active");
+    editButton?.classList.add("is-active");
+    logOutButton?.classList.add("is-active");
+}
 
   let onSubmit = async (user) => {
     try {
@@ -53,9 +64,11 @@ function LoginCard(props) {
       if (isRedirected) history.push(redirectTo);
       props.userType(resp.data.userType);
       props.login(true);
+      toggleNavbar()
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

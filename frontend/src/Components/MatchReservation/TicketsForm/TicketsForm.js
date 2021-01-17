@@ -3,13 +3,17 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
+const digitsOnly = (value) => /^\d+$/.test(value)
+
 const schema = yup.object().shape({
   creditCardNumber: yup.string()
     .required('Required field.')
-    .min(10, 'Must be at least 10 characters'),
+    .test('Digits only', 'The field should have digits only', digitsOnly)
+    .length(16, 'Must be 16 digits'),
   pin: yup.string()
     .required('Required field.')
-    .min(6, 'Must be at least 6 characters'),
+    .test('Digits only', 'The field should have digits only', digitsOnly)
+    .length(4, 'Must be 4 digits')
 });
 
 function TicketsForm({onSubmit, totalPrice}) {
@@ -30,14 +34,14 @@ function TicketsForm({onSubmit, totalPrice}) {
                     <input type="text" name="creditCardNumber" className="form-control tickets-input-text-area"
                            id="CreditCardInput" ref={register}>    
                     </input>
-                    <p className='error-message'>{errors.creditCard?.message}</p>
+                    <p className='error-message'>{errors.creditCardNumber?.message}</p>
                 </div>
                 <div className="pin-area">
                     <span className="tickets-input-label"> PIN </span>
                     <input type="password" className="form-control tickets-input-text-area"
                            id="PINInput" name="pin" ref={register}>
                     </input>
-                    <p className='error-message'>{errors.PIN?.message}</p>
+                    <p className='error-message'>{errors.pin?.message}</p>
                 </div>
                 <h2> Total Price: {totalPrice}$ </h2>
                 <div className="tickets-form-modal-buttons-area">

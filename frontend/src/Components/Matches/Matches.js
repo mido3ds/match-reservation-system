@@ -53,9 +53,8 @@ function Matches() {
       return true;
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) {
-        NotificationManager.error(err.response.data.err);
-      }
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
       return false;
     }
   }
@@ -70,9 +69,8 @@ function Matches() {
       return true;
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) {
-        NotificationManager.error(err.response.data.err);
-      }
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
       return false;
     }
   }
@@ -82,7 +80,6 @@ function Matches() {
   const [page, setPage] = useState(1);
 
   let removeMatchCard = (id) => {
-    console.log(matches);
     setMatches(matches => {
       return matches.filter(match => { return match.id !== id })
     });
@@ -100,7 +97,8 @@ function Matches() {
       }));
     } catch(err) {
       console.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

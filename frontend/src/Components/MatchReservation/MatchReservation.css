@@ -1,0 +1,15 @@
+.match-reservation-page {
+    position: relative;
+}
+
+.match-reservation-header-image {
+    width: 96%;
+    height: 900px;
+    object-fit: cover;
+    object-position: 50% 90%; /* try 20px 10px */ 
+    opacity: 90%;
+    filter: brightness(30%);
+    border-radius: 50px;
+    display:block;
+    margin: 0 auto 20px auto;
+}

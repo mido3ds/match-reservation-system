@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import UsersImage from "../../../images/users.jpg";
+import UsersImage from "../../../images/users.webp";
 import './UsersHeader.css';
 
 function UsersHeader() {

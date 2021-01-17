@@ -902,9 +902,15 @@ components:
           type: string
         city:
           type: string
+        rows:
+          type: integer
+        seatsPerRow:
+          type: integer
       required:
       - name
       - city
+      - rows
+      - seatsPerRow
     ListedStadium:
       type: object
       additionalProperties: false
@@ -915,10 +921,16 @@ components:
           type: string
         uuid:
           type: string
+        rows:
+          type: integer
+        seatsPerRow:
+          type: integer
       required:
       - name
       - city
       - uuid
+      - rows
+      - seatsPerRow
     MatchTicket:
       type: object
       additionalProperties: false

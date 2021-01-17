@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie';
 
 export function isLoggedIn() {
-    // return true;
     try {
         return authToken() && userType();
     } catch (e) {

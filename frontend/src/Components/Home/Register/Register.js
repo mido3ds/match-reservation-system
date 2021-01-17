@@ -13,7 +13,7 @@ import "./Register.css";
 
 const api = new DefaultApi();
 
-const minYearsOld = 10;
+const minYearsOld = 18;
 const maxYearsOld = 130;
 
 const minBirthDate = new Date();
@@ -83,8 +83,9 @@ function Register(props) {
         props.userType(resp.data.userType);
       }
     } catch(err) {
-      NotificationManager.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      console.error(err.message);
+      if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 
@@ -126,8 +127,8 @@ function Register(props) {
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Gender</Form.Label>
 
-            <Form.Control className="register-drop-down-button" as="select" name="gender" ref={register}>
-              <option selected value="male">Male</option>
+            <Form.Control className="register-drop-down-button" as="select" name="gender" ref={register} defaultValue="male">
+              <option value="male">Male</option>
               <option value="female">Female</option>
             </Form.Control>
             <p className="err-register">{errors.gender?.message}</p>
@@ -164,8 +165,8 @@ function Register(props) {
           </Form.Group>
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="input-label">Role</Form.Label>
-            <Form.Control className="register-drop-down-button" as="select" name="role" ref={register}>
-              <option selected value="fan">Fan</option>
+            <Form.Control className="register-drop-down-button" as="select" name="role" ref={register} defaultValue="fan">
+              <option value="fan">Fan</option>
               <option value="manager">Manager</option>
             </Form.Control>
             <p className="err-register">{errors.role?.message}</p>

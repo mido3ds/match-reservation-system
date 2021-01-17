@@ -1,4 +1,4 @@
-import Stadium from "../../../images/stadium-background-with-green-grass-pitch-daytime.jpg";
+import Stadium from "../../../images/stadium-background-with-green-grass-pitch-daytime.webp";
 import './StadiumHeader.css';
 import { isLoggedIn, userType } from '../../../Auth';
 

@@ -33,8 +33,8 @@
 }
 
 .ticket-card {
-    width: 235px;
-    height: 240px;
+    width: 270px;
+    height: 250px;
     background-color: #3d4949;
     border-radius: 20px;
     margin: 5px;
@@ -42,7 +42,7 @@
 
 .cancel-ticket-icon {
     position: relative;
-    left: 105px;
+    left: 120px;
     width: 17px;
     height: 17px;
     margin: 10px;
