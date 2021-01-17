@@ -20,37 +20,27 @@ function Navbar({ loggedIn, setLoggedIn }) {
         var navbar = document.getElementsByClassName("page-navbar")[0];
         var text = document.getElementsByClassName("brand-text")[0];
         var logo = document.getElementsByClassName("brand-logo")[0];
-        var buttons = undefined;
-        var editButton = undefined;
-        var logOutButton = undefined;
-        if (loggedIn) {
-            buttons = document.getElementsByClassName("navbar-button-area")[0];
-            editButton = document.getElementsByClassName("edit-profile-button")[0];
-            logOutButton = document.getElementsByClassName("log-out-profile-button")[0];
-        }
+        var buttons = document.getElementsByClassName("navbar-button-area")[0];
+        var editButton = document.getElementsByClassName("edit-profile-button")[0];
+        var logOutButton = document.getElementsByClassName("log-out-profile-button")[0];
 
         if (window.pageYOffset > 0) {
             if (!navbar.classList.contains("is-active")) {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
                 logo.classList.toggle("is-active");
-                if (loggedIn) {
-                    buttons.classList.toggle("is-active");
-                    editButton.classList.toggle("is-active");
-                    logOutButton.classList.toggle("is-active");
-                }
+                buttons?.classList.toggle("is-active");
+                editButton?.classList.toggle("is-active");
+                logOutButton?.classList.toggle("is-active");
             }
-
         } else {
             if (navbar.classList.contains("is-active")) {
                 navbar.classList.toggle("is-active");
                 text.classList.toggle("is-active");
                 logo.classList.toggle("is-active");
-                if (loggedIn) {
-                    buttons.classList.toggle("is-active");
-                    editButton.classList.toggle("is-active");
-                    logOutButton.classList.toggle("is-active");
-                }
+                buttons?.classList.toggle("is-active");
+                editButton?.classList.toggle("is-active");
+                logOutButton?.classList.toggle("is-active");
             }
         }
         
