@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   birthDate: { type: Date, required: true },
   gender: { type: String, required: true, enum: ['male', 'female'] },
   city: { type: String, required: true, minlength: 3, maxlength: 15, lowercase: true },
-  address: { type: String, required: true },
+  address: { type: String , maxlength: 200},
   email: { type: String, unique: true, required: true, minlength: 5, maxlength: 255, lowercase: true },
   role: { type: String, required: true, enum: ['fan', 'manager', 'admin'] },
   isPending: { type: Boolean, default: true, required: true },
@@ -42,7 +42,7 @@ function validateUser(user) {
     birthDate: Joi.date().required().max('now'),
     gender: Joi.string().valid('male', 'female').required(),
     city: Joi.string().min(3).max(15).required(),
-    address: Joi.string().min(5).max(100).required(),
+    address: Joi.string().allow('').optional().max(200),
     email: Joi.string().min(5).max(255).required().email(),
     role: Joi.string().valid('fan', 'manager', 'admin').required()
   }).validate(user);
@@ -56,7 +56,7 @@ function validateUpdatedUser(user) {
     birthDate: Joi.date().required().max('now'),
     gender: Joi.string().valid('male', 'female').required(),
     city: Joi.string().min(3).max(15).required(),
-    address: Joi.string().min(5).max(100).required(),
+    address: Joi.string().max(200),
     role: Joi.string().valid('fan', 'manager', 'admin').required()
   }).validate(user);
 }

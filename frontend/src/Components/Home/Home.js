@@ -61,7 +61,7 @@ function Home() {
         loggedIn ?
             '' :
             <div>
-                <Register />
+                <Register login={checkLoggedIn.bind(this)} userType={checkUserType.bind(this)}/>
             </div>
          }
     </>
