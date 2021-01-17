@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
+const { Ticket } = require('./ticket');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true, minlength: 5, maxlength: 50, lowercase: true },
