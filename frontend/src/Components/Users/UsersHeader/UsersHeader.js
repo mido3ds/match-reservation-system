@@ -11,7 +11,7 @@ function UsersHeader() {
       </div>
       <div className="users-button-area">
         <Link to='/management-requests'>
-          <button type="button" className="requests-button btn btn-primary"> Requests </button>
+          <button type="button" className="requests-button btn btn-primary"> Management Requests </button>
         </Link>
       </div>
     </div>
