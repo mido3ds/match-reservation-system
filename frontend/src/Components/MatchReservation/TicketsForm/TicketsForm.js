@@ -43,7 +43,7 @@ function TicketsForm({onSubmit, totalPrice}) {
                     </input>
                     <p className='error-message'>{errors.pin?.message}</p>
                 </div>
-                <h2> Total Price: {totalPrice}$ </h2>
+                <h2> Total Price: {totalPrice} EGP </h2>
                 <div className="tickets-form-modal-buttons-area">
                   <button type="submit" className="btn tickets-form-modal-purchase-btn"> Purchase </button>
                   <button type="button" className="btn tickets-form-modal-cancel-btn" data-dismiss="modal"> Cancel </button>

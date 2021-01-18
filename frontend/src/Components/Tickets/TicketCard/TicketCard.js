@@ -65,7 +65,7 @@ function TicketCard({ card }) {
                 </span>
                 <span className="tickets-price-area" >
                   <img alt="price-icon" src={Price} />
-                  <span> {ticket.price + "$"}  </span>
+                  <span> {ticket.price + " EGP"}  </span>
                 </span>
               </div>
             </div>
