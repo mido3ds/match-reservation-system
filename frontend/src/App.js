@@ -14,10 +14,11 @@ import Users from './Components/Users/Users';
 import Tickets from './Components/Tickets/Tickets';
 import { NotificationContainer } from 'react-notifications';
 import { isLoggedIn } from './Auth';
-
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const [sessionUUID] = useState(uuidv4());
 
   return (
     <div className="App">
@@ -37,7 +38,7 @@ function App() {
           <Tickets />
         </AuthorizedRoute>
         <Route path='/match-reservation/:match_id'>
-          <MatchReservation loggedIn={loggedIn} />
+          <MatchReservation sessionUUID={sessionUUID} loggedIn={loggedIn} />
         </Route>
         <Route exact path='/stadiums'>
           <Stadiums />

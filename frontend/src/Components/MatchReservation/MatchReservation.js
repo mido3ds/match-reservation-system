@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 const api = new DefaultApi();
 
-function MatchReservation({ loggedIn }) {
+function MatchReservation({ loggedIn, sessionUUID }) {
   let { match_id: matchID } = useParams();
   let { state } = useLocation();
 
@@ -46,7 +46,7 @@ function MatchReservation({ loggedIn }) {
       <div className="match-reservation-page flex-container-column-vcenter-hcenter">
         <img className="match-reservation-header-image" alt="match-header" src={UsersImage} />
         <MatchReservationHeader match={match}/>
-        {loggedIn? <MatchReservationSeats match={match}/> : <div />}
+        {loggedIn? <MatchReservationSeats sessionUUID={sessionUUID} match={match}/> : <div />}
       </div>
       : <div/>
      }

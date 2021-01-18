@@ -14,15 +14,21 @@ function notifyClients(matchID, seatID, isReserved) {
     }
 }
 
+function identifyUser(req) {
+    return req.query.uuid+req.ip+req.socket.address().address+JSON.stringify(req.headers);
+}
+
 router.get('/', (req, res) => {
     let matchID = req.params.match_id;
     let client = {
-        id: Date.now(),
+        id: identifyUser(req),
         res
     }
     if (!clients[matchID])
         clients[matchID] = [];
-
+    
+    // remove connections from same user
+    clients[matchID] = clients[matchID].filter(c => c.id !== client.id);
     clients[matchID].push(client);
 
     res.writeHead(200, {

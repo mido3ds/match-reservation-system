@@ -15,7 +15,7 @@ import ConfirmationModal from '../../ConfirmationModal/ConfirmationModal';
 
 const api = new DefaultApi();
 
-function MatchReservationSeats({ match }) {
+function MatchReservationSeats({ match, sessionUUID }) {
   const [ userTickets, setUserTickets ] = useState([]);
   const [ seatMap, setSeatMap ] = useState([]);
   const [ showButton, setShowButton ] = useState(false);
@@ -71,7 +71,7 @@ function MatchReservationSeats({ match }) {
     // eslint-disable-next-line
   }, []);
 
-  const liveUpdatesEndpoint = `http://localhost:3000/api/matches/${match.uuid}/seats/live-updates`;
+  const liveUpdatesEndpoint = `http://localhost:3000/api/matches/${match.uuid}/seats/live-updates?uuid=${sessionUUID}`;
   const [ listening, setListening ] = useState(false);
   // eslint-disable-next-line
   const [ events, setEvents ] = useState();
@@ -95,6 +95,7 @@ function MatchReservationSeats({ match }) {
     if (!listening) {
       const events = new EventSource(liveUpdatesEndpoint);
       events.addEventListener('message', (message) => {
+        console.log(message);
         let { seatID, isReserved } = JSON.parse(message.data);
         setLoading(true);
         updateSeatMap(seatID, isReserved);
