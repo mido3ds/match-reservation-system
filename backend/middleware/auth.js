@@ -15,7 +15,6 @@ async function auth(req, res, next) {
       if (!user) return res.status(400).send({ err: 'Invalid token!' });
       if (user.isPending) return res.status(400).send({ err: 'Invalid token!' });
     } catch (err) {
-      console.log('here4');
       return res.status(500).send({ err: err.message });
     }
     next();

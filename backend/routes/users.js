@@ -115,8 +115,6 @@ router.put('/me', auth, async (req, res) => {
   // don't change role if admin
   if (req.user.role === 'admin') user.role = 'admin';
 
-  console.log(user);
-
   let logout = false;
   let msg = `Successfull Edit, you have changed your role to ${user.role}`;
   try {
