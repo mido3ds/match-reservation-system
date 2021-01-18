@@ -13,7 +13,7 @@ const router = express.Router();
 router.use('/:match_id/seats', seats);
 
 router.get('/', async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 8;
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
