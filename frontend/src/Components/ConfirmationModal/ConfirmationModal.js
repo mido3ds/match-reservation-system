@@ -1,6 +1,4 @@
 import './ConfirmationModal.css';
-import { useRef } from 'react'
-
 
 function ConfirmationModal({ id, text, onOK }) {
   return (

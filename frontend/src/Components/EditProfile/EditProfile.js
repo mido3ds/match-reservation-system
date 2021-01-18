@@ -71,6 +71,12 @@ function EditProfile() {
 
   register('birthDate');
 
+  useEffect(() => {
+    setValue('birthDate', birthDate);
+    trigger('birthDate');
+  // eslint-disable-next-line
+  }, [birthDate]);
+
   let fillForm = (user) => {
     // Fill fields
     setValue('firstName', user?.firstName? user.firstName : ''); 
@@ -86,12 +92,6 @@ function EditProfile() {
     clearErrors();
   }
 
-  useEffect(() => {
-    setValue('birthDate', birthDate);
-    trigger('birthDate');
-  // eslint-disable-next-line
-  }, [birthDate]);
-
   let resetForm = () => {
     // Reset fields
     setValue('firstName', '');
@@ -106,24 +106,23 @@ function EditProfile() {
     clearErrors();
   }
 
-  async function getUser() {
-    try {
-      const resp = await api.getMyInfo(authToken());
-      fillForm(resp.data)
-    } catch(err) {
-      console.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
-      resetForm();
-    }
-  }
-
   useEffect(() => {
+    const getUser = async() => {
+      try {
+        const resp = await api.getMyInfo(authToken());
+        fillForm(resp.data)
+      } catch(err) {
+        console.error(err.message);
+        if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+        resetForm();
+      }
+    };
+
     getUser();
   }, []);
 
   let onSubmit = async (editedUser) => {
     try {
-      console.log(editedUser);
       const resp = await api.editUser(authToken(), editedUser);
       NotificationManager.success(resp?.data?.msg);
       await setTimeout(500);
@@ -179,9 +178,9 @@ function EditProfile() {
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="edit-profile-input-label">Address</Form.Label>
             <Form.Control className = "edit-profile-input-text-area" name="address" ref={register}/>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="removeAddress" ref={register}/>
-              <label class="custom-control-label edit-profile-address-check-box" for="defaultUnchecked">Remove my address</label>
+            <div className="custom-control custom-checkbox">
+              <input type="checkbox" className="custom-control-input" id="deleteMyAddress" name="removeAddress" ref={register}/>
+              <label className="custom-control-label edit-profile-address-check-box" htmlFor="deleteMyAddress">Remove my address</label>
             </div>
             <p className="err-edit-profile">{errors.address?.message}</p>
           </Form.Group>
