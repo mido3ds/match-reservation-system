@@ -36,9 +36,9 @@ function App() {
         <AuthorizedRoute path='/tickets' allowedUsers={["fan", "manager", "admin"]}>
           <Tickets />
         </AuthorizedRoute>
-        <AuthorizedRoute path='/match-reservation/:match_id' allowedUsers={["fan", "manager", "admin"]}>
-          <MatchReservation />
-        </AuthorizedRoute>
+        <Route path='/match-reservation/:match_id'>
+          <MatchReservation loggedIn={loggedIn} />
+        </Route>
         <Route exact path='/stadiums'>
           <Stadiums />
         </Route>
