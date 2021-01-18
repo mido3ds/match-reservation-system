@@ -7,9 +7,11 @@ const clients = {}
 
 function notifyClients(matchID, seatID, isReserved) {
     let seatStatus = { seatID: seatID, isReserved: isReserved }
-    clients[matchID]?.forEach(client => {
-        client.res.write(`data: ${JSON.stringify(seatStatus)}\n\n`)
-    });
+    if (clients[matchID]) {
+        clients[matchID].forEach(client => {
+            client.res.write(`data: ${JSON.stringify(seatStatus)}\n\n`)
+        });
+    }
 }
 
 router.get('/', (req, res) => {
