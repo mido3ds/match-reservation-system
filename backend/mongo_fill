@@ -2,6 +2,7 @@
 import argparse
 from datetime import datetime
 from random import choice, randint, sample
+import string
 
 import bcrypt
 from pymongo import MongoClient
@@ -52,9 +53,8 @@ teamnames = ["Al-Ahly",
 
 def get_seat_map(stadium):
     def get_seat(i, j):
-        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         return {
-            'id': f'{letters[i]}{j}',
+            'id': f'{string.ascii_uppercase[i]}{j}',
             'isReserved': choice([True, False])
         }
 
@@ -74,9 +74,9 @@ def get_matches(stadiums):
         'awayTeam': teamnames[(i+1) % len(teamnames)],
         'venue': f"{stadiums[i]['name']}, {stadiums[i]['city']}",
         'dateTime': choice(matchdatetimes),
-        'mainReferee': f'referee{i}',
-        'firstLinesman': f'firstLinesman{i}',
-        'secondLinesman': f'secondLinesman{i}',
+        'mainReferee': f'referee{string.ascii_uppercase[i]}',
+        'firstLinesman': f'firstLinesman{string.ascii_uppercase[i]}',
+        'secondLinesman': f'secondLinesman{string.ascii_uppercase[i]}',
         'ticketPrice': 200,
         'seatMap': get_seat_map(stadiums[i]),
     } for i in range(args.matches)]
@@ -101,7 +101,7 @@ def get_users():
         'address': f'{username} some address here',
         'email': f'{username}@example.com',
         'role': 'admin' if username == 'admin' else 'manager' if 'manager' in username else 'fan',
-        'isPending': choice([True, False]) if 'manager' in username else False,
+        'isPending': choice([True, False]) if 'manager' in username and username != 'manager0' else False,
         'createdIn': choice(creationdates),
     } for username in usernames]
 
@@ -119,6 +119,13 @@ def get_tickets(users, matches):
         'username': choice(users)['username'],
         'price': 200,
     } for i in range(args.tickets)]
+
+
+def get_non_pending(users):
+    return [
+        user['username'] for user in users
+        if 'manager' in user['username'] and not user['isPending']
+    ]
 
 
 # fill
@@ -144,6 +151,7 @@ with MongoClient(connection) as client:
     print('inserted', len(users), 'users')
     print('users are', [user['username'] for user in users],
           'password of {username} is {username}pass')
+    print('non-pending managers are', get_non_pending(users))
 
     tickets = get_tickets(users, matches)
     db['tickets'].insert_many(tickets)
