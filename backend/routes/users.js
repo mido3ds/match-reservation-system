@@ -50,9 +50,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  console.log(req.body);
   const { error } = validate(req.body);
-  console.log(error);
   if (error) return res.status(400).send({ err: error.details[0].message });
   let user;
   try {
@@ -96,8 +94,8 @@ router.post('/', async (req, res) => {
 
   if (user.isPending) return res.status(200).send({ msg });
 
-  const authToken = user.generateAuthToken();
-  res.status(200).send({ authToken, msg });
+  const [authToken, userType] = user.generateAuthToken();
+  res.status(200).send({ authToken, userType, msg });
 });
 
 router.put('/me', auth, async (req, res) => {

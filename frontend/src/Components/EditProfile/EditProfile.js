@@ -166,8 +166,8 @@ function EditProfile() {
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="edit-profile-input-label">Gender</Form.Label>
 
-            <Form.Control className="edit-profile-drop-down-button" as="select" name="gender" ref={register}>
-              <option selected value="male">Male</option>
+            <Form.Control className="edit-profile-drop-down-button" as="select" name="gender" ref={register} defaultValue="male">
+              <option value="male">Male</option>
               <option value="female">Female</option>
             </Form.Control>
             <p className="err-edit-profile">{errors.gender?.message}</p>
@@ -206,16 +206,16 @@ function EditProfile() {
           userType() === 'admin'?
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="edit-profile-input-label">Role</Form.Label>
-            <Form.Control className="edit-profile-drop-down-button" as="select" name="role" ref={register}>
-              <option selected value="admin">Admin</option>
+            <Form.Control className="edit-profile-drop-down-button" as="select" name="role" ref={register} defaultValue="admin">
+              <option value="admin">Admin</option>
             </Form.Control>
             <p className="err-edit-profile">{errors.role?.message}</p>
           </Form.Group>
           :
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="edit-profile-input-label">Role</Form.Label>
-            <Form.Control className="edit-profile-drop-down-button" as="select" name="role" ref={register}>
-              <option selected value="fan">Fan</option>
+            <Form.Control className="edit-profile-drop-down-button" as="select" name="role" ref={register} defaultValue="fan">
+              <option value="fan">Fan</option>
               <option value="manager">Manager</option>
             </Form.Control>
             <p className="err-edit-profile">{errors.role?.message}</p>

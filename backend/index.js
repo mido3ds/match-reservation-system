@@ -46,11 +46,9 @@ async function connectDB() {
   };
   try {
     await mongoose.connect(config.get('database.connection'), settings);
-    console.log(chalk.green('Connected to MongoDB...'));
     dbDebugger('Connected to MongoDB...');
   } catch {
     dbDebugger('Couldn\'t connect to MongoDB...');
-    console.log(chalk.red('couldn\'t connect to MongoDB...'));
     process.exit(1);
   }
 }
