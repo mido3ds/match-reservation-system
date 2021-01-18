@@ -101,7 +101,7 @@ def get_users():
         'address': f'{username} some address here',
         'email': f'{username}@example.com',
         'role': 'admin' if username == 'admin' else 'manager' if 'manager' in username else 'fan',
-        'isPending': choice([True, False]) if 'manager' in username else False,
+        'isPending': choice([True, False]) if 'manager' in username and username != 'manager0' else False,
         'createdIn': choice(creationdates),
     } for username in usernames]
 
@@ -119,6 +119,13 @@ def get_tickets(users, matches):
         'username': choice(users)['username'],
         'price': 200,
     } for i in range(args.tickets)]
+
+
+def get_non_pending(users):
+    return [
+        user['username'] for user in users
+        if 'manager' in user['username'] and not user['isPending']
+    ]
 
 
 # fill
@@ -144,6 +151,7 @@ with MongoClient(connection) as client:
     print('inserted', len(users), 'users')
     print('users are', [user['username'] for user in users],
           'password of {username} is {username}pass')
+    print('non-pending managers are', get_non_pending(users))
 
     tickets = get_tickets(users, matches)
     db['tickets'].insert_many(tickets)
