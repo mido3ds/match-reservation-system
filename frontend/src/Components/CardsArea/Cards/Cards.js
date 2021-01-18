@@ -7,7 +7,7 @@ function Cards({ cards, loading, cardIdentifier }) {
   }
 
   return (
-    <div className="flex-container-row-vcenter-hcenter">
+    <div className="flex-container-row-vcenter-hcenter" style={{width: '96%'}}>
       {cards.map(card => (
         <CardComponent card={card} id={cardIdentifier} key={card.id} />
       ))}
