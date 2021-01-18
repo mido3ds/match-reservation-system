@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Delete from "../../../images/delete.png";
 import Price from "../../../images/money.png";
 import Seat from "../../../images/seat-icon-gray.png";
-import { authToken } from '../../../Auth';
+import { authToken, logout } from '../../../Auth';
 import { logos_60x60 } from "../../../teams"
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import { NotificationManager } from 'react-notifications';
@@ -15,7 +15,7 @@ import 'moment-timezone';
 const api = new DefaultApi();
 
 function TicketCard({ card }) {
-  const {removeCard, ...ticket} = card;
+  const {removeCard, setLoggedIn, ...ticket} = card;
 
   let cancelTicket = async () => {
     try {
@@ -25,6 +25,11 @@ function TicketCard({ card }) {
     } catch(err) {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }

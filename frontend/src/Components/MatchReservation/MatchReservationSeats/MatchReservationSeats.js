@@ -12,10 +12,11 @@ import { authToken } from '../../../Auth';
 import Delete from "../../../images/delete2.png";
 import { NotificationManager } from 'react-notifications';
 import ConfirmationModal from '../../ConfirmationModal/ConfirmationModal';
+import { logout } from '../../../Auth';
 
 const api = new DefaultApi();
 
-function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
+function MatchReservationSeats({ match, sessionUUID, loggedIn, setLoggedIn }) {
   const [ userTickets, setUserTickets ] = useState([]);
   const [ seatMap, setSeatMap ] = useState([]);
   const [ showButton, setShowButton ] = useState(false);
@@ -36,6 +37,11 @@ function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
     } catch (err) {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   };
@@ -131,6 +137,11 @@ function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
       });
     } catch (err) {
       console.error(err.message);
+      if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
       if (err.response?.data?.err)
         NotificationManager.error(err.response.data.err);
     }
@@ -155,6 +166,11 @@ function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
         failedRequest = true;
         console.error(err.message);
         if (!err.response && err.request) NotificationManager.error('Connection error');
+        else if (err?.response?.data?.noUser) {
+          logout();
+          setLoggedIn(false);
+          NotificationManager.error('Session ended, please login again');
+        }
         else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
       }
     }));

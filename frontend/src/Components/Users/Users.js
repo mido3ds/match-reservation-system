@@ -4,10 +4,11 @@ import { authToken } from '../../Auth';
 import { NotificationManager } from 'react-notifications';
 import CardsArea from '../CardsArea/CardsArea';
 import UsersHeader from './UsersHeader/UsersHeader';
+import { logout } from '../../Auth';
 
 const api = new DefaultApi();
 
-function Users() {
+function Users({ setLoggedIn }) {
   const [stateCounter, setStateCount] = useState(0);
   let refresh = () => { console.log('refresh'); setStateCount(stateCounter + 1);}
 
@@ -27,6 +28,11 @@ function Users() {
     } catch(err) {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }

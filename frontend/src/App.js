@@ -28,26 +28,26 @@ function App() {
         <Route exact path='/'>
           <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         </Route>
-        <Route path='/edit-profile' allowedUsers={["fan", "manager", "admin"]}>
+        <AuthorizedRoute path='/edit-profile' allowedUsers={["fan", "manager", "admin"]}>
           <EditProfile setLoggedIn={setLoggedIn} />
-        </Route>
+        </AuthorizedRoute>
         <Route path='/matches'>
-          <Matches />
+          <Matches setLoggedIn={setLoggedIn}/>
         </Route>
         <AuthorizedRoute path='/tickets' allowedUsers={["fan", "manager", "admin"]}>
-          <Tickets />
+          <Tickets setLoggedIn={setLoggedIn}/>
         </AuthorizedRoute>
         <Route path='/match-reservation/:match_id'>
-          <MatchReservation sessionUUID={sessionUUID} loggedIn={loggedIn} />
+          <MatchReservation sessionUUID={sessionUUID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </Route>
         <Route exact path='/stadiums'>
-          <Stadiums />
+          <Stadiums setLoggedIn={setLoggedIn}/>
         </Route>
         <AuthorizedRoute path='/users' allowedUsers={["admin"]}>
-          <Users />
+          <Users setLoggedIn={setLoggedIn}/>
         </AuthorizedRoute>
         <AuthorizedRoute path='/management-requests' allowedUsers={["admin"]}>
-          <Requests />
+          <Requests setLoggedIn={setLoggedIn}/>
         </AuthorizedRoute>
         <Route path='*'>
           <Error />

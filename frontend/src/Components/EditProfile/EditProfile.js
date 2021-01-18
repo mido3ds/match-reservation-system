@@ -113,7 +113,12 @@ function EditProfile({ setLoggedIn }) {
         fillForm(resp.data)
       } catch(err) {
         console.error(err.message);
-        if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+        if (err?.response?.data?.noUser) {
+          logout();
+          setLoggedIn(false);
+          NotificationManager.error('Session ended, please login again');
+        }
+        else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
         resetForm();
       }
     };
@@ -139,7 +144,12 @@ function EditProfile({ setLoggedIn }) {
       }
     } catch(err) {
       NotificationManager.error(err.message);
-      if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
+      if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
+      else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
     }
   }
 

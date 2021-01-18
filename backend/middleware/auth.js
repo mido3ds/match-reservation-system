@@ -12,7 +12,7 @@ async function auth(req, res, next) {
     // Make sure the user still exists in the datatbase (could be deleted by the admin)
     try {
       let user = await User.findById(req.user._id).select('isPending');
-      if (!user) return res.status(400).send({ err: 'Invalid token!' });
+      if (!user) return res.status(400).send({ err: 'Invalid token!', noUser: true });
       if (user.isPending) return res.status(400).send({ err: 'Invalid token!' });
     } catch (err) {
       return res.status(500).send({ err: err.message });

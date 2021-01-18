@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { DefaultApi } from '../../api';
 import { NotificationManager } from 'react-notifications';
-import { authToken } from '../../Auth';
+import { authToken, logout } from '../../Auth';
 import MatchForm from './MatchForm/MatchForm';
 import CardsArea from '../CardsArea/CardsArea';
 import MatchesHeader from './MatchesHeader/MatchesHeader';
 
 const api = new DefaultApi();
 
-function Matches() {
+function Matches({ setLoggedIn }) {
   const [stateCounter, setStateCount] = useState(0);
   let refresh = () => setStateCount(stateCounter + 1);
   
@@ -57,6 +57,11 @@ function Matches() {
     } catch(err) {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
       return false;
     }
@@ -73,6 +78,11 @@ function Matches() {
     } catch(err) {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
+      else if (err?.response?.data?.noUser) {
+        logout();
+        setLoggedIn(false);
+        NotificationManager.error('Session ended, please login again');
+      }
       else if (err.response?.data?.err) NotificationManager.error(err.response.data.err);
       return false;
     }
