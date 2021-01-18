@@ -15,7 +15,7 @@ import ConfirmationModal from '../../ConfirmationModal/ConfirmationModal';
 
 const api = new DefaultApi();
 
-function MatchReservationSeats({ match, sessionUUID }) {
+function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
   const [ userTickets, setUserTickets ] = useState([]);
   const [ seatMap, setSeatMap ] = useState([]);
   const [ showButton, setShowButton ] = useState(false);
@@ -42,7 +42,7 @@ function MatchReservationSeats({ match, sessionUUID }) {
 
   let getSeatMap = async () => {
     try {
-      const resp = await api.getSeats(match.uuid, authToken())
+      const resp = await api.getSeats(match.uuid)
       await setTimeout(500);
       resp.data.forEach(row => {
         row.forEach((seat, j) => {
@@ -65,7 +65,7 @@ function MatchReservationSeats({ match, sessionUUID }) {
   }
 
   useEffect(() => {
-    getUserTickets();
+    if (loggedIn) { getUserTickets(); }
     getSeatMap();
     return () => setEvents(events => events?.close());
     // eslint-disable-next-line
@@ -184,6 +184,10 @@ function MatchReservationSeats({ match, sessionUUID }) {
   }, [userTickets]);
 
   let addSeat = async ({ row, number, id }, addCb) => {
+    if (!loggedIn) {
+      NotificationManager.error('You need to login first to reserve seats.');
+      return;
+    }
     setLoading(true)
     addCb(row, number, id, '')
     const lastTicketId = userTickets.length ? userTickets[userTickets.length - 1].id : 0;

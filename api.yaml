@@ -477,11 +477,6 @@ paths:
             type: string
           required: true
           in: path
-        - name: x-auth-token
-          schema:
-            type: string
-          required: false
-          in: header
       responses:
         '200':
           description: ok

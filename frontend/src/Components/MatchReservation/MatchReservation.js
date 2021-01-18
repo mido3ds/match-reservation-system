@@ -46,7 +46,7 @@ function MatchReservation({ loggedIn, sessionUUID }) {
       <div className="match-reservation-page flex-container-column-vcenter-hcenter">
         <img className="match-reservation-header-image" alt="match-header" src={UsersImage} />
         <MatchReservationHeader match={match}/>
-        {loggedIn? <MatchReservationSeats sessionUUID={sessionUUID} match={match}/> : <div />}
+        <MatchReservationSeats sessionUUID={sessionUUID} match={match} loggedIn={loggedIn}/>
       </div>
       : <div/>
      }

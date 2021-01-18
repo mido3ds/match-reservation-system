@@ -9,7 +9,7 @@ const { router: seatsLiveUpdates, notifyClients } = require('./seats_live_update
 const router = express.Router({ mergeParams: true });
 router.use('/live-updates', seatsLiveUpdates);
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   let matchID = req.params.match_id;
   if(!mongoose.Types.ObjectId.isValid(matchID))
     return res.status(400).send({ err: 'Invalid match ID format.'});

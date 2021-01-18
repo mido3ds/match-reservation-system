@@ -1325,11 +1325,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary get seats of given match
          * @param {string} matchId 
-         * @param {string} [xAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSeats: async (matchId: string, xAuthToken?: string, options: any = {}): Promise<RequestArgs> => {
+        getSeats: async (matchId: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'matchId' is not null or undefined
             if (matchId === null || matchId === undefined) {
                 throw new RequiredError('matchId','Required parameter matchId was null or undefined when calling getSeats.');
@@ -1346,10 +1345,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            if (xAuthToken !== undefined && xAuthToken !== null) {
-                localVarHeaderParameter['x-auth-token'] = String(xAuthToken);
-            }
 
 
     
@@ -2067,12 +2062,11 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 
          * @summary get seats of given match
          * @param {string} matchId 
-         * @param {string} [xAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSeats(matchId: string, xAuthToken?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getSeats(matchId, xAuthToken, options);
+        async getSeats(matchId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getSeats(matchId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: (configuration?.basePath || basePath) + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2368,12 +2362,11 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * 
          * @summary get seats of given match
          * @param {string} matchId 
-         * @param {string} [xAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSeats(matchId: string, xAuthToken?: string, options?: any): AxiosPromise<object> {
-            return DefaultApiFp(configuration).getSeats(matchId, xAuthToken, options).then((request) => request(axios, basePath));
+        getSeats(matchId: string, options?: any): AxiosPromise<object> {
+            return DefaultApiFp(configuration).getSeats(matchId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2650,13 +2643,12 @@ export class DefaultApi extends BaseAPI {
      * 
      * @summary get seats of given match
      * @param {string} matchId 
-     * @param {string} [xAuthToken] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getSeats(matchId: string, xAuthToken?: string, options?: any) {
-        return DefaultApiFp(this.configuration).getSeats(matchId, xAuthToken, options).then((request) => request(this.axios, this.basePath));
+    public getSeats(matchId: string, options?: any) {
+        return DefaultApiFp(this.configuration).getSeats(matchId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
