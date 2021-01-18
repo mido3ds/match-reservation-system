@@ -73,7 +73,7 @@ router.get('/:match_id', auth, async (req, res) => {
   res.status(200).send(tickets);
 });
 
-router.delete('/:ticket_id', async (req, res) => {
+router.delete('/:ticket_id', auth, async (req, res) => {
   let ticketID = req.params.ticket_id;
   if(!mongoose.Types.ObjectId.isValid(ticketID))
     return res.status(400).send({ err: 'Invalid ticket ID format.'});
