@@ -38,7 +38,7 @@ function MatchReservationHeader({ match }) {
           </div>
           <span className="match-price" >
               <img alt="match-price-icon" src={Price} />
-              <span> { match.ticketPrice + " $"}  </span>
+              <span> { match.ticketPrice + " EGP"}  </span>
           </span>
         </div>
         <div className="match-away-team" >
