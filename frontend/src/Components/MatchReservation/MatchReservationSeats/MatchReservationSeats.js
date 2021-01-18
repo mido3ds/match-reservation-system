@@ -183,7 +183,7 @@ function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
 
   let addSeat = async ({ row, number, id }, addCb) => {
     if (!loggedIn) {
-      NotificationManager.error('You need to login first to reserve seats.');
+      NotificationManager.warning('You need to login first to reserve seats.');
       return;
     }
     setLoading(true)
