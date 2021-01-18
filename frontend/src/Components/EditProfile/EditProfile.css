@@ -67,6 +67,8 @@
     padding-left: 10px;
     font-weight: bold !important;
     font-family: 'IBM Plex Sans', sans-serif !important;
+    width: 100%;
+    color: #495057;
 }
 
 .edit-profile-drop-down-button {
@@ -87,4 +89,23 @@
     margin-top: 5px;
     margin-bottom: 0;
     margin-left: 5px;
+}
+
+.edit-profile-address-check-box {
+    margin-top: 5px;
+    margin-left:5px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-left: 3px;
+    color: rgba(112, 110, 110, 0.849);
+}
+
+.edit-profile-customDatePickerWidth,
+.edit-profile-customDatePickerWidth > div.react-datepicker-wrapper, 
+.edit-profile-customDatePickerWidth > div > div.react-datepicker__input-container
+.edit-profile-customDatePickerWidth > div > div.react-datepicker__input-container input {
+   width: 100%;
 }

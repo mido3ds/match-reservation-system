@@ -114,6 +114,8 @@ router.put('/me', auth, async (req, res) => {
   user = _.omitBy(user, _.isEmpty);
   // don't change role if admin
   if (req.user.role === 'admin') user.role = 'admin';
+  // remove address if removeAdress checkbox is checked
+  if (req.body.removeAddress) user.address = '';
 
   let logout = false;
   let msg = `Successfull Edit, you have changed your role to ${user.role}`;

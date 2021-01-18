@@ -790,6 +790,8 @@ components:
           enum:
           - fan
           - manager
+        removeAddress:
+          type: boolean
     ListedUser:
       type: object
       additionalProperties: false

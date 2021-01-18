@@ -92,6 +92,12 @@ export interface EditedUser {
      * @memberof EditedUser
      */
     role?: EditedUserRoleEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EditedUser
+     */
+    removeAddress?: boolean;
 }
 
 /**

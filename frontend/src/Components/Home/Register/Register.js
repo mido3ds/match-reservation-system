@@ -141,17 +141,19 @@ function Register(props) {
             <p className="err-register">{errors.address?.message}</p>
           </Form.Group>
           <Form.Group className="col-md-6" size="lg">
-            <div className="container pr-0 mr-0">
-              <Form.Label className="row input-label">Birth Date</Form.Label>
-              <DatePicker className="row register-date-time-picker form-control pr=0 mr-0"
-                selected={birthDate}
-                minDate={minBirthDate}
-                maxDate={maxBirthDate}
-                onChange={setBirthDate}
-                dateFormat="dd/MM/yyyy"
-              />
+          <div className="register-birthday-area">
+            <Form.Label className="input-label">Birth Date</Form.Label>
+            <div className="register-customDatePickerWidth">
+              <DatePicker className="register-date-time-picker"
+                  selected={birthDate}
+                  minDate={minBirthDate}
+                  maxDate={maxBirthDate}
+                  onChange={setBirthDate}
+                  dateFormat="dd/MM/yyyy"
+                />
             </div>
             <p className="err-register">{errors.birthDate?.message}</p>
+          </div>
           </Form.Group>
         </div>
         <div className="row">

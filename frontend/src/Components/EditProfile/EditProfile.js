@@ -78,9 +78,9 @@ function EditProfile() {
     setValue('password', '');
     setValue('gender', user?.gender? user.gender : 'male'); 
     setValue('address', user?.address);
+    setValue('removeAddress', false);
     let birthDay = new Date(user.birthDate);
     setBirthDate(user?.birthDate? birthDay : maxBirthDate);
-    // trigger('birthDate');
     setValue('city', user?.city? user.city : '');
     setValue('role', user?.role? user.role : 'fan');
     clearErrors();
@@ -99,6 +99,7 @@ function EditProfile() {
     setValue('password', '');
     setValue('gender', 'male');
     setValue('address', '');
+    setValue('removeAddress', false);
     setBirthDate(maxBirthDate);
     setValue('city', '');
     setValue('role', 'fan');
@@ -122,6 +123,7 @@ function EditProfile() {
 
   let onSubmit = async (editedUser) => {
     try {
+      console.log(editedUser);
       const resp = await api.editUser(authToken(), editedUser);
       NotificationManager.success(resp?.data?.msg);
       await setTimeout(500);
@@ -177,20 +179,26 @@ function EditProfile() {
           <Form.Group className="col-md-6" size="lg">
             <Form.Label className="edit-profile-input-label">Address</Form.Label>
             <Form.Control className = "edit-profile-input-text-area" name="address" ref={register}/>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="removeAddress" ref={register}/>
+              <label class="custom-control-label edit-profile-address-check-box" for="defaultUnchecked">Remove my address</label>
+            </div>
             <p className="err-edit-profile">{errors.address?.message}</p>
           </Form.Group>
           <Form.Group className="col-md-6" size="lg">
-            <div className="container pr-0 mr-0">
-              <Form.Label className="row edit-profile-input-label">Birth Date</Form.Label>
-              <DatePicker className="row edit-profile-date-time-picker form-control pr=0 mr-0"
-                selected={birthDate}
-                minDate={minBirthDate}
-                maxDate={maxBirthDate}
-                onChange={setBirthDate}
-                dateFormat="dd/MM/yyyy"
-              />
+          <div>
+            <Form.Label className="input-label">Birth Date</Form.Label>
+            <div className="edit-profile-customDatePickerWidth">
+              <DatePicker className="edit-profile-date-time-picker"
+                  selected={birthDate}
+                  minDate={minBirthDate}
+                  maxDate={maxBirthDate}
+                  onChange={setBirthDate}
+                  dateFormat="dd/MM/yyyy"
+                />
             </div>
             <p className="err-edit-profile">{errors.birthDate?.message}</p>
+          </div>
           </Form.Group>
         </div>
         <div className="row">
