@@ -60,7 +60,7 @@ const schema = yup.object().shape({
 });
 
 
-function EditProfile() {
+function EditProfile({ setLoggedIn }) {
   const { register, handleSubmit, errors, setValue, trigger, clearErrors } = useForm(
     { resolver: yupResolver(schema) }
   );
@@ -129,8 +129,9 @@ function EditProfile() {
       await setTimeout(500);
       if (resp?.data?.logout) {
         logout();
-        history.push('/');
+        setLoggedIn(false);
         resetForm();
+        history.push('/');
       }
       else
       {

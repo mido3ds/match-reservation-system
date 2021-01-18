@@ -29,7 +29,7 @@ function App() {
           <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         </Route>
         <Route path='/edit-profile' allowedUsers={["fan", "manager", "admin"]}>
-          <EditProfile />
+          <EditProfile setLoggedIn={setLoggedIn} />
         </Route>
         <Route path='/matches'>
           <Matches />
