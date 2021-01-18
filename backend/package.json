@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index"
+    "start": "DEBUG=app:* node index",
+    "dev": "DEBUG=app:* nodemon index"
   },
   "keywords": [],
   "author": "",
