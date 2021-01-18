@@ -1,4 +1,5 @@
 import './StadiumCard.css';
+import SmallStadium from "../../../images/small-stadium.webp";
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import { isLoggedIn, userType, authToken } from '../../../Auth';
 import Delete from "../../../images/delete2.png";
@@ -34,7 +35,8 @@ function StadiumCard({ card }) {
                          text={ 'Are you sure you want to delete this stadium? '}
                          onOK={ deleteStadium } />
       </span>
-      <h1 className="name-area">{stadium.name}</h1>
+      <img className='stadium-img' src={SmallStadium}/>
+      <div className="name-area">{stadium.name}</div>
       <div className="city-area">{stadium.city}</div>
       <div className="capacity-area"><strong>Capacity:</strong> {stadium.rows * stadium.seatsPerRow} seats </div>
     </div>

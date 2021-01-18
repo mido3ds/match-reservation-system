@@ -7,6 +7,10 @@
     color: #FFFFFF;
 }
 
+.stadium-img {
+    height: 150px;
+}
+
 .flex-container-col-centered {
     display: flex;
     flex-wrap: wrap;
@@ -16,19 +20,18 @@
 }
 
 .name-area {
-    margin-top: 110px;
     font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
-    line-height: 36px;
+    line-height: 30px;
 }
 
 .city-area {
     font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 22px;
     /* or 137% */
 }
@@ -37,7 +40,7 @@
     font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 22px;
     /* or 137% */
 }
