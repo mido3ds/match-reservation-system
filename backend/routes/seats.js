@@ -53,6 +53,10 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
     return res.status(404).send({ err: 'No matches exist the given uuid.'});
   }
 
+  if (new Date(match.dateTime) < new Date()) {
+    return res.status(401).send({ err: "You can't reserve a seat on an old match." })
+  }
+
   let seatMap = match.seatMap;
   let row = ticket.seatID.charCodeAt(0) - 'A'.charCodeAt(0);
   let col = ticket.seatID.substring(1) - 1;
