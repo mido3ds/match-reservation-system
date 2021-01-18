@@ -8,15 +8,12 @@ import UsersHeader from './UsersHeader/UsersHeader';
 const api = new DefaultApi();
 
 function Users() {
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => { console.log('refresh'); setStateCount(stateCounter + 1);}
+
   const [hasNext, setHasNext] = useState(false);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
-
-  let removeUser = (id) => {
-    setUsers(users => {
-      return users.filter(user => { return user.id !== id })
-    });
-  }
 
   let getUsers = async () => {
     try {
@@ -24,7 +21,7 @@ function Users() {
       setHasNext(resp.data.has_next);
       setUsers(resp.data.users.map((user, i) => { 
         user.id = i; 
-        user.removeCard = () => { removeUser(i); };
+        user.removeCard = refresh;
         return user; 
       }));
     } catch(err) {
@@ -37,7 +34,7 @@ function Users() {
   useEffect(() => {
     getUsers();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, stateCounter]);
 
   return (
     <div className="flex-container-col">

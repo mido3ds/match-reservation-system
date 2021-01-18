@@ -8,15 +8,12 @@ import { authToken } from '../../Auth';
 const api = new DefaultApi();
 
 function Tickets() {
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => setStateCount(stateCounter + 1);
+
   const [hasNext, setHasNext] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [page, setPage] = useState(1);
-
-  let removeTicket = (id) => {
-    setTickets(tickets => {
-      return tickets.filter(ticket => { return ticket.id !== id })
-    });
-  }
 
   let getTickets = async () => {
     try {
@@ -25,7 +22,7 @@ function Tickets() {
       setHasNext(has_next);
       setTickets(tickets.map((ticket, i) => {
         ticket.id = i;
-        ticket.removeCard = () => { removeTicket(i); };
+        ticket.removeCard = refresh;
         ticket.match = matches.find(match => match.uuid === ticket.matchUUID)
         return ticket;
       }));
@@ -39,7 +36,7 @@ function Tickets() {
   useEffect(() => {
     getTickets();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, stateCounter]);
 
   return (
   <div className="flex-container-column-vcenter-hcenter">

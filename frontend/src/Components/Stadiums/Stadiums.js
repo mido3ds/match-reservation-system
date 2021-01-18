@@ -9,18 +9,12 @@ import { authToken } from '../../Auth';
 const api = new DefaultApi();
 
 function Stadiums() {
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => setStateCount(stateCounter + 1);
+  
   const [hasNext, setHasNext] = useState(false);
   const [stadiums, setStadiums] = useState([]);
   const [page, setPage] = useState(1);
-
-  const [stateCounter, setStateCount] = useState(0);
-  let refresh = () => setStateCount(stateCounter + 1);
-
-  let removeStadium = (id) => {
-    setStadiums(stadiums => {
-      return stadiums.filter(stadium => { return stadium.id !== id })
-    });
-  }
 
   let getStadiums = async () => {
     try {
@@ -28,7 +22,7 @@ function Stadiums() {
       setHasNext(resp.data.has_next);
       setStadiums(resp.data.stadiums.map((stadium, i) => {
         stadium.id = i;
-        stadium.removeCard = () => { removeStadium(i); };
+        stadium.removeCard = refresh;
         return stadium;
       }));
     } catch (err) {

@@ -9,6 +9,9 @@ import MatchesHeader from './MatchesHeader/MatchesHeader';
 const api = new DefaultApi();
 
 function Matches() {
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => setStateCount(stateCounter + 1);
+  
   const initialMatchModalProps = {
     show: false,
     title: '',
@@ -45,9 +48,6 @@ function Matches() {
     window.$('#MatchFormModal').modal('hide')
   };
 
-  const [stateCounter, setStateCount] = useState(0);
-  let refresh = () => setStateCount(stateCounter + 1);
-
   let addMatch = async (match) => {
     try {
       const resp = await api.submitMatch(authToken(), match);
@@ -82,12 +82,6 @@ function Matches() {
   const [matches, setMatches] = useState([]);
   const [page, setPage] = useState(1);
 
-  let removeMatchCard = (id) => {
-    setMatches(matches => {
-      return matches.filter(match => { return match.id !== id })
-    });
-  }
-
   let getMatches = async () => {
     try {
       const resp = await api.getMatches(page);
@@ -95,7 +89,7 @@ function Matches() {
       setHasNext(resp.data.has_next);
       setMatches(resp.data.matches.map((match, i) => { 
         match.id = i;
-        match.removeCard = () => { removeMatchCard(i); };
+        match.removeCard = refresh;
         match.showEditModal = () => { showEditMatchModal(match) }
         return match; 
       }));

@@ -35,7 +35,7 @@ function StadiumCard({ card }) {
                          text={ 'Are you sure you want to delete this stadium? '}
                          onOK={ deleteStadium } />
       </span>
-      <img className='stadium-img' src={SmallStadium}/>
+      <img alt='stadium-img' className='stadium-img' src={SmallStadium}/>
       <div className="name-area">{stadium.name}</div>
       <div className="city-area">{stadium.city}</div>
       <div className="capacity-area"><strong>Capacity:</strong> {stadium.rows * stadium.seatsPerRow} seats </div>

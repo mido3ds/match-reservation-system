@@ -8,15 +8,15 @@ import RequestsHeader from './RequestsHeader/RequestsHeader';
 const api = new DefaultApi();
 
 function Requests() {
+  const [stateCounter, setStateCount] = useState(0);
+  let refresh = () => {
+    setStateCount(stateCounter + 1);
+  }
+
   const [hasNext, setHasNext] = useState(false);
   const [requestedManagers, setRequestedManagers] = useState([]);
   const [page, setPage] = useState(1);
 
-  let removeRequest = (id) => {
-    setRequestedManagers(requestedManagers => {
-      return requestedManagers.filter(requestedManager => { return requestedManager.id !== id })
-    });
-  }
 
   let getManagersRequests = async () => {
     try {
@@ -24,7 +24,7 @@ function Requests() {
       setHasNext(resp.data.has_next);
       setRequestedManagers(resp.data.requestedManagers.map((requestedManager, i) => {
         requestedManager.id = i;
-        requestedManager.removeCard = () => { removeRequest(i); };
+        requestedManager.removeCard = refresh;
         return requestedManager; 
       }));
     } catch(err) {
@@ -37,7 +37,7 @@ function Requests() {
   useEffect(() => {
     getManagersRequests();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, stateCounter]);
 
   return (
     <div className="flex-container-col">
