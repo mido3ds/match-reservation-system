@@ -13,7 +13,8 @@ function Matches() {
     show: false,
     title: '',
     submit: '',
-    defaultValue: undefined
+    defaultValue: undefined,
+    edit: false
   };
 
   const [matchModalProps, setMatchModalProps] = useState(initialMatchModalProps);
@@ -22,7 +23,8 @@ function Matches() {
       show: true,
       title: 'Add Match',
       submit: addMatch,
-      defaultValue: undefined
+      defaultValue: undefined,
+      edit: false
     });
     window.$('#MatchFormModal').modal('show');
   }
@@ -32,7 +34,8 @@ function Matches() {
       show: true,
       title: 'Edit Match',
       submit: editedMatch => editMatch(match.uuid, editedMatch),
-      defaultValue: match
+      defaultValue: match,
+      edit: true
     });
     window.$('#MatchFormModal').modal('show');
   }
@@ -116,6 +119,7 @@ function Matches() {
                  title={matchModalProps.title} 
                  submit={matchModalProps.submit} 
                  defaultValues={matchModalProps.defaultValue}
+                 edit={matchModalProps.edit}
                  hide={hideModal}/>        
     </div>
   );

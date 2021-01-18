@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 });
 
 
-function MatchForm({ show, title, submit, hide, defaultValues }) {
+function MatchForm({ show, title, submit, hide, defaultValues, edit }) {
   const { register, handleSubmit, errors, setValue, trigger, clearErrors } = useForm(
     { resolver: yupResolver(schema) }
   );
@@ -216,7 +216,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
             <div>
               <DatePicker className="date-time-picker" selected={dateTime}
                 onChange={setDateTime}
-                minDate={tomorrow} 
+                minDate={edit? null : tomorrow} 
                 dateFormat="dd/MM/yyyy hh:mm aa"
                 showTimeInput />
               <p className='error-message'>{errors.dateTime?.message}</p>

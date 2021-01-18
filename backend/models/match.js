@@ -42,7 +42,7 @@ function validateMatchEdit(match) {
     homeTeam: Joi.string().min(3).max(20).optional(),
     awayTeam: Joi.string().min(3).max(20).optional(),
     venue: Joi.string().min(5).max(50).optional(),
-    dateTime: Joi.date().optional().min('now'),
+    dateTime: Joi.date().optional(),
     mainReferee: Joi.string().min(5).max(50).optional(),
     firstLinesman: Joi.string().min(5).max(50).optional(),
     secondLinesman: Joi.string().min(5).max(50).optional(),
