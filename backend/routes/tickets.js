@@ -78,16 +78,22 @@ router.delete('/:ticket_id', auth, async (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(ticketID))
     return res.status(400).send({ err: 'Invalid ticket ID format.'});
 
-  let ticket, match;
+  let ticket;
   try {
-    ticket = await Ticket.findOne({ _id: ticketID });
-    match = await Match.findById(ticket.matchUUID).select({ seatMap: 1, dateTime: 1 });
+    ticket = await Ticket.findOne({ _id: ticketID, username: req.user.username });
   } catch (err) {
     return res.status(500).send({ err: err.message });
   }
 
   if (!ticket)
-    return res.status(404).send({ err: 'Ticket to delete is not found'});
+    return res.status(404).send({ err: 'Ticket to delete is not found or does not belong to this user.'});
+
+  let match;
+  try {
+    match = await Match.findById(ticket.matchUUID).select({ seatMap: 1, dateTime: 1 });
+  } catch (err) {
+    return res.status(500).send({ err: err.message });
+  }
 
   let daysBeforeMatch = (match.dateTime.getTime() - Date.now()) / (1000 * 60 * 60 * 24);
   if(daysBeforeMatch < 3)
