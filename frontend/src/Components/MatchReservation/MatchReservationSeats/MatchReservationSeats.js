@@ -79,12 +79,10 @@ function MatchReservationSeats({ match, sessionUUID, loggedIn }) {
   let closeModal = (seatID, isReserved) => {
     if(isReserved) {
       setUserTickets(userTickets => {
-        userTickets.map(ticket => {
-          console.log(seatID, ticket.seatID)
+        userTickets.forEach(ticket => {
           if(!ticket.isReserved && ticket.seatID === seatID) {
             window.$("#TicketsModal").modal('hide');
           }
-            
         })
         return userTickets;
       });

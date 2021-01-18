@@ -74,7 +74,7 @@ function EditProfile() {
   useEffect(() => {
     setValue('birthDate', birthDate);
     trigger('birthDate');
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [birthDate]);
 
   let fillForm = (user) => {
@@ -119,6 +119,7 @@ function EditProfile() {
     };
 
     getUser();
+    // eslint-disable-next-line
   }, []);
 
   let onSubmit = async (editedUser) => {
