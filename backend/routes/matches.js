@@ -17,15 +17,15 @@ router.get('/', async (req, res) => {
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 
-  let matches, totalMatches;
+  let matches, totalMatches, now = new Date();
   try {
-    matches = await Match.find()
-                            .select({ seatMap: 0 })
-                            .sort('-dateTime')
-                            .skip((req.query.page - 1) * pageSize)
-                            .limit(pageSize);
+    matches = await Match.find({ dateTime: { $gt:now} })
+                          .select({ seatMap: 0 })
+                          .sort('-dateTime')
+                          .skip((req.query.page - 1) * pageSize)
+                          .limit(pageSize);
 
-    totalMatches = await Match.countDocuments();
+    totalMatches = await Match.countDocuments({ dateTime: { $gt:now} });
   } catch(err) {
     return res.status(500).send({ err: err.message });
   }
