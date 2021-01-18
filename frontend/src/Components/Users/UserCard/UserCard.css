@@ -1,6 +1,6 @@
 .user-card {
-    width: 235px;
-    height: 240px;
+    width: 280px;
+    height: 265px;
     background-color: #4675a8dc;
     border-radius: 20px;
     margin: 5px;
@@ -11,12 +11,12 @@
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left:100px;
+    margin-left:120px;
     cursor: pointer;
 }
 
 .role-badge {
-    margin-top:20px;
+    margin-top:30px;
 }
 
 .user-name {
