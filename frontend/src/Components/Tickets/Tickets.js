@@ -27,7 +27,7 @@ function Tickets({ setLoggedIn }) {
         ticket.setLoggedIn = setLoggedIn;
         ticket.match = matches.find(match => match.uuid === ticket.matchUUID)
         return ticket;
-      }));
+      }).filter(ticket => ticket.match !== undefined));
     } catch (err) {
       console.error(err.message);
       if (!err.response && err.request) NotificationManager.error('Connection error');
