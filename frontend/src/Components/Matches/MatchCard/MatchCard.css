@@ -28,9 +28,16 @@
     cursor: pointer;
 }
 
+.first-position {
+    left: 230px;
+}
+
+.second-position {
+    left: 165px;
+}
+
 .delete {
     position: relative;
-    left: 165px;
     width: 17px;
     height: 17px;
     margin: 10px;

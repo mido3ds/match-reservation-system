@@ -15,6 +15,13 @@ const api = new DefaultApi();
 function MatchCard({ card }) {
   const {removeCard, showEditModal, ...match} = card;
 
+  let oldMatch = () => {
+    let today = new Date();
+    let matchDate = new Date(match.dateTime)
+    return today > matchDate;
+  }
+
+
   let deleteMatch = async () => {
     // match.id -> frontend card id
     // match.uuid -> actual id of the match
@@ -34,8 +41,10 @@ function MatchCard({ card }) {
       <div className='match-card-container'>
         <div className="match-card">
           <span style={{ visibility: isLoggedIn() && userType() === 'manager' ? 'visible': 'hidden'}} >
+            { !oldMatch() ? 
             <img alt="edit-icon" className="edit" src={Edit} onClick={ showEditModal }/> 
-            <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
+              : ''}
+            <img alt="delete-icon" className={`delete ${oldMatch() ? "first-position" : "second-position"}`} src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
             <ConfirmationModal id={'deleteModal' + match.id} 
                               text={ 'Are you sure you want to delete this match?'}
                               onOK={ deleteMatch } /> : ''
