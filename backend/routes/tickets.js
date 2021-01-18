@@ -8,7 +8,7 @@ const { notifyClients } = require('./seats_live_updates');
 const router = express.Router();
 
 router.get('/', auth, async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 8;
   if (isNaN(req.query.page) || req.query.page < 1)
     return res.status(406).send({ err: 'Invalid page, must be a number greater than 0' });
 

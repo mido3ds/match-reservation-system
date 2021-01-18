@@ -15,12 +15,20 @@ const api = new DefaultApi();
 function MatchCard({ card }) {
   const {removeCard, showEditModal, ...match} = card;
 
+  let oldMatch = () => {
+    let today = new Date();
+    let matchDate = new Date(match.dateTime)
+    return today > matchDate;
+  }
+
+
   let deleteMatch = async () => {
     // match.id -> frontend card id
     // match.uuid -> actual id of the match
     try {
     const resp = await api.deleteMatch(authToken(), match.uuid);
     NotificationManager.success(resp.data?.msg);
+    await setTimeout(500);
     removeCard();
     } catch(err) {
       console.error(err.message);
@@ -33,8 +41,10 @@ function MatchCard({ card }) {
       <div className='match-card-container'>
         <div className="match-card">
           <span style={{ visibility: isLoggedIn() && userType() === 'manager' ? 'visible': 'hidden'}} >
+            { !oldMatch() ? 
             <img alt="edit-icon" className="edit" src={Edit} onClick={ showEditModal }/> 
-            <img alt="delete-icon" className="delete" src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
+              : ''}
+            <img alt="delete-icon" className={`delete ${oldMatch() ? "first-position" : "second-position"}`} src={Delete} data-toggle="modal" data-target={'#deleteModal' + match.id}/>
             <ConfirmationModal id={'deleteModal' + match.id} 
                               text={ 'Are you sure you want to delete this match?'}
                               onOK={ deleteMatch } /> : ''
@@ -63,6 +73,14 @@ function MatchCard({ card }) {
                 <span className="referee" >
                   <img alt="referee-icon" src="https://www.flaticon.com/svg/static/icons/svg/850/850989.svg" />
                   <span> { match.mainReferee } </span>
+                </span>
+                <span className="first-linesman">
+                  <img alt="linesman-icon" src="https://www.flaticon.com/svg/static/icons/svg/1031/1031387.svg" />
+                  <span> { match.firstLinesman }  </span>
+                </span>
+                <span className="second-linesman" >
+                  <img alt="linesman-icon" src="https://www.flaticon.com/svg/static/icons/svg/1031/1031387.svg" />
+                  <span> { match.secondLinesman }  </span>
                 </span>
               </div>
             </div>

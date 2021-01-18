@@ -1,6 +1,6 @@
 .request-card {
-    width: 235px;
-    height: 240px;
+    width: 280px;
+    height: 265px;
     background-color: #b7b927dc;
     border-radius: 20px;
     margin: 5px;
@@ -11,7 +11,7 @@
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left: 77px
+    margin-left: 95px
 }
 
 .reject {
@@ -19,7 +19,7 @@
     width: 17px;
     height: 17px;
     margin: 10px;
-    margin-left: 103px
+    margin-left: 120px
 }
 
 .accept:hover, .reject:hover {

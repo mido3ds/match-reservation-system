@@ -5,6 +5,8 @@ import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';
 import ManagerImage from "../../../images/manager.png";
 import { authToken } from '../../../Auth';
 import { NotificationManager } from 'react-notifications';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 
 const api = new DefaultApi();
@@ -60,7 +62,7 @@ function RequestCard({ card }) {
       <div className="flex-container-column-vcenter-hcenter">
         <div className="address-area">
           <img alt="address-icon" src="https://www.flaticon.com/svg/static/icons/svg/1076/1076323.svg" />
-          <span> { requestedManager.address } </span>
+          <span> { requestedManager.address + ", " + requestedManager.city} </span>
         </div>
         <div className="email-area">
           <img alt="email-icon" src="https://www.flaticon.com/svg/static/icons/svg/732/732200.svg" />
@@ -73,7 +75,7 @@ function RequestCard({ card }) {
           </div>
           <div className="birthdate-area">
             <img alt="birthdate-icon" src="https://www.flaticon.com/svg/static/icons/svg/3078/3078971.svg" />
-            <span> { requestedManager.birthDate } </span>
+            <span> <Moment format="ll" date={requestedManager.birthDate} /> </span>
           </div>
         </div>
       </div>

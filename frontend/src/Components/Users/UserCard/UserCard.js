@@ -6,6 +6,8 @@ import Delete from "../../../images/delete2.png";
 import FanImage from "../../../images/fan.png";
 import ManagerImage from "../../../images/manager.png";
 import './UserCard.css';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 const api = new DefaultApi();
 
@@ -43,7 +45,7 @@ function UserCard({ card }) {
       <div className="flex-container-column-vcenter-hcenter">
         <div className="address-area">
           <img alt="address-icon" src="https://www.flaticon.com/svg/static/icons/svg/1076/1076323.svg" />
-          <span> { user.address } </span>
+          <span> { user.address + ", " + user.city }  </span>
         </div>
         <div className="email-area">
           <img alt="email-icon" src="https://www.flaticon.com/svg/static/icons/svg/732/732200.svg" />
@@ -56,7 +58,7 @@ function UserCard({ card }) {
           </div>
           <div className="birthdate-area">
             <img alt="birthdate-icon" src="https://www.flaticon.com/svg/static/icons/svg/3078/3078971.svg" />
-            <span> { user.birthDate } </span>
+            <span> <Moment format="ll" date={user.birthDate} /> </span>
           </div>
         </div>
       </div>

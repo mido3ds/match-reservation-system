@@ -68,12 +68,29 @@ function Register(props) {
     clearErrors();
   }
 
+  let toggleNavbar = () => {
+    var navbar = window.$(".page-navbar")[0];
+    var text =  window.$(".brand-text")[0];
+    var logo =  window.$(".brand-logo")[0];
+    var buttons =  window.$(".navbar-button-area")[0];
+    var editButton =  window.$(".edit-profile-button")[0];
+    var logOutButton =  window.$(".log-out-profile-button")[0];
+    navbar.classList.remove("is-active");
+    text.classList.remove("is-active");
+    logo.classList.remove("is-active");
+    buttons?.classList.remove("is-active");
+    editButton?.classList.remove("is-active");
+    logOutButton?.classList.remove("is-active");
+}
+
+
   let onSubmit = async (user) => {
     try {
       const resp = await api.signup(user);
       NotificationManager.success(resp?.data?.msg);
       resetForm();
       await setTimeout(500);
+      toggleNavbar();
       if (resp.data.authToken) {
         setAuthToken(resp.data.authToken);
         props.login(true);

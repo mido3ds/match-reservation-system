@@ -1,6 +1,6 @@
 .match-card {
-    width: 270px;
-    height: 250px;
+    width: 280px;
+    height: 310px;
     background-color: #2C2738;
     border-radius: 20px;
     margin: 5px;
@@ -20,7 +20,7 @@
 
 .edit {
     position: relative;
-    left: 230px;
+    left: 240px;
     width: 17px;
     height: 17px;
     margin: 10px;
@@ -28,9 +28,16 @@
     cursor: pointer;
 }
 
+.first-position {
+    left: 240px;
+}
+
+.second-position {
+    left: 175px;
+}
+
 .delete {
     position: relative;
-    left: 165px;
     width: 17px;
     height: 17px;
     margin: 10px;
