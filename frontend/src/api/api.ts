@@ -177,12 +177,29 @@ export interface InlineResponse2001 {
      */
     authToken: string;
     /**
+     * used by the forntend to know the type of the user, the backend still needs to check the payload of the authToken payload
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    userType: InlineResponse2001UserTypeEnum;
+    /**
      * 
      * @type {string}
      * @memberof InlineResponse2001
      */
     msg: string;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineResponse2001UserTypeEnum {
+    Fan = 'fan',
+    Manager = 'manager',
+    Admin = 'admin'
+}
+
 /**
  * 
  * @export

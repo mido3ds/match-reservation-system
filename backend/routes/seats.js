@@ -46,7 +46,6 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
   try {
     match = await Match.findById(ticket.matchUUID).select({ seatMap: 1, ticketPrice: 1 });
   } catch (err) {
-    console.log(err);
     return res.status(500).send({ err: err.msg });
   }
     
@@ -84,7 +83,6 @@ router.post('/reserve/:seat_id', auth, async (req, res) => {
     res.status(200).send( { msg: 'Ticket for seat ' + ticket.seatID + ' booked successfully.'});
     notifyClients(ticket.matchUUID, ticket.seatID, true)
   } catch (err) {
-    console.log(err);
     res.status(500).send({ err: err.msg });
   }
 });

@@ -50,9 +50,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  console.log(req.body);
   const { error } = validate(req.body);
-  console.log(error);
   if (error) return res.status(400).send({ err: error.details[0].message });
   let user;
   try {
@@ -96,8 +94,8 @@ router.post('/', async (req, res) => {
 
   if (user.isPending) return res.status(200).send({ msg });
 
-  const authToken = user.generateAuthToken();
-  res.status(200).send({ authToken, msg });
+  const [authToken, userType] = user.generateAuthToken();
+  res.status(200).send({ authToken, userType, msg });
 });
 
 router.put('/me', auth, async (req, res) => {
@@ -116,8 +114,6 @@ router.put('/me', auth, async (req, res) => {
   user = _.omitBy(user, _.isEmpty);
   // don't change role if admin
   if (req.user.role === 'admin') user.role = 'admin';
-
-  console.log(user);
 
   let logout = false;
   let msg = `Successfull Edit, you have changed your role to ${user.role}`;

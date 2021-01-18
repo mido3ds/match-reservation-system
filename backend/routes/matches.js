@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
   try {
     matches = await Match.find()
                             .select({ seatMap: 0 })
+                            .sort('-dateTime')
                             .skip((req.query.page - 1) * pageSize)
                             .limit(pageSize);
 

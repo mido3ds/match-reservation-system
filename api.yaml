@@ -27,11 +27,20 @@ paths:
                 properties:
                   authToken:
                     type: string
+                  userType:
+                    type: string
+                    enum:
+                    - fan
+                    - manager
+                    - admin
+                    description: used by the forntend to know the type of the user, the backend still needs to check the payload of the authToken payload
                   msg:
                     type: string
                 required:
                 - authToken
+                - userType
                 - msg
+
         '401':
           description: not authorized
           content:
@@ -135,15 +144,6 @@ paths:
                 required:
                 - logout
                 - user
-          # content:
-          #   'application/json':
-          #     schema:
-          #       type: object
-          #       description: successful edit
-          #       properties:
-          #         msg:
-          #           type: string
-          #           description: in case the user asked to be a manger, send a message to display to assure they will be reviewed
         '401':
           description: not authorized
           content:
