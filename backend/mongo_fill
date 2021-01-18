@@ -65,15 +65,13 @@ def get_seat_map(stadium):
 
 
 def get_matches(stadiums):
-    matchdatetimes = [datetime.fromisoformat(f'20{i:02}-02-12T22')
-                      for i in range(22)]
     stadiums = [stadiums[randint(0, len(stadiums)-1)]
                 for _ in range(args.matches)]
     return [{
         'homeTeam': teamnames[i % len(teamnames)],
         'awayTeam': teamnames[(i+1) % len(teamnames)],
         'venue': f"{stadiums[i]['name']}, {stadiums[i]['city']}",
-        'dateTime': choice(matchdatetimes),
+        'dateTime': datetime.fromisoformat(f'20{randint(20, 25):02}-{randint(1, 12):02}-{randint(1, 30):02}T{randint(12,23)}'),
         'mainReferee': f'referee{string.ascii_uppercase[i]}',
         'firstLinesman': f'firstLinesman{string.ascii_uppercase[i]}',
         'secondLinesman': f'secondLinesman{string.ascii_uppercase[i]}',
