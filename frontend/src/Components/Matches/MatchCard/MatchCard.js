@@ -74,14 +74,6 @@ function MatchCard({ card }) {
                   <img alt="referee-icon" src="https://www.flaticon.com/svg/static/icons/svg/850/850989.svg" />
                   <span> { match.mainReferee } </span>
                 </span>
-                <span className="first-linesman">
-                  <img alt="linesman-icon" src="https://www.flaticon.com/svg/static/icons/svg/1031/1031387.svg" />
-                  <span> { match.firstLinesman }  </span>
-                </span>
-                <span className="second-linesman" >
-                  <img alt="linesman-icon" src="https://www.flaticon.com/svg/static/icons/svg/1031/1031387.svg" />
-                  <span> { match.secondLinesman }  </span>
-                </span>
               </div>
             </div>
           </Link>
