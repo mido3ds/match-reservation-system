@@ -26,6 +26,7 @@ function MatchReservationSeats({ match }) {
   let getUserTickets = async () => {
     try {
       const resp = await api.getMatchTickets(authToken(), match.uuid);
+      await setTimeout(500);
       setUserTickets(resp.data.map((userTicket, i) => {
         userTicket.id = i;
         userTicket.isReserved = true;
@@ -42,6 +43,7 @@ function MatchReservationSeats({ match }) {
   let getSeatMap = async () => {
     try {
       const resp = await api.getSeats(match.uuid, authToken())
+      await setTimeout(500);
       resp.data.forEach(row => {
         row.forEach((seat, j) => {
           seat.number = j + 1;
@@ -56,6 +58,12 @@ function MatchReservationSeats({ match }) {
     }
   };
 
+  let oldMatch = () => {
+    let today = new Date();
+    let matchDate = new Date(match.dateTime)
+    return today > matchDate;
+  }
+
   useEffect(() => {
     getUserTickets();
     getSeatMap();
@@ -68,6 +76,21 @@ function MatchReservationSeats({ match }) {
   // eslint-disable-next-line
   const [ events, setEvents ] = useState();
 
+  let closeModal = (seatID, isReserved) => {
+    if(isReserved) {
+      setUserTickets(userTickets => {
+        userTickets.map(ticket => {
+          console.log(seatID, ticket.seatID)
+          if(!ticket.isReserved && ticket.seatID === seatID) {
+            window.$("#TicketsModal").modal('hide');
+          }
+            
+        })
+        return userTickets;
+      });
+    }
+  }
+
   useEffect( () => {
     if (!listening) {
       const events = new EventSource(liveUpdatesEndpoint);
@@ -75,6 +98,7 @@ function MatchReservationSeats({ match }) {
         let { seatID, isReserved } = JSON.parse(message.data);
         setLoading(true);
         updateSeatMap(seatID, isReserved);
+        closeModal(seatID, isReserved);
         setUserTickets(userTickets => {
           return userTickets.filter(userTicket => { return userTicket.seatID !== seatID })
         });
@@ -101,6 +125,7 @@ function MatchReservationSeats({ match }) {
     setLoading(true)
     try {
       await api.cancelTicket(ticket.uuid, authToken());
+      await setTimeout(500);
       updateSeatMap(ticket.seatID, false)
       setUserTickets(userTickets => {
         return userTickets.filter(userTicket => { return userTicket.id !== ticket.id })
@@ -189,7 +214,7 @@ function MatchReservationSeats({ match }) {
                   text={'Are you sure you want to cancel this ticket?'}
                   onOK={confirmedTicket.cancelTicket} /> : ''}
     <div className="reservation-container flex-container-row-hcenter">
-      {seatMap.length ?
+      {seatMap.length && !oldMatch() ?
         <div className="reservation-area flex-container-column-vcenter">
           <div className="column-numbers flex-container-row">
             {seatMap[0].map((_, i) => { 

@@ -21,6 +21,7 @@ function MatchCard({ card }) {
     try {
     const resp = await api.deleteMatch(authToken(), match.uuid);
     NotificationManager.success(resp.data?.msg);
+    await setTimeout(500);
     removeCard();
     } catch(err) {
       console.error(err.message);

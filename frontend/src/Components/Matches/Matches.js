@@ -88,6 +88,7 @@ function Matches() {
   let getMatches = async () => {
     try {
       const resp = await api.getMatches(page);
+      await setTimeout(500);
       setHasNext(resp.data.has_next);
       setMatches(resp.data.matches.map((match, i) => { 
         match.id = i;

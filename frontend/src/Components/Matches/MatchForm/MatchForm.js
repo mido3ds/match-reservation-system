@@ -87,6 +87,7 @@ function MatchForm({ show, title, submit, hide, defaultValues }) {
   let getStadiums = async() => {
     try {
       const resp = await api.getStadiumsNames();
+      await setTimeout(500);
       setStadiums(resp.data);
     } catch(err) {
       console.error(err.message);
