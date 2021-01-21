@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Delete from "../../../images/delete.png";
 import Price from "../../../images/money.png";
-import Seat from "../../../images/seat-icon-gray.png";
+import Seat from "../../../images/seat-icon.png";
 import { authToken, logout } from '../../../Auth';
 import { logos_60x60 } from "../../../teams"
 import ConfirmationModal  from '../../ConfirmationModal/ConfirmationModal';

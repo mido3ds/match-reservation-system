@@ -1,7 +1,9 @@
 .stadium-card {
     width: 235px;
     height: 240px;
-    background-color: #14A38B;
+    background: -webkit-linear-gradient(360deg, #1C1C1C 10%, #494949 360%);
+    background: -moz-linear-gradient(360deg, #1C1C1C 10%, #494949 360%); 
+    background: linear-gradient(360deg, #1C1C1C 10%, #494949 360%);
     border-radius: 20px;
     margin: 5px;
     color: #FFFFFF;

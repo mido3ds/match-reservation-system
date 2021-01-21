@@ -35,7 +35,8 @@
 .ticket-card {
     width: 270px;
     height: 250px;
-    background-color: #3d4949;
+    background: -webkit-linear-gradient(360deg,#224e4d 10%,#083023 360%); 
+    background: linear-gradient(360deg,#224e4d 10%,#083023 360%);
     border-radius: 20px;
     margin: 5px;
 }

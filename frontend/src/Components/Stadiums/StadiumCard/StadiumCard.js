@@ -38,7 +38,7 @@ function StadiumCard({ card }) {
       <img alt='stadium-img' className='stadium-img' src={SmallStadium}/>
       <div className="name-area">{stadium.name}</div>
       <div className="city-area">{stadium.city}</div>
-      <div className="capacity-area"><strong>Capacity:</strong> {stadium.rows * stadium.seatsPerRow} seats </div>
+      <div className="capacity-area"> {stadium.rows * stadium.seatsPerRow} seats </div>
     </div>
   );
 }

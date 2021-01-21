@@ -1,7 +1,8 @@
 .user-card {
     width: 280px;
     height: 265px;
-    background-color: #4675a8dc;
+    background-color: #fbb034;
+    background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
     border-radius: 20px;
     margin: 5px;
 }

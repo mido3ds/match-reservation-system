@@ -43,7 +43,7 @@ function Users({ setLoggedIn }) {
   }, [page, stateCounter]);
 
   return (
-    <div className="flex-container-col">
+    <div className="flex-container-column-vcenter-hcenter">
       <UsersHeader />
       <CardsArea cards={users} hasNext={hasNext} cardIdentifier="user" onSetPage={setPage} />
     </div>
