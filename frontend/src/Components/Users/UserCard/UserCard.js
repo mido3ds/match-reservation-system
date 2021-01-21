@@ -45,7 +45,9 @@ function UserCard({ card }) {
       <div className="flex-container-column-vcenter-hcenter">
         <div className="address-area">
           <img alt="address-icon" src="https://www.flaticon.com/svg/static/icons/svg/1076/1076323.svg" />
-          <span> { user.address + ", " + user.city }  </span>
+          <span> { user.address + ", " 
+           + user.city.charAt(0).toUpperCase() 
+           + user.city.substring(1)} </span>
         </div>
         <div className="email-area">
           <img alt="email-icon" src="https://www.flaticon.com/svg/static/icons/svg/732/732200.svg" />
@@ -54,7 +56,7 @@ function UserCard({ card }) {
         <div className="flex-container-row-vcenter">
           <div className="gender-area">
             <img alt="gender-icon" src="https://www.flaticon.com/svg/static/icons/svg/3939/3939800.svg" />
-            <span> { user.gender } </span>
+            <span> { user.gender.charAt(0).toUpperCase() +  user.gender.substring(1)} </span>
           </div>
           <div className="birthdate-area">
             <img alt="birthdate-icon" src="https://www.flaticon.com/svg/static/icons/svg/3078/3078971.svg" />
