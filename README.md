@@ -1,7 +1,7 @@
 # Match Reservation System
-WebApp for `Egyptian Premier League`, with it you can reserve your seat on future matches.
+Webapp for `Egyptian Premier League`, with it you can reserve your seat on future matches.
 
-> This project is NOT affiliated or related to the `Egyptian Premier League` in any way. This is a college project merely for education purposes.
+> This project is NOT affiliated with or related to the `Egyptian Premier League` in any way. This was a college project done merely for educational purposes.
 
 ## Screenshots
 ## Home Page
@@ -41,4 +41,4 @@ $ make docs
 We designed the frontend with [Figma](figma.com), see [FigmaMockup.fig](FigmaMockup.fig) file.
 
 ## License
-Licensed under [The Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/licenses/NOSL3.0). See [LICENSE](LICENSE)
+Licensed under [The Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/licenses/NOSL3.0). See [LICENSE](LICENSE).
