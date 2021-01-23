@@ -23,3 +23,6 @@ pip3 install bcrypt pymongo
 ```
 
 pass `--help` for more options
+
+# Configs
+You can override configurations by adding them in `config/local.json` file, which is ignored by git.
