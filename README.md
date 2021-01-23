@@ -14,10 +14,10 @@ Webapp for `Egyptian Premier League`, with it you can reserve your seat on futur
 ![Match Page](screenshots/match.png)
 
 ## Build
-See both [frontend README](frontend/README.md) and [backend README](backend/README.md) for guides on how to setup and run the webapp.
+See both [frontend README](frontend/README.md) and [backend README](backend/README.md) files for guides on how to setup and run the webapp.
 
 ## Stack
-Built with `MERN` stack:
+Developed using `MERN` stack:
 - `Mongodb` for DB.
 - `Nodejs` and `ExpressJS` for backend.
 - `ReactJS` for frontend (SPA).
@@ -35,10 +35,10 @@ $ make docs
 
 ## Frontend Design
 ### Wireframe
-[Website Wireframe](wireframe.png) with draw.io
+[Website wireframe](wireframe.png) with draw.io
 
 ### Mockup
 We designed the frontend with [Figma](figma.com), see [FigmaMockup.fig](FigmaMockup.fig) file.
 
 ## License
-Licensed under [The Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/licenses/NOSL3.0). See [LICENSE](LICENSE).
+Licensed under [The Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/licenses/NOSL3.0). See [LICENSE](LICENSE) file.
