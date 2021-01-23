@@ -3,15 +3,15 @@ WebApp for `Egyptian Premier League`, with it you can reserve your seat on futur
 
 > This project is NOT affiliated or related to the `Egyptian Premier League` in any way. This is a college project merely for education purposes.
 
-## Gallery
+## Screenshots
 ## Home Page
-![Home Page](gallery/home.png)
+![Home Page](screenshots/home.png)
 
 ## Matches Page
-![Matches Page](gallery/matches.png)
+![Matches Page](screenshots/matches.png)
 
 ## Match Page
-![Match Page](gallery/match.png)
+![Match Page](screenshots/match.png)
 
 ## Build
 See both [frontend README](frontend/README.md) and [backend README](backend/README.md) for guides on how to setup and run the webapp.
