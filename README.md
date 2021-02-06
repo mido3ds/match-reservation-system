@@ -31,11 +31,11 @@
 ![Home Page](screenshots/home.png)
 
 ## Accept Manager
-Admin can accept/reject new user of type manager
+**Admin can accept/reject new user of type manager**
 ![Accept Manager GIF](screenshots/AcceptManager.gif)
 
 ## Delete User
-Admin can delete user
+**Admin can delete user**
 ![Delete User GIF](screenshots/DeleteUser.gif)
 
 ## Matches Page
@@ -45,14 +45,14 @@ Admin can delete user
 ![Match Page](screenshots/match.png)
 
 ## Add Match
-Manager can add new future match
+**Manager can add new future match**
 ![Add Match GIF](screenshots/AddMatch.gif)
 
 ## Add Stadium
-Manager can add new stadium
+**Manager can add new stadium**
 ![Add Stadium GIF](screenshots/AddStadium.gif)
 
-## Reserve Seats
+## Real Time Seats Reservation
 ![Reserve Seats GIF](screenshots/ReserveSeats.gif)
 
 # :construction_worker: Build
