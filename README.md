@@ -89,8 +89,8 @@ We designed the frontend with [Figma](figma.com), see [FigmaMockup.fig](FigmaMoc
 | Name                                |              Email               |
 | ----------------------------------- | :------------------------------: |
 | Abdulrahman Khalid Hassan           | abdulrahman.elshafei98@gmail.com |
-| Ahmad Mahmoud AbdElMen'em           | ahmed.afifi98@eng-st.cu.edu.eg   |
-| Mahmoud Othman Adas                 |  mido3ds@gmail.com               |
-| Yosry Mohammad Yosry                |         yosrym93@gmail.com       | 
+| Ahmad Mahmoud AbdElMen'em           |   ahmed.afifi.cufe@gmail.com     |
+| Mahmoud Othman Adas                 |   mido3ds@gmail.com              |
+| Yosry Mohammad Yosry                |       yosrym93@gmail.com         |   
 
 </center>
