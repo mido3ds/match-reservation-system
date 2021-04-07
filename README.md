@@ -26,6 +26,7 @@
 
 > This project is NOT affiliated with or related to the `Egyptian Premier League` in any way. This was a college project done merely for educational purposes.
 
+> Check [requirments](requirements.pdf) for more details
 # :camera: Screenshots
 ## Home Page
 ![Home Page](screenshots/home.png)
