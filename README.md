@@ -8,7 +8,7 @@
   <h3 align="center">:soccer: Match Reservation System :ticket:</h3>
 
   <p align="center">
-      Webapp for Egyptian Premier League, with it you can reserve your seat on future matches
+      Web application for Egyptian Premier League, with it you can reserve your seat on future matches. it has three types of user, each of them has its own functionalities
   </p>
 </p>
 
