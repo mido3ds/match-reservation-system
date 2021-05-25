@@ -20,7 +20,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/mido3ds/match-reservation-system)](https://github.com/mido3ds/match-reservation-system/issues)
 [![GitHub forks](https://img.shields.io/github/forks/mido3ds/match-reservation-system)](https://github.com/mido3ds/match-reservation-system/network)
 [![GitHub stars](https://img.shields.io/github/stars/mido3ds/match-reservation-system)](https://github.com/mido3ds/match-reservation-system/stargazers)
-[![GitHub license](https://img.shields.io/github/license/mido3ds/match-reservation-system)](https://github.com/mido3ds/match-reservation-system/blob/master/LICENSE)
 
 </div>
 
